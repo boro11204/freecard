@@ -19,28 +19,52 @@
   function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('show'); }, 2000); }
   function fillForm() { FIELDS.forEach(function (k) { var e = form.elements[k]; if (e) e.value = state[k] || ''; }); }
 
+  // v20261029b: each design tile is a real little card (the design's own picture, colors and the simcha's ready-made
+  // wording in the card's language and lettering), drawn only when it scrolls into view so the page stays light.
+  var tileObs = typeof IntersectionObserver !== 'undefined' ? new IntersectionObserver(function (ents) {
+    ents.forEach(function (e) { if (!e.isIntersecting) return; tileObs.unobserve(e.target); drawTile(e.target); });
+  }, { rootMargin: '250px 0px' }) : null;
+  function tileCard(key) {
+    var w = state.w || 'he';
+    var c = F.sampleCard(state.t, key, w === 'short' ? 'en' : w);
+    c.w = w; c.x = w === 'short' ? '' : tplFor(state.t, w);
+    c.f = state.f; if (state.nf) c.nf = state.nf;
+    return c;
+  }
+  function drawTile(w) {
+    var key = w.getAttribute('data-k'); if (!key || !w.isConnected) return;
+    try { F.renderCard(tileCard(key), w, { thumb: true }); w.classList.add('drawn'); } catch (e) { console.warn(e); }
+  }
   function swatch(key) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'swatch'; b.dataset.design = key; b.setAttribute('aria-pressed', 'false');
     b.setAttribute('aria-label', F.DESIGNS[key].name + ' design');
-    var w = document.createElement('div'); w.className = 'fc-wrap';
-    var mini = F.sampleCard(state.t, key, 'en');
-    mini.w = 'short'; mini.i = ''; mini.p1 = ''; mini.p2 = ''; mini.sc = ''; mini.ad = ''; mini.hd = ''; mini.h = '';
-    F.renderCard(mini, w, { thumb: true });
-    var s = document.createElement('span'); s.textContent = F.DESIGNS[key].name;
+    var w = document.createElement('div'); w.className = 'fc-wrap sw-card'; w.setAttribute('data-k', key);
+    var D = F.DESIGNS[key]; if (D.vars && D.vars.bg) w.style.backgroundColor = D.vars.bg;
+    var s = document.createElement('span'); s.className = 'sw-name'; s.textContent = D.name;
     b.appendChild(w); b.appendChild(s);
-    if (F.DESIGNS[key].ai) { var ai = document.createElement('small'); ai.className = 'ai-note'; var leo = F.DESIGNS[key].src === 'leo'; ai.textContent = leo ? 'AI art · Leonardo.ai' : 'AI art · Canva'; ai.title = leo ? 'Background art AI-generated with Leonardo.ai' : 'Background art AI-generated with Canva'; b.appendChild(ai); }
-    if (F.DESIGNS[key].nb) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
+    if (D.ai) { var ai = document.createElement('small'); ai.className = 'ai-note'; var leo = D.src === 'leo'; ai.textContent = leo ? 'AI art · Leonardo.ai' : 'AI art · Canva'; ai.title = leo ? 'Background art AI-generated with Leonardo.ai' : 'Background art AI-generated with Canva'; b.appendChild(ai); }
+    if (D.nb) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
     b.addEventListener('click', function () { state.d = key; applyUI(); render(); warmSoon(); });
     return b;
   }
+  function watchTiles(box) { box.querySelectorAll('.sw-card:not(.drawn)').forEach(function (w) { if (tileObs) tileObs.observe(w); else drawTile(w); }); }
   function buildSwatches() {
     var g = F.designsFor(state.t);
+    if (tileObs) tileObs.disconnect();
     $('swFirst').innerHTML = ''; $('swRest').innerHTML = '';
     g.first.forEach(function (k) { $('swFirst').appendChild(swatch(k)); });
     g.rest.forEach(function (k) { $('swRest').appendChild(swatch(k)); });
     $('swLabel').textContent = 'Designs for ' + F.TYPES[state.t].en;
+    watchTiles($('swFirst')); watchTiles($('swRest'));
   }
+  // the tiles follow the card's language and lettering (redrawn a moment after a change, only those in view)
+  var tileTimer = null;
+  function refreshTiles() { clearTimeout(tileTimer); tileTimer = setTimeout(function () {
+    if (tileObs) tileObs.disconnect();
+    document.querySelectorAll('.sw-card').forEach(function (w) { w.classList.remove('drawn'); w.innerHTML = ''; });
+    watchTiles($('swFirst')); watchTiles($('swRest'));
+  }, 400); }
   /* ---------- lettering: a picture of each font, in its own letters ---------- */
   var FONT_KEYS = Object.keys(F.FONTS);
   var TILE = { // how each lettering's sample is drawn: [Hebrew sample font, English sample font]
@@ -101,13 +125,13 @@
   });
   function setFont(k) {
     state.f = k;
-    applyUI(); render(); warmSoon();
+    applyUI(); render(); warmSoon(); refreshTiles();
     // switching shows at once; when the font's files land a moment later the card is measured again
     preloadFont(k).then(function () { if (state.f === k) settleFonts(); });
   }
   $('f-nf').addEventListener('change', function (e) {
     var k = e.target.value; state.nf = F.FONTS[k] ? k : '';
-    applyUI(); render(); warmSoon();
+    applyUI(); render(); warmSoon(); refreshTiles();
     if (k) preloadFont(k).then(settleFonts);
   });
   function stepFont(d) { var i = FONT_KEYS.indexOf(state.f); if (i < 0) i = 0; setFont(FONT_KEYS[(i + d + FONT_KEYS.length) % FONT_KEYS.length]); }
@@ -239,7 +263,7 @@
     var isHeb = w === 'he' || w === 'yi';
     if (wasHeb !== isHeb) swapSamples();
     if (!touched.pa && F.parsha) state.pa = F.parsha(state.dt, w);
-    fillForm(); applyUI(); render();
+    fillForm(); applyUI(); render(); refreshTiles();
   }
 
   document.querySelectorAll('#typeChips .chip').forEach(function (b) { b.addEventListener('click', function () { setType(b.dataset.type); }); });

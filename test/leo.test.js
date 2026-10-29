@@ -10,7 +10,8 @@ test('14 Leonardo designs with real image files and credits', ()=>{
   assert.strictEqual(new Set(keys.map(k=>D[k].name)).size,14);
   assert.match(fs.readFileSync(S+'/index.html','utf8'),/AI-generated with Canva and Leonardo\.ai/);
   assert.match(fs.readFileSync(S+'/make.js','utf8'),/AI art · Leonardo\.ai/);
-  assert.match(fs.readFileSync(S+'/home.js','utf8'),/AI-generated with Leonardo\.ai/);
+  // v20261029b: the home design gallery is gone; the per-design credit lives on the card maker's tiles
+  assert.match(fs.readFileSync(S+'/make.js','utf8'),/AI art · Leonardo\.ai/);
   const i18n=fs.readFileSync(S+'/i18n.js','utf8'); for(const s of ['AI art · Leonardo.ai','Background art AI-generated with Leonardo.ai','Some background art AI-generated with Canva and Leonardo.ai']) assert.ok(i18n.includes(JSON.stringify(s)+':'),s);
   for(const f of ['index.html','make.html','card.html','host.html']){ const h=fs.readFileSync(S+'/'+f,'utf8'); assert.ok(!h.includes('v=20261028f'),f); assert.match(h,/name="viewport"/); }
 });

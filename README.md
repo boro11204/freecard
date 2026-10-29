@@ -4,7 +4,7 @@ FreeCard is a free simcha card maker for the frum community. It makes invitation
 
 - **Live site:** https://freecard.sites.tab.bot/
 - **Also live on GitHub Pages:** https://boro11204.github.io/freecard/
-- **This copy:** version **v20261029a** (October 29, 2026), a backup of the live site.
+- **This copy:** version **v20261029b** (October 29, 2026), the same files as the live site.
 
 ## Background art
 
@@ -13,8 +13,8 @@ The "New" photo-style backgrounds are AI-generated, made with **Canva** and **Le
 ## What's in here
 
 - `index.html`, `core.js` and the other files at the top level are the whole site.
-- `fonts/` holds the web fonts. `img/` holds the backgrounds and thumbnails.
-- `test/` holds one test script used while building. It isn't needed to run the site.
+- `fonts/` holds the web fonts. `img/` holds the backgrounds and the sharper tile pictures the design picker shows (`img/ai/p/`, `img/p/`).
+- `test/` holds the test scripts used while building. It isn't needed to run the site.
 
 ## GitHub Pages
 
