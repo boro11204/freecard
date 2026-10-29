@@ -1,0 +1,919 @@
+/* ===== FreeCard invitation card (scales with its container) ===== */
+.fc-wrap { container-type: inline-size; width: 100%; }
+.fc-card {
+  --ink: #3b2a12; --accent: #a87b2a; --bg: #fbf7ee; --soft: #7a6440;
+  position: relative; width: 100%; aspect-ratio: 2 / 3; box-sizing: border-box;
+  background: var(--bg); color: var(--ink);
+  /* lettering: every family on the card comes from these, set per lettering below */
+  --fb: 'Cormorant Garamond', 'Frank Ruhl Libre', Georgia, serif;
+  --fh: 'Frank Ruhl Libre', serif;
+  --fn: 'Great Vibes', 'Frank Ruhl Libre', cursive;
+  --fnh: 'Frank Ruhl Libre', serif;
+  --fa: 'Cormorant Garamond', 'Frank Ruhl Libre', serif;
+  font-family: var(--fb);
+  border-radius: 1.4cqw; overflow: hidden; display: flex;
+  box-shadow: 0 2px 6px rgba(30,20,0,.08), 0 18px 40px -12px rgba(30,20,0,.28);
+  text-align: center;
+}
+.fc-frame { position: absolute; inset: 3.4cqw; border: .45cqw solid var(--accent); pointer-events: none; }
+.fc-frame::after { content: ''; position: absolute; inset: 1.4cqw; border: .2cqw solid var(--accent); opacity: .7; }
+.fc-orn { position: absolute; width: 22cqw; height: 22cqw; color: var(--accent); pointer-events: none; }
+.fc-tl { top: 1.6cqw; left: 1.6cqw; }
+.fc-tr { top: 1.6cqw; right: 1.6cqw; transform: scaleX(-1); }
+.fc-bl { bottom: 1.6cqw; left: 1.6cqw; transform: scaleY(-1); }
+.fc-br { bottom: 1.6cqw; right: 1.6cqw; transform: scale(-1, -1); }
+.fc-in {
+  position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 1.2cqw; padding: 12cqw 13cqw 11cqw;
+}
+.fc-in [dir="auto"] { unicode-bidi: plaintext; }
+.fc-bsd { position: absolute; top: 6.4cqw; right: 7.5cqw; font-family: var(--fh); font-size: 2.8cqw; color: var(--soft); }
+.fc-head { font-family: var(--fh); font-weight: 700; font-size: 4.6cqw; color: var(--accent); letter-spacing: .02em; }
+.fc-type { font-family: var(--fh); font-size: 3.2cqw; color: var(--soft); letter-spacing: .3em; margin-top: -.6cqw; }
+.fc-intro { margin: 1.6cqw 0 .6cqw; font-size: 4.1cqw; line-height: 1.32; font-style: italic; color: var(--soft); max-width: 62cqw; }
+.fc-intro:lang(he), .fc-intro[dir="rtl"] { font-style: normal; }
+.fc-names { display: flex; flex-direction: column; align-items: center; gap: .2cqw; margin: .6cqw 0; }
+.fc-n { font-family: var(--fn); font-size: 10.5cqw; line-height: 1.05; color: var(--ink); font-weight: 400; overflow-wrap: anywhere; max-width: 70cqw; word-spacing: .18em; }
+.fc-amp { font-family: var(--fa); font-style: italic; font-size: 5.2cqw; color: var(--accent); line-height: 1; }
+.fc-ph { opacity: .35; }
+.fc-parents { font-size: 3.4cqw; line-height: 1.35; color: var(--soft); display: flex; flex-direction: column; gap: .4cqw; }
+.fc-parents.two { flex-direction: row; gap: 5cqw; justify-content: center; }
+.fc-parents.two span { flex: 1 1 0; max-width: 32cqw; }
+.fc-parents span { font-family: var(--fb); font-weight: 600; }
+.fc-rule { width: 26cqw; height: .3cqw; background: var(--accent); margin: 2cqw 0 1cqw; position: relative; opacity: .9; }
+.fc-rule::after { content: ''; position: absolute; left: 50%; top: 50%; width: 1.8cqw; height: 1.8cqw; background: var(--bg); border: .3cqw solid var(--accent); transform: translate(-50%, -50%) rotate(45deg); }
+.fc-when { display: flex; flex-direction: column; align-items: center; gap: .5cqw; }
+.fc-date { font-size: 4.3cqw; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.fc-hdate { font-family: var(--fh); font-size: 3.7cqw; color: var(--soft); }
+.fc-time { font-size: 4.2cqw; font-weight: 600; color: var(--accent); margin-top: .4cqw; }
+.fc-sched { font-size: 3.3cqw; color: var(--soft); font-style: italic; }
+.fc-where { margin-top: 1.4cqw; }
+.fc-hall { font-size: 4.6cqw; font-weight: 600; }
+.fc-addr { font-size: 3.4cqw; color: var(--soft); }
+.fc-note { font-size: 3.1cqw; color: var(--soft); margin: .6cqw 0 0; font-style: italic; }
+.fc-foot { font-family: var(--fh); font-size: 4cqw; color: var(--accent); margin-top: 1.4cqw; font-weight: 700; }
+
+/* Gold Leaf */
+.d-gold { --bg: #fbf7ee; --ink: #3a2a10; --accent: #a8802c; --soft: #6e5a37;
+  background: radial-gradient(120% 80% at 50% 0%, #fffdf7 0%, #f7f0df 70%, #efe4c9 100%); }
+.d-gold .fc-rule::after { background: #f8f2e3; }
+
+/* Midnight (navy & gold deco artwork) */
+.d-midnight { --bg: #14223d; --ink: #f4e7c3; --accent: #d4ad57; --soft: #cfc3a2;
+  background: #14223d url('img/midnight.webp') center / 100% 100% no-repeat; }
+.d-midnight .fc-frame { display: none; }
+.d-midnight .fc-in { padding: 13cqw 14cqw 12cqw; }
+.d-midnight .fc-bsd { top: 8.5cqw; right: 10cqw; }
+.d-midnight .fc-n { color: #f6e3ad; text-shadow: 0 0 1.6cqw rgba(212,173,87,.25); }
+.d-midnight .fc-rule::after { background: #14223d; }
+
+/* Garden (watercolor florals) */
+.d-garden { --bg: #f8f7f3; --ink: #4a3a3a; --accent: #c0807a; --soft: #75625f; background: #f8f7f3; }
+.d-garden .fc-art-tl, .d-garden .fc-art-br { content: ''; position: absolute; width: 78%; pointer-events: none; background-size: 100% 100%; background-repeat: no-repeat; }
+.d-garden .fc-art-tl { top: 0; left: 0; aspect-ratio: 800 / 576; background-image: url('img/garden-top.webp'); }
+.d-garden .fc-art-br { bottom: 0; right: 0; aspect-ratio: 800 / 624; background-image: url('img/garden-bottom.webp'); }
+.d-garden .fc-frame { display: none; }
+.d-garden .fc-in { padding: 26cqw 16cqw 18cqw; gap: 1cqw; }
+.d-garden .fc-intro { max-width: 60cqw; }
+.d-garden .fc-foot { margin-top: 14cqw; }
+.d-garden .fc-bsd { top: 4cqw; right: 6cqw; zoom: 1; }
+.d-garden .fc-head, .d-garden .fc-foot, .d-garden .fc-time { color: #b46e67; }
+.d-garden .fc-rule { background: #8fa58a; }
+.d-garden .fc-rule::after { border-color: #8fa58a; background: #fbf9f5; }
+
+/* Classic */
+.d-classic .fc-n.heb { text-transform: none; }
+.d-classic { --bg: #ffffff; --ink: #111; --accent: #111; --soft: #444; background: #fff; }
+.d-classic .fc-frame { inset: 4cqw; border-width: .25cqw; }
+.d-classic .fc-frame::after { inset: 1cqw; border-width: .12cqw; }
+.d-classic .fc-n { font-family: var(--fa); font-weight: 600; font-size: 6.6cqw; letter-spacing: .02em; text-transform: uppercase; }
+.d-classic .fc-n:lang(he), .d-classic .fc-n[dir="rtl"] { text-transform: none; }
+.d-classic .fc-amp { font-size: 4.4cqw; }
+.d-classic .fc-head { font-size: 5.4cqw; }
+
+/* Emerald */
+.d-emerald { --bg: #0e3b31; --ink: #f3e6c4; --accent: #cfa94f; --soft: #c5c6a6;
+  background: radial-gradient(110% 80% at 50% 0%, #17574a 0%, #0f3e34 55%, #0a2d26 100%); }
+.d-emerald .fc-frame { border-width: .3cqw; }
+.d-emerald .fc-arch { position: absolute; left: 11cqw; right: 11cqw; top: 9cqw; bottom: 8cqw;
+  border: .35cqw solid rgba(207,169,79,.75); border-radius: 50cqw 50cqw 1cqw 1cqw; pointer-events: none; }
+.d-emerald .fc-arch::after { content: ''; position: absolute; inset: 1.4cqw; border: .15cqw solid rgba(207,169,79,.5); border-radius: 50cqw 50cqw .5cqw .5cqw; }
+.d-emerald .fc-in { padding-top: 20cqw; }
+.d-emerald .fc-bsd { right: 4.5cqw; top: 4.5cqw; }
+.d-emerald .fc-rule::after { background: #0f3e34; }
+
+/* Yerushalayim stone */
+.d-stone { --bg: #efe5d3; --ink: #4a3218; --accent: #9a6b34; --soft: #6f5638;
+  background:
+    repeating-linear-gradient(0deg, rgba(120,90,50,.07) 0 .25cqw, transparent .25cqw 9cqw),
+    repeating-linear-gradient(90deg, rgba(120,90,50,.05) 0 .25cqw, transparent .25cqw 16cqw),
+    linear-gradient(180deg, #f1e7d6, #e6d6bb); }
+.d-stone .fc-frame { border: none; }
+.d-stone .fc-frame::after { display: none; }
+.d-stone .fc-arch { position: absolute; left: 7cqw; right: 7cqw; top: 6cqw; bottom: 6cqw;
+  background: #fbf6ec; border-radius: 50cqw 50cqw 1.4cqw 1.4cqw; box-shadow: inset 0 0 0 .5cqw #c9a877, inset 0 0 0 1.5cqw #fbf6ec, inset 0 0 0 1.75cqw #c9a877; }
+.d-stone .fc-in { padding-top: 21cqw; padding-left: 15cqw; padding-right: 15cqw; }
+.d-stone .fc-bsd { top: 4cqw; right: 6cqw; }
+.d-stone .fc-rule::after { background: #fbf6ec; }
+
+/* full-wording body */
+.fc-guest { font-size: 3.4cqw; color: var(--accent); font-weight: 600; letter-spacing: .03em; margin-bottom: .4cqw; }
+.fc-body { display: flex; flex-direction: column; align-items: center; gap: .9cqw; width: 100%; }
+.fc-l { font-size: 3.75cqw; line-height: 1.3; color: var(--soft); max-width: 66cqw; }
+.fc-l.heb { font-family: var(--fh); font-size: 3.9cqw; }
+.fc-pre { font-size: 3.3cqw; color: var(--accent); letter-spacing: .04em; margin-top: .6cqw; font-weight: 600; }
+.fc-pre.heb { font-size: 3.6cqw; }
+.fc-amp { color: var(--accent); }
+.fc-l.fc-amp { font-size: 5cqw; font-style: italic; line-height: 1; }
+.fc-date { color: var(--ink); font-weight: 600; }
+.fc-l.fc-date { font-size: 3.9cqw; letter-spacing: .02em; text-transform: none; }
+.fc-l.fc-date.heb { font-size: 4.1cqw; font-weight: 700; }
+.fc-l.fc-time { color: var(--accent); font-weight: 600; }
+.fc-l.fc-hall { color: var(--ink); font-weight: 700; font-size: 4.3cqw; }
+.fc-l.fc-addr { font-size: 3.3cqw; }
+.fc-body .fc-n { margin: .2cqw 0; font-size: 9.5cqw; }
+.fc-n.heb { font-family: var(--fnh); font-weight: 700; font-size: 7.4cqw; line-height: 1.15; letter-spacing: 0; word-spacing: normal; }
+.fc-body .fc-n.heb { font-size: 7.2cqw; }
+.t-kiddush .fc-n, .t-seudah .fc-n { font-size: 7cqw; }
+.t-kiddush .fc-n.heb, .t-seudah .fc-n.heb { font-size: 5.6cqw; }
+.fc-body .fc-parents { margin-top: 1.2cqw; }
+.fc-parents span.heb { font-family: var(--fh); font-weight: 700; }
+.fc-extra { margin-top: 1.6cqw; padding-top: 1.4cqw; border-top: .25cqw solid var(--accent); font-size: 3.3cqw; color: var(--soft); line-height: 1.35; max-width: 64cqw; }
+.fc-extra div:first-child { color: var(--accent); font-weight: 700; }
+.fc-extra .heb { font-family: var(--fh); }
+.fc-photo { width: auto; height: 24cqw; aspect-ratio: 1 / 1; min-height: 10cqw; flex-shrink: 1; border-radius: 50%; overflow: hidden; border: .7cqw solid var(--accent); margin-bottom: 1cqw; box-shadow: 0 1cqw 3cqw rgba(0,0,0,.18); }
+.fc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* image designs */
+.k-img { background-size: 100% 100%; background-repeat: no-repeat; background-position: center; }
+.k-img .fc-frame { display: none; }
+.k-img .fc-bsd { top: 4.5cqw; right: 6cqw; }
+.d-midnight .fc-bsd { top: 8.5cqw; right: 10cqw; }
+
+/* lettering choices: each one changes BOTH the Hebrew/Yiddish and the English on the whole card */
+/* Classic: Bellefair, a light, airy engraved-style face (Hebrew + Latin) */
+.fc-card.f-serif { --fb: 'Bellefair', 'Frank Ruhl Libre', serif; --fh: 'Bellefair', 'Frank Ruhl Libre', serif;
+  --fn: 'Bellefair', 'Frank Ruhl Libre', serif; --fnh: 'Bellefair', 'Frank Ruhl Libre', serif; --fa: 'Bellefair', serif; }
+.f-serif, .f-serif * { font-weight: 400 !important; font-style: normal !important; }
+.f-serif .fc-n, .f-serif .fc-body .fc-n { font-size: 7.4cqw; text-transform: uppercase; letter-spacing: .08em; line-height: 1.15; }
+.f-serif .fc-n.heb { letter-spacing: .02em; }
+.f-serif .fc-l.heb { font-size: 4.15cqw; } .f-serif .fc-l.fc-date.heb { font-size: 4.4cqw; } .f-serif .fc-l.fc-hall.heb { font-size: 4.6cqw; }
+.f-serif .fc-head { letter-spacing: .12em; }
+.f-serif .fc-l.fc-hall, .f-serif .fc-hall, .f-serif .fc-l.fc-date.heb { color: var(--accent); }
+/* Bold: Suez One, heavy and square, for names and headings; text lines Suez One (Hebrew) / Frank Ruhl bold (English) */
+.fc-card.f-bold { --fb: 'FC Bold Body', 'Suez One', serif; --fh: 'Suez One', serif; --fn: 'Suez One', serif; --fnh: 'Suez One', serif; --fa: 'Suez One', serif; }
+.f-bold, .f-bold * { font-style: normal !important; font-synthesis: none; }
+.f-bold .fc-l, .f-bold .fc-parents span, .f-bold .fc-intro, .f-bold .fc-addr, .f-bold .fc-note, .f-bold .fc-extra { font-weight: 700; }
+.f-bold .fc-n, .f-bold .fc-body .fc-n, .f-bold .fc-n.heb, .f-bold .fc-body .fc-n.heb { font-size: 7cqw; letter-spacing: 0; line-height: 1.15; }
+.f-bold .fc-l { font-size: 3.35cqw; line-height: 1.32; } .f-bold .fc-l.heb { font-size: 3.6cqw; }
+.f-bold .fc-n:not(.heb) { font-size: 6.4cqw; }
+.f-bold .fc-head, .f-bold .fc-pre, .f-bold .fc-l.fc-hall, .f-bold .fc-l.fc-date, .f-bold .fc-l.fc-time, .f-bold .fc-hall, .f-bold .fc-date, .f-bold .fc-time, .f-bold .fc-foot { font-family: 'Suez One', serif; letter-spacing: .01em; }
+/* Modern: Heebo, clean sans-serif (Hebrew + Latin) */
+.fc-card.f-modern { --fb: 'Heebo', sans-serif; --fh: 'Heebo', sans-serif; --fn: 'Heebo', sans-serif; --fnh: 'Heebo', sans-serif; --fa: 'Heebo', sans-serif; }
+.f-modern, .f-modern * { font-style: normal !important; }
+.f-modern .fc-n, .f-modern .fc-body .fc-n, .f-modern .fc-n.heb, .f-modern .fc-body .fc-n.heb { font-weight: 700; font-size: 6.6cqw; letter-spacing: .01em; line-height: 1.15; }
+.f-modern .fc-l, .f-modern .fc-l.heb { font-size: 3.5cqw; }
+.f-modern .fc-head { letter-spacing: .06em; }
+/* kiddush / seudah name lines are long: keep them small in every lettering */
+.fc-card:not(.f-script).t-kiddush .fc-n, .fc-card:not(.f-script).t-seudah .fc-n { font-size: 6cqw; }
+.fc-card:not(.f-script).t-kiddush .fc-n.heb, .fc-card:not(.f-script).t-seudah .fc-n.heb { font-size: 5.6cqw; }
+.d-torah .fc-bsd { top: 10cqw; right: 22cqw; color: #7a4f1c; }
+.d-kos .fc-bsd, .d-damask .fc-bsd { top: 12cqw; right: 15cqw; }
+.d-garden .fc-parents.two span { max-width: 27cqw; }
+
+/* ===== More options (text size, names size, colours, text only, own background) ===== */
+.fc-in > * { zoom: calc(var(--z, 1) * var(--ts, 1) * var(--fit, 1)); }
+.k-img .fc-in > * { zoom: calc(var(--z, 1) * var(--ts, 1) * var(--fit, 1)); }
+.fc-in > .fc-bsd, .k-img .fc-in > .fc-bsd { zoom: 1; }
+.d-garden .fc-in { --z: .88; }
+.d-garden .fc-in > * { zoom: calc(var(--z, 1) * var(--ts, 1) * var(--fit, 1)); }
+.d-garden .fc-bsd { zoom: 1; }
+.fc-card .fc-n { zoom: var(--ns, 1); }
+/* names & headings colour */
+.fc-card.c-hl .fc-n, .fc-card.c-hl .fc-head, .fc-card.c-hl .fc-foot, .fc-card.c-hl .fc-pre, .fc-card.c-hl .fc-amp,
+.fc-card.c-hl .fc-time, .fc-card.c-hl .fc-l.fc-time, .fc-card.c-hl .fc-extra div:first-child { color: var(--hl) !important; text-shadow: none !important; }
+.fc-card.c-hl { --accent: var(--hl); }
+/* text colour */
+.fc-card.c-tc { --ink: var(--tc); --soft: var(--tc); }
+.fc-card.c-tc .fc-l:not(.fc-time):not(.fc-pre):not(.fc-amp), .fc-card.c-tc .fc-parents, .fc-card.c-tc .fc-parents span, .fc-card.c-tc .fc-intro,
+.fc-card.c-tc .fc-date, .fc-card.c-tc .fc-hdate, .fc-card.c-tc .fc-sched, .fc-card.c-tc .fc-hall, .fc-card.c-tc .fc-addr, .fc-card.c-tc .fc-note,
+.fc-card.c-tc .fc-extra, .fc-card.c-tc .fc-bsd, .fc-card.c-tc .fc-type { color: var(--tc) !important; }
+/* text only: no background or art, for printing on card stock you already have */
+.fc-card.fc-textonly { background: #fff !important; background-image: none !important; }
+.fc-textonly .fc-frame, .fc-textonly .fc-orn, .fc-textonly .fc-arch, .fc-textonly .fc-art-tl, .fc-textonly .fc-art-br { display: none !important; }
+.fc-card.fc-textonly:not(.c-tc) { --ink: #232323; --soft: #4a4a4a; }
+.fc-textonly:not(.c-tc) .fc-l:not(.fc-time):not(.fc-pre):not(.fc-amp), .fc-textonly:not(.c-tc) .fc-parents span, .fc-textonly:not(.c-tc) .fc-intro,
+.fc-textonly:not(.c-tc) .fc-date, .fc-textonly:not(.c-tc) .fc-hdate, .fc-textonly:not(.c-tc) .fc-hall, .fc-textonly:not(.c-tc) .fc-addr,
+.fc-textonly:not(.c-tc) .fc-bsd, .fc-textonly:not(.c-tc) .fc-note, .fc-textonly:not(.c-tc) .fc-extra { color: #2e2e2e !important; }
+.fc-textonly:not(.c-hl) .fc-n { color: #1e1e1e !important; text-shadow: none !important; }
+.d-midnight.fc-textonly:not(.c-hl), .d-emerald.fc-textonly:not(.c-hl), .d-kos.fc-textonly:not(.c-hl), .d-damask.fc-textonly:not(.c-hl) { --accent: #8a6a22; }
+.d-midnight.fc-textonly:not(.c-hl) .fc-head, .d-midnight.fc-textonly:not(.c-hl) .fc-time, .d-midnight.fc-textonly:not(.c-hl) .fc-pre, .d-midnight.fc-textonly:not(.c-hl) .fc-foot,
+.d-emerald.fc-textonly:not(.c-hl) .fc-head, .d-emerald.fc-textonly:not(.c-hl) .fc-time, .d-emerald.fc-textonly:not(.c-hl) .fc-pre, .d-emerald.fc-textonly:not(.c-hl) .fc-foot { color: #8a6a22 !important; }
+.fc-textonly .fc-rule::after { background: #fff !important; }
+/* the family's own background picture */
+.k-own .fc-frame, .k-own .fc-orn, .k-own .fc-arch, .k-own .fc-art-tl, .k-own .fc-art-br { display: none !important; }
+.k-own .fc-rule::after { background: transparent; }
+/* long name lines on the newer simchas */
+.t-sefertorah .fc-n, .t-siyum .fc-n { font-size: 7cqw; }
+.t-sefertorah .fc-n.heb, .t-siyum .fc-n.heb, .t-sefertorah .fc-body .fc-n.heb, .t-siyum .fc-body .fc-n.heb { font-size: 5.8cqw; }
+.fc-card:not(.f-script).t-sefertorah .fc-n, .fc-card:not(.f-script).t-siyum .fc-n { font-size: 6cqw; }
+.fc-card:not(.f-script).t-sefertorah .fc-n.heb, .fc-card:not(.f-script).t-siyum .fc-n.heb { font-size: 5.4cqw; }
+.t-thankyou .fc-head { font-size: 8cqw; }
+.t-thankyou .fc-body { gap: .6cqw; display: flex; flex-direction: column; align-items: center; }
+
+/* ===== newer designs (drawn art: shapes and gradients only) ===== */
+.fc-art { position: absolute; pointer-events: none; color: var(--accent); overflow: visible; }
+.fc-art .hole { fill: var(--bg); }
+.fc-textonly .fc-art, .k-own .fc-art { display: none !important; }
+
+/* Navy Crest */
+.d-navy { --bg: #15274b; --ink: #f3e8cc; --accent: #d2ae5c; --soft: #cbc2a8;
+  background: radial-gradient(120% 90% at 50% 0%, #21386a 0%, #15274b 55%, #0e1b38 100%); }
+.d-navy .fc-frame { border-width: .35cqw; }
+.d-navy .fc-frame::after { border-width: .15cqw; }
+.d-navy .fc-art-top { top: 7cqw; left: 35cqw; width: 30cqw; height: 16.8cqw; }
+.d-navy .fc-in { padding-top: 25cqw; }
+.d-navy .fc-n { color: #f6e3ad; }
+.d-navy .fc-rule::after { background: #15274b; }
+
+/* Blush & Ivory */
+.d-blush { --bg: #fcf3ef; --ink: #4b3436; --accent: #b46f68; --soft: #775d5a;
+  background: linear-gradient(180deg, #fdf7f3 0%, #f8e9e3 100%); }
+.d-blush .fc-frame { inset: 5cqw; border-width: .2cqw; border-color: #e2b6ae; }
+.d-blush .fc-frame::after { display: none; }
+.d-blush .fc-art-tl { top: 0; left: 0; width: 46cqw; height: 46cqw; }
+.d-blush .fc-art-br { bottom: 0; right: 0; width: 46cqw; height: 46cqw; transform: scale(-1, -1); }
+.d-blush .fc-in { padding: 23cqw 15cqw 21cqw; }
+.d-blush .fc-rule { background: #d6a39c; }
+.d-blush .fc-rule::after { border-color: #d6a39c; background: #fbf1ec; }
+
+/* Black Tie */
+.d-blacktie { --bg: #111111; --ink: #f1ead8; --accent: #c9a85a; --soft: #c6bda8;
+  background: linear-gradient(180deg, #181818 0%, #0d0d0d 100%); }
+.d-blacktie .fc-frame { inset: 3cqw; border-width: .3cqw; }
+.d-blacktie .fc-frame::after { inset: 1cqw; border-width: .12cqw; }
+.d-blacktie .fc-art-top { top: 3.2cqw; left: 35cqw; width: 30cqw; height: 17.1cqw; }
+.d-blacktie .fc-art-bot { bottom: 3.2cqw; left: 35cqw; width: 30cqw; height: 17.1cqw; transform: scaleY(-1); }
+.d-blacktie .fc-in { padding: 20cqw 13cqw 18cqw; }
+.d-blacktie .fc-bsd { top: 6cqw; right: 6.5cqw; }
+.d-blacktie .fc-n { color: #f4e2b0; }
+.d-blacktie .fc-rule::after { background: #131313; }
+
+/* Sage */
+.d-sage { --bg: #f1f3ec; --ink: #33423a; --accent: #5c7c63; --soft: #5b6a5f;
+  background: linear-gradient(180deg, #f6f7f1 0%, #eaede2 100%); }
+.d-sage .fc-frame { inset: 4.5cqw; border-width: .2cqw; border-color: #a5b8a4; }
+.d-sage .fc-frame::after { display: none; }
+.d-sage .fc-art-tl { top: 0; left: 0; width: 40cqw; height: 40cqw; }
+.d-sage .fc-art-br { bottom: 0; right: 0; width: 40cqw; height: 40cqw; transform: scale(-1, -1); }
+.d-sage .fc-in { padding: 22cqw 15cqw 20cqw; }
+.d-sage .fc-rule { background: #8ea48e; }
+.d-sage .fc-rule::after { border-color: #8ea48e; background: #eff1e9; }
+
+/* Burgundy */
+.d-burgundy { --bg: #5c1520; --ink: #f6e6c8; --accent: #d7b263; --soft: #e2cba8;
+  background: radial-gradient(120% 90% at 50% 0%, #7d2230 0%, #5c1520 60%, #440f19 100%); }
+.d-burgundy .fc-frame { inset: 5cqw; border-width: .25cqw; }
+.d-burgundy .fc-frame::after { inset: 1.2cqw; border-width: .12cqw; }
+.d-burgundy .fc-art { width: 24cqw; height: 24cqw; }
+.d-burgundy .fc-art-tl { top: 2.2cqw; left: 2.2cqw; }
+.d-burgundy .fc-art-tr { top: 2.2cqw; right: 2.2cqw; transform: scaleX(-1); }
+.d-burgundy .fc-art-bl { bottom: 2.2cqw; left: 2.2cqw; transform: scaleY(-1); }
+.d-burgundy .fc-art-br { bottom: 2.2cqw; right: 2.2cqw; transform: scale(-1, -1); }
+.d-burgundy .fc-in { padding: 16cqw 14cqw 14cqw; }
+.d-burgundy .fc-bsd { top: 8.6cqw; right: 27cqw; }
+.d-burgundy .fc-n { color: #f5dfa8; }
+.d-burgundy .fc-rule::after { background: #5e1622; }
+
+/* Lavender */
+.d-lavender { --bg: #f6f1fa; --ink: #3f3550; --accent: #8364ab; --soft: #6a5f7f;
+  background: linear-gradient(180deg, #fbf8fd 0%, #f1eaf7 100%); }
+.d-lavender .fc-frame { inset: 4cqw; border-width: .18cqw; border-color: #cbbcdf; }
+.d-lavender .fc-frame::after { display: none; }
+.d-lavender .fc-art-top { top: 1cqw; left: 4cqw; width: 92cqw; height: 22cqw; }
+.d-lavender .fc-art-bot { bottom: 1cqw; left: 14cqw; width: 72cqw; height: 17.3cqw; transform: scaleY(-1); }
+.d-lavender .fc-in { padding: 24cqw 14cqw 20cqw; }
+.d-lavender .fc-bsd { top: 12.5cqw; right: 8cqw; }
+.d-lavender .fc-rule { background: #b7a3d3; }
+.d-lavender .fc-rule::after { border-color: #b7a3d3; background: #f5f0fa; }
+
+/* Keser Torah */
+.d-keser { --bg: #f7f0de; --ink: #22305a; --accent: #a8802c; --soft: #555b72;
+  background: radial-gradient(120% 80% at 50% 0%, #fffdf6 0%, #f6efdc 70%, #ebdfc0 100%); }
+.d-keser .fc-frame { inset: 3cqw; border-width: .2cqw; }
+.d-keser .fc-frame::after { display: none; }
+.d-keser .fc-arch { position: absolute; left: 8cqw; right: 8cqw; top: 25cqw; bottom: 6cqw;
+  border: .3cqw solid #b8913e; border-radius: 50cqw 50cqw 1cqw 1cqw; pointer-events: none; }
+.d-keser .fc-arch::after { content: ''; position: absolute; inset: 1.2cqw; border: .12cqw solid #c8a75e; border-radius: 50cqw 50cqw .5cqw .5cqw; }
+.d-keser .fc-art-top { top: 4cqw; left: 38cqw; width: 24cqw; height: 20.8cqw; }
+.d-keser .fc-in { padding: 34cqw 15cqw 11cqw; }
+.d-keser .fc-rule::after { background: #f6efdc; }
+
+/* Heritage Blue */
+.d-heritage { --bg: #edf1f7; --ink: #1e2f4a; --accent: #4b6990; --soft: #536278;
+  background: linear-gradient(180deg, #f4f7fb 0%, #e5ebf3 100%); }
+.d-heritage .fc-frame { inset: 4cqw; border-width: .3cqw; border-color: #8ea3bf; }
+.d-heritage .fc-frame::after { inset: 1.3cqw; border-width: .15cqw; border-color: #8ea3bf; }
+.d-heritage .fc-art { width: 15cqw; height: 15cqw; color: #5d7aa0; }
+.d-heritage .fc-art-tl { top: -2.2cqw; left: -2.2cqw; }
+.d-heritage .fc-art-tr { top: -2.2cqw; right: -2.2cqw; }
+.d-heritage .fc-art-bl { bottom: -2.2cqw; left: -2.2cqw; }
+.d-heritage .fc-art-br { bottom: -2.2cqw; right: -2.2cqw; }
+.d-heritage .fc-art .hole { fill: #eef2f7; }
+.d-heritage .fc-bsd { top: 7.4cqw; right: 14cqw; }
+.d-heritage .fc-in { padding: 14cqw 14cqw 12cqw; }
+.d-heritage .fc-rule::after { background: #ebf0f6; }
+
+/* Ir Hakodesh */
+.d-ircity { --bg: #f7efdc; --ink: #4a3416; --accent: #a47a32; --soft: #6f5a3a;
+  background: linear-gradient(180deg, #fcf8ee 0%, #f3e7cd 100%); }
+.d-ircity .fc-frame { border-width: .3cqw; }
+.d-ircity .fc-frame::after { border-width: .14cqw; }
+.d-ircity .fc-art-bot { bottom: 3.6cqw; left: 3.6cqw; width: 92.8cqw; height: 27.8cqw; color: #b48f52; }
+.d-ircity .fc-art .hole { fill: #f3e7cd; }
+.d-ircity .fc-in { padding: 12cqw 13cqw 31cqw; }
+.d-ircity .fc-rule::after { background: #f9f2e3; }
+
+/* Simply Thanks */
+.d-thanks { --bg: #fffdf9; --ink: #39342f; --accent: #9c7f4c; --soft: #6d655b; background: #fffdf9; }
+.d-thanks .fc-frame { inset: 6cqw; border-width: .15cqw; border-color: #d9ccb2; }
+.d-thanks .fc-frame::after { display: none; }
+.d-thanks .fc-art-top { top: 12cqw; left: 32cqw; width: 36cqw; height: 11.8cqw; }
+.d-thanks .fc-in { padding: 26cqw 16cqw 14cqw; }
+.d-thanks .fc-bsd { top: 8.5cqw; right: 9.5cqw; }
+.d-thanks .fc-rule { width: 14cqw; height: .2cqw; }
+.d-thanks .fc-rule::after { display: none; }
+
+/* text only on the dark newer designs: gold that reads on white */
+.d-navy.fc-textonly:not(.c-hl), .d-blacktie.fc-textonly:not(.c-hl), .d-burgundy.fc-textonly:not(.c-hl) { --accent: #8a6a22; }
+.d-navy.fc-textonly:not(.c-hl) .fc-head, .d-navy.fc-textonly:not(.c-hl) .fc-time, .d-navy.fc-textonly:not(.c-hl) .fc-pre, .d-navy.fc-textonly:not(.c-hl) .fc-foot,
+.d-blacktie.fc-textonly:not(.c-hl) .fc-head, .d-blacktie.fc-textonly:not(.c-hl) .fc-time, .d-blacktie.fc-textonly:not(.c-hl) .fc-pre, .d-blacktie.fc-textonly:not(.c-hl) .fc-foot,
+.d-burgundy.fc-textonly:not(.c-hl) .fc-head, .d-burgundy.fc-textonly:not(.c-hl) .fc-time, .d-burgundy.fc-textonly:not(.c-hl) .fc-pre, .d-burgundy.fc-textonly:not(.c-hl) .fc-foot { color: #8a6a22 !important; }
+
+/* ===== more letterings (v20261026d): one font for the whole card, both Hebrew/Yiddish and English ===== */
+/* --fz scales all the text for fonts that run small; --fnz is the names' own scale (whichever font the names use) */
+.fc-card { --fz: 1; --fnz: 1; }
+.fc-in > *, .k-img .fc-in > *, .d-garden .fc-in > * { zoom: calc(var(--z, 1) * var(--ts, 1) * var(--fit, 1) * var(--fz, 1)); }
+.fc-card .fc-n { zoom: calc(var(--ns, 1) * var(--fnz, 1) / var(--fz, 1)); }
+.fg, .fg * { font-style: normal !important; }
+.fg .fc-n, .fg .fc-body .fc-n, .fg .fc-n.heb, .fg .fc-body .fc-n.heb { font-weight: 700; font-size: 6.6cqw; letter-spacing: .01em; line-height: 1.2; word-spacing: normal; text-transform: none; }
+.fg .fc-l, .fg .fc-l.heb { font-size: 3.6cqw; }
+.fg .fc-head { letter-spacing: .04em; }
+.fg .fc-l.fc-amp, .fg .fc-amp { font-style: normal; }
+.fw4, .fw4 * { font-weight: 400 !important; font-synthesis: none; }
+.fc-card.f-frank { --fb: 'Frank Ruhl Libre', serif; --fh: 'Frank Ruhl Libre', serif; --fn: 'Frank Ruhl Libre', serif; --fnh: 'Frank Ruhl Libre', serif; --fa: 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.f-david { --fb: 'David Libre', 'Frank Ruhl Libre', serif; --fh: 'David Libre', 'Frank Ruhl Libre', serif; --fn: 'David Libre', 'Frank Ruhl Libre', serif; --fnh: 'David Libre', 'Frank Ruhl Libre', serif; --fa: 'David Libre', 'Frank Ruhl Libre', serif; --fz: 1.04; --fnz: 1.04; }
+.fc-card.f-notoserif { --fb: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fh: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fn: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-rashi { --fb: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fh: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fn: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fnh: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fa: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.f-bona { --fb: 'Bona Nova', 'Frank Ruhl Libre', serif; --fh: 'Bona Nova', 'Frank Ruhl Libre', serif; --fn: 'Bona Nova', 'Frank Ruhl Libre', serif; --fnh: 'Bona Nova', 'Frank Ruhl Libre', serif; --fa: 'Bona Nova', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.f-miriam { --fb: 'Miriam Libre', 'Heebo', sans-serif; --fh: 'Miriam Libre', 'Heebo', sans-serif; --fn: 'Miriam Libre', 'Heebo', sans-serif; --fnh: 'Miriam Libre', 'Heebo', sans-serif; --fa: 'Miriam Libre', 'Heebo', sans-serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-rubik { --fb: 'Rubik', 'Heebo', sans-serif; --fh: 'Rubik', 'Heebo', sans-serif; --fn: 'Rubik', 'Heebo', sans-serif; --fnh: 'Rubik', 'Heebo', sans-serif; --fa: 'Rubik', 'Heebo', sans-serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-assistant { --fb: 'Assistant', 'Heebo', sans-serif; --fh: 'Assistant', 'Heebo', sans-serif; --fn: 'Assistant', 'Heebo', sans-serif; --fnh: 'Assistant', 'Heebo', sans-serif; --fa: 'Assistant', 'Heebo', sans-serif; --fz: 1.03; --fnz: 1.03; }
+.fc-card.f-alef { --fb: 'Alef', 'Heebo', sans-serif; --fh: 'Alef', 'Heebo', sans-serif; --fn: 'Alef', 'Heebo', sans-serif; --fnh: 'Alef', 'Heebo', sans-serif; --fa: 'Alef', 'Heebo', sans-serif; --fz: 1; --fnz: 1; }
+.fc-card.f-varela { --fb: 'Varela Round', 'Heebo', sans-serif; --fh: 'Varela Round', 'Heebo', sans-serif; --fn: 'Varela Round', 'Heebo', sans-serif; --fnh: 'Varela Round', 'Heebo', sans-serif; --fa: 'Varela Round', 'Heebo', sans-serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-secular { --fb: 'Secular One', 'Heebo', sans-serif; --fh: 'Secular One', 'Heebo', sans-serif; --fn: 'Secular One', 'Heebo', sans-serif; --fnh: 'Secular One', 'Heebo', sans-serif; --fa: 'Secular One', 'Heebo', sans-serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-karantina { --fb: 'Karantina', 'Heebo', sans-serif; --fh: 'Karantina', 'Heebo', sans-serif; --fn: 'Karantina', 'Heebo', sans-serif; --fnh: 'Karantina', 'Heebo', sans-serif; --fa: 'Karantina', 'Heebo', sans-serif; --fz: 1.15; --fnz: 1.2; }
+.fc-card.f-amatic { --fb: 'Amatic SC', 'Heebo', sans-serif; --fh: 'Amatic SC', 'Heebo', sans-serif; --fn: 'Amatic SC', 'Heebo', sans-serif; --fnh: 'Amatic SC', 'Heebo', sans-serif; --fa: 'Amatic SC', 'Heebo', sans-serif; --fz: 1.15; --fnz: 1.2; }
+.fc-card.f-playpen { --fb: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fh: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fn: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fnh: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fa: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fz: 0.95; --fnz: 0.95; }
+/* a separate font for the names (and the & between them) */
+.fc-card.nf-frank { --fn: 'Frank Ruhl Libre', serif; --fnh: 'Frank Ruhl Libre', serif; --fa: 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.nf-david { --fn: 'David Libre', 'Frank Ruhl Libre', serif; --fnh: 'David Libre', 'Frank Ruhl Libre', serif; --fa: 'David Libre', 'Frank Ruhl Libre', serif; --fnz: 1.04; }
+.fc-card.nf-notoserif { --fn: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew', 'Frank Ruhl Libre', serif; --fnz: 0.97; }
+.fc-card.nf-rashi { --fn: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fnh: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fa: 'Noto Rashi Hebrew', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.nf-bona { --fn: 'Bona Nova', 'Frank Ruhl Libre', serif; --fnh: 'Bona Nova', 'Frank Ruhl Libre', serif; --fa: 'Bona Nova', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.nf-miriam { --fn: 'Miriam Libre', 'Heebo', sans-serif; --fnh: 'Miriam Libre', 'Heebo', sans-serif; --fa: 'Miriam Libre', 'Heebo', sans-serif; --fnz: 0.97; }
+.fc-card.nf-rubik { --fn: 'Rubik', 'Heebo', sans-serif; --fnh: 'Rubik', 'Heebo', sans-serif; --fa: 'Rubik', 'Heebo', sans-serif; --fnz: 0.97; }
+.fc-card.nf-assistant { --fn: 'Assistant', 'Heebo', sans-serif; --fnh: 'Assistant', 'Heebo', sans-serif; --fa: 'Assistant', 'Heebo', sans-serif; --fnz: 1.03; }
+.fc-card.nf-alef { --fn: 'Alef', 'Heebo', sans-serif; --fnh: 'Alef', 'Heebo', sans-serif; --fa: 'Alef', 'Heebo', sans-serif; --fnz: 1; }
+.fc-card.nf-varela { --fn: 'Varela Round', 'Heebo', sans-serif; --fnh: 'Varela Round', 'Heebo', sans-serif; --fa: 'Varela Round', 'Heebo', sans-serif; --fnz: 0.97; }
+.fc-card.nf-secular { --fn: 'Secular One', 'Heebo', sans-serif; --fnh: 'Secular One', 'Heebo', sans-serif; --fa: 'Secular One', 'Heebo', sans-serif; --fnz: 0.97; }
+.fc-card.nf-karantina { --fn: 'Karantina', 'Heebo', sans-serif; --fnh: 'Karantina', 'Heebo', sans-serif; --fa: 'Karantina', 'Heebo', sans-serif; --fnz: 1.25; }
+.fc-card.nf-amatic { --fn: 'Amatic SC', 'Heebo', sans-serif; --fnh: 'Amatic SC', 'Heebo', sans-serif; --fa: 'Amatic SC', 'Heebo', sans-serif; --fnz: 1.25; }
+.fc-card.nf-playpen { --fn: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fnh: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fa: 'Playpen Sans Hebrew', 'Heebo', sans-serif; --fnz: 0.95; }
+.fc-card.nf-script { --fn: 'Great Vibes', 'Frank Ruhl Libre', cursive; --fnh: 'Frank Ruhl Libre', serif; --fa: 'Cormorant Garamond', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.nf-serif { --fn: 'Bellefair', 'Frank Ruhl Libre', serif; --fnh: 'Bellefair', 'Frank Ruhl Libre', serif; --fa: 'Bellefair', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.nf-bold { --fn: 'Suez One', serif; --fnh: 'Suez One', serif; --fa: 'Suez One', serif; --fnz: 1; }
+.fc-card.nf-modern { --fn: 'Heebo', sans-serif; --fnh: 'Heebo', sans-serif; --fa: 'Heebo', sans-serif; --fnz: 1; }
+.fc-card.nfs .fc-n, .fc-card.nfs .fc-amp { font-style: normal !important; font-weight: 700 !important; text-transform: none !important; letter-spacing: .01em !important; word-spacing: normal !important; font-synthesis: none; }
+.fc-card.nfs .fc-n { font-family: var(--fn) !important; } .fc-card.nfs .fc-n.heb { font-family: var(--fnh) !important; } .fc-card.nfs .fc-amp { font-family: var(--fa) !important; }
+.fc-card.nfs.nw4 .fc-n, .fc-card.nfs.nw4 .fc-amp { font-weight: 400 !important; }
+/* script names: the English in Great Vibes (regular), the Hebrew in Frank Ruhl bold, at the Script sizes */
+.fc-card.nfs.nf-script .fc-n:not(.heb) { font-weight: 400 !important; }
+.fc-card.nfs.nf-script .fc-in .fc-n:not(.heb) { font-size: 9.5cqw; line-height: 1.05; }
+.fc-card.nfs.nf-script .fc-amp { font-style: italic !important; font-weight: 400 !important; }
+.fc-card.nfs.nf-serif .fc-n, .fc-card.nfs.nf-serif .fc-amp, .fc-card.nfs.nf-bold .fc-n, .fc-card.nfs.nf-bold .fc-amp { font-weight: 400 !important; }
+/* Script lettering with other names: the names at the size the other letterings use */
+.fc-card.f-script.nfs:not(.nf-script) .fc-in .fc-n:not(.heb) { font-size: 6.6cqw; line-height: 1.2; }
+.fc-card.f-gveret { --fb: 'Gveret Levin', 'Heebo', sans-serif; --fh: 'Gveret Levin', 'Heebo', sans-serif; --fn: 'Gveret Levin', 'Heebo', sans-serif; --fnh: 'Gveret Levin', 'Heebo', sans-serif; --fa: 'Gveret Levin', 'Heebo', sans-serif; --fz: 1.1; --fnz: 1.1; }
+.fc-card.f-fredoka { --fb: 'Fredoka', 'Heebo', sans-serif; --fh: 'Fredoka', 'Heebo', sans-serif; --fn: 'Fredoka', 'Heebo', sans-serif; --fnh: 'Fredoka', 'Heebo', sans-serif; --fa: 'Fredoka', 'Heebo', sans-serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.f-plex { --fb: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fh: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fn: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fnh: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fa: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-gveret { --fn: 'Gveret Levin', 'Heebo', sans-serif; --fnh: 'Gveret Levin', 'Heebo', sans-serif; --fa: 'Gveret Levin', 'Heebo', sans-serif; --fnz: 1.1; }
+.fc-card.nf-fredoka { --fn: 'Fredoka', 'Heebo', sans-serif; --fnh: 'Fredoka', 'Heebo', sans-serif; --fa: 'Fredoka', 'Heebo', sans-serif; --fnz: 0.97; }
+.fc-card.nf-plex { --fn: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fnh: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fa: 'IBM Plex Sans Hebrew', 'Heebo', sans-serif; --fnz: 1; }
+.f-amatic, .f-amatic * { font-weight: 700 !important; }
+.fc-card.nf-amatic .fc-n, .fc-card.nf-amatic .fc-amp { font-weight: 700 !important; }
+
+/* ===== cute baby & kids designs (drawn art: plain shapes only) ===== */
+.fc-art-full { top: 0; left: 0; width: 100cqw; height: 150cqw; }
+.d-babyblue .fc-frame, .d-babypink .fc-frame, .d-crib .fc-frame, .d-teddy .fc-frame, .d-stork .fc-frame,
+.d-booties .fc-frame, .d-rattle .fc-frame, .d-balloons .fc-frame, .d-alefbeis .fc-frame, .d-stars .fc-frame { inset: 2.4cqw; border-width: .35cqw; border-radius: 4.5cqw; }
+.d-babyblue .fc-frame::after, .d-babypink .fc-frame::after, .d-crib .fc-frame::after, .d-teddy .fc-frame::after, .d-stork .fc-frame::after,
+.d-booties .fc-frame::after, .d-rattle .fc-frame::after, .d-balloons .fc-frame::after, .d-alefbeis .fc-frame::after, .d-stars .fc-frame::after { display: none; }
+.d-babyblue .fc-bsd, .d-babypink .fc-bsd, .d-crib .fc-bsd, .d-teddy .fc-bsd, .d-stork .fc-bsd,
+.d-booties .fc-bsd, .d-rattle .fc-bsd, .d-rattle .fc-bsd, .d-balloons .fc-bsd, .d-alefbeis .fc-bsd, .d-stars .fc-bsd { top: 7.4cqw; right: 9cqw; }
+
+/* Blue Carriage */
+.d-babyblue { --bg: #e8f1fb; --ink: #2b4366; --accent: #6189bd; --soft: #4f6a8c;
+  background: linear-gradient(180deg, #f1f7fd 0%, #dce9f7 100%); }
+.d-babyblue .fc-frame { border-color: #a8c3e4; }
+.d-babyblue .fc-art-top { top: 7cqw; left: 32cqw; width: 36cqw; height: 29.3cqw; }
+.d-babyblue .fc-in { padding: 39cqw 13cqw 13cqw; }
+.d-babyblue .fc-n { color: #3c64a0; }
+.d-babyblue .fc-rule::after { background: #e6eff9; }
+
+/* Pink Carriage */
+.d-babypink { --bg: #fcecf1; --ink: #66313f; --accent: #cd7690; --soft: #87566a;
+  background: linear-gradient(180deg, #fef5f8 0%, #f8dde6 100%); }
+.d-babypink .fc-frame { border-color: #efb4c5; }
+.d-babypink .fc-art-top { top: 7cqw; left: 32cqw; width: 36cqw; height: 29.3cqw; }
+.d-babypink .fc-in { padding: 39cqw 13cqw 13cqw; }
+.d-babypink .fc-n { color: #b4506f; }
+.d-babypink .fc-rule::after { background: #fbe9ef; }
+
+/* Crib & Moon */
+.d-crib { --bg: #efebf8; --ink: #3b355f; --accent: #8a78c0; --soft: #5d5682;
+  background: linear-gradient(180deg, #f6f3fc 0%, #e4def3 100%); }
+.d-crib .fc-frame { border-color: #c4b8e4; }
+.d-crib .fc-art-top { top: 6cqw; left: 26cqw; width: 48cqw; height: 34.1cqw; }
+.d-crib .fc-in { padding: 43cqw 13cqw 13cqw; }
+.d-crib .fc-n { color: #6a58a8; }
+.d-crib .fc-rule::after { background: #ece8f7; }
+
+/* Teddy Bear */
+.d-teddy { --bg: #ecf6f1; --ink: #36493f; --accent: #5fa592; --soft: #586b61;
+  background: linear-gradient(180deg, #f5fbf8 0%, #dff0e7 100%); }
+.d-teddy .fc-frame { border-color: #a9d3c3; }
+.d-teddy .fc-art-top { top: 6cqw; left: 37cqw; width: 26cqw; height: 29.5cqw; }
+.d-teddy .fc-art-side { top: 8cqw; left: 64cqw; width: 9cqw; height: 13.5cqw; }
+.d-teddy .fc-in { padding: 39cqw 13cqw 13cqw; }
+.d-teddy .fc-n { color: #8a5d36; }
+.d-teddy .fc-rule::after { background: #e9f4ee; }
+
+/* Stork */
+.d-stork { --bg: #e7f1fa; --ink: #2d4865; --accent: #7d9ec8; --soft: #4f6782;
+  background: linear-gradient(180deg, #d8e8f6 0%, #eef5fb 45%, #f8fbfe 100%); }
+.d-stork .fc-frame { border-color: #a7c2e2; }
+.d-stork .fc-art-top { top: 5.5cqw; left: 19cqw; width: 62cqw; height: 37.4cqw; }
+.d-stork .fc-in { padding: 45cqw 13cqw 13cqw; }
+.d-stork .fc-n { color: #3d6496; }
+.d-stork .fc-rule::after { background: #f2f7fc; }
+
+/* Booties */
+.d-booties { --bg: #f1f8f5; --ink: #3a5048; --accent: #77b39f; --soft: #5a6e66;
+  background: linear-gradient(180deg, #f8fcfa 0%, #e5f3ec 100%); }
+.d-booties .fc-frame { border-color: #b2dccd; }
+.d-booties .fc-art-top { top: 8cqw; left: 29cqw; width: 42cqw; height: 24.7cqw; }
+.d-booties .fc-art-bot { bottom: 7cqw; left: 34cqw; width: 32cqw; height: 9.1cqw; }
+.d-booties .fc-in { padding: 36cqw 13cqw 18cqw; }
+.d-booties .fc-n { color: #4f8f7b; }
+.d-booties .fc-rule::after { background: #edf6f2; }
+
+/* Rattle & Bottle */
+.d-rattle { --bg: #fdf4e6; --ink: #4b3d2c; --accent: #e0a24f; --soft: #6d5d48;
+  background: linear-gradient(180deg, #fffaf2 0%, #fbead2 100%); }
+.d-rattle .fc-frame { border-color: #f1cc9a; }
+.d-rattle .fc-art-top { top: 6.5cqw; left: 31cqw; width: 38cqw; height: 29cqw; }
+.d-rattle .fc-in { padding: 39cqw 13cqw 13cqw; }
+.d-rattle .fc-n { color: #4f86a8; }
+.d-rattle .fc-rule::after { background: #fcf1e1; }
+
+/* Balloons & Blocks */
+.d-balloons { --bg: #fff8ee; --ink: #3e3a52; --accent: #e8857f; --soft: #625d78;
+  background: linear-gradient(180deg, #fffbf5 0%, #fcefdf 100%); }
+.d-balloons .fc-frame { border-color: #f4c2b6; }
+.d-balloons .fc-art-top { top: 5.5cqw; left: 32cqw; width: 36cqw; height: 30.5cqw; }
+.d-balloons .fc-art-bot { bottom: 5.5cqw; left: 31cqw; width: 38cqw; height: 18.6cqw; }
+.d-balloons .fc-in { padding: 38cqw 13cqw 25cqw; }
+.d-balloons .fc-n { color: #d0625c; }
+.d-balloons .fc-rule::after { background: #fdf3e7; }
+
+/* Aleph-Beis Blocks */
+.d-alefbeis { --bg: #f2f8fd; --ink: #2d3f5c; --accent: #ec8a84; --soft: #50607a;
+  background: linear-gradient(180deg, #f8fbfe 0%, #e5f0f9 100%); }
+.d-alefbeis .fc-frame { border-color: #b9d6ea; }
+.d-alefbeis .fc-art-top { top: 4.5cqw; left: 6cqw; width: 88cqw; height: 11.7cqw; }
+.d-alefbeis .fc-art-bot { bottom: 5.5cqw; left: 29cqw; width: 42cqw; height: 20.6cqw; }
+.d-alefbeis .fc-bsd { top: 18cqw; }
+.d-alefbeis .fc-in { padding: 23cqw 13cqw 27cqw; }
+.d-alefbeis .fc-n { color: #3f78b0; }
+.d-alefbeis .fc-rule::after { background: #eef5fb; }
+
+/* Little Stars */
+.d-stars { --bg: #eff7f3; --ink: #2f4a44; --accent: #c9a347; --soft: #546b65;
+  background: linear-gradient(180deg, #f6fbf8 0%, #e2f0e9 100%); }
+.d-stars .fc-frame { border-color: #cfe3d9; }
+.d-stars .fc-art-top { top: 9cqw; left: 22cqw; width: 56cqw; height: 17.9cqw; }
+.d-stars .fc-art-bot { bottom: 8cqw; left: 20cqw; width: 60cqw; height: 10.2cqw; }
+.d-stars .fc-in { padding: 30cqw 13cqw 19cqw; }
+.d-stars .fc-n { color: #b08a2e; }
+.d-stars .fc-rule::after { background: #ecf5f0; }
+
+/* ===== simcha art designs (v20261027c): plain shapes only ===== */
+/* Chanukah Lights */
+.d-menorah { --bg: #10224a; --ink: #f3e8cc; --accent: #d9b25f; --soft: #c9c0a6;
+  background: radial-gradient(110% 70% at 50% 8%, #22407a 0%, #12254f 55%, #0a1631 100%); }
+.d-menorah .fc-frame { border-width: .3cqw; }
+.d-menorah .fc-frame::after { border-width: .14cqw; }
+.d-menorah .fc-art-top { top: 6.5cqw; left: 28cqw; width: 44cqw; height: 34.8cqw; }
+.d-menorah .fc-in { padding-top: 43cqw; }
+.d-menorah .fc-n { color: #f6e3ad; }
+.d-menorah .fc-rule::after { background: #12254f; }
+/* Purim Masks */
+.d-purim { --bg: #fcf6ee; --ink: #3f2156; --accent: #8a4fb3; --soft: #5e4a6e;
+  background: linear-gradient(180deg, #fffaf3 0%, #f6ecf8 100%); }
+.d-purim .fc-frame { inset: 2.4cqw; border-width: .35cqw; border-radius: 4.5cqw; border-color: #d9bdea; }
+.d-purim .fc-frame::after { display: none; }
+.d-purim .fc-bsd { top: 7.4cqw; right: 9cqw; }
+.d-purim .fc-art-top { top: 7cqw; left: 25cqw; width: 50cqw; height: 30.5cqw; }
+.d-purim .fc-in { padding: 40cqw 13cqw 13cqw; }
+.d-purim .fc-n { color: #6b2f96; }
+.d-purim .fc-rule::after { background: #fbf4f4; }
+/* Shabbos Candles */
+.d-candles { --bg: #fbf4e6; --ink: #4a1f2a; --accent: #a8792e; --soft: #6e4b48;
+  background: radial-gradient(90% 60% at 50% 12%, #fffaf0 0%, #f8eedb 60%, #efdfc0 100%); }
+.d-candles .fc-frame { border-color: #c69b52; border-width: .3cqw; }
+.d-candles .fc-frame::after { border-color: #c69b52; }
+.d-candles .fc-art-top { top: 5.5cqw; left: 35cqw; width: 30cqw; height: 28.1cqw; }
+.d-candles .fc-in { padding-top: 36cqw; }
+.d-candles .fc-n { color: #7a2433; }
+.d-candles .fc-rule::after { background: #f8eedb; }
+/* Golden Rings */
+.d-rings { --bg: #fbf4e7; --ink: #3d2f2a; --accent: #b48a3c; --soft: #6b5a50;
+  background: linear-gradient(180deg, #fffaf2 0%, #f5e8d3 100%); }
+.d-rings .fc-frame { border-color: #cfae6c; border-width: .25cqw; }
+.d-rings .fc-frame::after { border-color: #cfae6c; }
+.d-rings .fc-art-top { top: 6.5cqw; left: 32cqw; width: 36cqw; height: 25.2cqw; }
+.d-rings .fc-in { padding-top: 34cqw; }
+.d-rings .fc-n { color: #8a6424; }
+.d-rings .fc-rule::after { background: #f9f0e1; }
+/* Tefillin */
+.d-tefillin { --bg: #f7f0e1; --ink: #23232d; --accent: #a07c33; --soft: #4f4a46;
+  background: linear-gradient(180deg, #fbf7ee 0%, #eee2c7 100%); }
+.d-tefillin .fc-frame { border-color: #2a2a31; border-width: .3cqw; }
+.d-tefillin .fc-frame::after { border-color: #a07c33; }
+.d-tefillin .fc-art-top { top: 6.5cqw; left: 32cqw; width: 36cqw; height: 24.3cqw; }
+.d-tefillin .fc-in { padding-top: 34cqw; }
+.d-tefillin .fc-rule::after { background: #f3ead6; }
+
+/* ===== line spacing, move words up/down, photo shapes & size (v20261027d) ===== */
+.fc-card.c-ls .fc-body { gap: max(0px, calc(.9cqw + (var(--ls) - 1) * 4cqw)); }
+.fc-card.c-ls .fc-in { row-gap: max(0px, calc(1.2cqw + (var(--ls) - 1) * 4cqw)); }
+.fc-card.c-ty .fc-in > *:not(.fc-bsd) { position: relative; top: calc(var(--ty) * 1cqw); }
+.fc-card .fc-photo { height: calc(24cqw * var(--pz, 1)); }
+.fc-photo.ps-arch { aspect-ratio: 4 / 5; border-radius: 50% 50% 1.6cqw 1.6cqw / 40% 40% 1.6cqw 1.6cqw; }
+.fc-photo.ps-round { aspect-ratio: 4 / 5; border-radius: 3.2cqw; }
+.fc-photo.ps-square { aspect-ratio: 1 / 1; border-radius: .8cqw; }
+.fc-photo.ps-oval { aspect-ratio: 4 / 5; border-radius: 50%; }
+
+/* ===== more simcha art designs (v20261027f) ===== */
+/* Under the Chuppah */
+.d-chuppah { --bg: #fbf7f0; --ink: #2f3346; --accent: #9a7b45; --soft: #5b5d6b;
+  background: radial-gradient(100% 70% at 50% 10%, #fffdf8 0%, #f8f1e4 65%, #efe3cc 100%); }
+.d-chuppah .fc-frame { border-color: #c2a46c; border-width: .25cqw; }
+.d-chuppah .fc-frame::after { border-color: #c2a46c; }
+.d-chuppah .fc-art-top { top: 5.5cqw; left: 30cqw; width: 40cqw; height: 31.6cqw; }
+.d-chuppah .fc-in { padding-top: 38cqw; }
+.d-chuppah .fc-n { color: #7e5f2c; }
+.d-chuppah .fc-rule::after { background: #f8f1e4; }
+/* Rose Garland */
+.d-wreath { --bg: #fffaf6; --ink: #46333a; --accent: #b9707a; --soft: #6d5559;
+  background: linear-gradient(180deg, #fffcf9 0%, #fbeee9 100%); }
+.d-wreath .fc-frame { border-color: #e1b3b5; border-width: .25cqw; }
+.d-wreath .fc-frame::after { border-color: #e1b3b5; }
+.d-wreath .fc-art-top { top: 4.5cqw; left: 9cqw; width: 82cqw; height: 34.4cqw; }
+.d-wreath .fc-bsd { top: 4cqw; }
+.d-wreath .fc-in { padding-top: 37cqw; }
+.d-wreath .fc-n { color: #a4525e; }
+.d-wreath .fc-rule::after { background: #fdf4f0; }
+/* Havdalah */
+.d-havdalah { --bg: #1c1e3d; --ink: #f1e6d0; --accent: #d7b46a; --soft: #c8bfae;
+  background: radial-gradient(100% 70% at 50% 8%, #2e3163 0%, #1c1e3d 60%, #121329 100%); }
+.d-havdalah .fc-frame { border-width: .3cqw; }
+.d-havdalah .fc-frame::after { border-width: .14cqw; }
+.d-havdalah .fc-art-top { top: 5.5cqw; left: 31cqw; width: 38cqw; height: 30.4cqw; }
+.d-havdalah .fc-in { padding-top: 38cqw; }
+.d-havdalah .fc-n { color: #f4dc9c; }
+.d-havdalah .fc-rule::after { background: #1c1e3d; }
+/* Open Sefer */
+.d-sefer { --bg: #f8f2e3; --ink: #2b2f4a; --accent: #9a7330; --soft: #55586c;
+  background: radial-gradient(110% 80% at 50% 0%, #fffcf3 0%, #f6eedb 70%, #ecdfc1 100%); }
+.d-sefer .fc-frame { border-color: #b8913e; border-width: .3cqw; }
+.d-sefer .fc-frame::after { border-color: #b8913e; }
+.d-sefer .fc-art-top { top: 6cqw; left: 30cqw; width: 40cqw; height: 25.3cqw; }
+.d-sefer .fc-in { padding-top: 34cqw; }
+.d-sefer .fc-rule::after { background: #f6eedb; }
+
+/* Apple & Honey (v20261027i) */
+.d-applehoney { --bg: #fffaf0; --ink: #3b2a1e; --accent: #b5862f; --soft: #6b5646;
+  background: radial-gradient(100% 70% at 50% 8%, #fffdf7 0%, #fbf1dc 65%, #f3e2bf 100%); }
+.d-applehoney .fc-frame { border-color: #d0a956; border-width: .3cqw; }
+.d-applehoney .fc-frame::after { border-color: #d0a956; }
+.d-applehoney .fc-art-top { top: 7cqw; left: 29cqw; width: 42cqw; height: 27.7cqw; }
+.d-applehoney .fc-in { padding-top: 37cqw; }
+.d-applehoney .fc-n { color: #a32a36; }
+.d-applehoney .fc-rule::after { background: #fbf1dc; }
+
+/* short greeting cards: bigger words (v20261027i) */
+.t-mishloach .fc-in, .t-shanatova .fc-in, .t-mazeltov .fc-in { --z: 1.3; }
+
+
+/* ===== v20261028c: new chasuna & bar mitzvah designs (drawn shapes only) ===== */
+.d-crest { --bg: #fcf8ef; --ink: #33291c; --accent: #a8822f; --soft: #6f5f45;
+  background: radial-gradient(120% 85% at 50% 0%, #fffdf8 0%, #f8f1e1 70%, #f1e6cd 100%); }
+.d-crest .fc-frame { border-width: .22cqw; border-color: #c9a964; }
+.d-crest .fc-frame::after { border-width: .12cqw; border-color: #c9a964; }
+.d-crest .fc-art-top { top: 5cqw; left: 30cqw; width: 40cqw; height: 35cqw; }
+.d-crest .fc-in { padding-top: 41cqw; }
+.d-crest .fc-n { color: #7d5b1f; }
+.d-crest .fc-rule::after { background: #f9f3e6; }
+
+.d-emarch { --bg: #12392d; --ink: #f4ecd8; --accent: #d6b46c; --soft: #cbd3c2;
+  background: radial-gradient(110% 80% at 50% 30%, #1b4d3d 0%, #12392d 60%, #0b2a20 100%); }
+.d-emarch .fc-frame { display: none; }
+.d-emarch .fc-art-full { color: #d6b46c; }
+.d-emarch .fc-in { padding: 27cqw 17cqw 14cqw; }
+.d-emarch .fc-bsd { top: 4cqw; right: 6cqw; }
+.d-emarch .fc-n { color: #f3dca4; }
+.d-emarch .fc-rule::after { background: #15402f; }
+
+.d-peony { --bg: #fdf6f3; --ink: #4a3437; --accent: #b46c75; --soft: #7a5f60;
+  background: linear-gradient(180deg, #fefaf8 0%, #f9ebe7 100%); }
+.d-peony .fc-frame { inset: 5cqw; border-width: .2cqw; border-color: #e3b9b6; }
+.d-peony .fc-frame::after { display: none; }
+.d-peony .fc-art-tl { top: -1cqw; left: -1cqw; width: 50cqw; height: 50cqw; }
+.d-peony .fc-art-br { bottom: -1cqw; right: -1cqw; width: 50cqw; height: 50cqw; transform: scale(-1, -1); }
+.d-peony .fc-in { padding: 27cqw 14cqw 25cqw; }
+.d-peony .fc-bsd { top: 7cqw; right: 8cqw; }
+.d-peony .fc-rule { background: #d9a3a3; }
+.d-peony .fc-rule::after { border-color: #d9a3a3; background: #fbf1ee; }
+
+.d-pomvine { --bg: #fbf5ea; --ink: #3c2326; --accent: #a8803a; --soft: #6e5452;
+  background: radial-gradient(120% 90% at 50% 50%, #fdf9f1 0%, #f7eedd 100%); }
+.d-pomvine .fc-frame { inset: 3cqw; border-width: .3cqw; border-color: #8e2a3a; }
+.d-pomvine .fc-frame::after { border-color: #b8924d; border-width: .12cqw; }
+.d-pomvine .fc-art-top { top: 5.5cqw; left: 5cqw; width: 90cqw; height: 20.7cqw; }
+.d-pomvine .fc-art-bot { bottom: 5.5cqw; left: 5cqw; width: 90cqw; height: 20.7cqw; transform: scaleY(-1); }
+.d-pomvine .fc-in { padding: 28cqw 13cqw 26cqw; }
+.d-pomvine .fc-bsd { top: 26cqw; right: 8cqw; }
+.d-pomvine .fc-n { color: #7a2030; }
+.d-pomvine .fc-head, .d-pomvine .fc-foot { color: #8e2a3a; }
+.d-pomvine .fc-rule::after { background: #faf3e6; }
+
+.d-deco { --bg: #121212; --ink: #f1e7cf; --accent: #cfa955; --soft: #c4baa3;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0c0c0c 100%); }
+.d-deco .fc-frame { display: none; }
+.d-deco .fc-in { padding: 22cqw 15cqw 20cqw; }
+.d-deco .fc-bsd { top: 12cqw; right: 13cqw; }
+.d-deco .fc-n { color: #f3dda3; }
+.d-deco .fc-rule::after { background: #141414; }
+
+.d-olive { --bg: #f7f6ef; --ink: #2f3a2a; --accent: #7d7a3e; --soft: #5f6656;
+  background: linear-gradient(180deg, #fbfaf5 0%, #f1f0e4 100%); }
+.d-olive .fc-frame { inset: 5cqw; border-width: .18cqw; border-color: #b7bd9c; }
+.d-olive .fc-frame::after { display: none; }
+.d-olive .fc-art-top { top: 5cqw; left: 20cqw; width: 60cqw; height: 27cqw; color: #8a7d45; }
+.d-olive .fc-in { padding: 33cqw 14cqw 15cqw; }
+.d-olive .fc-n { color: #3e4b2c; }
+.d-olive .fc-rule { background: #b7bd9c; }
+.d-olive .fc-rule::after { border-color: #9da47c; background: #f5f4ec; }
+
+.d-scroll { --bg: #142650; --ink: #f2e9d3; --accent: #d4b067; --soft: #c7c3b3;
+  background: radial-gradient(120% 90% at 50% 10%, #22397a 0%, #152a58 55%, #0e1d3e 100%); }
+.d-scroll .fc-frame { border-width: .3cqw; }
+.d-scroll .fc-frame::after { border-width: .12cqw; }
+.d-scroll .fc-art-top { top: 5.5cqw; left: 27cqw; width: 46cqw; height: 32.7cqw; }
+.d-scroll .fc-in { padding-top: 40cqw; }
+.d-scroll .fc-n { color: #f5dea2; }
+.d-scroll .fc-rule::after { background: #152a57; }
+
+.d-stripes { --bg: #fbfaf5; --ink: #1f2f57; --accent: #a8802c; --soft: #4d5772;
+  background: #fbfaf5; }
+.d-stripes .fc-frame { display: none; }
+.d-stripes .fc-in { padding: 29cqw 12cqw 26cqw; }
+.d-stripes .fc-bsd { top: 27.5cqw; right: 7cqw; }
+.d-stripes .fc-rule::after { background: #fbfaf5; }
+
+.d-luchos { --bg: #fbf6ea; --ink: #2c2a3a; --accent: #a17a2e; --soft: #625c58;
+  background: radial-gradient(120% 90% at 50% 12%, #fffdf6 0%, #f8f0de 60%, #f0e4c8 100%); }
+.d-luchos .fc-frame { border-width: .3cqw; border-color: #b8913e; }
+.d-luchos .fc-frame::after { border-width: .12cqw; border-color: #b8913e; }
+.d-luchos .fc-art-top { top: 5cqw; left: 28cqw; width: 44cqw; height: 29.9cqw; }
+.d-luchos .fc-in { padding-top: 37cqw; }
+.d-luchos .fc-n { color: #1f3566; }
+.d-luchos .fc-rule::after { background: #f9f2e3; }
+
+.d-kosel { --bg: #f6efe0; --ink: #3d2f22; --accent: #9a7434; --soft: #6b5a45;
+  background: linear-gradient(180deg, #fbf7ee 0%, #f2e8d3 100%); }
+.d-kosel .fc-frame { border-width: .22cqw; border-color: #bda57a; }
+.d-kosel .fc-frame::after { display: none; }
+.d-kosel .fc-art-top { top: 7cqw; left: 42cqw; width: 16cqw; height: 11.7cqw; }
+.d-kosel .fc-art-bot { bottom: 0; left: 0; width: 100cqw; height: 35cqw; color: #9a7434; }
+.d-kosel .fc-in { padding: 21cqw 12cqw 37cqw; }
+.d-kosel .fc-n { color: #5a3f1f; }
+.d-kosel .fc-rule::after { background: #f5ede0; }
+
+.d-magen { --bg: #3d1119; --ink: #f4e9d6; --accent: #d6b26a; --soft: #d3c3b8;
+  background: radial-gradient(120% 90% at 50% 15%, #5e1c28 0%, #43131c 55%, #2a0b11 100%); }
+.d-magen .fc-frame { border-width: .25cqw; }
+.d-magen .fc-frame::after { border-width: .1cqw; }
+.d-magen .fc-art-top { top: 5cqw; left: 27cqw; width: 46cqw; height: 29.4cqw; }
+.d-magen .fc-in { padding-top: 37cqw; }
+.d-magen .fc-n { color: #f3dca0; }
+.d-magen .fc-rule::after { background: #47141e; }
+
+.d-velvet { --bg: #1c3780; --ink: #f6eed8; --accent: #d9b866; --soft: #cfd0d8;
+  background: radial-gradient(90% 70% at 50% 45%, #2c4fa6 0%, #1d3a86 55%, #12275e 100%); }
+.d-velvet .fc-frame { display: none; }
+.d-velvet .fc-in { padding: 26cqw 15cqw 19cqw; }
+.d-velvet .fc-bsd { top: 24cqw; right: 17cqw; }
+.d-velvet .fc-n { color: #f5dfa4; }
+.d-velvet .fc-rule::after { background: #20408f; }
+
+.d-emarch.fc-textonly:not(.c-hl), .d-deco.fc-textonly:not(.c-hl), .d-scroll.fc-textonly:not(.c-hl), .d-magen.fc-textonly:not(.c-hl), .d-velvet.fc-textonly:not(.c-hl) { --accent: #8a6a22; }
+.d-emarch.fc-textonly .fc-rule::after, .d-deco.fc-textonly .fc-rule::after, .d-scroll.fc-textonly .fc-rule::after, .d-magen.fc-textonly .fc-rule::after, .d-velvet.fc-textonly .fc-rule::after { background: #fff; }
+.d-emarch.fc-textonly:not(.c-hl) .fc-n, .d-deco.fc-textonly:not(.c-hl) .fc-n, .d-scroll.fc-textonly:not(.c-hl) .fc-n, .d-magen.fc-textonly:not(.c-hl) .fc-n, .d-velvet.fc-textonly:not(.c-hl) .fc-n { color: #1e1e1e; }
+/* ===== v20261028e: more creative designs (drawn art, shapes & flat colours only, so the blocked-images painter draws them too) ===== */
+.d-wcbloom { --bg: #fffaf6; --ink: #4a3437; --accent: #b2606e; --soft: #7a5f60;
+  background: radial-gradient(120% 90% at 50% 50%, #fffdfb 0%, #fdf4ee 100%); }
+.d-wcbloom .fc-frame { display: none; }
+.d-wcbloom .fc-in { padding: 31cqw 14cqw 30cqw; }
+.d-wcbloom .fc-bsd { top: 6cqw; right: 8cqw; }
+.d-wcbloom .fc-n { color: #a24b5e; }
+.d-wcbloom .fc-rule { background: #dba3a8; }
+.d-wcbloom .fc-rule::after { border-color: #dba3a8; background: #fdf6f1; }
+
+.d-wclilac { --bg: #fcfaff; --ink: #3b3352; --accent: #7a63b0; --soft: #5f5878;
+  background: linear-gradient(180deg, #fbf8ff 0%, #f6f2fd 100%); }
+.d-wclilac .fc-frame { display: none; }
+.d-wclilac .fc-in { padding: 36cqw 13cqw 24cqw; }
+.d-wclilac .fc-bsd { top: 30cqw; right: 8cqw; }
+.d-wclilac .fc-n { color: #5b47a0; }
+.d-wclilac .fc-rule::after { background: #f8f5fe; }
+
+.d-rainbow { --bg: #f6fbff; --ink: #34405a; --accent: #d9725f; --soft: #56607a;
+  background: linear-gradient(180deg, #f3f9ff 0%, #fbfdff 60%, #f3faf1 100%); }
+.d-rainbow .fc-frame { display: none; }
+.d-rainbow .fc-in { padding: 47cqw 14cqw 18cqw; }
+.d-rainbow .fc-bsd { top: 3.5cqw; right: 6cqw; }
+.d-rainbow .fc-n { color: #3c6fb0; }
+.d-rainbow .fc-rule::after { background: #f8fbff; }
+
+.d-cloudsblue { --bg: #eef4fb; --ink: #2f4466; --accent: #c49a3c; --soft: #50607d;
+  background: linear-gradient(180deg, #d7e7f8 0%, #f2f7fd 40%, #f6f9fd 70%, #e3eefa 100%); }
+.d-cloudsblue .fc-frame, .d-cloudspink .fc-frame { display: none; }
+.d-cloudsblue .fc-in, .d-cloudspink .fc-in { padding: 41cqw 13cqw 25cqw; }
+.d-cloudsblue .fc-bsd, .d-cloudspink .fc-bsd { top: 38cqw; right: 8cqw; }
+.d-cloudsblue .fc-n { color: #3d6aa6; }
+.d-cloudsblue .fc-rule::after { background: #f2f7fd; }
+.d-cloudspink { --bg: #fbeef2; --ink: #5a3446; --accent: #c4943c; --soft: #7a5866;
+  background: linear-gradient(180deg, #f8dde6 0%, #fdf5f8 40%, #fdf7f9 70%, #f8e4eb 100%); }
+.d-cloudspink .fc-n { color: #b0587a; }
+.d-cloudspink .fc-rule::after { background: #fdf5f8; }
+
+.d-nightsky { --bg: #101d45; --ink: #f2ecda; --accent: #e6c36e; --soft: #c9cbe0;
+  background: radial-gradient(120% 90% at 50% 0%, #203a78 0%, #101d45 55%, #080f2a 100%); }
+.d-nightsky .fc-frame { display: none; }
+.d-nightsky .fc-in { padding: 31cqw 15cqw 22cqw; }
+.d-nightsky .fc-bsd { top: 28cqw; right: 12cqw; }
+.d-nightsky .fc-n { color: #f6dfa0; }
+.d-nightsky .fc-rule::after { background: #111f49; }
+
+.d-jlmdawn { --bg: #fbefd9; --ink: #3b2a1d; --accent: #9a6a32; --soft: #6b5440;
+  background: linear-gradient(180deg, #fdf9f0 0%, #fbefd9 45%, #f5d9b4 75%, #efc796 100%); }
+.d-jlmdawn .fc-frame { inset: 3.4cqw; border-width: .25cqw; border-color: #c9a273; }
+.d-jlmdawn .fc-frame::after { border-width: .12cqw; border-color: #c9a273; }
+.d-jlmdawn .fc-in { padding: 13cqw 12cqw 57cqw; }
+.d-jlmdawn .fc-n { color: #6b3f1c; }
+.d-jlmdawn .fc-rule::after { background: #fbf2e1; }
+
+.d-papercut { --bg: #fbf4e6; --ink: #3a1e22; --accent: #b8913e; --soft: #5e4446;
+  background: #fbf4e6; }
+.d-papercut .fc-frame { display: none; }
+.d-papercut .fc-in { padding: 45cqw 21cqw 16cqw; }
+.d-papercut .fc-bsd { top: 39cqw; left: 0; right: 0; text-align: center; }
+.d-papercut .fc-n { color: #7d1e2c; }
+.d-papercut .fc-head, .d-papercut .fc-foot { color: #7d1e2c; }
+.d-papercut .fc-rule { background: #b8913e; }
+.d-papercut .fc-rule::after { background: #fbf4e6; }
+
+.d-geofoil { --bg: #fbfaf6; --ink: #2b2b2b; --accent: #a8792c; --soft: #555049;
+  background: #fbfaf6; }
+.d-geofoil .fc-frame { display: none; }
+.d-geofoil .fc-in { padding: 31cqw 15cqw 29cqw; }
+.d-geofoil .fc-n { color: #8a6424; }
+.d-geofoil .fc-rule::after { background: #fbfaf6; }
+
+.d-marble { --bg: #f5f4f1; --ink: #2b2b2b; --accent: #b08d3e; --soft: #55534e;
+  background: radial-gradient(120% 90% at 30% 20%, #ffffff 0%, #f3f2ef 60%, #e9e7e3 100%); }
+.d-marble .fc-frame { display: none; }
+.d-marble .fc-in { padding: 18cqw 14cqw 17cqw; }
+.d-marble .fc-bsd { top: 10cqw; right: 11cqw; }
+.d-marble .fc-n { color: #8a6a2a; }
+.d-marble .fc-rule::after { background: #f4f3f0; }
+
+.d-sunburst { --bg: #0f3b3e; --ink: #f2ead6; --accent: #d9b45f; --soft: #c7d2cc;
+  background: radial-gradient(110% 80% at 50% 20%, #1d5a5c 0%, #0f3b3e 60%, #0a2a2c 100%); }
+.d-sunburst .fc-frame { display: none; }
+.d-sunburst .fc-in { padding: 38cqw 15cqw 22cqw; }
+.d-sunburst .fc-bsd { top: 12cqw; right: 14cqw; }
+.d-sunburst .fc-n { color: #f4dca0; }
+.d-sunburst .fc-rule::after { background: #10403f; }
+
+.d-mosaic { --bg: #f6eedc; --ink: #2f3442; --accent: #c0623e; --soft: #5a5a5e;
+  background: #f6eedc; }
+.d-mosaic .fc-frame { display: none; }
+.d-mosaic .fc-in { padding: 36cqw 16cqw 30cqw; }
+.d-mosaic .fc-bsd { top: 14cqw; right: 15cqw; }
+.d-mosaic .fc-n { color: #24508a; }
+.d-mosaic .fc-rule::after { background: #f6eedc; }
+
+.d-illum { --bg: #f6ecd4; --ink: #3a2a1a; --accent: #a07a2e; --soft: #5e4a33;
+  background: radial-gradient(120% 90% at 50% 40%, #fbf3de 0%, #f3e5c2 70%, #e8d3a4 100%); }
+.d-illum .fc-frame { display: none; }
+.d-illum .fc-in { padding: 36cqw 18cqw 18cqw; }
+.d-illum .fc-bsd { top: 16cqw; right: 17cqw; }
+.d-illum .fc-n { color: #9e2a2b; }
+.d-illum .fc-head, .d-illum .fc-foot { color: #2b4a8a; }
+.d-illum .fc-rule::after { background: #f6ebd1; }
+
+.d-terrazzo { --bg: #f7f1ea; --ink: #3b3433; --accent: #b58a46; --soft: #5f5755;
+  background: #f7f1ea; }
+.d-terrazzo .fc-frame { display: none; }
+.d-terrazzo .fc-in { padding: 31cqw 20cqw 14cqw; }
+.d-terrazzo .fc-bsd { top: 22cqw; left: 0; right: 0; text-align: center; }
+.d-terrazzo .fc-n { color: #b0604a; }
+.d-terrazzo .fc-rule::after { background: #fffdf9; }
+
+.d-linewreath { --bg: #fbfaf6; --ink: #3c4a3f; --accent: #a8873f; --soft: #5b665d;
+  background: #fbfaf6; }
+.d-linewreath .fc-frame { display: none; }
+.d-linewreath .fc-in { padding: 27cqw 19cqw 28cqw; }
+.d-linewreath .fc-bsd { top: 19cqw; left: 0; right: 0; text-align: center; }
+.d-linewreath .fc-n { color: #4c6150; }
+.d-linewreath .fc-rule { background: #b9c4b5; }
+.d-linewreath .fc-rule::after { border-color: #a8873f; background: #fbfaf6; }
+
+.d-nightsky.fc-textonly:not(.c-hl), .d-sunburst.fc-textonly:not(.c-hl) { --accent: #8a6a22; }
+.d-nightsky.fc-textonly .fc-rule::after, .d-sunburst.fc-textonly .fc-rule::after { background: #fff; }
+.d-nightsky.fc-textonly:not(.c-hl) .fc-n, .d-sunburst.fc-textonly:not(.c-hl) .fc-n { color: #1e1e1e; }
+.fc-textonly.d-papercut .fc-bsd, .fc-textonly.d-terrazzo .fc-bsd, .fc-textonly.d-linewreath .fc-bsd { top: 6.4cqw; left: auto; right: 7.5cqw; }
+/* ===== top / middle / bottom fonts & sizes (v20261028): the parts are marked sec-top / sec-mid / sec-bot ===== */
+.fc-in > .sec-top { --sz: var(--tz, 1); }
+.fc-in > .sec-bot { --sz: var(--bz, 1); }
+.fc-in > *, .k-img .fc-in > *, .d-garden .fc-in > * { zoom: calc(var(--z, 1) * var(--ts, 1) * var(--fit, 1) * var(--fz, 1) * var(--sz, 1) * var(--ez, 1)); }
+.fc-in > .fc-body { --sz: 1; }
+.fc-card .fc-body > .sec-top { zoom: calc(var(--tz, 1) * var(--ez, 1)); }
+.fc-card .fc-body > .sec-bot { zoom: calc(var(--bz, 1) * var(--ez, 1)); }
+.fc-card .fc-body > .sec-mid:not(.fc-n) { zoom: calc(var(--ns, 1) * var(--ez, 1)); }
+.fc-card.tfs .sec-top, .fc-card.tfs .sec-top * { font-family: var(--sft) !important; font-style: normal !important; text-transform: none !important; letter-spacing: .01em !important; }
+.fc-card.bfs .sec-bot, .fc-card.bfs .sec-bot * { font-family: var(--sfb) !important; font-style: normal !important; text-transform: none !important; letter-spacing: .01em !important; }
+.fc-card.tfs.tw4 .sec-top, .fc-card.tfs.tw4 .sec-top * { font-weight: 400 !important; font-synthesis: none; }
+.fc-card.bfs.bw4 .sec-bot, .fc-card.bfs.bw4 .sec-bot * { font-weight: 400 !important; font-synthesis: none; }
+.fc-card.nfs .fc-body > .sec-mid:not(.fc-n) { font-family: var(--fa) !important; font-style: normal !important; }
+.fc-card.nfs.nw4 .fc-body > .sec-mid, .fc-card.nfs.nw4 .fc-body > .sec-mid * { font-weight: 400 !important; font-synthesis: none; }
+
+/* ===== matching set pieces (v20261028c) ===== */
+.fc-card .fc-title { font-size: 9.5cqw !important; line-height: 1.12 !important; color: var(--accent); margin-bottom: 1.2cqw; }
+.fc-card .fc-title.heb { font-size: 8.2cqw !important; }
+.fc-card.pc-welcome .fc-title { font-size: 12.5cqw !important; }
+.fc-card.pc-welcome .fc-title.heb { font-size: 10.5cqw !important; }
+.fc-card.pc-bentcher .fc-title.heb { font-size: 10cqw !important; }
+.fc-card .fc-tnum { font-size: 40cqw !important; line-height: 1 !important; color: var(--accent); margin: 1cqw 0 2cqw; max-width: none; }
+.fc-card .fc-tnum.heb { font-size: 34cqw !important; }
+.fc-card.pc-table .fc-body > .fc-l:first-child { font-size: 6cqw; color: var(--soft); }
+.fc-card.pc-table .fc-body > .fc-l:first-child:not(.heb) { letter-spacing: .22em; text-transform: uppercase; }
+.fc-card.pc-table .fc-body > .fc-l:last-child { font-size: 4.2cqw; }
+.fc-card.pc-thanks .fc-body > .fc-text, .fc-card.pc-welcome .fc-body > .fc-date, .fc-card.pc-bentcher .fc-body > .fc-date { font-size: 4.4cqw; }
+.fc-card.pc-thanks .fc-in > .fc-body, .fc-card.pc-bentcher .fc-in > .fc-body, .fc-card.pc-welcome .fc-in > .fc-body { --sz: 1.2; }
+.fc-card.pc-table .fc-in > .fc-body { --sz: 1.1; }
+
+/* ===== one part changed by tapping it (v20261028d): these win over the whole-card and top/names/details settings ===== */
+.fc-card .fc-in > .fc-body > .fc-n.sec-mid { zoom: calc(var(--ns, 1) * var(--fnz, 1) / var(--fz, 1) * var(--ez, 1)); }
+.fc-card .fc-when > .pe-z, .fc-card .fc-where > .pe-z { zoom: var(--ez, 1); }
+.fc-card.fc-card .fc-in .pe-f.pe-f, .fc-card.fc-card .fc-in .pe-f.pe-f * { font-family: var(--ef) !important; font-style: normal !important; text-transform: none !important; letter-spacing: .01em !important; word-spacing: normal !important; }
+.fc-card.fc-card .fc-in .pe-w4.pe-w4, .fc-card.fc-card .fc-in .pe-w4.pe-w4 * { font-weight: 400 !important; font-synthesis: none; }
+.fc-card.fc-card .fc-in .pe-b.pe-b, .fc-card.fc-card .fc-in .pe-b.pe-b * { font-weight: 700 !important; font-synthesis: weight; }
+.fc-card.fc-card .fc-in .pe-nb.pe-nb, .fc-card.fc-card .fc-in .pe-nb.pe-nb * { font-weight: 400 !important; }
+.fc-card.fc-card .fc-in .pe-c.pe-c, .fc-card.fc-card .fc-in .pe-c.pe-c * { color: var(--ec) !important; -webkit-text-fill-color: var(--ec) !important; }
+.fc-card.fc-card .fc-in .pe-a.pe-a, .fc-card.fc-card .fc-in .pe-a.pe-a > * { text-align: var(--ea) !important; }
+.fc-card.fc-card .fc-in .pe-a.pe-a:not(.two) { margin-left: 0 !important; margin-right: 0 !important; max-width: none !important; align-self: stretch !important; }
+.fc-card.fc-card .fc-in .pe-l.pe-l, .fc-card.fc-card .fc-in .pe-l.pe-l * { line-height: var(--el) !important; }
+.fc-card.fc-card .fc-in .pe-m.pe-m { position: relative !important; left: calc(var(--ex, 0) * .6cqw) !important; top: calc(var(--ey, 0) * .6cqw) !important; }
+
+/* v20261028f: AI-made picture backgrounds (Canva): בס״ד centred above the words, inside the picture's empty centre */
+.k-ai .fc-bsd { top: var(--bsdt, 6cqw); left: 0; right: 0; text-align: center; }
+.k-ai .fc-rule::after { background: var(--bg); }
+.k-dark .fc-n { text-shadow: 0 0 1.4cqw rgba(0,0,0,.25); }
+.fc-textonly.k-ai .fc-bsd { top: 6.4cqw; left: auto; right: 7.5cqw; text-align: right; }
+.k-dark.fc-textonly:not(.c-hl) { --accent: #8a6a22; }
+.k-dark.fc-textonly:not(.c-hl) .fc-head, .k-dark.fc-textonly:not(.c-hl) .fc-time, .k-dark.fc-textonly:not(.c-hl) .fc-pre, .k-dark.fc-textonly:not(.c-hl) .fc-foot { color: #8a6a22 !important; }

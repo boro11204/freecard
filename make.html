@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Make your card · FreeCard</title>
+<meta name="description" content="Make a simcha invitation: choose the simcha and design, fill in the details, then download it as a JPEG to send on WhatsApp or a PDF to print.">
+<meta property="og:title" content="Make your card · FreeCard">
+<meta property="og:description" content="Make a simcha invitation: choose the simcha and design, fill in the details, then download it as a JPEG to send on WhatsApp or a PDF to print.">
+<meta property="og:image" content="og.jpg">
+<meta name="theme-color" content="#faf6ee">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/GreatVibes-7-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=20261029a">
+<link rel="stylesheet" href="card.css?v=20261029a">
+<link rel="stylesheet" href="styles.css?v=20261029a">
+<script src="i18n.js?v=20261029a"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="2.5" width="22" height="27" rx="2.5" fill="#1b2640"/><rect x="8" y="5.5" width="16" height="21" rx="1" fill="none" stroke="#d8b467" stroke-width="1"/><path d="M16 10 l3.2 3.2 -3.2 3.2 -3.2 -3.2z" fill="#d8b467"/><path d="M11 20.5h10M12.5 23h7" stroke="#d8b467" stroke-width="1" stroke-linecap="round"/></svg><span>Free<b>Card</b></span></a>
+<nav class="nav" aria-label="Main"><a class="plain" href="index.html#simchas">Simchas</a><a class="plain" href="index.html#designs">Designs</a><a class="plain" href="index.html#faq">FAQ</a><a class="btn sm" href="make.html">Make a card</a></nav>
+</div></header>
+<main id="main" class="maker"><div class="wrap">
+ <div class="maker-grid">
+  <div>
+   <h1 id="makerTitle">Make your card</h1>
+   <p class="sub">Fill it in and watch the card update. Then download it as a JPEG to send on WhatsApp, or a PDF to print.</p>
+   <p class="draft-note"><span id="draftMsg">Your card is saved on this device as you go.</span> <button type="button" class="linkbtn" id="startOver">Start over</button> · <button type="button" class="linkbtn" id="saveCopy">Save a copy</button> · <button type="button" class="linkbtn" id="myCards">My cards</button></p>
+   <div class="mycards" id="cardsBox" hidden><div class="mc-top"><b>My cards</b> <span class="hint">kept only on this device</span><button type="button" class="kb-x" id="cardsClose" aria-label="Close">✕</button></div><div id="cardsList"></div></div>
+   <form id="form" autocomplete="off" novalidate>
+    <div class="panel"><h2><span class="n">1</span>The simcha</h2><div class="chips grouped" id="typeChips" role="group" aria-label="Simcha type"><div class="chipset"><div class="chipgrp">Wedding & engagement</div><div class="chiprow"><button type="button" class="chip" data-type="chasuna" aria-pressed="false"><span>Chasuna</span><span class="he" dir="rtl">חתונה</span></button><button type="button" class="chip" data-type="engaged" aria-pressed="false"><span>Engagement announcement</span><span class="he" dir="rtl">הודעת אירוסין</span></button><button type="button" class="chip" data-type="vort" aria-pressed="false"><span>Vort / L'chaim</span><span class="he" dir="rtl">ווארט / לחיים</span></button><button type="button" class="chip" data-type="tenoyim" aria-pressed="false"><span>Tenoyim</span><span class="he" dir="rtl">תנאים</span></button><button type="button" class="chip" data-type="aufruf" aria-pressed="false"><span>Aufruf</span><span class="he" dir="rtl">אויפרופן</span></button><button type="button" class="chip" data-type="shevabrachos" aria-pressed="false"><span>Sheva Brachos</span><span class="he" dir="rtl">שבע ברכות</span></button></div></div>
+<div class="chipset"><div class="chipgrp">Baby</div><div class="chiprow"><button type="button" class="chip" data-type="birth" aria-pressed="false"><span>Birth announcement</span><span class="he" dir="rtl">הודעת לידה</span></button><button type="button" class="chip" data-type="vachnacht" aria-pressed="false"><span>Vach Nacht</span><span class="he" dir="rtl">וואכנאכט</span></button><button type="button" class="chip" data-type="bris" aria-pressed="false"><span>Bris</span><span class="he" dir="rtl">ברית מילה</span></button><button type="button" class="chip" data-type="shalomzachor" aria-pressed="false"><span>Shalom Zachor</span><span class="he" dir="rtl">שלום זכר</span></button><button type="button" class="chip" data-type="kiddush" aria-pressed="false"><span>Kiddush</span><span class="he" dir="rtl">קידוש</span></button><button type="button" class="chip" data-type="pidyonhaben" aria-pressed="false"><span>Pidyon Haben</span><span class="he" dir="rtl">פדיון הבן</span></button><button type="button" class="chip" data-type="upsherin" aria-pressed="false"><span>Upsherin</span><span class="he" dir="rtl">אפשערן</span></button></div></div>
+<div class="chipset"><div class="chipgrp">Bar & Bas Mitzvah</div><div class="chiprow"><button type="button" class="chip" data-type="barmitzvah" aria-pressed="false"><span>Bar Mitzvah</span><span class="he" dir="rtl">בר מצוה</span></button><button type="button" class="chip" data-type="tefillin" aria-pressed="false"><span>Hanachas Tefillin</span><span class="he" dir="rtl">הנחת תפילין</span></button><button type="button" class="chip" data-type="basmitzvah" aria-pressed="false"><span>Bas Mitzvah</span><span class="he" dir="rtl">בת מצוה</span></button></div></div>
+<div class="chipset"><div class="chipgrp">Shabbos & Yom Tov</div><div class="chiprow"><button type="button" class="chip" data-type="shabbos" aria-pressed="false"><span>Shabbos Schedule</span><span class="he" dir="rtl">סדר השבת</span></button><button type="button" class="chip" data-type="melavamalka" aria-pressed="false"><span>Melava Malka</span><span class="he" dir="rtl">מלוה מלכה</span></button><button type="button" class="chip" data-type="purim" aria-pressed="false"><span>Purim Seudah</span><span class="he" dir="rtl">סעודת פורים</span></button><button type="button" class="chip" data-type="chanukah" aria-pressed="false"><span>Chanukah Party</span><span class="he" dir="rtl">מסיבת חנוכה</span></button><button type="button" class="chip" data-type="mishloach" aria-pressed="false"><span>Mishloach Manos note</span><span class="he" dir="rtl">משלוח מנות</span></button><button type="button" class="chip" data-type="shanatova" aria-pressed="false"><span>Rosh Hashana card</span><span class="he" dir="rtl">שנה טובה</span></button></div></div>
+<div class="chipset"><div class="chipgrp">Shul & community</div><div class="chiprow"><button type="button" class="chip" data-type="siyum" aria-pressed="false"><span>Siyum</span><span class="he" dir="rtl">סיום</span></button><button type="button" class="chip" data-type="sefertorah" aria-pressed="false"><span>Hachnasas Sefer Torah</span><span class="he" dir="rtl">הכנסת ספר תורה</span></button><button type="button" class="chip" data-type="chanukashabayis" aria-pressed="false"><span>Chanukas Habayis</span><span class="he" dir="rtl">חנוכת הבית</span></button><button type="button" class="chip" data-type="shiur" aria-pressed="false"><span>Shiur / Drasha</span><span class="he" dir="rtl">שיעור / דרשה</span></button><button type="button" class="chip" data-type="parlor" aria-pressed="false"><span>Parlor Meeting</span><span class="he" dir="rtl">אסיפה</span></button></div></div>
+<div class="chipset"><div class="chipgrp">Cards & more</div><div class="chiprow"><button type="button" class="chip" data-type="seudah" aria-pressed="false"><span>Seudah / Other</span><span class="he" dir="rtl">סעודה</span></button><button type="button" class="chip" data-type="thankyou" aria-pressed="false"><span>Thank-you card</span><span class="he" dir="rtl">כרטיס תודה</span></button><button type="button" class="chip" data-type="mazeltov" aria-pressed="false"><span>Mazel Tov wishes</span><span class="he" dir="rtl">ברכת מזל טוב</span></button></div></div></div></div>
+    <div class="panel"><h2><span class="n">2</span>The design</h2>
+     <div class="sw-label" id="swLabel">Designs for this simcha</div><div class="swatches" id="swFirst" role="group" aria-label="Designs for this simcha"></div>
+     <details class="more-designs"><summary>More designs</summary><div class="swatches" id="swRest" role="group" aria-label="More designs"></div></details>
+     <p class="ai-credit">Designs marked “AI art” have background art AI-generated with Canva or Leonardo.ai.</p>
+    </div>
+    <div class="panel" id="letterPanel"><h2><span class="n">3</span>Lettering <span class="opt">the font on the card</span></h2>
+     <div class="fontgrid" id="fontGrid" role="group" aria-label="Lettering"></div>
+     <div class="parts" id="partFonts">
+      <div class="parts-h">Font for each part <span class="opt">optional</span></div>
+      <p class="hint nf-hint">Top, names and details can each have their own font and size.</p>
+      <div class="part-row"><label for="f-tf" class="part-l"><svg class="part-ic" viewBox="0 0 14 20" aria-hidden="true"><rect x="1" y="1" width="12" height="18" rx="1.5" fill="none" stroke="currentColor"/><rect x="3" y="3.5" width="8" height="3" fill="currentColor"/></svg>Top</label><select id="f-tf" class="part-sel" data-k="tf"><option value="">Same as the card</option></select><div class="stepper" data-k="tz"><button type="button" data-d="-5" aria-label="Smaller top">A−</button><output id="o-tz">100%</output><button type="button" data-d="5" aria-label="Bigger top">A+</button></div></div>
+      <div class="part-row"><label for="f-nf" class="part-l"><svg class="part-ic" viewBox="0 0 14 20" aria-hidden="true"><rect x="1" y="1" width="12" height="18" rx="1.5" fill="none" stroke="currentColor"/><rect x="3" y="8.5" width="8" height="3" fill="currentColor"/></svg>Names</label><select id="f-nf" class="part-sel"><option value="">Same as the card</option></select><div class="stepper" data-k="ns"><button type="button" data-d="-5" aria-label="Smaller names">A−</button><output id="o-ns2">100%</output><button type="button" data-d="5" aria-label="Bigger names">A+</button></div></div>
+      <div class="part-row"><label for="f-bf" class="part-l"><svg class="part-ic" viewBox="0 0 14 20" aria-hidden="true"><rect x="1" y="1" width="12" height="18" rx="1.5" fill="none" stroke="currentColor"/><rect x="3" y="13.5" width="8" height="3" fill="currentColor"/></svg>Details</label><select id="f-bf" class="part-sel" data-k="bf"><option value="">Same as the card</option></select><div class="stepper" data-k="bz"><button type="button" data-d="-5" aria-label="Smaller details">A−</button><output id="o-bz">100%</output><button type="button" data-d="5" aria-label="Bigger details">A+</button></div></div>
+      <button type="button" class="linkbtn" id="partsReset" hidden>Use one font for the whole card</button>
+     </div>
+    </div>
+    <div class="panel"><h2><span class="n">4</span>The wording</h2>
+     <div class="seg" id="langSeg" role="group" aria-label="Wording language">
+      <button type="button" data-w="he" class="he">לשון הקודש</button><button type="button" data-w="yi" class="he">אידיש</button><button type="button" data-w="en">English</button><button type="button" data-w="short">Short</button>
+     </div>
+     <div class="wstyle" id="styleRow" hidden><span class="mo-l">Style</span><div class="pshape" id="styleSeg" role="group" aria-label="Wording style"><button type="button" class="chip sm" data-ws="">Standard</button><button type="button" class="chip sm" data-ws="h">Heimish</button><button type="button" class="chip sm" data-ws="s">Short &amp; simple</button></div></div>
+     <div class="fields">
+      <div class="field full" id="w-x"><label for="f-x">Invitation text</label><textarea id="f-x" name="x" dir="auto" rows="12"></textarea>
+       <span class="hint">Words in [BRACKETS] fill in from the details below. Edit anything else freely. Tap to add one: <span id="tokChips" class="tok-chips"></span> <button type="button" class="linkbtn" id="resetX">Reset wording</button></span></div>
+      <div class="field full" id="w-i" hidden><label for="f-i">Opening line</label><textarea id="f-i" name="i" dir="auto" rows="2"></textarea></div>
+      <div class="field"><label for="f-h">Top line</label><input id="f-h" name="h" dir="auto"></div>
+      <div class="field" id="w-tl" hidden><label for="f-tl">Time label</label><input id="f-tl" name="tl" dir="auto" placeholder="Chuppah"></div>
+     </div>
+    </div>
+    <div class="panel"><h2><span class="n">5</span>The details</h2>
+     <div class="fields">
+      <div class="field" id="w-n1"><label for="f-n1" id="l-n1">Chosson</label><input id="f-n1" name="n1" dir="auto"></div>
+      <div class="field" id="w-n2"><label for="f-n2" id="l-n2">Kallah</label><input id="f-n2" name="n2" dir="auto"></div>
+      <div class="field" id="w-p1"><label for="f-p1" id="l-p1">Parents</label><input id="f-p1" name="p1" dir="auto"></div>
+      <div class="field" id="w-p2"><label for="f-p2" id="l-p2">Parents</label><input id="f-p2" name="p2" dir="auto"></div>
+      <div class="field"><label for="f-dt">Date</label><input id="f-dt" name="dt" type="date"></div>
+      <div class="field"><label for="f-hd">Hebrew date</label><input id="f-hd" name="hd" dir="auto"><span class="hint">Filled in from the date. Evening simchas may fall on the next Hebrew date. <button type="button" class="linkbtn" id="hdAuto">Re-fill</button></span><label class="check" style="margin-top:6px"><input type="checkbox" id="f-eve"> Evening simcha (after sunset): use the next Hebrew date, “אור ל…”</label></div>
+      <div class="field"><label for="f-pa">Parsha <span class="opt">for Shabbos</span></label><input id="f-pa" name="pa" dir="auto" placeholder="e.g. פרשת נח"><span class="hint">Filled in when the date is a Friday night or Shabbos (outside Eretz Yisroel). Shows on the card only where the wording has [PARSHA]. <button type="button" class="linkbtn" id="paAuto">Re-fill</button></span></div>
+      <div class="field"><label for="f-tm">Time</label><input id="f-tm" name="tm" type="time"></div>
+      <div class="field"><label for="f-sc">More times (optional)</label><input id="f-sc" name="sc" dir="auto" placeholder="Kabbolas Ponim 5:30 · Seudah 8:00"></div>
+      <div class="field"><label for="f-hl">Hall / place</label><input id="f-hl" name="hl" dir="auto"></div>
+      <div class="field"><label for="f-ad">Address</label><input id="f-ad" name="ad" dir="auto"></div>
+      <div class="field full"><label for="f-ex">Another event on the same card (optional)</label><textarea id="f-ex" name="ex" dir="auto" rows="2" placeholder="e.g. Sheva Brachos&#10;Motzei Shabbos, 8:00 PM at the Friedman home"></textarea></div>
+      <div class="field full"><label for="f-nt">Note (optional)</label><input id="f-nt" name="nt" dir="auto" placeholder="e.g. Separate seating · Valet parking"></div>
+     </div>
+    </div>
+    <div class="panel"><h2><span class="n">6</span>Photo <span class="opt">optional</span></h2>
+     <div class="fields"><div class="field full"><label for="f-photo">Add a photo or logo</label><input id="f-photo" type="file" accept="image/*">
+      <span class="hint">It shows on your JPEG and PDF. <button type="button" class="linkbtn" id="photoClear" hidden>Remove photo</button></span></div>
+      <div class="field full" id="photoOpts" hidden><div class="mo-l">Photo shape</div><div class="pshape" role="group" aria-label="Photo shape"><button type="button" class="chip sm" data-ps="">Circle</button><button type="button" class="chip sm" data-ps="oval">Oval</button><button type="button" class="chip sm" data-ps="arch">Arch</button><button type="button" class="chip sm" data-ps="round">Rounded</button><button type="button" class="chip sm" data-ps="square">Square</button></div>
+       <div class="mo-row" style="margin-top:10px"><div class="mo-l">Photo size</div><div class="stepper" data-k="pz"><button type="button" data-d="-10" aria-label="Smaller photo">−</button><output id="o-pz">100%</output><button type="button" data-d="10" aria-label="Bigger photo">+</button></div></div></div></div>
+    </div>
+
+    <div class="panel more-panel"><details class="more-opts" id="moreOpts"><summary><h2><span class="n">7</span>More options <span class="opt">size · colors · background</span></h2></summary>
+     <div class="mo-grid">
+      <div class="mo-row"><div class="mo-l">Text size</div><div class="stepper" data-k="ts"><button type="button" data-d="-5" aria-label="Smaller text">A−</button><output id="o-ts">100%</output><button type="button" data-d="5" aria-label="Bigger text">A+</button></div></div>
+      <div class="mo-row"><div class="mo-l">Names size</div><div class="stepper" data-k="ns"><button type="button" data-d="-5" aria-label="Smaller names">A−</button><output id="o-ns">100%</output><button type="button" data-d="5" aria-label="Bigger names">A+</button></div></div>
+      <div class="mo-row"><div class="mo-l">Line spacing</div><div class="stepper" data-k="ls"><button type="button" data-d="-10" aria-label="Less space between lines">−</button><output id="o-ls">100%</output><button type="button" data-d="10" aria-label="More space between lines">+</button></div></div>
+      <div class="mo-row"><div class="mo-l">Move the words</div><div class="stepper sty" data-k="ty"><button type="button" data-d="-2" aria-label="Move the words up">↑</button><output id="o-ty">0</output><button type="button" data-d="2" aria-label="Move the words down">↓</button></div></div>
+      <div class="mo-row col"><div class="mo-l">Color of names &amp; headings</div><div class="colors" id="hcRow" data-k="hc" role="group" aria-label="Color of names and headings"></div></div>
+      <div class="mo-row col"><div class="mo-l">Color of the other text</div><div class="colors" id="tcRow" data-k="tc" role="group" aria-label="Color of the other text"></div></div>
+      <div class="mo-row col"><label class="mo-l" for="f-bg">Your own background picture</label>
+       <input id="f-bg" type="file" accept="image/*">
+       <span class="hint">Use your own design or a photo behind the words. It's cut to the card's shape. <button type="button" class="linkbtn" id="bgClear" hidden>Remove background</button></span>
+       <label class="check" id="bgVeilW" hidden><input type="checkbox" id="f-bv" checked> Lighten it so the words are easy to read</label></div>
+      <label class="check"><input type="checkbox" id="f-to"> Text only, no background <span class="hint">to print on fancy card paper you already have</span></label>
+      <label class="check"><input type="checkbox" id="f-gray"> Black &amp; white <span class="hint">for printing at home without color</span></label>
+     </div>
+    </details></div>
+    <div class="panel" id="setPanel"><h2><span class="n">8</span>Matching set <span class="opt">same design, colors and fonts</span></h2>
+     <p class="hint set-hint">Make the other pieces for your simcha from this card. Pick one, check the preview, then download.</p>
+     <div class="chips pieces" id="pieceChips" role="group" aria-label="Piece of the set">
+      <button type="button" class="chip" data-pk="" aria-pressed="true">Invitation</button>
+      <button type="button" class="chip" data-pk="thanks" aria-pressed="false">Thank-you note</button>
+      <button type="button" class="chip" data-pk="table" aria-pressed="false">Table numbers</button>
+      <button type="button" class="chip" data-pk="bentcher" aria-pressed="false">Bentcher cover</button>
+      <button type="button" class="chip" data-pk="welcome" aria-pressed="false">Welcome sign</button>
+     </div>
+     <div id="pieceOpts" hidden>
+      <div id="tableOpts" class="table-opts" hidden>
+       <div class="tn-row"><label for="f-tfrom">Tables from</label><input id="f-tfrom" type="number" inputmode="numeric" min="1" max="200" value="1"><label for="f-tto">to</label><input id="f-tto" type="number" inputmode="numeric" min="1" max="200" value="20"></div>
+       <div class="tn-row"><span class="tn-l">Preview number</span><div class="stepper sty-n" id="tnStep"><button type="button" data-d="-1" aria-label="Previous number">‹</button><output id="o-tn">1</output><button type="button" data-d="1" aria-label="Next number">›</button></div></div>
+       <label class="check"><input type="checkbox" id="f-theb"> Hebrew letters: א ב ג</label>
+       <div class="tn-dl"><button type="button" class="btn gold" id="dlTablesPdf">All tables: one PDF</button><button type="button" class="btn ghost" id="dlTablesZip">All tables: JPEGs (.zip)</button></div>
+       <p class="hint" id="tnMsg">One number per page. The PDF follows the paper size in Print options.</p>
+      </div>
+      <label for="f-pw" class="pw-l">Wording for this piece</label>
+      <textarea id="f-pw" rows="6" dir="auto"></textarea>
+      <p class="hint">A line that starts with # is shown big. [NAME1], [NAME2], [HEBREW DATE], [DATE], [TABLE] and [NAMES] fill in from your card. <button type="button" class="linkbtn" id="pwReset">Use the ready-made wording</button></p>
+     </div>
+    </div>
+   </form>
+  </div>
+  <aside class="preview-col" id="preview" aria-label="Live preview">
+   <div class="preview-label">Live preview</div>
+   <div class="fc-wrap" id="card"></div>
+   <div class="fontbar" id="fontBar"><button type="button" class="fb-arrow" id="fontPrev" aria-label="Previous lettering">‹</button><button type="button" class="fb-cur" id="fontCur" aria-label="Choose the lettering"><span class="fb-l">Lettering</span> <b id="fontCurName"></b></button><button type="button" class="fb-arrow" id="fontNext" aria-label="Next lettering">›</button></div>
+   <div class="dl-main">
+    <button type="button" class="btn gold dl-big" id="dlJpg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download JPEG</button>
+    <button type="button" class="btn dl-big" id="dlPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF</button>
+   </div>
+   <p class="dl-hint">JPEG to send on WhatsApp · PDF to print</p>
+   <div class="dl-more"><button type="button" class="btn ghost dl-sm" id="dlGif"><span aria-hidden="true">✨</span> Animated GIF</button><button type="button" class="btn ghost dl-sm" id="dlStory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>Status size</button></div>
+   <button type="button" class="linkbtn set-link" id="setLink">Matching set: thank-you note, table numbers, bentcher, welcome sign ›</button>
+   <details class="print-opts" id="printOpts"><summary>Print options</summary>
+    <div class="po-in">
+     <label for="f-paper">PDF paper size</label>
+     <select id="f-paper">
+      <option value="card">Card size, 4×6 in</option>
+      <option value="5x7">5×7 in</option>
+      <option value="half">Half letter, 5½×8½ in</option>
+      <option value="a5">A5</option>
+      <option value="letter">Letter, one card in the middle</option>
+      <option value="letter2">Letter, 2 cards per page (cut in half)</option>
+     </select>
+     <label class="check"><input type="checkbox" id="f-hq"> Extra sharp (for printing, bigger file)</label>
+     <label class="check"><input type="checkbox" id="f-marks"> For a print shop: add bleed and cut marks</label>
+    </div>
+   </details>
+  </aside>
+ </div>
+</div></main>
+<div class="mobile-bar"><a class="btn ghost see" href="#preview">See card</a><button type="button" class="btn gold" id="dlJpg2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>JPEG</button><button type="button" class="btn" id="dlPdf2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>PDF</button></div>
+<div class="kb" id="kb" hidden role="dialog" aria-label="Hebrew keyboard">
+ <div class="kb-top"><span class="kb-t">Hebrew keyboard · <span id="kbFor"></span></span><button type="button" class="kb-x" id="kbClose" aria-label="Close keyboard">✕</button></div>
+ <div class="kb-words" id="kbWords"></div>
+ <div class="kb-keys" id="kbKeys"></div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="vendor/html-to-image.js?v=20261029a"></script>
+<script src="core.js?v=20261029a"></script>
+<script src="paint.js?v=20261029a"></script>
+<script src="extras.js?v=20261029a"></script>
+<script src="download.js?v=20261029a"></script>
+<script src="make.js?v=20261029a"></script>
+<script src="partedit.js?v=20261029a"></script>
+</body></html>

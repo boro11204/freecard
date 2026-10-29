@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Host page · FreeCard</title>
+<meta name="theme-color" content="#faf6ee">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css?v=20261029a">
+<link rel="stylesheet" href="card.css?v=20261029a">
+<link rel="stylesheet" href="styles.css?v=20261029a">
+<script src="i18n.js?v=20261029a"></script>
+</head>
+<body class="hostpage">
+<div class="v-top"><a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="2.5" width="22" height="27" rx="2.5" fill="#1b2640"/><rect x="8" y="5.5" width="16" height="21" rx="1" fill="none" stroke="#d8b467" stroke-width="1"/><path d="M16 10 l3.2 3.2 -3.2 3.2 -3.2 -3.2z" fill="#d8b467"/><path d="M11 20.5h10M12.5 23h7" stroke="#d8b467" stroke-width="1" stroke-linecap="round"/></svg><span>Free<b>Card</b></span></a></div>
+<main class="h-main" id="main">
+ <div id="hLoading" class="v-error"><p>Opening your host page…</p></div>
+ <div id="hErr" class="v-error" hidden><h1 id="hErrH">This host link is not valid</h1><p id="hErrP">Check that you copied the whole link. If you saved the card on this phone, it is listed below.</p><a class="btn gold" href="make.html">Make a card</a></div>
+ <div id="hView" hidden>
+  <p class="eyebrow-s">Your private host page</p>
+  <h1 id="hTitle" dir="auto"></h1>
+  <p class="h-sub" id="hSub"></p>
+  <section class="h-card">
+   <div class="h-share">
+    <div class="linkout"><input id="hLink" readonly aria-label="Card link for guests"><button type="button" class="btn sm" id="hCopy">Copy</button></div>
+    <div class="h-btns"><a class="btn wa sm" id="hWa" target="_blank" rel="noopener">Share on WhatsApp</a><a class="btn ghost sm" id="hOpen" target="_blank" rel="noopener">Open card</a><a class="btn gold sm" id="hEdit">Edit card</a></div>
+   </div>
+  </section>
+  <section class="stats" aria-label="Totals">
+   <div class="stat big"><b id="sPeople">0</b><span>people coming</span></div>
+   <div class="stat"><b id="sYes">0</b><span>replies: coming</span></div>
+   <div class="stat"><b id="sNo">0</b><span>can't come</span></div>
+   <div class="stat"><b id="sOpen">0</b><span>times opened</span></div>
+  </section>
+  <p class="split-tot" id="sSplit" hidden></p>
+  <section class="h-card">
+   <div class="h-head"><h2>Guest list</h2><div class="h-tools"><button type="button" class="btn ghost sm" id="hRefresh">Refresh</button><a class="btn sm" id="hCsv" download="guest-list.csv">Download CSV</a></div></div>
+   <div class="seg" id="hFilter" role="group" aria-label="Show"><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="yes" aria-pressed="false">Coming</button><button type="button" data-f="no" aria-pressed="false">Not coming</button></div>
+   <ul class="glist" id="gList"></ul>
+   <p class="empty" id="gEmpty">No answers yet. When guests RSVP on the card, they show up here.</p>
+   <details class="removed" id="gRemovedBox" hidden><summary>Removed answers</summary><ul class="glist" id="gRemoved"></ul></details>
+  </section>
+  <section class="h-card">
+   <div class="h-head"><h2>Personal links</h2></div>
+   <p class="small">Paste your guest list, one name per line. Each guest gets their own link with their name on the card, and you can see who opened it and who answered.</p>
+   <textarea id="pList" dir="auto" rows="5" placeholder="One name per line&#10;משפחת גרין&#10;Mr. &amp; Mrs. Katz"></textarea>
+   <button type="button" class="btn sm" id="pMake">Save &amp; make links</button>
+   <p class="small p-sum" id="pSum" hidden></p>
+   <ul class="plist" id="pOut"></ul>
+  </section>
+  <section class="h-card">
+   <div class="h-head"><h2>Mazel Tov wishes</h2></div>
+   <ul class="wall host" id="wList"></ul>
+   <p class="empty" id="wEmpty">No wishes yet.</p>
+  </section>
+  <section class="h-card danger">
+   <h2>Keep this page</h2>
+   <p class="small">Anyone with this link can see your guest list and edit the card, so keep it private. It is saved on this phone too. <a id="hWaSelf" target="_blank" rel="noopener">Send it to myself on WhatsApp</a></p>
+   <button type="button" class="linkbtn red" id="hDelete">Delete this card</button>
+  </section>
+ </div>
+ <section class="mine" id="mineBox" hidden><h2>Your cards on this phone</h2><ul id="mineList"></ul></section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="core.js?v=20261029a"></script>
+<script src="api.js?v=20261029a"></script>
+<script src="host.js?v=20261029a"></script>
+</body></html>

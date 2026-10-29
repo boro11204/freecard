@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You're invited · FreeCard</title>
+<meta name="description" content="You're invited! Open to see the invitation, RSVP, add it to your calendar and get directions.">
+<meta property="og:title" content="You're invited · FreeCard">
+<meta property="og:description" content="You're invited! Open to see the invitation, RSVP, add it to your calendar and get directions.">
+<meta property="og:image" content="og.jpg">
+<meta name="theme-color" content="#faf6ee">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/GreatVibes-7-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=20261029a">
+<link rel="stylesheet" href="card.css?v=20261029a">
+<link rel="stylesheet" href="styles.css?v=20261029a">
+<script src="i18n.js?v=20261029a"></script>
+</head>
+<body class="viewer">
+<div class="host-bar" id="hostBar" hidden>You made this card · <a id="hostBarLink" href="#">Guest list &amp; RSVPs →</a></div>
+<div class="v-top"><a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="2.5" width="22" height="27" rx="2.5" fill="#1b2640"/><rect x="8" y="5.5" width="16" height="21" rx="1" fill="none" stroke="#d8b467" stroke-width="1"/><path d="M16 10 l3.2 3.2 -3.2 3.2 -3.2 -3.2z" fill="#d8b467"/><path d="M11 20.5h10M12.5 23h7" stroke="#d8b467" stroke-width="1" stroke-linecap="round"/></svg><span>Free<b>Card</b></span></a></div>
+<main class="v-main" id="main">
+ <div id="loading" class="v-error"><p>Opening your invitation…</p></div>
+ <div id="err" class="v-error" hidden><h1 id="errH">This link looks incomplete</h1><p id="errP">Ask the sender to send the full link again, or make your own card.</p><a class="btn gold" href="make.html">Make a card</a></div>
+ <div id="view" hidden>
+  <div class="env-stage" id="stage">
+   <button type="button" class="envelope" id="envelope" aria-label="Open the invitation">
+    <div class="env"><div class="flap"></div><div class="seal" dir="rtl">מזל<br>טוב</div><div class="to"><span id="envFor" class="for"></span><span id="envTo">You're invited</span></div><div class="tap">TAP TO OPEN</div></div>
+   </button>
+   <div class="fc-wrap" id="card"></div>
+  </div>
+  <div class="countdown" id="countdown" hidden></div>
+  <div class="actions">
+   <div class="act" id="rsvpBox">
+    <h2>RSVP</h2>
+    <p class="small" id="rsvpTo">Let the family know if you're coming.</p>
+    <div id="rsvpForm">
+    <div class="field"><label for="gName">Your name</label><input id="gName" dir="auto" maxlength="80" placeholder="e.g. Shmuel &amp; Rochel Green" autocomplete="name"></div>
+    <div class="rsvp-q" role="group" aria-label="Are you coming?"><button type="button" data-a="yes" aria-pressed="true">I'll be there</button><button type="button" data-a="no" aria-pressed="false">Can't make it</button></div>
+    <div class="count" id="countRow"><span>How many people?</span><span class="stepper"><button type="button" id="minus" aria-label="Fewer">−</button><output id="count">2</output><button type="button" id="plus" aria-label="More">+</button></span></div>
+    <details class="split" id="splitBox"><summary>Men / women / children <span class="opt">optional</span></summary>
+     <div class="split-row"><label>Men<input id="gMen" type="number" inputmode="numeric" min="0" max="99" placeholder="0"></label><label>Women<input id="gWomen" type="number" inputmode="numeric" min="0" max="99" placeholder="0"></label><label>Children<input id="gKids" type="number" inputmode="numeric" min="0" max="99" placeholder="0"></label></div>
+    </details>
+    <div class="field" id="noteRow"><label for="gNote">Note <span class="opt">optional</span></label><input id="gNote" dir="auto" maxlength="300" placeholder="e.g. We'll come for the chuppah"></div>
+    <button type="button" class="btn gold wide" id="rsvpSend">Send my answer</button>
+    </div>
+    <div class="rsvp-done" id="rsvpDone" hidden><div class="tick" aria-hidden="true">✓</div><p id="rsvpDoneTxt"></p><button type="button" class="linkbtn" id="rsvpChange">Change my answer</button></div>
+    <div class="btn-row" id="waRow"><a class="btn wa" id="rsvpWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3z"/></svg><span id="rsvpWaTxt">Send RSVP</span></a><a class="btn" id="rsvpSms"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V6a1 1 0 0 1 1-1z"/></svg>By text</a></div>
+   </div>
+   <div class="act" id="wallBox" hidden>
+    <h2>Mazel Tov wishes</h2>
+    <p class="small">Leave a bracha for the family.</p>
+    <div class="field"><label for="wName">Your name</label><input id="wName" dir="auto" maxlength="60" autocomplete="name"></div>
+    <div class="field"><label for="wMsg">Your wish</label><textarea id="wMsg" dir="auto" maxlength="400" rows="3" placeholder="Mazel Tov! May you see much nachas…"></textarea></div>
+    <button type="button" class="btn wide" id="wSend">Post my Mazel Tov</button>
+    <ul class="wall" id="wall"></ul>
+    <p class="small wall-empty" id="wallEmpty">Be the first to wish Mazel Tov!</p>
+   </div>
+   <div class="act" id="calBox"><h2>Save the date</h2><p class="small" id="calWhen"></p>
+    <div class="btn-row"><a class="btn ghost" id="gcal" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>Google</a><button type="button" class="btn ghost" id="ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>Apple / other</button></div></div>
+   <div class="act" id="mapBox"><h2>Directions</h2><p class="small" id="mapWhere"></p>
+    <div class="btn-row three"><a class="btn ghost" id="gmap" target="_blank" rel="noopener">Google</a><a class="btn ghost" id="waze" target="_blank" rel="noopener">Waze</a><a class="btn ghost" id="amap" target="_blank" rel="noopener">Apple</a></div></div>
+   <div class="act"><h2>Save the card</h2><p class="small">Keep it on your phone or print it.</p>
+    <div class="btn-row"><button type="button" class="btn ghost" id="dlJpg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>JPEG</button><button type="button" class="btn ghost" id="dlPdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>PDF</button></div></div>
+   <div class="act"><h2>Share &amp; wish Mazel Tov</h2><p class="small">Send the invitation on, or a Mazel Tov to the family.</p>
+    <div class="btn-row"><a class="btn wa" id="shareWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3z"/></svg>Share</a><button type="button" class="btn ghost" id="copyLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Copy link</button>
+    <a class="btn ghost" id="mazel" target="_blank" rel="noopener" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 4 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4 20 4 22.4 7.2 21.2 10.6 19.5 15.4 12 20 12 20z"/></svg>Send a Mazel Tov</a></div></div>
+  </div>
+  <p class="v-foot">Made with FreeCard · <a href="make.html">Make your own card</a></p>
+ </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script src="vendor/html-to-image.js?v=20261029a"></script>
+<script src="core.js?v=20261029a"></script>
+<script src="paint.js?v=20261029a"></script>
+<script src="download.js?v=20261029a"></script>
+<script src="api.js?v=20261029a"></script>
+<script src="card.js?v=20261029a"></script>
+</body></html>
