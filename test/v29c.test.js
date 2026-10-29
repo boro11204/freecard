@@ -20,5 +20,5 @@ test('v20261029c: AI designs come before the older drawn designs in every simcha
   assert.match(core,/function aiFirst\(list\)/); assert.match(core,/return \{ first: aiFirst\(first\), rest: aiFirst\(rest\) \};/);
   assert.match(core,/if \(DESIGNS\[k\]\.nb\) DESIGNS\[k\]\.nb = false;/);
   const i=fs.readFileSync(S+'/index.html','utf8'); assert.match(i,/<footer[^]*ai-credit[^]*Canva and Leonardo\.ai/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=fs.readFileSync(S+'/'+f,'utf8'); assert.ok(!/v=20261029b/.test(h),f); assert.match(h,/v=20261029c/,f); }
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=fs.readFileSync(S+'/'+f,'utf8'); assert.ok(!/v=20261029b/.test(h),f); assert.match(h,/v=20261029[c-z]/,f); }
 });

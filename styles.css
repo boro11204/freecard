@@ -61,7 +61,6 @@ section { padding: 72px 0; }
 .type .t-he { font-family: 'Frank Ruhl Libre', serif; font-size: 30px; color: var(--gold); font-weight: 700; line-height: 1.1; }
 .type .t-en { font-family: var(--serif); font-size: 26px; color: var(--navy); font-weight: 600; margin-top: 6px; }
 .type .t-sub { color: var(--muted); font-size: 15px; margin-top: 4px; }
-.type .arrow { position: absolute; right: 20px; top: 24px; color: var(--navy); opacity: .5; font-size: 20px; }
 .band { background: var(--navy); color: #e9e4d6; }
 .band h2 { color: #fff; }
 .band .sec-head p { color: #c9c4b4; }
@@ -202,7 +201,6 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   .type .t-he { font-size: 24px; }
   .type .t-en { font-size: 21px; }
   .type .t-sub { font-size: 13px; }
-  .type .arrow { display: none; }
   .steps { grid-template-columns: 1fr; }
   .guests { grid-template-columns: 1fr 1fr; gap: 10px; }
   .g-item { padding: 16px; }
