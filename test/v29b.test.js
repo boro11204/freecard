@@ -4,7 +4,7 @@ test('v20261029b: home page has no design gallery and nothing points at it', ()=
   for(const f of fs.readdirSync(S).filter(f=>f.endsWith('.html'))){ const h=fs.readFileSync(path.join(S,f),'utf8');
     assert.ok(!/#designs|designGrid|Designs for every simcha|Tap one to start/.test(h), f);
     assert.ok(/name="viewport" content="width=device-width/.test(h), f+' viewport');
-    assert.ok(!/\?v=20261029a/.test(h), f+' version');
+    assert.ok(!/\?v=20261029a/.test(h) && !/\?v=20261029b/.test(h), f+' version');
     for(const m of h.matchAll(/(?:src|href)="([^"#?:]+\.(?:js|css|svg|jpg|webp))/g)) assert.ok(fs.existsSync(path.join(S,m[1])), f+' missing '+m[1]); }
   const i=fs.readFileSync(path.join(S,'index.html'),'utf8');
   assert.match(i,/<title>[^<]+<\/title>/); assert.match(i,/href="#simchas">See all simchas/); assert.match(i,/id="simchas"/);
@@ -13,7 +13,7 @@ test('v20261029b: home page has no design gallery and nothing points at it', ()=
 });
 test('v20261029b: every picture design has a sharp 400x600 tile picture', ()=>{
   const c=fs.readFileSync(path.join(S,'core.js'),'utf8');
-  const thumbs=[...c.matchAll(/"thumb": "(ai\/p\/[^"]+)"/g)].map(m=>m[1]); assert.equal(thumbs.length,38);
+  const thumbs=[...c.matchAll(/"thumb": "(ai\/p\/[^"]+)"/g)].map(m=>m[1]); assert.equal(thumbs.length,58);
   for(const t of thumbs){ const b=fs.readFileSync(path.join(S,'img',t+'.webp')); assert.equal(b.toString('ascii',8,12),'WEBP',t); assert.ok(b.length>3000&&b.length<60000,t); }
   for(const k of ['orchid','jerusalem','torah','tallis','lchaim','bris','girl','kos','upsherin','damask','midnight']) assert.ok(fs.existsSync(path.join(S,'img/p',k+'.webp')),k);
   assert.ok(!fs.existsSync(path.join(S,'img/ai/t')));
