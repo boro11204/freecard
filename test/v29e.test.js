@@ -3,7 +3,7 @@ const S=path.join(__dirname,'..','site');
 const rd=f=>fs.readFileSync(S+'/'+f,'utf8');
 test('v20261029e: on-screen keyboard (English + Hebrew) is loaded on the card maker', ()=>{
   const m=rd('make.html'), k=rd('vkb.js'), c=rd('styles.css');
-  assert.match(m,/<script src="vkb\.js\?v=20261029[e-z]"><\/script>/);
+  assert.match(m,/<script src="vkb\.js\?v=202610(?:29[e-z]|3\d[a-z])"><\/script>/);
   assert.ok(m.indexOf('partedit.js')<m.indexOf('vkb.js'), 'after the part editor so its text box gets the keyboard too');
   assert.ok(!/id="kb"/.test(m), 'old bottom-only Hebrew keyboard removed');
   assert.ok(!/kbOpen|KB_ROWS/.test(rd('make.js')));
@@ -18,9 +18,9 @@ test('v20261029e: on-screen keyboard (English + Hebrew) is loaded on the card ma
   assert.match(k,/new InputEvent\('input'/); assert.match(k,/vkbX/); assert.match(k,/vkbGrip/); assert.match(k,/'shift'/);
   assert.ok(!/https?:\/\//.test(k), 'no outside libraries');
   assert.match(c,/\.vkb \{/); assert.match(c,/\.vkb-ico \{/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261029d/.test(h),f); assert.match(h,/v=20261029[e-z]/,f); }
-  assert.match(rd('download.js'),/VERSION = '20261029[e-z]'/);
-  assert.match(rd('index.html'),/<footer[^]*ai-credit[^]*Canva and Leonardo\.ai/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261029d/.test(h),f); assert.match(h,/v=202610(?:29[e-z]|3\d[a-z])/,f); }
+  assert.match(rd('download.js'),/VERSION = '202610(?:29[e-z]|3\d[a-z])'/);
+  assert.match(rd('index.html'),/<footer[^]*ai-credit[^]*Canva,? (?:and )?Leonardo\.ai/);
 });
 test('v20261029e: every text box on the card maker can get the keyboard', ()=>{
   const m=rd('make.html');

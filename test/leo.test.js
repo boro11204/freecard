@@ -8,7 +8,7 @@ test('14 Leonardo designs with real image files and credits', ()=>{
   for(const k of keys){ const d=D[k]; assert.ok(fs.statSync(S+'/img/'+d.file+'.webp').size>50000,k); assert.ok(fs.statSync(S+'/img/'+d.thumb+'.webp').size>3000,k);
     assert.strictEqual(d.src,'leo'); assert.ok(d.nb && d.isNew && d.ai); assert.ok(!/hand/i.test(d.name+d.note)); }
   assert.strictEqual(new Set(keys.map(k=>D[k].name)).size,14);
-  assert.match(fs.readFileSync(S+'/index.html','utf8'),/AI-generated with Canva and Leonardo\.ai/);
+  assert.match(fs.readFileSync(S+'/index.html','utf8'),/AI-generated with Canva,? (?:and )?Leonardo\.ai/);
   assert.match(fs.readFileSync(S+'/make.js','utf8'),/AI art · Leonardo\.ai/);
   // v20261029b: the home design gallery is gone; the per-design credit lives on the card maker's tiles
   assert.match(fs.readFileSync(S+'/make.js','utf8'),/AI art · Leonardo\.ai/);

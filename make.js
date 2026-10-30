@@ -43,7 +43,7 @@
     var D = F.DESIGNS[key]; if (D.vars && D.vars.bg) w.style.backgroundColor = D.vars.bg;
     var s = document.createElement('span'); s.className = 'sw-name'; s.textContent = D.name;
     b.appendChild(w); b.appendChild(s);
-    if (D.ai) { var ai = document.createElement('small'); ai.className = 'ai-note'; var leo = D.src === 'leo'; ai.textContent = leo ? 'AI art · Leonardo.ai' : 'AI art · Canva'; ai.title = leo ? 'Background art AI-generated with Leonardo.ai' : 'Background art AI-generated with Canva'; b.appendChild(ai); }
+    if (D.ai) { var ai = document.createElement('small'); ai.className = 'ai-note'; var leo = D.src === 'leo', gem = D.src === 'gem'; ai.textContent = leo ? 'AI art · Leonardo.ai' : gem ? 'AI art · Google Gemini' : 'AI art · Canva'; ai.title = leo ? 'Background art AI-generated with Leonardo.ai' : gem ? 'Background art AI-generated with Google Gemini' : 'Background art AI-generated with Canva'; b.appendChild(ai); }
     if (D.nb) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
     b.addEventListener('click', function () { state.d = key; applyUI(); render(); warmSoon(); });
     return b;
