@@ -1,1 +1,30 @@
-Y29uc3QgdGVzdD1yZXF1aXJlKCdub2RlOnRlc3QnKSwgYXNzZXJ0PXJlcXVpcmUoJ25vZGU6YXNzZXJ0JyksIGZzPXJlcXVpcmUoJ2ZzJyksIHBhdGg9cmVxdWlyZSgncGF0aCcpOwpjb25zdCBTPXBhdGguam9pbihfX2Rpcm5hbWUsJy4uJywnc2l0ZScpOwpjb25zdCByZD1mPT5mcy5yZWFkRmlsZVN5bmMoUysnLycrZiwndXRmOCcpOwp0ZXN0KCd2MjAyNjEwMjllOiBvbi1zY3JlZW4ga2V5Ym9hcmQgKEVuZ2xpc2ggKyBIZWJyZXcpIGlzIGxvYWRlZCBvbiB0aGUgY2FyZCBtYWtlcicsICgpPT57CiAgY29uc3QgbT1yZCgnbWFrZS5odG1sJyksIGs9cmQoJ3ZrYi5qcycpLCBjPXJkKCdzdHlsZXMuY3NzJyk7CiAgYXNzZXJ0Lm1hdGNoKG0sLzxzY3JpcHQgc3JjPSJ2a2JcLmpzXD92PTIwMjYxMDI5W2Utel0iPjxcL3NjcmlwdD4vKTsKICBhc3NlcnQub2sobS5pbmRleE9mKCdwYXJ0ZWRpdC5qcycpPG0uaW5kZXhPZigndmtiLmpzJyksICdhZnRlciB0aGUgcGFydCBlZGl0b3Igc28gaXRzIHRleHQgYm94IGdldHMgdGhlIGtleWJvYXJkIHRvbycpOwogIGFzc2VydC5vayghL2lkPSJrYiIvLnRlc3QobSksICdvbGQgYm90dG9tLW9ubHkgSGVicmV3IGtleWJvYXJkIHJlbW92ZWQnKTsKICBhc3NlcnQub2soIS9rYk9wZW58S0JfUk9XUy8udGVzdChyZCgnbWFrZS5qcycpKSk7CiAgLy8gSXNyYWVsaSBsYXlvdXQgcm93cyBleGFjdGx5IGFzIGFza2VkCiAgYXNzZXJ0Lm9rKGsuaW5jbHVkZXMoIlsn16cnLCAn16gnLCAn15AnLCAn15gnLCAn15UnLCAn158nLCAn150nLCAn16QnXSIpKTsKICBhc3NlcnQub2soay5pbmNsdWRlcygiWyfXqScsICfXkycsICfXkicsICfXmycsICfXoicsICfXmScsICfXlycsICfXnCcsICfXmicsICfXoyddIikpOwogIGFzc2VydC5vayhrLmluY2x1ZGVzKCJbJ9eWJywgJ9ehJywgJ9eRJywgJ9eUJywgJ9egJywgJ9eeJywgJ9emJywgJ9eqJywgJ9elJ10iKSk7CiAgYXNzZXJ0Lm9rKGsuaW5jbHVkZXMoIlsncScsICd3JywgJ2UnLCAncicsICd0JywgJ3knLCAndScsICdpJywgJ28nLCAncCddIikpOwogIGZvcihjb25zdCBwIG9mIFsiJy4nIiwiJywnIiwiJz8nIiwiJyEnIiwiJy0nIiwiJzonIiwiJzsnIiwiJ1wiJyIsIlwiJ1wiIiwiJ0AnIl0pIGFzc2VydC5vayhrLmluY2x1ZGVzKHApLCAncHVuY3R1YXRpb24gJytwKTsKICBhc3NlcnQubWF0Y2goaywvJzEnLCAnMicsICczJywgJzQnLCAnNScsICc2JywgJzcnLCAnOCcsICc5JywgJzAnLyk7CiAgYXNzZXJ0Lm1hdGNoKGssL3NldEF0dHJpYnV0ZVwoJ2lucHV0bW9kZScsICdub25lJ1wpLyk7IGFzc2VydC5tYXRjaChrLC9yZW1vdmVBdHRyaWJ1dGVcKCdpbnB1dG1vZGUnXCkvKTsKICBhc3NlcnQubWF0Y2goaywvbmV3IElucHV0RXZlbnRcKCdpbnB1dCcvKTsgYXNzZXJ0Lm1hdGNoKGssL3ZrYlgvKTsgYXNzZXJ0Lm1hdGNoKGssL3ZrYkdyaXAvKTsgYXNzZXJ0Lm1hdGNoKGssLydzaGlmdCcvKTsKICBhc3NlcnQub2soIS9odHRwcz86XC9cLy8udGVzdChrKSwgJ25vIG91dHNpZGUgbGlicmFyaWVzJyk7CiAgYXNzZXJ0Lm1hdGNoKGMsL1wudmtiIFx7Lyk7IGFzc2VydC5tYXRjaChjLC9cLnZrYi1pY28gXHsvKTsKICBmb3IoY29uc3QgZiBvZiBbJ2luZGV4Lmh0bWwnLCdtYWtlLmh0bWwnLCdjYXJkLmh0bWwnLCdob3N0Lmh0bWwnXSl7IGNvbnN0IGg9cmQoZik7IGFzc2VydC5vayghL3Y9MjAyNjEwMjlkLy50ZXN0KGgpLGYpOyBhc3NlcnQubWF0Y2goaCwvdj0yMDI2MTAyOVtlLXpdLyxmKTsgfQogIGFzc2VydC5tYXRjaChyZCgnZG93bmxvYWQuanMnKSwvVkVSU0lPTiA9ICcyMDI2MTAyOVtlLXpdJy8pOwogIGFzc2VydC5tYXRjaChyZCgnaW5kZXguaHRtbCcpLC88Zm9vdGVyW15dKmFpLWNyZWRpdFteXSpDYW52YSBhbmQgTGVvbmFyZG9cLmFpLyk7Cn0pOwp0ZXN0KCd2MjAyNjEwMjllOiBldmVyeSB0ZXh0IGJveCBvbiB0aGUgY2FyZCBtYWtlciBjYW4gZ2V0IHRoZSBrZXlib2FyZCcsICgpPT57CiAgY29uc3QgbT1yZCgnbWFrZS5odG1sJyk7CiAgY29uc3QgaWRzPVsuLi5tLm1hdGNoQWxsKC88KGlucHV0fHRleHRhcmVhKSBpZD0iKGYtW2EtejAtOV0rKSIoW14+XSopPi9nKV0uZmlsdGVyKHg9PnhbMV09PT0ndGV4dGFyZWEnfHwhL3R5cGU9IihkYXRlfHRpbWV8bnVtYmVyfGZpbGV8Y2hlY2tib3h8Y29sb3IpIi8udGVzdCh4WzNdKSkubWFwKHg9PnhbMl0pOwogIGZvcihjb25zdCBpZCBvZiBbJ2YteCcsJ2YtaCcsJ2YtbjEnLCdmLW4yJywnZi1wMScsJ2YtcDInLCdmLWhkJywnZi1zYycsJ2YtaGwnLCdmLWFkJywnZi1leCcsJ2YtbnQnLCdmLXB3J10pIGFzc2VydC5vayhpZHMuaW5jbHVkZXMoaWQpLCBpZCk7CiAgYXNzZXJ0Lm1hdGNoKHJkKCd2a2IuanMnKSwvZ2V0RWxlbWVudEJ5SWRcKCdmb3JtJ1wpLCBkXC5nZXRFbGVtZW50QnlJZFwoJ3BlU2hlZXQnXCkvKTsKfSk7Cg==
+const test=require('node:test'), assert=require('node:assert'), fs=require('fs'), path=require('path');
+const S=path.join(__dirname,'..','site');
+const rd=f=>fs.readFileSync(S+'/'+f,'utf8');
+test('v20261029e: on-screen keyboard (English + Hebrew) is loaded on the card maker', ()=>{
+  const m=rd('make.html'), k=rd('vkb.js'), c=rd('styles.css');
+  assert.match(m,/<script src="vkb\.js\?v=20261029[e-z]"><\/script>/);
+  assert.ok(m.indexOf('partedit.js')<m.indexOf('vkb.js'), 'after the part editor so its text box gets the keyboard too');
+  assert.ok(!/id="kb"/.test(m), 'old bottom-only Hebrew keyboard removed');
+  assert.ok(!/kbOpen|KB_ROWS/.test(rd('make.js')));
+  // Israeli layout rows exactly as asked
+  assert.ok(k.includes("['ק', 'ר', 'א', 'ט', 'ו', 'ן', 'ם', 'פ']"));
+  assert.ok(k.includes("['ש', 'ד', 'ג', 'כ', 'ע', 'י', 'ח', 'ל', 'ך', 'ף']"));
+  assert.ok(k.includes("['ז', 'ס', 'ב', 'ה', 'נ', 'מ', 'צ', 'ת', 'ץ']"));
+  assert.ok(k.includes("['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']"));
+  for(const p of ["'.'","','","'?'","'!'","'-'","':'","';'","'\"'","\"'\"","'@'"]) assert.ok(k.includes(p), 'punctuation '+p);
+  assert.match(k,/'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'/);
+  assert.match(k,/setAttribute\('inputmode', 'none'\)/); assert.match(k,/removeAttribute\('inputmode'\)/);
+  assert.match(k,/new InputEvent\('input'/); assert.match(k,/vkbX/); assert.match(k,/vkbGrip/); assert.match(k,/'shift'/);
+  assert.ok(!/https?:\/\//.test(k), 'no outside libraries');
+  assert.match(c,/\.vkb \{/); assert.match(c,/\.vkb-ico \{/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261029d/.test(h),f); assert.match(h,/v=20261029[e-z]/,f); }
+  assert.match(rd('download.js'),/VERSION = '20261029[e-z]'/);
+  assert.match(rd('index.html'),/<footer[^]*ai-credit[^]*Canva and Leonardo\.ai/);
+});
+test('v20261029e: every text box on the card maker can get the keyboard', ()=>{
+  const m=rd('make.html');
+  const ids=[...m.matchAll(/<(input|textarea) id="(f-[a-z0-9]+)"([^>]*)>/g)].filter(x=>x[1]==='textarea'||!/type="(date|time|number|file|checkbox|color)"/.test(x[3])).map(x=>x[2]);
+  for(const id of ['f-x','f-h','f-n1','f-n2','f-p1','f-p2','f-hd','f-sc','f-hl','f-ad','f-ex','f-nt','f-pw']) assert.ok(ids.includes(id), id);
+  assert.match(rd('vkb.js'),/getElementById\('form'\), d\.getElementById\('peSheet'\)/);
+});
