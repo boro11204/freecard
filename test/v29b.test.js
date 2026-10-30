@@ -13,7 +13,7 @@ test('v20261029b: home page has no design gallery and nothing points at it', ()=
 });
 test('v20261029b: every picture design has a sharp 400x600 tile picture', ()=>{
   const c=fs.readFileSync(path.join(S,'core.js'),'utf8');
-  const thumbs=[...c.matchAll(/"thumb": "(ai\/p\/[^"]+)"/g)].map(m=>m[1]); assert.equal(thumbs.length,76);
+  const thumbs=[...c.matchAll(/"thumb": "(ai\/p\/[^"]+)"/g)].map(m=>m[1]); assert.equal(thumbs.length,85);
   for(const t of thumbs){ const b=fs.readFileSync(path.join(S,'img',t+'.webp')); assert.equal(b.toString('ascii',8,12),'WEBP',t); assert.ok(b.length>3000&&b.length<60000,t); }
   for(const k of ['orchid','jerusalem','torah','tallis','lchaim','bris','girl','kos','upsherin','damask','midnight']) assert.ok(fs.existsSync(path.join(S,'img/p',k+'.webp')),k);
   assert.ok(!fs.existsSync(path.join(S,'img/ai/t')));

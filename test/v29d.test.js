@@ -3,7 +3,7 @@ const S=path.join(__dirname,'..','site');
 const core=fs.readFileSync(S+'/core.js','utf8');
 test('v20261029d: general AI designs are cross-listed under the simchas they fit, own designs first', ()=>{
   const m=core.match(/var CROSS_ADD = (\{.*?\});\n/); assert.ok(m); const C=JSON.parse(m[1]);
-  const ai={}; for(const nm of ['AI_DESIGNS','LEO_DESIGNS','AI3_DESIGNS','AI4_DESIGNS']){ const x=core.match(new RegExp('var '+nm+' = (\\{.*?\\});\\n')); Object.assign(ai, JSON.parse(x[1])); }
+  const ai={}; for(const nm of ['AI_DESIGNS','LEO_DESIGNS','AI3_DESIGNS','AI4_DESIGNS','AI5_DESIGNS']){ const x=core.match(new RegExp('var '+nm+' = (\\{.*?\\});\\n')); Object.assign(ai, JSON.parse(x[1])); }
   for(const k of Object.keys(C)){ assert.ok(ai[k], k+' is an AI design'); assert.ok(C[k].length>0); }
   const babyKeys=['leogirl1','leogirl2','leogirl3','ai3leogirl04','leobris1','leobris2','leobris3','leoupsherin2','ai3leoupsherin03','ai3brpowderblue1','ai3brpowderblue2','ai3brpowderblue3'];
   const wed=['chasuna','vort','engaged','tenoyim','aufruf','shevabrachos'];
