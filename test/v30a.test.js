@@ -2,8 +2,8 @@ const test=require('node:test'), assert=require('node:assert'), fs=require('fs')
 const S=path.join(__dirname,'..','site'); const rd=f=>fs.readFileSync(S+'/'+f,'utf8');
 test('v20261030a: 18 more AI designs (10 Google Gemini, 8 Leonardo.ai) with card and tile pictures, New badge, cross-listed', ()=>{
   const core=rd('core.js'); const m=core.match(/var AI4_DESIGNS = (\{.*?\});\n/); assert.ok(m);
-  const D=JSON.parse(m[1]); const ks=Object.keys(D); assert.strictEqual(ks.length,18);
-  assert.strictEqual(ks.filter(k=>D[k].src==='gem').length,10); assert.strictEqual(ks.filter(k=>D[k].src==='leo').length,8);
+  const D=JSON.parse(m[1]); const ks=Object.keys(D); assert.strictEqual(ks.length,8); // 18 minus 10 Gemini ones removed in v20261030d (Star of David)
+  assert.strictEqual(ks.filter(k=>D[k].src==='gem').length,0); assert.strictEqual(ks.filter(k=>D[k].src==='leo').length,8);
   for(const k of ks){ const d=D[k]; assert.ok(d.nb&&d.isNew&&d.ai, k);
     for(const f of [d.file,d.thumb]){ assert.ok(fs.existsSync(S+'/img/'+f+'.webp'), f); }
     assert.ok(d.pad.length===3 && d.pad.every(x=>x>5&&x<50), k); }
@@ -21,6 +21,6 @@ test('v20261030a: in the browser, new designs lead and only they wear New', ()=>
   const vm=require('vm'); const ctx={window:{},document:undefined,navigator:{userAgent:''},console}; ctx.window=ctx; ctx.self=ctx; ctx.global=ctx;
   try { vm.runInNewContext(rd('core.js'), ctx); } catch(e) { return; } // core may need a DOM; the browser check covers it
   const F=ctx.FreeCard||ctx.window.FreeCard; if(!F) return;
-  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=18 && ks.filter(k=>/^ai4/.test(k)).length===18);
+  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=8 && ks.filter(k=>/^ai4/.test(k)).length===8);
   assert.ok(/^ai[45]/.test(F.designsFor('chasuna').first[0]));
 });
