@@ -6,7 +6,7 @@
   var params = new URLSearchParams(location.search);
   var type = F.TYPES[params.get('type')] ? params.get('type') : 'chasuna';
   var lang = ['he', 'yi', 'en', 'short'].indexOf(params.get('lang')) >= 0 ? params.get('lang') : 'he';
-  var design = F.DESIGNS[params.get('design')] && !F.DESIGNS[params.get('design')].hidden ? params.get('design') : null;
+  var design = F.DESIGNS[params.get('design')] ? params.get('design') : null; // a removed design (old link) gets the simcha's default
   var state = F.sampleCard(type, design, lang);
   state.x = F.defaultTemplate(type, lang);
   var touched = {}, photo = null;
