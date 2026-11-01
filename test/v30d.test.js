@@ -17,6 +17,6 @@ test('v20261030d: the 18 Star of David designs are removed entirely (no entries,
   for(const k of Object.keys(F.DESIGNS)){ const d=F.DESIGNS[k]; if(d.kind==='img' && d.file){ assert.ok(fs.existsSync(S+'/img/'+d.file+'.webp'), d.file); if(d.thumb) assert.ok(fs.existsSync(S+'/img/'+d.thumb+'.webp'), d.thumb); } }
   assert.match(core,/var key = DESIGNS\[c\.d\] \? c\.d : \(designsFor\(TYPES\[c\.t\] \? c\.t : 'chasuna'\)\.first\[0\] \|\| 'gold'\)/);
   assert.match(core,/v20261030d/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030c/.test(h),f); assert.match(h,/v=202610(30d|31[a-z])/,f); }
-  assert.match(rd('download.js'),/VERSION = '202610(30d|31[a-z])'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030c/.test(h),f); assert.match(h,/v=(?:202610(30d|31[a-z])|202611\d\d[a-z])/,f); }
+  assert.match(rd('download.js'),/VERSION = '(?:202610(30d|31[a-z])|202611\d\d[a-z])'/);
 });
