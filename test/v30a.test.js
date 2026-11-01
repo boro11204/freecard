@@ -21,6 +21,6 @@ test('v20261030a: in the browser, new designs lead and only they wear New', ()=>
   const vm=require('vm'); const ctx={window:{},document:undefined,navigator:{userAgent:''},console}; ctx.window=ctx; ctx.self=ctx; ctx.global=ctx;
   try { vm.runInNewContext(rd('core.js'), ctx); } catch(e) { return; } // core may need a DOM; the browser check covers it
   const F=ctx.FreeCard||ctx.window.FreeCard; if(!F) return;
-  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length===0); // v20261031b: the Gemini set that wore New was removed; nothing wears New until the next set
-  assert.ok(/^ai[45]/.test(F.designsFor('chasuna').first[0]));
+  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length===17 && ks.every(k=>/^ai7/.test(k))); // v20261031c: only the newest set (ai7) wears New
+  assert.ok(/^ai7/.test(F.designsFor('chasuna').first[0]));
 });
