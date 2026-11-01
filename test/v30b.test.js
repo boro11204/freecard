@@ -17,6 +17,6 @@ test('v20261030b: 9 more AI designs Benz picked (6 Google Gemini, 3 Leonardo.ai)
   const a4=core.indexOf('var AI4_DESIGNS'), a5=core.indexOf('var AI5_DESIGNS'); assert.ok(a4<a5 && a5<core.indexOf('var CROSS_ADD'));
   assert.ok(!/only the newest set wears the New badge/.test(core.slice(core.indexOf('var AI5_DESIGNS'), core.indexOf('var KEYS'))));
   assert.match(core,/v20261030b/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030a/.test(h),f); assert.match(h,/v=20261030[b-z]/,f); }
-  assert.match(rd('download.js'),/VERSION = '20261030[b-z]'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030a/.test(h),f); assert.match(h,/v=202610(30[b-z]|31[a-z])/,f); }
+  assert.match(rd('download.js'),/VERSION = '202610(30[b-z]|31[a-z])'/);
 });

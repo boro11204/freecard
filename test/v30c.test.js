@@ -9,6 +9,6 @@ test('v20261030c: per-line font menu has a Font label and a clear default in EN/
   assert.match(pe,/'Same as card': \['כמו בהזמנה', 'ווי אויפן קארטל'\]/);
   assert.match(rd('styles.css'),/\.pe-flab \{/);
   assert.match(rd('core.js'),/v20261030c/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030b/.test(h),f); assert.match(h,/v=20261030[c-z]/,f); }
-  assert.match(rd('download.js'),/VERSION = '20261030[c-z]'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261030b/.test(h),f); assert.match(h,/v=202610(30[c-z]|31[a-z])/,f); }
+  assert.match(rd('download.js'),/VERSION = '202610(30[c-z]|31[a-z])'/);
 });
