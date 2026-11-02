@@ -34,6 +34,9 @@
   function drawTile(w) {
     var key = w.getAttribute('data-k'); if (!key || !w.isConnected) return;
     try { F.renderCard(tileCard(key), w, { thumb: true }); w.classList.add('drawn'); } catch (e) { console.warn(e); }
+    // v20261102g: the tile is already drawn only when it comes into view, so its picture loads now too (a second wait inside
+    // a sideways strip could leave a tile as plain cream with only its words)
+    var cd = w.querySelector('.fc-card[data-bg]'); if (cd && !cd.style.backgroundImage) cd.style.backgroundImage = "url('" + cd.getAttribute('data-bg') + "')";
   }
   function swatch(key) {
     var b = document.createElement('button');
@@ -64,7 +67,7 @@
   function refreshTiles() { clearTimeout(tileTimer); tileTimer = setTimeout(function () {
     if (tileObs) tileObs.disconnect();
     document.querySelectorAll('.sw-card').forEach(function (w) { w.classList.remove('drawn'); w.innerHTML = ''; });
-    watchTiles($('swFirst')); watchTiles($('swRest')); if (edStripEl && edStripEl.isConnected) watchTiles(edStripEl);
+    watchTiles($('swFirst')); watchTiles($('swRest')); if (edStripEl && edStripEl.isConnected) { watchTiles(edStripEl); edDrawVisible(); }
   }, 400); }
   /* ---------- lettering: a picture of each font, in its own letters ---------- */
   var FONT_KEYS = Object.keys(F.FONTS);
@@ -599,8 +602,43 @@
     g = g || F.designsFor(state.t);
     g.first.concat(g.rest).forEach(function (k) { var b = swatch(k); b.classList.add('ed-tile'); b.title = F.DESIGNS[k].name; row.appendChild(b); });
     e.strip.appendChild(lab); e.strip.appendChild(row);
+    row.addEventListener('scroll', function () { clearTimeout(edDrawT); edDrawT = setTimeout(edDrawVisible, 120); }, { passive: true });
     if (document.body.classList.contains('ed-mode')) { watchTiles(e.strip); applyUI(); edCenter(); }
   }
+  // v20261102g: draw every strip tile that is on screen right away (does not wait on the in-view watcher)
+  var edDrawT = null;
+  function edDrawVisible() {
+    var row = document.querySelector('#edStrip .ed-row'); if (!row || !row.isConnected) return;
+    var rr = row.getBoundingClientRect(), pad = rr.width;
+    row.querySelectorAll('.sw-card:not(.drawn)').forEach(function (w) { var r = w.getBoundingClientRect(); if (r.right > rr.left - pad && r.left < rr.right + pad && r.width > 0) { if (tileObs) tileObs.unobserve(w); drawTile(w); } });
+  }
+  /* v20261102g: beside the opened design only the editing tools show (lettering, size, colors, matching set, download).
+     The words, the details and the photo open in their own drawer from one button (and from "Change in the form" on a
+     tapped line); the same fields move into the drawer and back, so nothing typed is lost and switching designs keeps it. */
+  var DR_SEL = ['.panel.p-words', '.panel.p-details', '.panel.p-photo'], drMarks = [];
+  function edDrawerIsOpen() { var d = $('edDrawer'); return !!(d && !d.hidden); }
+  function edDrawerOpen(target) {
+    var dr = $('edDrawer'), body = $('edDrBody'); if (!dr || !body) return;
+    if (dr.hidden) {
+      drMarks = [];
+      DR_SEL.forEach(function (sel) { var p = form.querySelector(sel); if (!p || p.parentNode === body) return; var m = document.createComment('ed-drawer'); p.parentNode.insertBefore(m, p); body.appendChild(p); drMarks.push([p, m]); });
+      dr.hidden = false; document.body.classList.add('ed-dr-open'); var bt = $('edDetailsBtn'); if (bt) bt.setAttribute('aria-expanded', 'true');
+      body.scrollTop = 0;
+    }
+    if (target && body.contains(target)) { try { target.scrollIntoView({ block: 'center' }); } catch (x) {} if (target.focus && /INPUT|TEXTAREA|SELECT/.test(target.tagName)) setTimeout(function () { try { target.focus({ preventScroll: true }); } catch (x) {} }, 200); }
+  }
+  function edDrawerClose() {
+    var dr = $('edDrawer'); if (!dr || dr.hidden) return;
+    drMarks.forEach(function (pm) { if (pm[1].parentNode) { pm[1].parentNode.insertBefore(pm[0], pm[1]); pm[1].parentNode.removeChild(pm[1]); } }); drMarks = [];
+    dr.hidden = true; document.body.classList.remove('ed-dr-open'); var bt = $('edDetailsBtn'); if (bt) bt.setAttribute('aria-expanded', 'false');
+  }
+  function edReveal(target) { // a field of the words/details/photo: in the editor it lives in the drawer
+    if (!target || !document.body.classList.contains('ed-mode')) return false;
+    if (!(target.closest && target.closest(DR_SEL.join(',')))) return false;
+    edDrawerOpen(target); return true;
+  }
+  if ($('edDetailsBtn')) $('edDetailsBtn').addEventListener('click', function () { if (edDrawerIsOpen()) edDrawerClose(); else edDrawerOpen(); });
+  if ($('edDrDone')) $('edDrDone').addEventListener('click', function () { edDrawerClose(); });
   function edPlace() {
     var e = edEls(), card = $('card'), pv = $('preview'), grid = document.querySelector('.maker-grid');
     if (document.body.classList.contains('ed-mode') && edPhone.matches) {
@@ -620,16 +658,16 @@
   }
   function edEnter() {
     var was = document.body.classList.contains('ed-mode');
-    document.body.classList.add('ed-mode'); edPlace(); watchTiles(edEls().strip); applyUI(); edCenter();
+    document.body.classList.add('ed-mode'); edPlace(); watchTiles(edEls().strip); applyUI(); edCenter(); setTimeout(edDrawVisible, 60); setTimeout(edDrawVisible, 700);
     if (!was) { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (x) { window.scrollTo(0, 0); } }
   }
   function edExit(toDesigns) {
-    document.body.classList.remove('ed-mode'); edPlace();
+    edDrawerClose(); document.body.classList.remove('ed-mode'); edPlace();
     if (toDesigns) { var p = $('swFirst'); if (p) try { p.closest('.panel').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {} }
   }
   if (edPhone.addEventListener) edPhone.addEventListener('change', edPlace); else if (edPhone.addListener) edPhone.addListener(edPlace);
-  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('ed-mode') && !document.body.classList.contains('pe-open')) edExit(false); });
-  window.__fcEd = { enter: edEnter, exit: edExit };
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('ed-mode') && !document.body.classList.contains('pe-open')) { if (edDrawerIsOpen()) edDrawerClose(); else edExit(false); } });
+  window.__fcEd = { enter: edEnter, exit: edExit, reveal: edReveal, openDetails: edDrawerOpen, closeDetails: edDrawerClose };
 
   var restored = restore();
   if (restored) { setTypeQuiet(); }

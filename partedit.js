@@ -214,7 +214,7 @@
       if (target) {
         var s = document.createElement('span'); s.textContent = tr('These words come from the form.') + ' ';
         var b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn'; b.textContent = tr('Change in the form');
-        b.addEventListener('click', function () { close(); target.scrollIntoView({ block: 'center', behavior: 'smooth' }); if (target.focus && /INPUT|TEXTAREA|SELECT/.test(target.tagName)) setTimeout(function () { target.focus({ preventScroll: true }); }, 350); });
+        b.addEventListener('click', function () { close(); if (window.__fcEd && window.__fcEd.reveal && window.__fcEd.reveal(target)) return; /* v20261102g: in the editor the form lives in its drawer */ target.scrollIntoView({ block: 'center', behavior: 'smooth' }); if (target.focus && /INPUT|TEXTAREA|SELECT/.test(target.tagName)) setTimeout(function () { target.focus({ preventScroll: true }); }, 350); });
         h.appendChild(s); h.appendChild(b);
       }
       h.hidden = !target;

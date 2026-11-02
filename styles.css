@@ -680,3 +680,24 @@ body.ed-mode .ed-head { display: flex; align-items: center; gap: 10px; margin: 0
 
 .ftile .ft-name.ft-own { font-size: .92rem; letter-spacing: 0; }
 .ftile .ft-enonly { opacity: .7; }
+
+/* v20261102g: in the editor only the editing tools sit beside the card; the words, details and photo open in a drawer */
+.ed-tools-head, .ed-drawer { display: none; }
+body.ed-mode .ed-tools-head { display: block; margin: 0 0 14px; padding: 12px 14px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+body.ed-mode .ed-details-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; font: inherit; font-weight: 700; font-size: 1rem; color: var(--ink, #1c2b4a); padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--gold, #a8802c); background: #fbf6ea; cursor: pointer; }
+body.ed-mode .ed-details-btn:hover { background: #f6edd6; }
+body.ed-mode .ed-details-btn[aria-expanded="true"] { background: #f1e4c2; }
+body.ed-mode .ed-tip { margin: 8px 2px 0; font-size: .82rem; color: var(--muted, #6b6455); text-align: center; }
+body.ed-mode #form > .panel.p-type, body.ed-mode #form > .panel.p-design, body.ed-mode #form > .panel.p-words,
+body.ed-mode #form > .panel.p-details, body.ed-mode #form > .panel.p-photo { display: none; }
+body.ed-mode .ed-drawer:not([hidden]) { display: flex; flex-direction: column; position: fixed; z-index: 70; top: 0; bottom: 0; inset-inline-end: 0; width: min(470px, 100vw); background: #faf6ee; box-shadow: 0 0 34px rgba(20,25,40,.22); }
+.ed-dr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--line); }
+.ed-dr-head strong { font-size: 1.05rem; }
+.ed-dr-done { font: inherit; font-weight: 700; padding: 8px 18px; border-radius: 999px; border: 0; background: var(--ink, #1c2b4a); color: #fff; cursor: pointer; }
+.ed-dr-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 12px 14px 28px; }
+.ed-dr-body > .panel { display: block; margin-bottom: 12px; }
+@media (max-width: 900px) {
+  body.ed-mode .ed-drawer:not([hidden]) { top: auto; left: 0; right: 0; width: auto; max-height: 50vh; border-radius: 18px 18px 0 0; }
+  body.ed-mode.ed-dr-open .ed-strip { display: none; }
+  body.ed-mode .ed-tools-head { margin-top: 4px; }
+}

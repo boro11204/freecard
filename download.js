@@ -566,7 +566,7 @@
       return blobToDataUrl(blob).then(function (du) { p(du); return 'panel'; });
     });
   }
-  var VERSION = '20261102f';
+  var VERSION = '20261102g';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {

@@ -1,4 +1,5 @@
 /* FreeCard core: simcha types, wording, designs, link encoding, card renderer */
+  /* v20261102g: editor — only the editing tools beside the card (words, details and photo open in a drawer); the design strip shows each design's real picture */
   /* v20261102f: 50 more new backgrounds (all Canva; Leonardo's free plan is Auto-only, so none from Leonardo) in the same catalog style, New badge kept on v20261102e too; no Gemini */
   /* v20261102e: 64 new backgrounds (all Canva) in the style of Benz's invitation-catalog screenshots (original art), New badge; no Gemini */
   /* v20261102c: removed 7 plain cream designs with only a small kids' strip at the bottom (Benz: 'nebby') — 95 Canva designs remain in the newest set */
