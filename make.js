@@ -45,7 +45,7 @@
     b.appendChild(w); b.appendChild(s);
     if (D.ai) { var ai = document.createElement('small'); ai.className = 'ai-note'; var leo = D.src === 'leo', gem = D.src === 'gem'; ai.textContent = leo ? 'AI art · Leonardo.ai' : gem ? 'AI art · Google Gemini' : 'AI art · Canva'; ai.title = leo ? 'Background art AI-generated with Leonardo.ai' : gem ? 'Background art AI-generated with Google Gemini' : 'Background art AI-generated with Canva'; b.appendChild(ai); }
     if (D.nb) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
-    b.addEventListener('click', function () { state.d = key; applyUI(); render(); warmSoon(); });
+    b.addEventListener('click', function () { state.d = key; applyUI(); render(); warmSoon(); if (b.closest('#swFirst, #swRest')) edEnter(); else edCenter(); });
     return b;
   }
   function watchTiles(box) { box.querySelectorAll('.sw-card:not(.drawn)').forEach(function (w) { if (tileObs) tileObs.observe(w); else drawTile(w); }); }
@@ -57,13 +57,14 @@
     g.rest.forEach(function (k) { $('swRest').appendChild(swatch(k)); });
     $('swLabel').textContent = 'Designs for ' + F.TYPES[state.t].en;
     watchTiles($('swFirst')); watchTiles($('swRest'));
+    edBuildStrip(g);
   }
   // the tiles follow the card's language and lettering (redrawn a moment after a change, only those in view)
   var tileTimer = null;
   function refreshTiles() { clearTimeout(tileTimer); tileTimer = setTimeout(function () {
     if (tileObs) tileObs.disconnect();
     document.querySelectorAll('.sw-card').forEach(function (w) { w.classList.remove('drawn'); w.innerHTML = ''; });
-    watchTiles($('swFirst')); watchTiles($('swRest'));
+    watchTiles($('swFirst')); watchTiles($('swRest')); if (edStripEl && edStripEl.isConnected) watchTiles(edStripEl);
   }, 400); }
   /* ---------- lettering: a picture of each font, in its own letters ---------- */
   var FONT_KEYS = Object.keys(F.FONTS);
@@ -103,6 +104,8 @@
     var s1 = document.createElement('span'); s1.className = 'ft-he'; s1.lang = 'he'; s1.dir = 'rtl'; s1.textContent = 'מזל טוב'; s1.style.font = tileFont(k, 0);
     var s2 = document.createElement('span'); s2.className = 'ft-en'; s2.textContent = 'Mazel Tov'; s2.style.font = tileFont(k, 1);
     var s3 = document.createElement('span'); s3.className = 'ft-name'; s3.textContent = F.FONTS[k].name;
+    if (F.FONTS[k].family) { s3.style.fontFamily = "'" + F.FONTS[k].family + "', 'Frank Ruhl Libre', serif"; s3.classList.add('ft-own'); var nz = ({ italianno: 1.45, tangerine: 1.5, alexbrush: 1.2, pinyon: 1.1, allura: 1.25, parisienne: 1.1 })[k]; if (nz) s3.style.fontSize = (0.92 * nz) + 'rem'; }
+    if (F.FONTS[k].enOnly) { s1.lang = 'en'; s1.dir = 'ltr'; s1.textContent = 'Mazel Tov'; s1.style.font = F.FONTS[k].weight + " " + (({ italianno: 1.1, tangerine: 1.15, cinzel: .68, baskerville: .66, playfair: .78, marcellus: .8, cormorant: .86, alexbrush: .9, pinyon: .85, allura: .95, parisienne: .88 })[k] || .85) + "em '" + F.FONTS[k].family + "', serif"; s2.textContent = 'English letters'; s2.style.font = "400 .5em system-ui, sans-serif"; s2.className = 'ft-en ft-enonly'; b.title = F.FONTS[k].name + ' — English letters; Hebrew and Yiddish use Frank Ruhl'; }
     b.appendChild(s1); b.appendChild(s2); b.appendChild(s3);
     if (F.FONTS[k].isNew) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
     b.addEventListener('pointerenter', function () { preloadFont(k); });
@@ -565,6 +568,68 @@
   $('myCards').addEventListener('click', function () { var b = $('cardsBox'); b.hidden = !b.hidden; if (!b.hidden) renderCards(); });
   $('cardsClose').addEventListener('click', function () { $('cardsBox').hidden = true; });
   cardsCount();
+
+
+  /* ---------- v20261102b: tap a design → an enlarged preview with every tool laid out beside it ----------
+     Desktop: the card large on the left with a strip of designs under it, the tools in a panel on the right.
+     Phone: the card stays in view at the top, the strip under it, then the tools — nothing hidden in a menu.
+     The strip shows this simcha's designs first; one tap switches the design and keeps everything typed. */
+  var edPhone = window.matchMedia ? window.matchMedia('(max-width: 900px)') : { matches: false };
+  var edStripEl = null, edHeadEl = null, edStageEl = null;
+  function edEls() {
+    var strip = edStripEl;
+    if (!strip) {
+      strip = document.createElement('div'); strip.id = 'edStrip'; strip.className = 'ed-strip';
+      strip.setAttribute('role', 'group'); strip.setAttribute('aria-label', 'Switch design'); edStripEl = strip;
+    }
+    var head = edHeadEl;
+    if (!head) {
+      head = document.createElement('div'); head.id = 'edHead'; head.className = 'ed-head';
+      head.innerHTML = '<button type="button" class="ed-back" id="edBack">‹ All designs</button><span class="ed-name" id="edName"></span>';
+      head.querySelector('#edBack').addEventListener('click', function () { edExit(true); }); edHeadEl = head;
+    }
+    var stage = edStageEl;
+    if (!stage) { stage = document.createElement('div'); stage.id = 'edStage'; stage.className = 'ed-stage'; edStageEl = stage; }
+    return { strip: strip, head: head, stage: stage };
+  }
+  function edBuildStrip(g) {
+    var e = edEls(); e.strip.innerHTML = '';
+    var lab = document.createElement('div'); lab.className = 'ed-strip-l'; lab.textContent = 'More designs — tap to switch, your words stay';
+    var row = document.createElement('div'); row.className = 'ed-row';
+    g = g || F.designsFor(state.t);
+    g.first.concat(g.rest).forEach(function (k) { var b = swatch(k); b.classList.add('ed-tile'); b.title = F.DESIGNS[k].name; row.appendChild(b); });
+    e.strip.appendChild(lab); e.strip.appendChild(row);
+    if (document.body.classList.contains('ed-mode')) { watchTiles(e.strip); applyUI(); edCenter(); }
+  }
+  function edPlace() {
+    var e = edEls(), card = $('card'), pv = $('preview'), grid = document.querySelector('.maker-grid');
+    if (document.body.classList.contains('ed-mode') && edPhone.matches) {
+      if (e.stage.parentNode !== grid) grid.insertBefore(e.stage, grid.firstChild);
+      e.stage.appendChild(e.head); e.stage.appendChild(card); e.stage.appendChild(e.strip);
+    } else {
+      pv.insertBefore(card, pv.querySelector('.fontbar'));
+      if (document.body.classList.contains('ed-mode')) { pv.insertBefore(e.head, card); card.parentNode.insertBefore(e.strip, card.nextSibling); }
+      else { if (e.head.parentNode) e.head.parentNode.removeChild(e.head); if (e.strip.parentNode) e.strip.parentNode.removeChild(e.strip); }
+      if (e.stage.parentNode) e.stage.parentNode.removeChild(e.stage);
+    }
+  }
+  function edCenter() {
+    var nm = $('edName'); if (nm && F.DESIGNS[state.d]) nm.textContent = F.DESIGNS[state.d].name;
+    var row = document.querySelector('#edStrip .ed-row'), t = row && row.querySelector('.swatch[aria-pressed="true"]');
+    if (row && t) { try { row.scrollTo({ left: t.offsetLeft - row.offsetLeft - (row.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' }); } catch (x) { row.scrollLeft = t.offsetLeft - row.offsetLeft - 40; } }
+  }
+  function edEnter() {
+    var was = document.body.classList.contains('ed-mode');
+    document.body.classList.add('ed-mode'); edPlace(); watchTiles(edEls().strip); applyUI(); edCenter();
+    if (!was) { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (x) { window.scrollTo(0, 0); } }
+  }
+  function edExit(toDesigns) {
+    document.body.classList.remove('ed-mode'); edPlace();
+    if (toDesigns) { var p = $('swFirst'); if (p) try { p.closest('.panel').scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {} }
+  }
+  if (edPhone.addEventListener) edPhone.addEventListener('change', edPlace); else if (edPhone.addListener) edPhone.addListener(edPlace);
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('ed-mode') && !document.body.classList.contains('pe-open')) edExit(false); });
+  window.__fcEd = { enter: edEnter, exit: edExit };
 
   var restored = restore();
   if (restored) { setTypeQuiet(); }

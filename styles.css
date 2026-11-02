@@ -643,3 +643,40 @@ footer.site .ai-credit { margin: 0; font-size: 13px; }
 @media (max-width: 640px) {
   .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
 }
+
+/* ===== v20261102b: tap a design → enlarged preview with the tools laid out beside it ===== */
+.ed-head { display: none; }
+body.ed-mode .ed-head { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; }
+.ed-back { border: 1px solid var(--line); background: #fff; color: var(--ink, #1b2640); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.ed-back:hover { border-color: #b0852f; }
+.ed-name { font-weight: 600; font-size: .95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.ed-strip { margin: 10px 0 6px; }
+.ed-strip-l { font-size: .8rem; color: var(--muted, #6b6455); margin: 0 2px 6px; }
+.ed-row { display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; padding: 2px 2px 8px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.ed-row > .swatch.ed-tile { flex: 0 0 78px; width: 78px; min-width: 0; padding: 3px; scroll-snap-align: start; }
+.ed-row > .swatch.ed-tile .sw-card, .preview-col .ed-row .fc-wrap { max-width: none; width: 100%; margin: 0; }
+.ed-row > .swatch.ed-tile .sw-name { font-size: .66rem; line-height: 1.15; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ed-row > .swatch.ed-tile .ai-note, .ed-row > .swatch.ed-tile .nb { display: none; }
+@media (min-width: 901px) {
+  body.ed-mode .maker-grid { grid-template-columns: minmax(0, 1fr) 430px; gap: 32px; }
+  body.ed-mode .maker-grid > .preview-col { order: 1; grid-column: 1; grid-row: 1; padding: 6px 10px 14px; background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+  body.ed-mode .maker-grid > div:not(.preview-col) { order: 2; grid-column: 2; grid-row: 1; }
+  body.ed-mode .preview-col .preview-label { display: none; }
+  body.ed-mode .preview-col > #card.fc-wrap { max-width: min(560px, calc((100vh - 330px) * .6667)); }
+  body.ed-mode .ed-row > .swatch.ed-tile { flex-basis: 72px; width: 72px; }
+  body.ed-mode .ed-row > .swatch.ed-tile .sw-name { display: none; }
+}
+@media (max-width: 900px) {
+  body.ed-mode .ed-stage { max-width: none; min-width: 0; width: auto; position: sticky; top: 62px; z-index: 12; background: rgba(250,246,238,.97); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); margin: 0 -16px; padding: 8px 16px 2px; border-bottom: 1px solid var(--line); box-shadow: 0 8px 18px rgba(27,38,64,.08); }
+  body.ed-mode .ed-stage > #card.fc-wrap { max-width: calc(34vh * .6667); margin: 0 auto; }
+  body.ed-mode .ed-head { margin-bottom: 6px; }
+  body.ed-mode .ed-strip { margin: 6px 0 0; }
+  body.ed-mode .ed-strip-l { display: none; }
+  body.ed-mode .ed-row { padding-bottom: 6px; }
+  body.ed-mode .ed-row > .swatch.ed-tile { flex-basis: 58px; width: 58px; padding: 2px; }
+  body.ed-mode .ed-row > .swatch.ed-tile .sw-name { display: none; }
+  body.ed-mode .maker-grid > div:not(.preview-col):not(.ed-stage) h1, body.ed-mode .maker-grid > div:not(.preview-col):not(.ed-stage) > .sub { display: none; }
+}
+
+.ftile .ft-name.ft-own { font-size: .92rem; letter-spacing: 0; }
+.ftile .ft-enonly { opacity: .7; }
