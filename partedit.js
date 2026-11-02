@@ -26,6 +26,7 @@
     'Photo': ['תמונה', 'בילד'], 'Shape': ['צורה', 'פארעם'], 'Size': ['גודל', 'גרייס'],
     'Smaller photo': ['תמונה קטנה יותר', 'קלענער בילד'], 'Bigger photo': ['תמונה גדולה יותר', 'גרעסער בילד'],
     'Remove photo': ['הסרת התמונה', 'אראפנעמען דאס בילד'], 'Pick any color': ['בחירת כל צבע', 'קלייבט סיי וועלכן קאליר'],
+    'Delete this line': ['מחיקת השורה', 'אויסמעקן די שורה'],
     'This line is empty now. Type to bring it back.': ['השורה ריקה עכשיו. כתבו כדי להחזיר אותה.', 'די שורה איז יעצט ליידיג. שרייבט צו ברענגען זי צוריק.']
   });
 
@@ -64,6 +65,7 @@
       '<button type="button" data-mx="-1" data-my="0" aria-label="Left" class="r270">' + ARW + '</button>' +
       '<button type="button" data-mx="1" data-my="0" aria-label="Right" class="r90">' + ARW + '</button></div>' +
       '<button type="button" class="linkbtn pe-reset" id="peReset">Reset this part</button></div>' +
+     '<div class="pe-row pe-delrow"><button type="button" class="btn pe-del" id="peDel"><span aria-hidden="true">🗑</span> <span>Delete this line</span></button></div>' +
     '</div>' +
     '<div class="pe-body" id="pePhoto" hidden>' +
      '<div class="pe-row"><span class="pe-lab">Shape</span><div class="pe-shapes" id="peShapes"></div></div>' +
@@ -207,7 +209,25 @@
   function syncWords() {
     var ta = $('peWords'), h = $('peHint'), e = partEl();
     ta.dir = state.w === 'he' || state.w === 'yi' ? 'rtl' : 'auto';
-    if (!src || src.type === 'none') {
+    if (src && src.type === 'none') {
+      // v20261102h: nothing on the card is permanent — fixed words (מזל טוב, בס״ד, the simcha's title, names from the form)
+      // can be retyped right here or deleted
+      ta.hidden = false; ta.rows = 1;
+      var ov = cur().t;
+      if (document.activeElement !== ta) ta.value = typeof ov === 'string' ? ov : (e ? (e.textContent || '').replace(/\s+/g, ' ').trim() : '');
+      h.innerHTML = '';
+      if (ov === '') { var em = document.createElement('div'); em.textContent = tr('This line is empty now. Type to bring it back.'); h.appendChild(em); }
+      var fid0 = FORM_OF[sel], target0 = fid0 && $(fid0);
+      if (target0) {
+        var s0 = document.createElement('span'); s0.textContent = tr('These words come from the form.') + ' ';
+        var b0 = document.createElement('button'); b0.type = 'button'; b0.className = 'linkbtn'; b0.textContent = tr('Change in the form');
+        b0.addEventListener('click', function () { close(); if (window.__fcEd && window.__fcEd.reveal && window.__fcEd.reveal(target0)) return; target0.scrollIntoView({ block: 'center', behavior: 'smooth' }); });
+        h.appendChild(s0); h.appendChild(b0);
+      }
+      h.hidden = !h.childNodes.length;
+      return;
+    }
+    if (!src) {
       ta.hidden = true; ta.value = '';
       h.innerHTML = '';
       var fid = FORM_OF[sel], target = fid && $(fid);
@@ -271,7 +291,19 @@
   $('pePrev').addEventListener('click', function () { step(-1); });
   $('peNext').addEventListener('click', function () { step(1); });
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !sheet.hidden) close(); });
-  $('peWords').addEventListener('input', function (ev) { writeWords(ev.target.value); syncWords(); placeBox(); });
+  $('peWords').addEventListener('input', function (ev) {
+    if (src && src.type === 'none') { var v = ev.target.value.replace(/\r?\n/g, ' '); change(function (o) { o.t = v; }); syncWords(); placeBox(); return; }
+    writeWords(ev.target.value); syncWords(); placeBox();
+  });
+  // v20261102h: one tap deletes the line, whatever it is
+  function delLine() {
+    if (!sel || sel === 'ph' || !src) return;
+    if (src.type === 'none') change(function (o) { o.t = ''; });
+    else writeWords('');
+    $('peWords').value = '';
+    syncWords(); syncControls(); placeBox();
+  }
+  $('peDel').addEventListener('click', delLine);
   fsel.addEventListener('change', function () { var v = fsel.value; change(function (o) { if (v) o.f = v; else delete o.f; }); });
   function zoomBy(d) { change(function (o) { var z = Math.max(40, Math.min(300, (parseInt(o.z, 10) || 100) + d)); if (z === 100) delete o.z; else o.z = z; }); }
   $('peZm').addEventListener('click', function () { zoomBy(-10); });
@@ -307,6 +339,7 @@
   });
   $('peReset').addEventListener('click', function () {
     var ed = edits(); delete ed[scope() + sel]; saveEdits(ed); api.render(); syncControls();
+    if (src) { $('peWords').value = ''; $('peWords').blur(); syncWords(); } placeBox();
   });
   $('peUndoAll').addEventListener('click', function () {
     if (!confirm(tr('Undo all part changes') + '?')) return;

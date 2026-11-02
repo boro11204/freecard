@@ -701,3 +701,13 @@ body.ed-mode .ed-drawer:not([hidden]) { display: flex; flex-direction: column; p
   body.ed-mode.ed-dr-open .ed-strip { display: none; }
   body.ed-mode .ed-tools-head { margin-top: 4px; }
 }
+
+/* v20261102h: the "Tap any line" hint is big and clear on every screen; one-tap delete in the part panel */
+.pe-tip { font-size: 1.2rem; font-weight: 700; color: #1b2640; max-width: 560px; line-height: 1.35; margin: 4px auto 14px; }
+.pe-tip > span[aria-hidden] { font-size: 1.3em; }
+.pe-tip .linkbtn { font-size: 14px; font-weight: 600; }
+body.ed-mode .ed-tip { font-size: 1.15rem; font-weight: 700; color: #1b2640; line-height: 1.35; margin: 10px 2px 2px; }
+@media (max-width: 640px) { .pe-tip { font-size: 1.12rem; padding: 0 6px; } body.ed-mode .ed-tip { font-size: 1.08rem; } }
+.pe-delrow { justify-content: center; }
+.pe-sheet .btn.pe-del { background: #fff; color: #9b1c1c; border: 1.5px solid #e2b4b4; font-weight: 700; padding: 8px 16px; border-radius: 10px; font-size: .95rem; cursor: pointer; }
+.pe-sheet .btn.pe-del:hover { background: #fdf2f2; }

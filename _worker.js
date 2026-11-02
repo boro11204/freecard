@@ -3,7 +3,7 @@
 const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 const TOKA = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';
 const CARD_KEYS = ['t','d','w','f','h','i','x','n1','n2','p1','p2','dt','hd','tm','tl','sc','hl','ad','ex','ph','hn','nt','rs','wl'];
-const LIMITS = { create: [40, 3600], update: [400, 3600], og: [120, 3600], rsvp: [25, 600], wish: [12, 600], open: [120, 600], guests: [60, 3600] };
+const LIMITS = { create: [40, 3600], update: [400, 3600], og: [120, 3600], rsvp: [25, 600], wish: [12, 600], open: [120, 600], guests: [60, 3600], tile: [40, 3600] };
 const BOT = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegram|preview|skype|discord|embedly|vkshare|pinterest|headless|curl|wget|python|go-http/i;
 
 let schemaReady = null;
@@ -140,6 +140,22 @@ async function api(req, env, url, ctx) {
       } catch (e) { if (!/UNIQUE|constraint/i.test(String(e))) throw e; }
     }
     return bad('could not save, try again', 500);
+  }
+  // v20261102h: design tiles that could not load report here (browser name + which picture), so a blank tile can be traced
+  if (parts.length === 2 && parts[1] === 'tilelog') {
+    await env.DB.prepare('CREATE TABLE IF NOT EXISTS tilelog (ts INTEGER, ua TEXT, info TEXT)').run();
+    if (m === 'POST') {
+      let t = ''; try { t = (await req.text()).slice(0, 600); } catch (e) {}
+      if (await limited(env, ip, 'tile')) return new Response(null, { status: 204 });
+      await env.DB.prepare('INSERT INTO tilelog (ts, ua, info) VALUES (?, ?, ?)').bind(now(), str(req.headers.get('user-agent'), 300), str(t, 600)).run();
+      await env.DB.prepare('DELETE FROM tilelog WHERE rowid NOT IN (SELECT rowid FROM tilelog ORDER BY rowid DESC LIMIT 500)').run();
+      return new Response(null, { status: 204 });
+    }
+    if (m === 'GET' && url.searchParams.get('k') === 'a38ece4903fb4675') {
+      const r = await env.DB.prepare('SELECT ts, ua, info FROM tilelog ORDER BY rowid DESC LIMIT 100').all();
+      return json({ ok: true, rows: r.results || [] });
+    }
+    return bad('not found', 404);
   }
   if (parts[1] !== 'cards' || !parts[2]) return bad('not found', 404);
   const id = parts[2], sub = parts[3] || '';
