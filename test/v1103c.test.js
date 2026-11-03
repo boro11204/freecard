@@ -17,7 +17,7 @@ test('v20261103c: 28 more Adobe Firefly designs with pictures, tiles, credential
   for(const f of ["ax3-bris-navy-white-carved-floral-scroll-frame", "ax3-chasuna-sapphire-gold-rococo-corners"]) assert.ok(!core.includes(f) && !fs.existsSync(S+'/img/ai/'+f+'.webp'), f);
   const F=load(); const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); assert.ok(all.length>=448);
   for(const k of ks) assert.ok(F.DESIGNS[k], k);
-  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[456](adobe|can)/.test(f), t+' leads with '+f); }
+  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[4567](adobe|can)/.test(f), t+' leads with '+f); }
   assert.ok(all.filter(k=>/^ai1[23]adobe/.test(k)).every(k=>F.DESIGNS[k].nb), 'the earlier Adobe sets keep New');
 });
 test('v20261103c: version everywhere', ()=>{

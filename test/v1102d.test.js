@@ -10,7 +10,7 @@ test('v20261102d: the ai10 Canva set (no Gemini) has pictures, tiles, Canva cred
     assert.ok(Array.isArray(d.pad) && d.pad.length===3 && d.pad.every(x=>x>=10 && x<=50), k+' pad');
     const b=fs.readFileSync(S+'/img/'+d.file+'.webp'); assert.ok(!b.includes('Google'), d.file); assert.ok(b.includes('c2pa'), 'Canva credentials kept '+d.file);
     assert.ok(b.length<260000, d.file+' size'); const t=fs.readFileSync(S+'/img/'+d.thumb+'.webp'); assert.ok(t.length<60000, d.thumb+' size'); }
-  const nb=all.filter(k=>F.DESIGNS[k].nb); assert.deepStrictEqual(nb.sort(), ks.concat(all.filter(k=>/^ai11can|^ai1[234]adobe|^ai15(adobe|can)|^ai16adobe/.test(k))).sort()); // v20261102f: today's second set (ai11) wears New too
-  for(const t of ['chasuna','barmitzvah','tenoyim','bris','vachnacht','shalomzachor','kiddush','shevabrachos','pidyonhaben']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[01]can|^ai1[234]adobe|^ai15(adobe|can)|^ai16adobe/.test(f), t+' leads with '+f); }
+  const nb=all.filter(k=>F.DESIGNS[k].nb); assert.deepStrictEqual(nb.sort(), ks.concat(all.filter(k=>/^ai11can|^ai1[234]adobe|^ai15(adobe|can)|^ai16adobe|^ai17adobe/.test(k))).sort()); // v20261102f: today's second set (ai11) wears New too
+  for(const t of ['chasuna','barmitzvah','tenoyim','bris','vachnacht','shalomzachor','kiddush','shevabrachos','pidyonhaben']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[01]can|^ai1[234]adobe|^ai15(adobe|can)|^ai16adobe|^ai17adobe/.test(f), t+' leads with '+f); }
   const h=rd('index.html'); assert.match(h, /v=2026110(2[d-z]|3[a-z])/); assert.ok(!/Gemini/.test(h));
 });
