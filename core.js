@@ -1918,6 +1918,9 @@
     frank: { name: 'Frank Ruhl', he: 'פרנק רוהל', family: 'Frank Ruhl Libre', weight: 700 },
     david: { name: 'David', he: 'דוד', family: 'David Libre', weight: 700 },
     notoserif: { name: 'Noto Serif', he: 'נוטו סריף', family: 'Noto Serif Hebrew', weight: 700 },
+    // v20261103h: Benz's two headline fonts; on a card in the standard lettering they are the defaults (big titles: condensed black, names: black)
+    notocondblack: { name: 'Noto Serif Black Condensed', he: 'נוטו סריף שחור צר', family: 'Noto Serif Hebrew Condensed Black', weight: 900, isNew: true },
+    notoblack: { name: 'Noto Serif Black', he: 'נוטו סריף שחור', family: 'Noto Serif Hebrew Black', weight: 900, isNew: true },
     rashi: { name: 'Rashi', he: 'רש״י', family: 'Noto Rashi Hebrew', weight: 700 },
     bona: { name: 'Bona Nova', he: 'בונה נובה', family: 'Bona Nova', weight: 700 },
     miriam: { name: 'Miriam', he: 'מרים', family: 'Miriam Libre', weight: 700 },
@@ -1969,6 +1972,8 @@
     lulav: { name: 'Lulav', he: 'לולב', family: 'Lulav CLM', weight: 400, isNew: true, yi: true, grp: 'fancy', fix: 'dlns' },
     shmulik: { name: 'Shmulik', he: 'שמוליק', family: 'Shmulik CLM', weight: 400, isNew: true, yi: true, grp: 'fancy' }
   });
+  // v20261103h: the standard lettering's defaults for the main words (a card that chose a lettering, a names font, a part's font or a line's font keeps it)
+  var DEF_TITLE = 'notocondblack', DEF_NAMES = 'notoblack';
   var BASE_TOKENS = { 'DATE': 'dt', 'HEBREW DATE': 'hd', 'TIME': 'tm', 'MORE TIMES': 'sc', 'HALL': 'hl', 'ADDRESS': 'ad',
     'NAME1': 'n1', 'NAME2': 'n2', 'PARENTS1': 'p1', 'PARENTS2': 'p2', 'PARSHA': 'pa', 'TABLE': 'tn', 'NAMES': 'nl' };
   var HEB = /[\u0590-\u05FF]/;
@@ -3306,8 +3311,8 @@
     var key = DESIGNS[c.d] ? c.d : (designsFor(TYPES[c.t] ? c.t : 'chasuna').first[0] || 'gold'); // a removed design falls back to the simcha's first design
     var D = DESIGNS[key];
     mount.innerHTML = '';
-    var fkey = FONTS[c.f] ? c.f : 'script', nkey = FONTS[c.nf] ? c.nf : fkey;
-    var card = el('article', 'fc-card d-' + key + ' k-' + D.kind + ' f-' + fkey +
+    var fkey = FONTS[c.f] ? c.f : 'script', nkey = FONTS[c.nf] ? c.nf : (fkey === 'script' ? DEF_NAMES : fkey);
+    var card = el('article', 'fc-card d-' + key + ' k-' + D.kind + ' f-' + fkey + (fkey === 'script' ? ' hdf' : '') +
       (FONTS[fkey].family ? ' fg' + (FONTS[fkey].weight === 400 ? ' fw4' : '') : '') +
       (nkey !== fkey ? ' nfs nf-' + nkey + (FONTS[nkey].weight === 400 ? ' nw4' : '') : '') + ' t-' + c.t);
     card.setAttribute('aria-label', 'Invitation: ' + titleOf(c));
@@ -3440,6 +3445,6 @@
     enDate: enDate, enTime: enTime, daysUntil: daysUntil, phoneDigits: phoneDigits, namesLine: namesLine, titleOf: titleOf,
     mapsLinks: mapsLinks, calendarInfo: calendarInfo, fitCard: fitCard, loadCardFonts: loadCardFonts, parsha: parshaOf,
     PIECES: PIECES, pieceCard: pieceCard, pieceTemplate: pieceTemplate,
-    templateOf: templateOf, tokenMap: tokenMap, peParse: peParse, peClean: peClean, peIsEmpty: peIsEmpty, plainText: plainText, loMeasure: loMeasure, loSplitTab: loSplitTab, LO_SEP: LO_SEP, secStack: secStack, fixText: fixText, PLAIN: PLAIN
+    templateOf: templateOf, tokenMap: tokenMap, peParse: peParse, peClean: peClean, peIsEmpty: peIsEmpty, plainText: plainText, loMeasure: loMeasure, loSplitTab: loSplitTab, LO_SEP: LO_SEP, secStack: secStack, fixText: fixText, PLAIN: PLAIN, DEF_TITLE: DEF_TITLE, DEF_NAMES: DEF_NAMES
   };
 })(window);

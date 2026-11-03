@@ -62,6 +62,6 @@ test('v20261103g: the 15 Adobe project designs (#13 the broken blue plate)', ()=
   assert.strictEqual(Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).length, 501);
 });
 test('v20261103g: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103f'), f); assert.ok(h.includes('?v=20261103g'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103g';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103g'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103f'), f); assert.ok(h.includes('?v=20261103h'), f); }
+  assert.match(rd('download.js'),/var VERSION = '20261103h';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103g'/);
 });

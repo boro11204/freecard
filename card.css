@@ -997,6 +997,23 @@
 .fc-card.f-shmulik { --fb: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
 .fc-card.nf-shmulik { --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
 /* end v20261103f fonts */
+/* v20261103h: Benz's headline fonts (Nov 3, 2:38 PM: "3 and 4") */
+.fc-card.f-notocondblack { --fb: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fh: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fn: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.nf-notocondblack { --fn: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew Condensed Black', 'Frank Ruhl Libre', serif; --fnz: 0.97; }
+.fc-card.f-notoblack { --fb: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fh: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fn: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fz: 0.97; --fnz: 0.97; }
+.fc-card.nf-notoblack { --fn: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fnh: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fa: 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; --fnz: 0.97; }
+/* the standard lettering (hdf): the big titles default to Noto Serif Black Condensed; the names to Noto Serif Black (nf-notoblack); a part's or a line's own font still wins (!important rules above/below) */
+.fc-card.hdf .fc-in .fc-head, .fc-card.hdf .fc-in .fc-title, .fc-card.hdf .fc-in .fc-type, .fc-card.hdf .fc-in .fc-foot { font-family: 'Noto Serif Hebrew Condensed Black', 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif; font-weight: 900; font-style: normal; font-synthesis: none; }
+.fc-card.hdf .fc-in .fc-type { letter-spacing: .12em; }
+/* the title line is drawn big, like the store cards Benz sent (condensed letters take less width) */
+.fc-card.hdf .fc-in .fc-head { font-size: 6.8cqw; line-height: 1.12; letter-spacing: .01em; }
+.fc-card.hdf.t-thankyou .fc-in .fc-head { font-size: 9cqw; }
+.fc-card.hdf .fc-in .fc-foot { font-size: 5.2cqw; }
+.fc-card.hdf .fc-in .fc-n.fc-title:not(.pe-f) { font-family: 'Noto Serif Hebrew Condensed Black', 'Noto Serif Hebrew Black', 'Frank Ruhl Libre', serif !important; font-weight: 900; }
+.fc-card.hdf.tfs .fc-in .fc-n.fc-title.sec-top:not(.pe-f) { font-family: var(--sft) !important; }
+.fc-card.hdf.bfs .fc-in .fc-n.fc-title.sec-bot:not(.pe-f) { font-family: var(--sfb) !important; }
+.fc-card.nf-notoblack .fc-n, .fc-card.nf-notocondblack .fc-n, .fc-card.f-notoblack .fc-n, .fc-card.f-notocondblack .fc-n { font-synthesis: none; }
+/* end v20261103h fonts */
 
 /* ===== v20261103g: text layout per part — Paragraph / Copyfit / Tab & dot leader / Curve / Columns (core.js loBuild, loMeasure) ===== */
 .fc-card fc-e { display: block; }

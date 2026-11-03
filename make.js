@@ -106,7 +106,7 @@
   // The lists are real <select>s underneath, so the choice also works without the drawn list.
   var FONT_GROUPS = [
     ['Yiddish & sofer classics', ['shlomostam', 'stamashk', 'taameyashk', 'keteryg', 'mekorot', 'rommvilna', 'shlomosemi', 'keteraram', 'ezra', 'taameyfrank', 'drugulin', 'nesher', 'yehoash']],
-    ['Elegant & headline', ['hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
+    ['Elegant & headline', ['notocondblack', 'notoblack', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
     ['Classic', ['script', 'serif', 'bold', 'frank', 'david', 'notoserif', 'rashi', 'bona', 'tinos', 'miriam']],
     ['Modern & fun', ['modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
     ['English letters only', ['playfair', 'cinzel', 'parisienne', 'allura', 'pinyon', 'italianno', 'baskerville', 'marcellus', 'cormorant', 'alexbrush', 'tangerine']]
@@ -229,6 +229,8 @@
     $('f-f').value = fk;
     $('fontCurName').textContent = F.FONTS[fk].name;
     syncStyle();
+    // v20261103h: in the standard lettering the names default to Noto Serif Black, and the list says so
+    try { var nf0 = $('f-nf').options[0], nfl = fk === 'script' ? 'Default: ' + F.FONTS[F.DEF_NAMES].name : 'Same as the card'; if (nf0) { nf0.dataset.en = nfl; nf0.textContent = window.FCi18n && window.FCi18n.t ? window.FCi18n.t(nfl) : nfl; } } catch (e) {}
     $('f-nf').value = F.FONTS[state.nf] ? state.nf : '';
     $('f-tf').value = F.FONTS[state.tf] ? state.tf : '';
     $('f-bf').value = F.FONTS[state.bf] ? state.bf : '';

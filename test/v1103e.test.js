@@ -32,6 +32,6 @@ test('v20261103e: 38 designs from the Adobe-vs-Canva test (18 Adobe Firefly, 20 
   for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[56]/.test(f), t+' leads with '+f); }
 });
 test('v20261103e: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103d') && !h.includes('?v=20261103e'), f); assert.ok(!h.includes('?v=20261103f') && h.includes('?v=20261103g'), f); }  // v20261103g: bumped again
-  assert.match(rd('download.js'),/var VERSION = '20261103g';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103g'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103d') && !h.includes('?v=20261103e'), f); assert.ok(!h.includes('?v=20261103f') && !h.includes('?v=20261103g') && h.includes('?v=20261103h'), f); }  // v20261103g: bumped again
+  assert.match(rd('download.js'),/var VERSION = '20261103h';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103g'/);
 });
