@@ -14,10 +14,10 @@ test('v20261103a: 17 Adobe Firefly designs with pictures, tiles, Adobe credentia
   const sims=ks.map(k=>D[k].types[0]); for(const s of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','upsherin','pidyonhaben']) assert.ok(sims.includes(s), s);
   // the doubles and the two Benz flagged are not on the site
   for(const f of ['ax1-shevabrachos-black-gold-deco-fans','ax1-tenoyim-emerald-filigree-panel','ax1-vachnacht-hydrangea']) assert.ok(!core.includes(f) && !fs.existsSync(S+'/img/ai/'+f+'.webp'), f);
-  const F=load(); const all=Object.keys(F.DESIGNS); assert.strictEqual(all.length,398);
+  const F=load(); const all=Object.keys(F.DESIGNS); assert.strictEqual(all.length,420); // v20261103b adds 22
   for(const k of ks) assert.ok(F.DESIGNS[k], k);
-  for(const t of ['chasuna','tenoyim','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai12adobe/.test(f), t+' leads with '+f); }
-  const nb=all.filter(k=>F.DESIGNS[k].nb); assert.ok(nb.every(k=>/^ai1[01]can|^ai12adobe/.test(k))); assert.ok(all.filter(k=>/^ai1[01]can/.test(k)).every(k=>F.DESIGNS[k].nb), "today's Canva sets keep New");
+  for(const t of ['chasuna','tenoyim','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[23]adobe/.test(f), t+' leads with '+f); }
+  const nb=all.filter(k=>F.DESIGNS[k].nb); assert.ok(nb.every(k=>/^ai1[01]can|^ai1[23]adobe/.test(k))); assert.ok(all.filter(k=>/^ai1[01]can/.test(k)).every(k=>F.DESIGNS[k].nb), "today's Canva sets keep New");
 });
 test('v20261103a: credit names Adobe Firefly in English, Hebrew and Yiddish; tile label; version everywhere', ()=>{
   assert.match(rd('index.html'),/class="ai-credit">Some background art AI-generated with Canva, Leonardo\.ai and Adobe Firefly</);
@@ -25,6 +25,6 @@ test('v20261103a: credit names Adobe Firefly in English, Hebrew and Yiddish; til
   const i18n=rd('i18n.js'); for(const s of ['AI art · Adobe Firefly','Background art AI-generated with Adobe Firefly','Some background art AI-generated with Canva, Leonardo.ai and Adobe Firefly','Designs marked “AI art” have background art AI-generated with Canva, Leonardo.ai or Adobe Firefly.']) assert.ok(i18n.includes(JSON.stringify(s)+':'),s);
   assert.ok(i18n.includes('Adobe Firefly", "AI קונסט · Adobe Firefly"') || i18n.includes('"AI קונסט · Adobe Firefly"'));
   assert.match(rd('make.js'),/adobe \? 'AI art · Adobe Firefly'/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261102h'), f); assert.ok(h.includes('?v=20261103a'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103a';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103a'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261102h'), f); assert.ok(/\?v=20261103[a-z]/.test(h), f); }
+  assert.match(rd('download.js'),/var VERSION = '20261103[a-z]';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103[a-z]'/);
 });

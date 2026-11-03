@@ -911,7 +911,8 @@
 .fc-card.fc-card .fc-in .pe-m.pe-m { position: relative !important; left: calc(var(--ex, 0) * .6cqw) !important; top: calc(var(--ey, 0) * .6cqw) !important; }
 
 /* v20261028f: AI-made picture backgrounds (Canva): בס״ד centred above the words, inside the picture's empty centre */
-.k-ai .fc-bsd { top: var(--bsdt, 6cqw); left: 0; right: 0; text-align: center; }
+.k-ai .fc-bsd { top: var(--bsdt, 6cqw); left: var(--bsdl, 0); right: var(--bsdr, 0); text-align: center; }
+.k-shade .fc-in { text-shadow: 0 0 1.4cqw rgba(50,18,0,.85), 0 0 .4cqw rgba(50,18,0,.7); } /* v20261103b: light words over bright art */
 .k-ai .fc-rule::after { background: var(--bg); }
 .k-dark .fc-n { text-shadow: 0 0 1.4cqw rgba(0,0,0,.25); }
 .fc-textonly.k-ai .fc-bsd { top: 6.4cqw; left: auto; right: 7.5cqw; text-align: right; }

@@ -21,6 +21,6 @@ test('v20261030a: in the browser, new designs lead and only they wear New', ()=>
   const vm=require('vm'); const ctx={window:{},document:undefined,navigator:{userAgent:''},console}; ctx.window=ctx; ctx.self=ctx; ctx.global=ctx;
   try { vm.runInNewContext(rd('core.js'), ctx); } catch(e) { return; } // core may need a DOM; the browser check covers it
   const F=ctx.FreeCard||ctx.window.FreeCard; if(!F) return;
-  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=19 && ks.every(k=>/^ai1[01]can|^ai12adobe/.test(k))); // v20261102d: only the newest set (ai10) wears New; v20261102f: today's two sets (ai10, ai11)
-  assert.ok(/^ai1[01]can|^ai12adobe/.test(F.designsFor('chasuna').first[0]));
+  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=19 && ks.every(k=>/^ai1[01]can|^ai1[23]adobe/.test(k))); // v20261102d: only the newest set (ai10) wears New; v20261102f: today's two sets (ai10, ai11)
+  assert.ok(/^ai1[01]can|^ai1[23]adobe/.test(F.designsFor('chasuna').first[0]));
 });
