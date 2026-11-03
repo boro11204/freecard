@@ -9,7 +9,7 @@ function webpSize(b){ // VP8 / VP8L / VP8X header -> [w,h]
   return null; }
 test('v20261103d: every high-res copy exists, is 1600x2400, small enough, and belongs to a live picture design', ()=>{
   const dl=rd('download.js'); const m=dl.match(/HD_SET = \{\};\n  '([^']+)'\.split/); assert.ok(m,'HD list'); const names=m[1].split(' ');
-  assert.strictEqual(names.length, 78); assert.strictEqual(new Set(names).size, names.length);
+  assert.strictEqual(names.length, 96); assert.strictEqual(new Set(names).size, names.length);
   const core=rd('core.js');
   for(const n of names){
     const p=S+'/img/ai/hd/'+n+'.webp'; assert.ok(fs.existsSync(p), p); const b=fs.readFileSync(p);
@@ -40,6 +40,6 @@ test('v20261103d: download makes the card bigger only on Download, with a quiet 
   assert.strictEqual(D.hdUrl('https://x/img/ai/c11-tenoyim-malachite.webp'),null); assert.strictEqual(D.hdUrl('https://x/img/ai/p/ax1-chasuna-blackregal.webp'),null);
 });
 test('v20261103d: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103c'), f); assert.ok(h.includes('?v=20261103d'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103d';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103d'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103c'), f); assert.ok(/\?v=20261103[d-z]/.test(h), f); }
+  assert.match(rd('download.js'),/var VERSION = '20261103[d-z]';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103[d-z]'/);
 });

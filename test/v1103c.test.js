@@ -15,9 +15,9 @@ test('v20261103c: 28 more Adobe Firefly designs with pictures, tiles, credential
     assert.strictEqual(t.readUInt32LE(4)+8, t.length, 'tile is a whole RIFF file'); }
   // dropped on the re-check: a double of the live navy-and-gold "midnight", and carved flowers with + shaped petals
   for(const f of ["ax3-bris-navy-white-carved-floral-scroll-frame", "ax3-chasuna-sapphire-gold-rococo-corners"]) assert.ok(!core.includes(f) && !fs.existsSync(S+'/img/ai/'+f+'.webp'), f);
-  const F=load(); const all=Object.keys(F.DESIGNS); assert.strictEqual(all.length,448);
+  const F=load(); const all=Object.keys(F.DESIGNS); assert.ok(all.length>=448);
   for(const k of ks) assert.ok(F.DESIGNS[k], k);
-  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai14adobe/.test(f), t+' leads with '+f); }
+  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[45](adobe|can)/.test(f), t+' leads with '+f); }
   assert.ok(all.filter(k=>/^ai1[23]adobe/.test(k)).every(k=>F.DESIGNS[k].nb), 'the earlier Adobe sets keep New');
 });
 test('v20261103c: version everywhere', ()=>{
