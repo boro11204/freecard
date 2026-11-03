@@ -1,0 +1,5 @@
+Font licenses for the FreeCard Yiddish/Hebrew font candidates (subset to Hebrew + basic Latin, converted to WOFF2; subsetting is permitted by each license).
+- OFL 1.1: Shlomo Stam, Shlomo SemiStam (derived from SIL Ezra, OFL), Ezra SIL, Romm Vilna, Nesher Gadol, E Yehoash Esther -> OFL-1.1.txt (each font's copyright notice is in its name table).
+- GPL-2 + font exception (Culmus, Yoram Gnat): Stam Ashkenaz CLM, Taamey Ashkenaz, Taamey Frank CLM, Keter YG, Keter Aram Tsova, Hadasim CLM, Shofar, Shmulik CLM -> Culmus-LICENSE.txt + GPL-2.0.txt
+- GPL-2 (Culmus, Maxim Iorsh; no font exception): Gan CLM, Gladia CLM, Lulav CLM, Dorian CLM, Drugulin CLM, Mekorot Vilna -> GPL-2.0.txt (+ Mekorot-Vilna-LICENSE.txt). Fine to serve as web fonts with this license file alongside; card downloads are rasterized images, so no font is embedded in user output.
+Sources: Culmus 0.140 (sourceforge.net/projects/culmus), Open Siddur font pack (github.com/aharonium/fonts).
