@@ -4,7 +4,7 @@ const W=path.join(__dirname,'..','site');
 const mj=fs.readFileSync(W+'/make.js','utf8'), css=fs.readFileSync(W+'/styles.css','utf8'), fcss=fs.readFileSync(W+'/fonts.css','utf8'), core=fs.readFileSync(W+'/core.js','utf8'), html=fs.readFileSync(W+'/make.html','utf8');
 ['function edEnter','function edExit','function edBuildStrip','edStrip','ed-tile',"closest('#swFirst, #swRest')"].forEach(s=>assert(mj.includes(s),'make.js lacks '+s));
 ['body.ed-mode .maker-grid','body.ed-mode .ed-stage','.ed-row','@media (min-width: 901px)'].forEach(s=>assert(css.includes(s),'styles.css lacks '+s));
-['id="swFirst"','id="swRest"','id="card"','id="dlJpg"','id="dlPdf"','id="fontGrid"','id="preview"'].forEach(s=>assert(html.includes(s),'make.html lost '+s));
+['id="swFirst"','id="swRest"','id="card"','id="dlJpg"','id="dlPdf"','id="f-f"','id="preview"'].forEach(s=>assert(html.includes(s),'make.html lost '+s));
 assert(!/Gemini/.test(html));
 const m=core.match(/Object\.assign\(FONTS, \{([\s\S]*?)\n  \}\);/); assert(m,'FONTS block');
 const ents=[...m[1].matchAll(/(\w+): \{ name: '([^']+)', he: '([^']+)', family: '([^']+)', weight: (\d+)([^}]*)\}/g)];

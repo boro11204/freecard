@@ -27,11 +27,11 @@ test('v20261103e: 38 designs from the Adobe-vs-Canva test (18 Adobe Firefly, 20 
   // left out: Adobe's walnut (Stars of David carved in) and Adobe's silver tray (a photo of a tray on a table with a cross-shaped medallion)
   assert.ok(!/walnut/i.test(Object.values(D).filter(d=>d.src==='adobe').map(d=>d.name).join(' ')), 'no Adobe walnut');
   assert.ok(!fs.readdirSync(S+'/img/ai').some(f=>/^ab-adobe-(kiddush-walnut|pidyonhaben)/.test(f)), 'dropped Adobe files are not shipped');
-  const F=load(); const all=Object.keys(F.DESIGNS); assert.strictEqual(all.length,486);
+  const F=load(); const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); assert.strictEqual(all.length,486);
   for(const k of ks) assert.ok(F.DESIGNS[k], k);
   for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','upsherin']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai15/.test(f), t+' leads with '+f); }
 });
 test('v20261103e: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103d'), f); assert.ok(h.includes('?v=20261103e'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103e';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103e'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103d') && !h.includes('?v=20261103e'), f); assert.ok(h.includes('?v=20261103f'), f); }
+  assert.match(rd('download.js'),/var VERSION = '20261103f';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103f'/);
 });

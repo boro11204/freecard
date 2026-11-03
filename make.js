@@ -82,6 +82,7 @@
     var f = F.FONTS[k], z = { karantina: 1.3, amatic: 1.3 }[k] || 1;
     return f.weight + ' ' + (i ? 0.62 * z : z) + "em '" + f.family + "', 'Frank Ruhl Libre', serif";
   }
+  window.FCTileFont = tileFont;
   // load a lettering's files (both weights, Hebrew and English letters) before it is needed
   var fontLoads = {};
   function familiesOf(k) {
@@ -101,22 +102,28 @@
     fontLoads[k] = Promise.all(jobs);
     return fontLoads[k];
   }
-  FONT_KEYS.forEach(function (k) {
-    var b = document.createElement('button'); b.type = 'button'; b.dataset.f = k; b.className = 'ftile';
-    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Lettering: ' + F.FONTS[k].name);
-    var s1 = document.createElement('span'); s1.className = 'ft-he'; s1.lang = 'he'; s1.dir = 'rtl'; s1.textContent = 'מזל טוב'; s1.style.font = tileFont(k, 0);
-    var s2 = document.createElement('span'); s2.className = 'ft-en'; s2.textContent = 'Mazel Tov'; s2.style.font = tileFont(k, 1);
-    var s3 = document.createElement('span'); s3.className = 'ft-name'; s3.textContent = F.FONTS[k].name;
-    if (F.FONTS[k].family) { s3.style.fontFamily = "'" + F.FONTS[k].family + "', 'Frank Ruhl Libre', serif"; s3.classList.add('ft-own'); var nz = ({ italianno: 1.45, tangerine: 1.5, alexbrush: 1.2, pinyon: 1.1, allura: 1.25, parisienne: 1.1 })[k]; if (nz) s3.style.fontSize = (0.92 * nz) + 'rem'; }
-    if (F.FONTS[k].enOnly) { s1.lang = 'en'; s1.dir = 'ltr'; s1.textContent = 'Mazel Tov'; s1.style.font = F.FONTS[k].weight + " " + (({ italianno: 1.1, tangerine: 1.15, cinzel: .68, baskerville: .66, playfair: .78, marcellus: .8, cormorant: .86, alexbrush: .9, pinyon: .85, allura: .95, parisienne: .88 })[k] || .85) + "em '" + F.FONTS[k].family + "', serif"; s2.textContent = 'English letters'; s2.style.font = "400 .5em system-ui, sans-serif"; s2.className = 'ft-en ft-enonly'; b.title = F.FONTS[k].name + ' — English letters; Hebrew and Yiddish use Frank Ruhl'; }
-    b.appendChild(s1); b.appendChild(s2); b.appendChild(s3);
-    if (F.FONTS[k].isNew) { var nb = document.createElement('i'); nb.className = 'nb'; nb.textContent = 'New'; b.appendChild(nb); }
-    b.addEventListener('pointerenter', function () { preloadFont(k); });
-    b.addEventListener('focus', function () { preloadFont(k); });
-    b.addEventListener('click', function () { setFont(k); });
-    $('fontGrid').appendChild(b);
-    ['f-nf', 'f-tf', 'f-bf'].forEach(function (id) { var o = document.createElement('option'); o.value = k; o.textContent = F.FONTS[k].name; $(id).appendChild(o); });
+  // v20261103f: every lettering in one compact list (fontpick.js draws it), grouped, the new Yiddish/sofer fonts first.
+  // The lists are real <select>s underneath, so the choice also works without the drawn list.
+  var FONT_GROUPS = [
+    ['Yiddish & sofer classics', ['shlomostam', 'stamashk', 'taameyashk', 'keteryg', 'mekorot', 'rommvilna', 'shlomosemi', 'keteraram', 'ezra', 'taameyfrank', 'drugulin', 'nesher', 'yehoash']],
+    ['Elegant & headline', ['hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
+    ['Classic', ['script', 'serif', 'bold', 'frank', 'david', 'notoserif', 'rashi', 'bona', 'tinos', 'miriam']],
+    ['Modern & fun', ['modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
+    ['English letters only', ['playfair', 'cinzel', 'parisienne', 'allura', 'pinyon', 'italianno', 'baskerville', 'marcellus', 'cormorant', 'alexbrush', 'tangerine']]
+  ];
+  (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !seen[k] && (seen[k] = 1); }); });
+    var rest = FONT_KEYS.filter(function (k) { return !seen[k]; }); if (rest.length) FONT_GROUPS[2][1] = FONT_GROUPS[2][1].concat(rest);
+    FONT_KEYS = [].concat.apply([], FONT_GROUPS.map(function (g) { return g[1]; })); })();
+  window.FCFontGroups = FONT_GROUPS;
+  ['f-f', 'f-nf', 'f-tf', 'f-bf'].forEach(function (id) {
+    var sel = $(id); if (!sel) return;
+    FONT_GROUPS.forEach(function (g) {
+      var og = document.createElement('optgroup'); og.label = g[0];
+      g[1].forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = F.FONTS[k].name; og.appendChild(o); });
+      sel.appendChild(og);
+    });
   });
+  $('f-f').addEventListener('change', function (e) { if (F.FONTS[e.target.value]) setFont(e.target.value); });
   // a font for the top and for the details (the names use f-nf)
   ['f-tf', 'f-bf'].forEach(function (id) {
     $(id).addEventListener('change', function (e) {
@@ -144,8 +151,8 @@
   $('fontPrev').addEventListener('click', function () { stepFont(-1); });
   $('fontNext').addEventListener('click', function () { stepFont(1); });
   $('fontCur').addEventListener('click', function () {
+    if (window.FCFontPick) { window.FCFontPick.open($('f-f'), { sheet: true, keep: true }); return; }
     var p = $('letterPanel'); p.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    var on = p.querySelector('.ftile[aria-pressed="true"]'); if (on) setTimeout(function () { on.focus({ preventScroll: true }); }, 400);
   });
   // after every change: any font the card uses that is not here yet is fetched, then the card is fitted again
   var settleTimer = null;
@@ -161,7 +168,7 @@
     });
   }
   // fetch every lettering quietly once the page has settled, so switching is instant
-  function preloadAll() { FONT_KEYS.reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
+  function preloadAll() { FONT_KEYS.filter(function (k) { return !F.FONTS[k].yi; }).reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
   if ('requestIdleCallback' in window) setTimeout(function () { requestIdleCallback(preloadAll, { timeout: 4000 }); }, 2500);
   else setTimeout(preloadAll, 3000);
   function buildTokens() {
@@ -216,9 +223,10 @@
     document.querySelectorAll('#typeChips .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.type === state.t)); });
     try { var pc = document.querySelector('#typeChips .chip[aria-pressed="true"]'), row = pc && pc.parentNode; if (row && row.scrollWidth > row.clientWidth) row.scrollLeft = pc.offsetLeft - row.offsetLeft - 14; } catch (e) {}
     document.querySelectorAll('.swatch').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.design === state.d)); });
+    document.querySelectorAll('.plain-dot').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.design === state.d)); });
     document.querySelectorAll('#langSeg button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.w === state.w)); });
     var fk = F.FONTS[state.f] ? state.f : 'script';
-    document.querySelectorAll('#fontGrid .ftile').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === fk)); });
+    $('f-f').value = fk;
     $('fontCurName').textContent = F.FONTS[fk].name;
     syncStyle();
     $('f-nf').value = F.FONTS[state.nf] ? state.nf : '';
@@ -238,6 +246,7 @@
     settleFonts();
     saveSoon();
     if (window.FCPartEdit) { try { window.FCPartEdit.after(); } catch (e) { console.warn(e); } }
+    if (typeof hintsSoon === 'function') hintsSoon();
   }
 
   function swapSamples(prevType, prevLang) {
@@ -254,7 +263,7 @@
     if (!touched.tl) state.tl = T.timeLabel;
     state.i = T.intro[state.w === 'en' || state.w === 'short' ? 'en' : 'he'];
     state.x = state.w === 'short' ? '' : tplFor(t, state.w); touched.x = false;
-    if (F.DESIGNS[state.d].types.indexOf(t) < 0) state.d = F.designsFor(t).first[0];
+    if (!F.DESIGNS[state.d].plain && F.DESIGNS[state.d].types.indexOf(t) < 0) state.d = F.designsFor(t).first[0];
     swapSamples();
     buildSwatches(); buildTokens(); fillForm(); applyUI(); render();
   try { if (window.FreeCardPaint) window.FreeCardPaint.watchPreview(cardMount); } catch (e) { console.warn(e); }
@@ -506,7 +515,7 @@
     catch (e) { try { d.photo = null; d.bg = null; localStorage.setItem(DKEY, JSON.stringify(d)); } catch (e2) {} }
   }
   function restore() {
-    if (params.get('type') || params.get('design')) return false;
+    if (params.get('type') || params.get('design') || params.get('blank')) return false;
     var d = null; try { d = JSON.parse(localStorage.getItem(DKEY) || 'null'); } catch (e) { d = null; }
     if (!d || !d.state || !F.TYPES[d.state.t]) return false;
     Object.keys(d.state).forEach(function (k) { if (typeof d.state[k] === 'string') state[k] = d.state[k]; });
@@ -669,13 +678,112 @@
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('ed-mode') && !document.body.classList.contains('pe-open')) { if (edDrawerIsOpen()) edDrawerClose(); else edExit(false); } });
   window.__fcEd = { enter: edEnter, exit: edExit, reveal: edReveal, openDetails: edDrawerOpen, closeDetails: edDrawerClose };
 
+
+  /* ---------- v20261103f: + Add line, Clear all text, Start from scratch, plain backgrounds ---------- */
+  // An added line is one more line of the wording ([LINE] until words are typed), so it has every part control
+  // (words, font, size, colour, bold, align, spacing, move, delete), is saved with the card and drawn in every download.
+  // An empty [LINE] shows a "Tap to write" mark on the preview only (drawn beside the card, never inside it).
+  var BLANK_TPL = '# [LINE]\n[LINE]\n[LINE]\n[LINE]';
+  function curTpl() {
+    var pk = pieceOn();
+    if (pk) { var v = state['pw_' + pk]; return typeof v === 'string' && v.trim() ? v : F.pieceTemplate(Object.assign({}, state, { w: state.w === 'short' ? 'en' : state.w }), pk); }
+    return F.templateOf(state) || '';
+  }
+  function setTpl(v) {
+    var pk = pieceOn();
+    if (pk) { state['pw_' + pk] = v; var pw = $('f-pw'); if (pw) pw.value = v; return; }
+    state.x = v; touched.x = true; form.elements.x.value = v;
+  }
+  function leaveShort() { // the short English layout has no lines of its own: it becomes the English wording first
+    if (state.w !== 'short' || pieceOn()) return;
+    state.w = 'en'; state.x = tplFor(state.t, 'en'); state.i = F.TYPES[state.t].intro.en; fillForm(); applyUI();
+  }
+  function openLine(idx) {
+    setTimeout(function () {
+      var e = cardMount.querySelector('.fc-card [data-pl="' + idx + '"]');
+      if (!e || !window.FCPartEdit) return;
+      window.FCPartEdit.open(e.getAttribute('data-pe'));
+      var w = $('peWords'); if (w) try { w.focus({ preventScroll: true }); } catch (er) { w.focus(); }
+    }, 80);
+  }
+  function addLine() {
+    leaveShort();
+    var raws = curTpl().replace(/\s+$/, '').split(/\r?\n/);
+    if (raws.length === 1 && !raws[0].trim()) raws = [];
+    raws.push('[LINE]');
+    setTpl(raws.join('\n')); render(); warmSoon();
+    openLine(raws.length - 1);
+  }
+  function blankWords() {
+    leaveShort();
+    setTpl(BLANK_TPL);
+    if (!pieceOn()) {
+      state.h = ''; touched.h = true; state.ex = ''; touched.ex = true; state.nt = ''; touched.nt = true;
+      var ed = F.peParse(state); Object.keys(ed).forEach(function (k) { if (k.indexOf('/') < 0 && k !== 'bsd') delete ed[k]; });
+      ed.ft = { t: '' }; // the simcha's closing words (e.g. מזל טוב) go too; a blank card starts with nothing but בס״ד
+      state.pe = JSON.stringify(ed);
+      fillForm();
+    }
+  }
+  function clearText() {
+    if (!confirm(tr('Clear all the words on the card? You can then write your own lines.'))) return;
+    if (window.FCPartEdit) try { window.FCPartEdit.close(); } catch (e) {}
+    blankWords(); applyUI(); render(); warmSoon();
+    toast(tr('Tap a line on the card to write it, or add more lines.'));
+  }
+  function startBlank(ask) {
+    if (ask && !confirm(tr('Start a card from scratch? The words on this card will be cleared.'))) return;
+    if (window.FCPartEdit) try { window.FCPartEdit.close(); } catch (e) {}
+    state.pk = '';
+    blankWords(); applyUI(); render(); warmSoon();
+    toast(tr('Blank card: pick a design or a plain background, then tap a line to write.'));
+  }
+  $('addLine').addEventListener('click', addLine);
+  $('addLine2').addEventListener('click', addLine);
+  $('clearText').addEventListener('click', clearText);
+  $('startBlank').addEventListener('click', function () { startBlank(true); });
+  // the "Tap to write" marks for empty lines, laid over the preview (outside the card, so no download shows them)
+  function blankHints() {
+    [].slice.call(cardMount.querySelectorAll('.fc-blank-hint')).forEach(function (h) { h.remove(); });
+    var c = cardMount.querySelector('.fc-card'); if (!c) return;
+    var bl = c.querySelectorAll('.fc-blank'); if (!bl.length) return;
+    var m = cardMount.getBoundingClientRect();
+    [].forEach.call(bl, function (e) {
+      var r = e.getBoundingClientRect(); if (!r.width && !r.height) return;
+      var h = document.createElement('div'); h.className = 'fcx-ov fc-blank-hint'; h.setAttribute('aria-hidden', 'true');
+      h.textContent = tr('Tap to write');
+      var w = Math.max(r.width, m.width * 0.5);
+      h.style.left = (r.left - m.left + (r.width - w) / 2) + 'px'; h.style.top = (r.top - m.top) + 'px';
+      h.style.width = w + 'px'; h.style.height = Math.max(r.height - 2, 10) + 'px'; h.style.fontSize = Math.max(9, Math.min(13, r.height * 0.55)) + 'px';
+      cardMount.appendChild(h);
+    });
+  }
+  var hintTimer = null;
+  function hintsSoon() { clearTimeout(hintTimer); hintTimer = setTimeout(blankHints, 60); setTimeout(blankHints, 500); setTimeout(blankHints, 1100); }
+  window.addEventListener('resize', hintsSoon);
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(hintsSoon).observe(cardMount);
+  cardMount.addEventListener('transitionend', hintsSoon);
+  document.addEventListener('click', function () { setTimeout(hintsSoon, 450); }, true);
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', hintsSoon);
+  // plain backgrounds: one tap, any simcha
+  (function () {
+    var box = $('plainDots'); if (!box || !F.PLAIN) return;
+    F.PLAIN.forEach(function (p) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'plain-dot'; b.dataset.design = p[0];
+      b.style.background = p[2]; b.title = p[1]; b.setAttribute('aria-label', p[1]); b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { state.d = p[0]; applyUI(); render(); warmSoon(); });
+      box.appendChild(b);
+    });
+  })();
+
   var restored = restore();
   if (restored) { setTypeQuiet(); }
+  if (params.get('blank') === '1') blankWords();
   buildSwatches(); buildTokens(); fillForm(); applyUI(); render();
   restoring = false;
   try { if (window.FreeCardPaint) window.FreeCardPaint.watchPreview(cardMount); } catch (e) { console.warn(e); }
   function setTypeQuiet() { /* the restored card keeps its own words; only the screen is brought in line */ }
   window.__fcState = state;
   window.__fcOpts = popts;
-  window.__fcApi = { state: state, form: form, render: render, pieceOn: pieceOn, syncSet: syncSet };
+  window.__fcApi = { state: state, form: form, render: render, pieceOn: pieceOn, syncSet: syncSet, addLine: addLine, clearText: clearText, startBlank: startBlank };
 })();

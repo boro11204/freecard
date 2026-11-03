@@ -11,10 +11,10 @@
 <meta name="theme-color" content="#faf6ee">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/GreatVibes-7-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=20261103e">
-<link rel="stylesheet" href="card.css?v=20261103e">
-<link rel="stylesheet" href="styles.css?v=20261103e">
-<script src="i18n.js?v=20261103e"></script>
+<link rel="stylesheet" href="fonts.css?v=20261103f">
+<link rel="stylesheet" href="card.css?v=20261103f">
+<link rel="stylesheet" href="styles.css?v=20261103f">
+<script src="i18n.js?v=20261103f"></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -26,10 +26,10 @@
   <div>
    <h1 id="makerTitle">Make your card</h1>
    <p class="sub">Fill it in and watch the card update. Then download it as a JPEG to send on WhatsApp, or a PDF to print.</p>
-   <p class="draft-note"><span id="draftMsg">Your card is saved on this device as you go.</span> <button type="button" class="linkbtn" id="startOver">Start over</button> · <button type="button" class="linkbtn" id="saveCopy">Save a copy</button> · <button type="button" class="linkbtn" id="myCards">My cards</button></p>
+   <p class="draft-note"><span id="draftMsg">Your card is saved on this device as you go.</span> <button type="button" class="linkbtn" id="startOver">Start over</button> · <button type="button" class="linkbtn" id="startBlank">Start from scratch</button> · <button type="button" class="linkbtn" id="saveCopy">Save a copy</button> · <button type="button" class="linkbtn" id="myCards">My cards</button></p>
    <div class="mycards" id="cardsBox" hidden><div class="mc-top"><b>My cards</b> <span class="hint">kept only on this device</span><button type="button" class="kb-x" id="cardsClose" aria-label="Close">✕</button></div><div id="cardsList"></div></div>
    <form id="form" autocomplete="off" novalidate>
-    <div class="ed-tools-head" id="edToolsHead"><button type="button" class="ed-details-btn" id="edDetailsBtn" aria-controls="edDrawer" aria-expanded="false"><span aria-hidden="true">✎</span> <span>Edit the words &amp; details</span></button><p class="ed-tip">Tap any line on the card to change just that line.</p></div>
+    <div class="ed-tools-head" id="edToolsHead"><button type="button" class="ed-details-btn" id="edDetailsBtn" aria-controls="edDrawer" aria-expanded="false"><span aria-hidden="true">✎</span> <span>Edit the words &amp; details</span></button><p class="ed-tip">Tap any line on the card to change just that line.</p><div class="line-tools"><button type="button" class="btn sm addline" id="addLine"><span aria-hidden="true">＋</span> <span>Add line</span></button><button type="button" class="linkbtn" id="clearText">Clear all text</button></div></div>
     <div class="panel p-type"><h2><span class="n">1</span>The simcha</h2><div class="chips grouped" id="typeChips" role="group" aria-label="Simcha type"><div class="chipset"><div class="chipgrp">Wedding & engagement</div><div class="chiprow"><button type="button" class="chip" data-type="chasuna" aria-pressed="false"><span>Chasuna</span><span class="he" dir="rtl">חתונה</span></button><button type="button" class="chip" data-type="engaged" aria-pressed="false"><span>Engagement announcement</span><span class="he" dir="rtl">הודעת אירוסין</span></button><button type="button" class="chip" data-type="vort" aria-pressed="false"><span>Vort / L'chaim</span><span class="he" dir="rtl">ווארט / לחיים</span></button><button type="button" class="chip" data-type="tenoyim" aria-pressed="false"><span>Tenoyim</span><span class="he" dir="rtl">תנאים</span></button><button type="button" class="chip" data-type="aufruf" aria-pressed="false"><span>Aufruf</span><span class="he" dir="rtl">אויפרופן</span></button><button type="button" class="chip" data-type="shevabrachos" aria-pressed="false"><span>Sheva Brachos</span><span class="he" dir="rtl">שבע ברכות</span></button></div></div>
 <div class="chipset"><div class="chipgrp">Baby</div><div class="chiprow"><button type="button" class="chip" data-type="birth" aria-pressed="false"><span>Birth announcement</span><span class="he" dir="rtl">הודעת לידה</span></button><button type="button" class="chip" data-type="vachnacht" aria-pressed="false"><span>Vach Nacht</span><span class="he" dir="rtl">וואכנאכט</span></button><button type="button" class="chip" data-type="bris" aria-pressed="false"><span>Bris</span><span class="he" dir="rtl">ברית מילה</span></button><button type="button" class="chip" data-type="shalomzachor" aria-pressed="false"><span>Shalom Zachor</span><span class="he" dir="rtl">שלום זכר</span></button><button type="button" class="chip" data-type="kiddush" aria-pressed="false"><span>Kiddush</span><span class="he" dir="rtl">קידוש</span></button><button type="button" class="chip" data-type="pidyonhaben" aria-pressed="false"><span>Pidyon Haben</span><span class="he" dir="rtl">פדיון הבן</span></button><button type="button" class="chip" data-type="upsherin" aria-pressed="false"><span>Upsherin</span><span class="he" dir="rtl">אפשערן</span></button></div></div>
 <div class="chipset"><div class="chipgrp">Bar & Bas Mitzvah</div><div class="chiprow"><button type="button" class="chip" data-type="barmitzvah" aria-pressed="false"><span>Bar Mitzvah</span><span class="he" dir="rtl">בר מצוה</span></button><button type="button" class="chip" data-type="tefillin" aria-pressed="false"><span>Hanachas Tefillin</span><span class="he" dir="rtl">הנחת תפילין</span></button><button type="button" class="chip" data-type="basmitzvah" aria-pressed="false"><span>Bas Mitzvah</span><span class="he" dir="rtl">בת מצוה</span></button></div></div>
@@ -38,11 +38,11 @@
 <div class="chipset"><div class="chipgrp">Cards & more</div><div class="chiprow"><button type="button" class="chip" data-type="seudah" aria-pressed="false"><span>Seudah / Other</span><span class="he" dir="rtl">סעודה</span></button><button type="button" class="chip" data-type="thankyou" aria-pressed="false"><span>Thank-you card</span><span class="he" dir="rtl">כרטיס תודה</span></button><button type="button" class="chip" data-type="mazeltov" aria-pressed="false"><span>Mazel Tov wishes</span><span class="he" dir="rtl">ברכת מזל טוב</span></button></div></div></div></div>
     <div class="panel p-design"><h2><span class="n">2</span>The design</h2>
      <div class="sw-label" id="swLabel">Designs for this simcha</div><div class="swatches" id="swFirst" role="group" aria-label="Designs for this simcha"></div>
-     <details class="more-designs"><summary>More designs</summary><div class="swatches" id="swRest" role="group" aria-label="More designs"></div></details>
+     <div class="plain-row" id="plainRow"><span class="plain-l">Plain background</span><span class="plain-dots" id="plainDots" role="group" aria-label="Plain background"></span></div> <details class="more-designs"><summary>More designs</summary><div class="swatches" id="swRest" role="group" aria-label="More designs"></div></details>
      <p class="ai-credit">Designs marked “AI art” have background art AI-generated with Canva, Leonardo.ai or Adobe Firefly.</p>
     </div>
     <div class="panel" id="letterPanel"><h2><span class="n">3</span>Lettering <span class="opt">the font on the card</span></h2>
-     <div class="fontgrid" id="fontGrid" role="group" aria-label="Lettering"></div>
+     <select id="f-f" class="font-main" aria-label="Lettering"></select>
      <div class="parts" id="partFonts">
       <div class="parts-h">Font for each part <span class="opt">optional</span></div>
       <p class="hint nf-hint">Top, names and details can each have their own font and size.</p>
@@ -59,7 +59,7 @@
      <div class="wstyle" id="styleRow" hidden><span class="mo-l">Style</span><div class="pshape" id="styleSeg" role="group" aria-label="Wording style"><button type="button" class="chip sm" data-ws="">Standard</button><button type="button" class="chip sm" data-ws="h">Heimish</button><button type="button" class="chip sm" data-ws="s">Short &amp; simple</button></div></div>
      <div class="fields">
       <div class="field full" id="w-x"><label for="f-x">Invitation text</label><textarea id="f-x" name="x" dir="auto" rows="12"></textarea>
-       <span class="hint">Words in [BRACKETS] fill in from the details below. Edit anything else freely. Tap to add one: <span id="tokChips" class="tok-chips"></span> <button type="button" class="linkbtn" id="resetX">Reset wording</button></span></div>
+       <span class="hint">Words in [BRACKETS] fill in from the details below. Edit anything else freely. Tap to add one: <span id="tokChips" class="tok-chips"></span> <button type="button" class="linkbtn" id="resetX">Reset wording</button></span><div class="line-tools"><button type="button" class="btn sm addline" id="addLine2"><span aria-hidden="true">＋</span> <span>Add line</span></button></div></div>
       <div class="field full" id="w-i" hidden><label for="f-i">Opening line</label><textarea id="f-i" name="i" dir="auto" rows="2"></textarea></div>
       <div class="field"><label for="f-h">Top line</label><input id="f-h" name="h" dir="auto"></div>
       <div class="field" id="w-tl" hidden><label for="f-tl">Time label</label><input id="f-tl" name="tl" dir="auto" placeholder="Chuppah"></div>
@@ -161,12 +161,13 @@
 </div></main>
 <div class="mobile-bar"><a class="btn ghost see" href="#preview">See card</a><button type="button" class="btn gold" id="dlJpg2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>JPEG</button><button type="button" class="btn" id="dlPdf2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>PDF</button></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="vendor/html-to-image.js?v=20261103e"></script>
-<script src="core.js?v=20261103e"></script>
-<script src="paint.js?v=20261103e"></script>
-<script src="extras.js?v=20261103e"></script>
-<script src="download.js?v=20261103e"></script>
-<script src="make.js?v=20261103e"></script>
-<script src="partedit.js?v=20261103e"></script>
-<script src="vkb.js?v=20261103e"></script>
+<script src="vendor/html-to-image.js?v=20261103f"></script>
+<script src="core.js?v=20261103f"></script>
+<script src="paint.js?v=20261103f"></script>
+<script src="extras.js?v=20261103f"></script>
+<script src="download.js?v=20261103f"></script>
+<script src="make.js?v=20261103f"></script>
+<script src="partedit.js?v=20261103f"></script>
+<script src="fontpick.js?v=20261103f"></script>
+<script src="vkb.js?v=20261103f"></script>
 </body></html>

@@ -692,3 +692,194 @@
   src: url(fonts/Tinos-tinos-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* v20261103f: 20 Yiddish/Hebrew invitation fonts (Culmus, Open Siddur, SIL; licenses in fonts/licenses/). Each file is fetched only when a card or the font list shows it. */
+@font-face {
+  font-family: 'Shlomo Stam';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/ShlomoStam.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Stam Ashkenaz CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/StamAshkenazCLM.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Taamey Ashkenaz';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/TaameyAshkenaz-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Taamey Ashkenaz';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/TaameyAshkenaz-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Keter YG';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/KeterYG-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Keter YG';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/KeterYG-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Mekorot Vilna';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/Mekorot-Vilna.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Mekorot Vilna';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/Mekorot-Vilna-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Romm Vilna';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/RommVilna-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Romm Vilna';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/RommVilna-Heading.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shlomo SemiStam';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/ShlomoSemiStam.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Keter Aram Tsova';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/KeterAramTsova.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ezra SIL';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/SILEOT.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Taamey Frank CLM';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/TaameyFrankCLM-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Taamey Frank CLM';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/TaameyFrankCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Drugulin CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/DrugulinCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Nesher Gadol';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/NesherGadol.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'E Yehoash Esther';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/E-Yehoash-Esther.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Hadasim CLM';
+  font-style: normal;
+  font-weight: 1 599;
+  font-display: swap;
+  src: url(fonts/HadasimCLM-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Hadasim CLM';
+  font-style: normal;
+  font-weight: 600 1000;
+  font-display: swap;
+  src: url(fonts/HadasimCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shofar';
+  font-style: normal;
+  font-weight: 1 549;
+  font-display: swap;
+  src: url(fonts/ShofarRegular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shofar';
+  font-style: normal;
+  font-weight: 550 1000;
+  font-display: swap;
+  src: url(fonts/ShofarDemi-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Dorian CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/DorianCLM-Book.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Gan CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/GanCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Gladia CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/GladiaCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Lulav CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/LulavCLM.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shmulik CLM';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-display: swap;
+  src: url(fonts/ShmulikCLM.woff2) format('woff2');
+}

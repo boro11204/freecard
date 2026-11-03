@@ -5,7 +5,7 @@ function load(){ global.window=global; global.document={createElement:()=>({styl
 test('v20261102d: the ai10 Canva set (no Gemini) has pictures, tiles, Canva credentials, the New badge, and leads its simchas', ()=>{
   const core=rd('core.js'); const m=core.match(/var AI10_DESIGNS = (\{.*\});/); assert.ok(m, 'AI10 block');
   const D=JSON.parse(m[1]); const ks=Object.keys(D); assert.ok(ks.length>=19, 'count '+ks.length);
-  const F=load(); const all=Object.keys(F.DESIGNS); const names=new Set(all.map(k=>F.DESIGNS[k].name)); assert.strictEqual(names.size, all.length, 'every design name is unique');
+  const F=load(); const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); const names=new Set(all.map(k=>F.DESIGNS[k].name)); assert.strictEqual(names.size, all.length, 'every design name is unique');
   for(const k of ks){ const d=D[k]; assert.ok(/^ai10can/.test(k) && d.nb && d.isNew && d.ai && !d.src, k); assert.strictEqual(d.note,'AI art · Canva');
     assert.ok(Array.isArray(d.pad) && d.pad.length===3 && d.pad.every(x=>x>=10 && x<=50), k+' pad');
     const b=fs.readFileSync(S+'/img/'+d.file+'.webp'); assert.ok(!b.includes('Google'), d.file); assert.ok(b.includes('c2pa'), 'Canva credentials kept '+d.file);

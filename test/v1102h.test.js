@@ -6,8 +6,8 @@ function load(){ global.window=global; global.document={createElement:()=>({styl
 test('v20261102h: the Black Damask & Gold Candelabras design (Stars of David in its damask) is removed entirely', ()=>{
   const core=rd('core.js'); assert.ok(!/candelabras/i.test(core), 'no entry, order or cross-listing left');
   assert.ok(!fs.existsSync(S+'/img/ai/c11-chasuna-candelabras.webp') && !fs.existsSync(S+'/img/ai/p/c11-chasuna-candelabras.webp'), 'pictures deleted');
-  const F=load(); assert.ok(!Object.keys(F.DESIGNS).some(k=>/candelabra/.test(k)));
-  for(const k of Object.keys(F.DESIGNS)){ const d=F.DESIGNS[k]; if(d.kind!=='img') continue; const f=d.file||k; assert.ok(fs.existsSync(S+'/img/'+f+'.webp'), f); const t=d.thumb||('p/'+f); assert.ok(fs.existsSync(S+'/img/'+t+'.webp'), t); }
+  const F=load(); assert.ok(!Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).some(k=>/candelabra/.test(k)));
+  for(const k of Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain)){ const d=F.DESIGNS[k]; if(d.kind!=='img') continue; const f=d.file||k; assert.ok(fs.existsSync(S+'/img/'+f+'.webp'), f); const t=d.thumb||('p/'+f); assert.ok(fs.existsSync(S+'/img/'+t+'.webp'), t); }
 });
 test('v20261102h: picker tiles draw their picture as an <img> with explicit size, a version on the address and a full-picture fallback', ()=>{
   const core=rd('core.js'), css=rd('card.css');

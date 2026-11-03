@@ -114,7 +114,7 @@
     return F.templateOf(state) || '';
   }
   // what the words of the selected part come from: a field of the form, one line of the wording, or nothing editable here
-  var src = null;
+  var src = null, delBlank = false;
   function sourceOf(e) {
     var k = e.getAttribute('data-pe');
     if (FIELD_OF[k]) return { type: 'field', field: FIELD_OF[k], multi: k === 'ex' };
@@ -123,14 +123,14 @@
       if (raw == null) return { type: 'none' };
       var title = /^#\s+/.test(raw), body = raw.replace(/^#\s+/, ''), m = /^\s*\[([^\]]+)\]\s*$/.exec(body);
       if (m) { var f = F.tokenMap(state.t)[m[1].trim().toUpperCase()]; if (f && EDITABLE[f]) return { type: 'field', field: f }; }
-      return { type: 'line', idx: idx, title: title, tokens: /\[[^\]]+\]/.test(body) };
+      return { type: 'line', idx: idx, title: title, tokens: /\[[^\]]+\]/.test(body) && !/^\s*\[LINE\]\s*$/i.test(body) };
     }
     return { type: 'none' };
   }
   function srcValue() {
     if (!src) return '';
     if (src.type === 'field') return state[src.field] || '';
-    if (src.type === 'line') { var raw = curTemplate().split(/\r?\n/)[src.idx]; return raw == null ? '' : raw.replace(/^#\s+/, ''); }
+    if (src.type === 'line') { var raw = curTemplate().split(/\r?\n/)[src.idx]; return raw == null || /^(#\s+)?\s*\[LINE\]\s*$/i.test(raw) ? '' : raw.replace(/^#\s+/, ''); }
     return '';
   }
   function writeWords(v) {
@@ -142,7 +142,7 @@
     }
     if (src.type !== 'line') return;
     v = v.replace(/\r?\n/g, ' ');
-    var raws = curTemplate().split(/\r?\n/), nraw = (src.title ? '# ' : '') + v;
+    var raws = curTemplate().split(/\r?\n/), wasBlank = /^(#\s+)?\s*\[LINE\]\s*$/i.test(raws[src.idx] || ''), nraw = (src.title ? '# ' : '') + (v === '' && wasBlank && !delBlank ? '[LINE]' : v);
     raws[src.idx] = nraw;
     var ed = edits(), k = scope() + sel; if (ed[k]) { ed[k].r = nraw; saveEdits(ed); }
     var all = raws.join('\n'), pk = api.pieceOn();
@@ -299,7 +299,7 @@
   function delLine() {
     if (!sel || sel === 'ph' || !src) return;
     if (src.type === 'none') change(function (o) { o.t = ''; });
-    else writeWords('');
+    else { delBlank = true; writeWords(''); delBlank = false; }
     $('peWords').value = '';
     syncWords(); syncControls(); placeBox();
   }

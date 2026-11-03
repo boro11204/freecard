@@ -949,3 +949,51 @@
 .fc-card.has-tbg { isolation: isolate; }
 .fc-card > img.fc-tbg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none; z-index: -1; display: block; object-fit: fill; pointer-events: none; user-select: none; -webkit-user-drag: none; border: 0; margin: 0; padding: 0; }
 .fc-card .pe-gone { display: none !important; }
+
+/* v20261103f: an empty line of a custom card keeps its height; plain backgrounds have no frame */
+.fc-blank { min-height: 2em; min-width: 30cqw; }
+.fc-blank.fc-title { min-height: 1.3em; }
+.k-plain .fc-frame { display: none; }
+
+/* v20261103f fonts */
+.fc-card.f-shlomostam { --fb: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fh: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fn: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fnh: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fa: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fz: 0.96; --fnz: 0.96; }
+.fc-card.nf-shlomostam { --fn: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fnh: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fa: 'Shlomo Stam', 'Frank Ruhl Libre', serif; --fnz: 0.96; }
+.fc-card.f-stamashk { --fb: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fh: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fn: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fnh: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fa: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-stamashk { --fn: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fnh: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fa: 'Stam Ashkenaz CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-taameyashk { --fb: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fh: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fn: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fnh: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fa: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fz: 1.05; --fnz: 1.05; }
+.fc-card.nf-taameyashk { --fn: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fnh: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fa: 'Taamey Ashkenaz', 'Frank Ruhl Libre', serif; --fnz: 1.05; }
+.fc-card.f-keteryg { --fb: 'Keter YG', 'Frank Ruhl Libre', serif; --fh: 'Keter YG', 'Frank Ruhl Libre', serif; --fn: 'Keter YG', 'Frank Ruhl Libre', serif; --fnh: 'Keter YG', 'Frank Ruhl Libre', serif; --fa: 'Keter YG', 'Frank Ruhl Libre', serif; --fz: 1.04; --fnz: 1.04; }
+.fc-card.nf-keteryg { --fn: 'Keter YG', 'Frank Ruhl Libre', serif; --fnh: 'Keter YG', 'Frank Ruhl Libre', serif; --fa: 'Keter YG', 'Frank Ruhl Libre', serif; --fnz: 1.04; }
+.fc-card.f-mekorot { --fb: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fh: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fn: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fnh: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fa: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fz: 1.05; --fnz: 1.05; }
+.fc-card.nf-mekorot { --fn: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fnh: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fa: 'Mekorot Vilna', 'Frank Ruhl Libre', serif; --fnz: 1.05; }
+.fc-card.f-rommvilna { --fb: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fh: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fn: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fnh: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fa: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fz: 1.12; --fnz: 1.12; }
+.fc-card.nf-rommvilna { --fn: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fnh: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fa: 'Romm Vilna', 'Frank Ruhl Libre', serif; --fnz: 1.12; }
+.fc-card.f-shlomosemi { --fb: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fh: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fn: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fnh: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fa: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fz: 0.96; --fnz: 0.96; }
+.fc-card.nf-shlomosemi { --fn: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fnh: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fa: 'Shlomo SemiStam', 'Frank Ruhl Libre', serif; --fnz: 0.96; }
+.fc-card.f-keteraram { --fb: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fh: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fn: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fnh: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fa: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fz: 1.1; --fnz: 1.1; }
+.fc-card.nf-keteraram { --fn: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fnh: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fa: 'Keter Aram Tsova', 'Frank Ruhl Libre', serif; --fnz: 1.1; }
+.fc-card.f-ezra { --fb: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fh: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fn: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fnh: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fa: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fz: 0.95; --fnz: 0.95; }
+.fc-card.nf-ezra { --fn: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fnh: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fa: 'Ezra SIL', 'Frank Ruhl Libre', serif; --fnz: 0.95; }
+.fc-card.f-taameyfrank { --fb: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fh: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fn: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fnh: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fa: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fz: 1.08; --fnz: 1.08; }
+.fc-card.nf-taameyfrank { --fn: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fnh: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fa: 'Taamey Frank CLM', 'Frank Ruhl Libre', serif; --fnz: 1.08; }
+.fc-card.f-drugulin { --fb: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fh: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fn: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fnh: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fa: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fz: 1.06; --fnz: 1.06; }
+.fc-card.nf-drugulin { --fn: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fnh: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fa: 'Drugulin CLM', 'Frank Ruhl Libre', serif; --fnz: 1.06; }
+.fc-card.f-nesher { --fb: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fh: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fn: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fnh: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fa: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fz: 1.04; --fnz: 1.04; }
+.fc-card.nf-nesher { --fn: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fnh: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fa: 'Nesher Gadol', 'Frank Ruhl Libre', serif; --fnz: 1.04; }
+.fc-card.f-yehoash { --fb: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fh: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fn: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fnh: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fa: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fz: 0.9; --fnz: 0.9; }
+.fc-card.nf-yehoash { --fn: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fnh: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fa: 'E Yehoash Esther', 'Frank Ruhl Libre', serif; --fnz: 0.9; }
+.fc-card.f-hadasim { --fb: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fh: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fn: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fnh: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fa: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-hadasim { --fn: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fnh: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fa: 'Hadasim CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-shofar { --fb: 'Shofar', 'Frank Ruhl Libre', serif; --fh: 'Shofar', 'Frank Ruhl Libre', serif; --fn: 'Shofar', 'Frank Ruhl Libre', serif; --fnh: 'Shofar', 'Frank Ruhl Libre', serif; --fa: 'Shofar', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-shofar { --fn: 'Shofar', 'Frank Ruhl Libre', serif; --fnh: 'Shofar', 'Frank Ruhl Libre', serif; --fa: 'Shofar', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-dorian { --fb: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fh: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fn: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fnh: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fa: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fz: 0.92; --fnz: 0.92; }
+.fc-card.nf-dorian { --fn: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fnh: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fa: 'Dorian CLM', 'Frank Ruhl Libre', serif; --fnz: 0.92; }
+.fc-card.f-gan { --fb: 'Gan CLM', 'Frank Ruhl Libre', serif; --fh: 'Gan CLM', 'Frank Ruhl Libre', serif; --fn: 'Gan CLM', 'Frank Ruhl Libre', serif; --fnh: 'Gan CLM', 'Frank Ruhl Libre', serif; --fa: 'Gan CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-gan { --fn: 'Gan CLM', 'Frank Ruhl Libre', serif; --fnh: 'Gan CLM', 'Frank Ruhl Libre', serif; --fa: 'Gan CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-gladia { --fb: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fh: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fn: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fnh: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fa: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-gladia { --fn: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fnh: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fa: 'Gladia CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-lulav { --fb: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fh: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fn: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fnh: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fa: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-lulav { --fn: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fnh: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fa: 'Lulav CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+.fc-card.f-shmulik { --fb: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
+.fc-card.nf-shmulik { --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
+/* end v20261103f fonts */

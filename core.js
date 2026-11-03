@@ -1894,6 +1894,11 @@
     Object.keys(prev).forEach(function (k) { if (!DESIGNS[k]) DESIGNS[k] = prev[k]; }); })();
   // v20261031b: the two older designs with small stars in the art (Navy Starry Night, Starry Balloons) never open a simcha; they move to the back of its preferred list
   (function () { var back = ['ai3leobris04', 'ai4leoupsherinballoons']; Object.keys(NEW_FIRST).forEach(function (t) { var l = NEW_FIRST[t]; NEW_FIRST[t] = l.filter(function (k) { return back.indexOf(k) < 0; }).concat(l.filter(function (k) { return back.indexOf(k) >= 0; })); }); })();
+  // v20261103f: plain backgrounds for a card made from scratch (no picture, no frame); they are picked from their own row, not the design lists
+  var PLAIN = [['plaincream', 'Plain cream', '#f7f0e1', '#3a2a10', '#9a7428', '#6e5a37'], ['plainwhite', 'Plain white', '#ffffff', '#222222', '#8a6a2a', '#555555'],
+    ['plainblack', 'Plain black', '#111111', '#f3e7c6', '#d4ad57', '#cbbf9f'], ['plainnavy', 'Plain navy', '#14223d', '#f4e7c3', '#d4ad57', '#cfc3a2'],
+    ['plainburgundy', 'Plain burgundy', '#5a1424', '#f6e6c8', '#e0b866', '#e2cfae']];
+  PLAIN.forEach(function (p) { DESIGNS[p[0]] = { name: p[1], note: 'plain background', kind: 'plain', types: [], plain: true, vars: { bg: p[2], ink: p[3], accent: p[4], soft: p[5] } }; });
   var KEYS = ['t', 'd', 'w', 'f', 'nf', 'h', 'i', 'x', 'n1', 'n2', 'p1', 'p2', 'dt', 'hd', 'tm', 'tl', 'sc', 'hl', 'ad', 'ex', 'ph', 'hn', 'nt', 'rs', 'wl', 'ts', 'ns', 'hc', 'tc', 'to', 'bv', 'ls', 'ty', 'ps', 'pz', 'pa', 'tf', 'tz', 'bf', 'bz', 'pe'];
   var FONTS = {
     script: { name: 'Script', he: 'כתב' },
@@ -1932,6 +1937,30 @@
     tangerine: { name: 'Tangerine', he: 'טנג׳רין', family: 'Tangerine', weight: 700, isNew: true, enOnly: true },
     tinos: { name: 'Tinos', he: 'טינוס', family: 'Tinos', weight: 700, isNew: true }
   });
+  // v20261103f: 20 classic Yiddish/Hebrew invitation fonts (sofer/STaM, seforim, headline). fix = letters the font lacks, drawn another way on the card only:
+  // l = װ ױ ײ as two letters, d = precomposed אַ פֿ … as letter + mark, n = no vowel marks, s = no shin/sin dots, p = ׳ ״ as ' "
+  Object.assign(FONTS, {
+    shlomostam: { name: 'Shlomo Stam', he: 'שלמה סת״ם', family: 'Shlomo Stam', weight: 400, isNew: true, yi: true, grp: 'sofer' },
+    stamashk: { name: 'Stam Ashkenaz', he: 'סת״ם אשכנז', family: 'Stam Ashkenaz CLM', weight: 400, isNew: true, yi: true, grp: 'sofer', fix: 'dlp' },
+    taameyashk: { name: 'Taamey Ashkenaz', he: 'טעמי אשכנז', family: 'Taamey Ashkenaz', weight: 700, isNew: true, yi: true, grp: 'sofer' },
+    keteryg: { name: 'Keter YG', he: 'כתר', family: 'Keter YG', weight: 700, isNew: true, yi: true, grp: 'sofer', fix: 'd' },
+    mekorot: { name: 'Mekorot Vilna', he: 'מקורות וילנא', family: 'Mekorot Vilna', weight: 700, isNew: true, yi: true, grp: 'sofer', fix: 'p' },
+    rommvilna: { name: 'Romm Vilna', he: 'ראם ווילנא', family: 'Romm Vilna', weight: 700, isNew: true, yi: true, grp: 'sofer' },
+    shlomosemi: { name: 'Shlomo SemiStam', he: 'שלמה חצי סת״ם', family: 'Shlomo SemiStam', weight: 400, isNew: true, yi: true, grp: 'sofer' },
+    keteraram: { name: 'Keter Aram Tsova', he: 'כתר ארם צובא', family: 'Keter Aram Tsova', weight: 400, isNew: true, yi: true, grp: 'sofer' },
+    ezra: { name: 'Ezra SIL', he: 'עזרא', family: 'Ezra SIL', weight: 400, isNew: true, yi: true, grp: 'sofer' },
+    taameyfrank: { name: 'Taamey Frank', he: 'טעמי פרנק', family: 'Taamey Frank CLM', weight: 700, isNew: true, yi: true, grp: 'sofer' },
+    drugulin: { name: 'Drugulin', he: 'דרוגולין', family: 'Drugulin CLM', weight: 400, isNew: true, yi: true, grp: 'sofer' },
+    nesher: { name: 'Nesher Gadol', he: 'נשר גדול', family: 'Nesher Gadol', weight: 400, isNew: true, yi: true, grp: 'sofer', fix: 'dlns' },
+    yehoash: { name: 'Yehoash Esther', he: 'יהואש אסתר', family: 'E Yehoash Esther', weight: 400, isNew: true, yi: true, grp: 'sofer', fix: 'dn' },
+    hadasim: { name: 'Hadasim', he: 'הדסים', family: 'Hadasim CLM', weight: 700, isNew: true, yi: true, grp: 'fancy' },
+    shofar: { name: 'Shofar', he: 'שופר', family: 'Shofar', weight: 700, isNew: true, yi: true, grp: 'fancy' },
+    dorian: { name: 'Dorian', he: 'דוריאן', family: 'Dorian CLM', weight: 400, isNew: true, yi: true, grp: 'fancy' },
+    gan: { name: 'Gan', he: 'גן', family: 'Gan CLM', weight: 400, isNew: true, yi: true, grp: 'fancy', fix: 'dlnps' },
+    gladia: { name: 'Gladia', he: 'גלדיה', family: 'Gladia CLM', weight: 400, isNew: true, yi: true, grp: 'fancy', fix: 'dlnps' },
+    lulav: { name: 'Lulav', he: 'לולב', family: 'Lulav CLM', weight: 400, isNew: true, yi: true, grp: 'fancy', fix: 'dlns' },
+    shmulik: { name: 'Shmulik', he: 'שמוליק', family: 'Shmulik CLM', weight: 400, isNew: true, yi: true, grp: 'fancy' }
+  });
   var BASE_TOKENS = { 'DATE': 'dt', 'HEBREW DATE': 'hd', 'TIME': 'tm', 'MORE TIMES': 'sc', 'HALL': 'hl', 'ADDRESS': 'ad',
     'NAME1': 'n1', 'NAME2': 'n2', 'PARENTS1': 'p1', 'PARENTS2': 'p2', 'PARSHA': 'pa', 'TABLE': 'tn', 'NAMES': 'nl' };
   var HEB = /[\u0590-\u05FF]/;
@@ -1969,7 +1998,7 @@
 
   function designsFor(type) {
     var first = [], rest = [];
-    Object.keys(DESIGNS).forEach(function (k) { (DESIGNS[k].types.indexOf(type) >= 0 ? first : rest).push(k); });
+    Object.keys(DESIGNS).forEach(function (k) { if (DESIGNS[k].plain) return; (DESIGNS[k].types.indexOf(type) >= 0 ? first : rest).push(k); });
     var pref = (NEW_FIRST[type] || []).concat(DESIGN_ADD[type] || []);
     if (pref.length) first.sort(function (a, b) { var ia = pref.indexOf(a), ib = pref.indexOf(b); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     // v20261029c: AI-made designs first (newest set leading), the older drawn designs after them
@@ -2101,6 +2130,8 @@
       }
       var title = /^#\s+/.test(raw);
       if (title) raw = raw.replace(/^#\s+/, '');
+      // v20261103f: an empty line of a custom card, waiting for its words ([LINE]); nothing of it is drawn in a download
+      if (/^\s*\[LINE\]\s*$/i.test(raw)) { lines.push({ kind: 'blank', text: '', title: title, cols: null, src: src, raw: whole }); return; }
       var text = fillLine(raw, c, map, info);
       if (!text) return;
       var f = info.fields, kind = 'text';
@@ -2973,6 +3004,34 @@
     var ph = inner.querySelector(':scope > .fc-photo'); if (ph) ph.setAttribute('data-pe', 'ph');
   }
 
+  /* ---------- v20261103f: letters a font does not have are drawn another way, on the card only (the saved words stay as typed) ---------- */
+  var FIX_FAM = {};
+  Object.keys(FONTS).forEach(function (k) { if (FONTS[k].fix) FIX_FAM[FONTS[k].family] = FONTS[k].fix; });
+  function fixText(s, fl) {
+    if (fl.indexOf('d') >= 0) s = s.replace(/[\uFB1D-\uFB4F]/g, function (ch) { return ch.normalize ? ch.normalize('NFD') : ch; });
+    if (fl.indexOf('l') >= 0) s = s.replace(/\u05F0/g, '\u05D5\u05D5').replace(/\u05F1/g, '\u05D5\u05D9').replace(/\u05F2/g, '\u05D9\u05D9');
+    if (fl.indexOf('n') >= 0) s = s.replace(/[\u0591-\u05C7]/g, function (m) { return /[\u05BE\u05C0\u05C3\u05C6]/.test(m) ? m : ''; });
+    else if (fl.indexOf('s') >= 0) s = s.replace(/[\u05C1\u05C2]/g, '');
+    if (fl.indexOf('p') >= 0) s = s.replace(/\u05F3/g, "'").replace(/\u05F4/g, '"');
+    return s;
+  }
+  function usesFix(c) {
+    var ks = [c.f, c.nf, c.tf, c.bf], ed = peParse(c);
+    Object.keys(ed).forEach(function (k) { if (ed[k] && ed[k].f) ks.push(ed[k].f); });
+    return ks.some(function (k) { return k && FONTS[k] && FONTS[k].fix; });
+  }
+  function fixCard(card, c) {
+    if (!card || !usesFix(c) || typeof getComputedStyle !== 'function' || !document.createTreeWalker) return;
+    var w = document.createTreeWalker(card, 4), n, seen = [], flags = [];
+    while ((n = w.nextNode())) {
+      var t = n.nodeValue; if (!/[\u0591-\u05F4\uFB1D-\uFB4F]/.test(t)) continue;
+      var p = n.parentNode, i = seen.indexOf(p), fl;
+      if (i < 0) { var ff = (getComputedStyle(p).fontFamily || '').split(',')[0].trim().replace(/^["']|["']$/g, ''); fl = FIX_FAM[ff] || ''; seen.push(p); flags.push(fl); }
+      else fl = flags[i];
+      if (fl) { var v = fixText(t, fl); if (v !== t) n.nodeValue = v; }
+    }
+  }
+
   /* ---------- the card ---------- */
   // design-picker thumbnails load only when they scroll into view (phones download far less)
   var bgObserver = null;
@@ -2984,7 +3043,7 @@
     card.setAttribute('data-bg', src); bgObserver.observe(card);
     return true;
   }
-  var TILE_V = 'v20261103e';
+  var TILE_V = 'v20261103f';
   function tileLog(ev, u) {
     try {
       if (!/tab\.bot$/.test(location.hostname) || !navigator.sendBeacon) return;
@@ -3015,6 +3074,7 @@
       (FONTS[fkey].family ? ' fg' + (FONTS[fkey].weight === 400 ? ' fw4' : '') : '') +
       (nkey !== fkey ? ' nfs nf-' + nkey + (FONTS[nkey].weight === 400 ? ' nw4' : '') : '') + ' t-' + c.t);
     card.setAttribute('aria-label', 'Invitation: ' + titleOf(c));
+    if (D.kind === 'plain') card.style.cssText = '--bg:' + D.vars.bg + ';--ink:' + D.vars.ink + ';--accent:' + D.vars.accent + ';--soft:' + D.vars.soft + ';background:' + D.vars.bg;
     if (D.kind === 'img') {
       var v = D.vars;
       var src = 'img/' + (opts.thumb ? (D.thumb || 'p/' + (D.file || key)) : (D.file || key)) + '.webp'; // v20261029b: every picture design has a sharp 400x600 tile picture
@@ -3077,6 +3137,8 @@
         if (ln.kind === 'parents') {
           le = el('div', 'fc-parents' + (ln.cols.length > 1 ? ' two' : ''));
           ln.cols.forEach(function (t) { le.appendChild(el('span', '', t)); });
+        } else if (ln.kind === 'blank') {
+          le = el('div', 'fc-l fc-blank' + (ln.title ? ' fc-n fc-title' : ''), '\u00a0');
         } else if (ln.kind === 'name') {
           le = el('div', 'fc-n', ln.text);
         } else if (ln.kind === 'title' || ln.kind === 'tnum') {
@@ -3128,6 +3190,7 @@
     try { peMark(c, inner, plist, opts); } catch (peErr) { if (global.console) console.warn('FreeCard part edits', peErr); }
     card.appendChild(inner);
     mount.appendChild(card);
+    try { fixCard(card, c); } catch (fxErr) {}
     if (!opts.noFit) fitCard(card);
     return card;
   }
@@ -3139,6 +3202,6 @@
     enDate: enDate, enTime: enTime, daysUntil: daysUntil, phoneDigits: phoneDigits, namesLine: namesLine, titleOf: titleOf,
     mapsLinks: mapsLinks, calendarInfo: calendarInfo, fitCard: fitCard, loadCardFonts: loadCardFonts, parsha: parshaOf,
     PIECES: PIECES, pieceCard: pieceCard, pieceTemplate: pieceTemplate,
-    templateOf: templateOf, tokenMap: tokenMap, peParse: peParse, peClean: peClean, peIsEmpty: peIsEmpty, secStack: secStack
+    templateOf: templateOf, tokenMap: tokenMap, peParse: peParse, peClean: peClean, peIsEmpty: peIsEmpty, secStack: secStack, fixText: fixText, PLAIN: PLAIN
   };
 })(window);
