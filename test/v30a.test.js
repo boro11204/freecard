@@ -12,8 +12,8 @@ test('v20261030a: 18 more AI designs (10 Google Gemini, 8 Leonardo.ai) with card
   assert.match(core,/v20261030a/);
   for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/v=20261029e/.test(h),f); assert.match(h,/v=(?:202610(30[a-z]|31[a-z])|202611\d\d[a-z])/,f); }
   assert.match(rd('download.js'),/VERSION = '(?:202610(30[a-z]|31[a-z])|202611\d\d[a-z])'/);
-  assert.match(rd('index.html'),/ai-credit[^<]*Canva and Leonardo\.ai/); // v20261031b: no Gemini art left, credit names Canva and Leonardo.ai
-  assert.match(rd('make.html'),/Canva or Leonardo\.ai/);
+  assert.match(rd('index.html'),/ai-credit[^<]*Canva(,| and) Leonardo\.ai/); // v20261031b: no Gemini art left, credit names Canva and Leonardo.ai
+  assert.match(rd('make.html'),/Canva(,| or) Leonardo\.ai/);
   assert.match(rd('make.js'),/gem \? 'AI art · Google Gemini'/);
   const i18n=rd('i18n.js'); for(const s of ['AI art · Google Gemini','Background art AI-generated with Google Gemini','Some background art AI-generated with Canva, Leonardo.ai and Google Gemini']) assert.ok(i18n.includes(JSON.stringify(s)), s);
 });
@@ -21,6 +21,6 @@ test('v20261030a: in the browser, new designs lead and only they wear New', ()=>
   const vm=require('vm'); const ctx={window:{},document:undefined,navigator:{userAgent:''},console}; ctx.window=ctx; ctx.self=ctx; ctx.global=ctx;
   try { vm.runInNewContext(rd('core.js'), ctx); } catch(e) { return; } // core may need a DOM; the browser check covers it
   const F=ctx.FreeCard||ctx.window.FreeCard; if(!F) return;
-  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=19 && ks.every(k=>/^ai1[01]can/.test(k))); // v20261102d: only the newest set (ai10) wears New; v20261102f: today's two sets (ai10, ai11)
-  assert.ok(/^ai1[01]can/.test(F.designsFor('chasuna').first[0]));
+  const ks=Object.keys(F.DESIGNS).filter(k=>F.DESIGNS[k].nb); assert.ok(ks.length>=19 && ks.every(k=>/^ai1[01]can|^ai12adobe/.test(k))); // v20261102d: only the newest set (ai10) wears New; v20261102f: today's two sets (ai10, ai11)
+  assert.ok(/^ai1[01]can|^ai12adobe/.test(F.designsFor('chasuna').first[0]));
 });

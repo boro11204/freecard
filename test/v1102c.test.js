@@ -10,6 +10,6 @@ assert.strictEqual(Object.keys(D).length,95,'newest set count');
 for(const k of GONE){ assert(!D[k],k+' still a design'); assert(!core.includes('"'+k+'"'),k+' still referenced'); }
 for(const f of FILES){ for(const p of ['img/ai/'+f+'.webp','img/ai/p/'+f+'.webp']){ assert(!fs.existsSync(path.join(S,p)),p+' still on disk'); assert(!core.includes(f+'"'),f+' still referenced'); } }
 for(const k of Object.keys(D)){ assert(fs.existsSync(path.join(S,'img',D[k].file+'.webp')),'missing '+D[k].file); assert(fs.existsSync(path.join(S,'img',D[k].thumb+'.webp')),'missing '+D[k].thumb); }
-for(const f of ['index.html','make.html','card.html','host.html']){ const h=fs.readFileSync(S+'/'+f,'utf8'); assert(!/v=20261102b/.test(h),f+' old version'); assert(/v=20261102[c-z]/.test(h),f+' new version'); }
-assert(/VERSION = '20261102[c-z]'/.test(fs.readFileSync(S+'/download.js','utf8')));
+for(const f of ['index.html','make.html','card.html','host.html']){ const h=fs.readFileSync(S+'/'+f,'utf8'); assert(!/v=20261102b/.test(h),f+' old version'); assert(/v=2026110(2[c-z]|3[a-z])/.test(h),f+' new version'); }
+assert(/VERSION = '2026110(2[c-z]|3[a-z])'/.test(fs.readFileSync(S+'/download.js','utf8')));
 console.log('v1102c ok', Object.keys(D).length,'newest designs');

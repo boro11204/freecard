@@ -12,5 +12,5 @@ test('v20261031b: every Google Gemini design is removed entirely (entries, pictu
   for(const t of Object.keys(F.TYPES)){ const g=F.designsFor(t); assert.ok(g.first.length>=5, t); const d=F.sampleCard(t).d; assert.ok(F.DESIGNS[d], t);
     assert.ok(!['ai3leobris04','ai4leoupsherinballoons'].includes(d), t+' opens with a starry design'); }
   for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!/Google Gemini/.test(h), f); }
-  assert.match(rd('index.html'),/Some background art AI-generated with Canva and Leonardo\.ai/);
+  assert.match(rd('index.html'),/Some background art AI-generated with Canva(,| and) Leonardo\.ai/);
 });

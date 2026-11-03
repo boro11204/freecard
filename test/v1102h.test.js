@@ -13,7 +13,7 @@ test('v20261102h: picker tiles draw their picture as an <img> with explicit size
   const core=rd('core.js'), css=rd('card.css');
   assert.match(core,/function tileImg\(card, src, full\)/); assert.match(core,/if \(opts\.thumb\) tileImg\(card, src, 'img\/' \+ \(D\.file \|\| key\) \+ '\.webp'\)/);
   assert.match(core,/im\.width = 400; im\.height = 600;/); assert.match(core,/im\.src = src \+ '\?v=' \+ TILE_V/); assert.match(core,/im\.src = full \+ '\?v=' \+ TILE_V/);
-  assert.match(core,/var TILE_V = 'v20261102h'/);
+  assert.match(core,/var TILE_V = 'v2026110(2h|3[a-z])'/);
   assert.ok(!/opts\.thumb && lazyBg\(card, src\)/.test(core), 'tiles no longer wait on a CSS background');
   assert.match(css,/\.fc-card > img\.fc-tbg \{ position: absolute;[^}]*width: 100%; height: 100%;[^}]*z-index: -1;/); assert.match(css,/\.fc-card\.has-tbg \{ isolation: isolate; \}/);
 });
@@ -29,7 +29,7 @@ test('v20261102h: every part can be retyped or deleted, and a deleted part stays
 });
 test('v20261102h: the "Tap any line" hint is big and bold, version 20261102h everywhere', ()=>{
   const css=rd('styles.css'); assert.match(css,/\.pe-tip \{ font-size: 1\.2rem; font-weight: 700;/); assert.match(css,/body\.ed-mode \.ed-tip \{ font-size: 1\.15rem; font-weight: 700;/);
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261102g'), f); assert.ok(h.includes('?v=20261102h'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261102h';/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261102g'), f); assert.ok(/\?v=2026110(2h|3[a-z])/.test(h), f); }
+  assert.match(rd('download.js'),/var VERSION = '2026110(2h|3[a-z])';/);
   assert.match(rd('_worker.js'),/parts\[1\] === 'tilelog'/);
 });

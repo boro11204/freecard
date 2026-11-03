@@ -16,5 +16,5 @@ test('v20261102g: the design strip tiles load their own picture as soon as they 
   const js=rd('make.js');
   assert.match(js,/var cd = w\.querySelector\('\.fc-card\[data-bg\]'\); if \(cd && !cd\.style\.backgroundImage\) cd\.style\.backgroundImage/);
   assert.match(js,/function edDrawVisible\(\)/); assert.match(js,/row\.addEventListener\('scroll'/);
-  const h=rd('make.html'); assert.match(h,/v=20261102[g-z]/);
+  const h=rd('make.html'); assert.match(h,/v=2026110(2[g-z]|3[a-z])/);
 });
