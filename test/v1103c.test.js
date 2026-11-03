@@ -21,6 +21,6 @@ test('v20261103c: 28 more Adobe Firefly designs with pictures, tiles, credential
   assert.ok(all.filter(k=>/^ai1[23]adobe/.test(k)).every(k=>F.DESIGNS[k].nb), 'the earlier Adobe sets keep New');
 });
 test('v20261103c: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103b'), f); assert.ok(h.includes('?v=20261103c'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103c';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103c'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103b'), f); assert.ok(/\?v=20261103[c-z]/.test(h), f); }
+  assert.match(rd('download.js'),/var VERSION = '20261103[c-z]';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103[c-z]'/);
 });

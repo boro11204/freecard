@@ -497,9 +497,12 @@
       var fontJobs = document.fonts && document.fonts.load ? Object.keys(c.fonts).map(function (f) {
         return within(document.fonts.load(f, c.fonts[f].replace(/\s+/g, ' ').slice(0, 400)), 3000, null);
       }) : [];
+      var sw = opts.swap || {};
       var picJobs = c.urls.map(function (u) {
         var abs = u; try { abs = /^data:/i.test(u) ? u : new URL(u, location.href).href; } catch (e) {}
-        return bitmap(abs, opts.picMs || 6000).then(function (b) { if (b) info.bitmaps[u] = b; });
+        // v20261103d: the high-res copy of the design for downloads, else the normal picture
+        var hd = sw[u] || sw[abs], get = hd ? bitmap(new URL(hd, location.href).href, 9000).then(function (b) { return b || bitmap(abs, opts.picMs || 6000); }) : bitmap(abs, opts.picMs || 6000);
+        return get.then(function (b) { if (b) info.bitmaps[u] = b; });
       });
       return Promise.all(fontJobs.concat(picJobs));
     }).then(function () {

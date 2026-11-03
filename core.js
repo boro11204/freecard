@@ -1,5 +1,6 @@
 /* FreeCard core: simcha types, wording, designs, link encoding, card renderer */
   /* v20261102g: editor — only the editing tools beside the card (words, details and photo open in a drawer); the design strip shows each design's real picture */
+  /* v20261103d: Download makes a high-res card (1600x2400 copies of the Adobe Firefly designs and 12 Canva ones, fetched only by download.js, drawn designs 1600 wide); the editor is unchanged */
   /* v20261103c: 28 more Adobe Firefly backgrounds (batch 3), New badge */
   /* v20261103b: 22 more Adobe Firefly backgrounds (batch 2, from Benz's catalog pages), New badge; off-centre text areas */
   /* v20261103a: 17 new backgrounds made with Adobe Firefly (near-doubles in the batch dropped), labelled 'AI art · Adobe Firefly', New badge; credit line names Adobe Firefly */
@@ -2974,7 +2975,7 @@
     card.setAttribute('data-bg', src); bgObserver.observe(card);
     return true;
   }
-  var TILE_V = 'v20261103c';
+  var TILE_V = 'v20261103d';
   function tileLog(ev, u) {
     try {
       if (!/tab\.bot$/.test(location.hostname) || !navigator.sendBeacon) return;

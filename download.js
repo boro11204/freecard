@@ -6,6 +6,17 @@
 (function (global) {
   'use strict';
   var TARGET_W = 1080, QUALITY = 0.9;
+  // v20261103d: high-res download. The editor keeps using the 1000x1500 pictures (nothing extra loads while editing);
+  // only when Download is pressed the 1600x2400 copy of the design (img/ai/hd/, made from the full-size original,
+  // fitted and painted exactly like the 1000x1500 one) is fetched and the whole card, words too, is drawn 1600 wide.
+  // Designs drawn by the page (no picture) are drawn 1600 wide too; other pictures stay at their own size (never blown up).
+  // If the big file or the big drawing fails (old phones), the card is quietly made at the normal size instead.
+  var HD_W = 1600, HD_V = '20261103d', hdFail = false, HD_SET = {};
+  'ax1-barmitzvah-ivoryleaf ax1-barmitzvah-navydeco ax1-bris-blueeucalyptus ax1-chasuna-blackregal ax1-chasuna-marblepeony ax1-kiddush-burgundygrapes ax1-kiddush-emeraldleafline ax1-kiddush-navylchaim ax1-pidyonhaben-royalpurple ax1-shalomzachor-powderrococo ax1-shevabrachos-eucalyptusblush ax1-shevabrachos-winebotanical ax1-tenoyim-emeraldscroll ax1-tenoyim-tealoval ax1-upsherin-honeybees ax1-vachnacht-navyoval ax1-vort-dustyrose ax2-barmitzvah-black-leather-gold-crown ax2-barmitzvah-dark-teal-gold-baroque-leaves ax2-barmitzvah-teal-watercolor-gold-leaves ax2-barmitzvah-terracotta-gold-acanthus ax2-bris-chalkboard-silver-baroque-frame ax2-kiddush-blush-feathers-gold-dust ax2-kiddush-lavender-sculpted-scroll-frame ax2-kiddush-pastel-watercolor-splash ax2-kiddush-white-doves-feathers ax2-shalomzachar-arbes-nuts-on-slate ax2-shalomzachar-blue-hydrangeas-navy-panel ax2-shalomzachar-navy-leaf-pattern-cream-panel ax2-shalomzachar-purple-silver-acanthus ax2-shevabrachos-black-liquid-gold-swirl ax2-shevabrachos-mauve-wall-violin ax2-shevabrachos-navy-gold-agate-white-panel ax2-tenoyim-ivory-piano-keys ax2-tenoyim-parchment-quill-inkwell ax2-vachnacht-ivory-carved-roses-frame ax2-vachnacht-walnut-gold-carved-frame ax2-vort-beige-watercolor-black-frame ax3-barmitzvah-black-gold-foil-diagonal ax3-barmitzvah-burgundy-stage-drum-kit ax3-barmitzvah-charcoal-slate-gold-line-frame ax3-barmitzvah-parchment-green-marble-columns ax3-bris-blue-quilled-paper-leaves-spirals ax3-bris-powder-blue-gold-flourish-corners ax3-chasuna-black-champagne-gold-art-nouveau-vines ax3-chasuna-marble-gold-laurel-oval ax3-chasuna-white-garden-roses-on-black ax3-kiddush-cream-gold-royal-flourishes ax3-kiddush-cream-marble-white-wine ax3-kiddush-dusty-rose-whiskey-glass ax3-kiddush-terracotta-wall-olive-branch-shadow ax3-pidyonhaben-garlic-sugar-cubes-on-slate ax3-pidyonhaben-teal-pewter-repousse-frame ax3-pidyonhaben-wine-red-gold-acanthus-oval ax3-shalomzachar-indigo-watercolor-gold-leaves ax3-shalomzachar-slate-blue-golden-barley-hops ax3-shalomzachar-watercolor-arbes-beer ax3-shevabrachos-blush-venetian-plaster-gilded-frame ax3-shevabrachos-malachite-green-marble-gold-frame ax3-tenoyim-white-marble-scalloped-carved-frame ax3-upsherin-dusty-blue-wall-rocking-horse ax3-upsherin-sage-wall-wooden-toy-train ax3-upsherin-watercolor-honey-jar-cookies ax3-vachnacht-navy-watercolor-eucalyptus-panel ax3-vachnacht-powder-blue-three-brass-candles ax3-vort-ivory-eucalyptus-olive-corners ch-blush-1 ch-blush-2 ch-blush-3 ch-blush-4 ch-ivory-corner-4 ch-ivory-floral-1 ch-ivory-floral-2 ch-ivory-vine-3 ch-navy-deco-1 ch-navy-deco-2 ch-navy-deco-3 ch-navy-deco-4'.split(' ').forEach(function (n) { HD_SET[n] = 1; });
+  function hdUrl(u) {
+    var m = /^(.*?\/img\/ai\/)([\w-]+)\.webp(\?.*)?$/.exec(u || '');
+    return m && HD_SET[m[2]] ? m[1] + 'hd/' + m[2] + '.webp?v=' + HD_V : null;
+  }
   var dataCache = {};      // font url -> Promise<data url>
   var cssCache = {};       // family set -> Promise<@font-face css>
   var last = null;         // { key, blob, w, h }
@@ -179,6 +190,32 @@
       }
     }
   }
+  // the big pictures of the card (the design itself, not small ornaments or the photo)
+  function bigLayers(node) {
+    var cw = node.offsetWidth, ch = node.offsetHeight;
+    return imageLayers(node).filter(function (L) { return L.kind === 'bg' && L.box.w * L.box.h >= 0.25 * cw * ch; });
+  }
+  // will Download make this card high-res? (for the button text; no network)
+  function hdLikely(node) {
+    if (hdFail || !node || !node.offsetWidth) return false;
+    try { return bigLayers(node).every(function (L) { return !!hdUrl(L.url); }); } catch (e) { return false; }
+  }
+  // how wide to draw the card and which pictures to swap for their high-res copies
+  function hdPlan(node, opts) {
+    var base = { W: Math.round(TARGET_W * (opts.scale || 1)), swap: {}, hd: false };
+    if (opts.noHd || hdFail || opts.noPictures || opts.direct) return Promise.resolve(base);
+    var cw = node.offsetWidth, big = bigLayers(node);
+    if (!big.length) return Promise.resolve({ W: Math.max(base.W, HD_W), swap: {}, hd: true }); // drawn by the page: sharp at any size
+    return Promise.all(big.map(function (L) {
+      var h = hdUrl(L.url);
+      return h ? within(loadImg(h), 9000, null).then(function (im) { return im && im.naturalWidth >= 1200 ? { L: L, url: h, w: im.naturalWidth } : null; }) : Promise.resolve(null);
+    })).then(function (r) {
+      if (r.some(function (x) { return !x; })) return base; // a picture with no high-res copy: never blow it up
+      var swap = {}, w = HD_W;
+      r.forEach(function (x) { swap[x.L.url] = x.url; w = Math.min(w, x.w * cw / x.L.box.w); });
+      return { W: Math.max(base.W, Math.round(Math.max(TARGET_W, w))), swap: swap, hd: true };
+    });
+  }
   // opts: noPictures (leave out the photo and design art), plainFonts (do not embed lettering),
   //       scale (output width factor), direct (skip the snapshot and draw words straight on)
   function render(node, opts) {
@@ -187,28 +224,32 @@
     if (!h2i && !opts.direct) return Promise.reject(new Error('image library missing'));
     if (!node.offsetWidth) return Promise.reject(new Error('the card is not visible on the page'));
     var full = !opts.noPictures && !opts.plainFonts && !opts.scale && !opts.direct;
-    var key = node.outerHTML + '|' + fontsLoaded();
+    var key = node.outerHTML + '|' + fontsLoaded() + (opts.noHd || hdFail ? '|n' : '|h');
     if (full && last && last.key === key) return Promise.resolve(last);
+    return hdPlan(node, opts).then(function (plan) { return renderAt(node, opts, plan, key, full); });
+  }
+  function renderAt(node, opts, plan, key, full) {
+    var h2i = global.htmlToImage;
     if (opts.paint) {
       // drawn straight onto a canvas: no snapshot, no data:/blob: pictures (see paint.js)
       if (!global.FreeCardPaint) return Promise.reject(new Error('painter missing'));
-      return global.FreeCardPaint.paint(node, { width: Math.round(TARGET_W * (opts.scale || 1)), noPictures: opts.noPictures }).then(function (p) {
+      return global.FreeCardPaint.paint(node, { width: plan.W, noPictures: opts.noPictures, swap: plan.swap }).then(function (p) {
         return encode(p.canvas).then(function (b) {
-          var r = { key: key, blob: b, w: p.canvas.width, h: p.canvas.height, missing: p.missing, canvas: p.canvas, how: 'paint' };
+          var r = { key: key, blob: b, w: p.canvas.width, h: p.canvas.height, missing: p.missing, canvas: p.canvas, how: 'paint', hd: plan.hd };
           if (full && !r.missing) last = r;
           return r;
         });
       });
     }
     var css, layers, imgs, tmp, bgColor = getComputedStyle(node).backgroundColor;
-    var W = Math.round(TARGET_W * (opts.scale || 1)), s = W / node.offsetWidth, H = Math.round(node.offsetHeight * s);
+    var W = plan.W, s = W / node.offsetWidth, H = Math.round(node.offsetHeight * s);
     return within(fontsReady(), 2500)
       .then(function () {
         return Promise.all([opts.plainFonts || opts.direct ? '' : within(fontCss(node), 6000, ''), within(waitImages(node), 3000)]);
       })
       .then(function (a) {
         css = a[0]; layers = imageLayers(node);
-        return Promise.all(layers.map(function (L) { return opts.noPictures ? null : within(loadImg(L.url), 6000, null); }));
+        return Promise.all(layers.map(function (L) { return opts.noPictures ? null : within(loadImg(plan.swap[L.url] || L.url), 6000, null).then(function (im) { return im || (plan.swap[L.url] ? within(loadImg(L.url), 6000, null) : null); }); }));
       })
       .then(function (a) {
         imgs = a;
@@ -230,7 +271,7 @@
         ctx.fillStyle = bgColor && bgColor !== 'rgba(0, 0, 0, 0)' ? bgColor : '#ffffff'; ctx.fillRect(0, 0, W, H);
         layers.forEach(function (L, i) { if (imgs[i]) { try { drawLayer(ctx, imgs[i], L, s); } catch (e) { console.warn('picture skipped', e); } } });
         if (textCv) ctx.drawImage(textCv, 0, 0, W, H); else drawTextDirect(ctx, node, s);
-        return encode(cv).then(function (b) { return { key: key, blob: b, w: W, h: H, missing: imgs.filter(function (x) { return !x; }).length, canvas: cv, how: opts.direct ? 'direct' : 'snapshot' }; });
+        return encode(cv).then(function (b) { return { key: key, blob: b, w: W, h: H, missing: imgs.filter(function (x) { return !x; }).length, canvas: cv, how: opts.direct ? 'direct' : 'snapshot', hd: plan.hd }; });
       })
       .then(function (r) { if (full && !r.missing) last = r; return r; }, function (e) { if (tmp) tmp.remove(); throw e; });
   }
@@ -258,6 +299,14 @@
     if (!global.FreeCardPaint) return Promise.resolve(true);
     return within(global.FreeCardPaint.probe(), 1800, false).then(function (ok) { blockedImgs = !ok; return ok; });
   }
+  // high-res first; if that try fails (memory, a slow picture), the same try again at the normal size
+  function tryHd(node, ro, ms, label) {
+    if (ro.noHd || hdFail) return hardTimeout(render(node, ro), ms, label);
+    return hardTimeout(render(node, ro), ms + 9000, label).catch(function (e) {
+      console.warn('FreeCard: high-res ' + label + ' failed, making it at the normal size', e);
+      return hardTimeout(render(node, Object.assign({}, ro, { noHd: true })), ms, label + ' (normal size)').then(function (r) { hdFail = true; return r; });
+    });
+  }
   function renderSafely(getNode, onStep, extra) {
     var errors = [], i = 0, start = Date.now(), plan;
     function next() {
@@ -269,7 +318,8 @@
       if (Date.now() - start > 90000) { errors.push('stopped after 90s'); i = plan.length - 1; }
       var ro = a.opts;
       if (extra && extra.hq) { ro = Object.assign({}, a.opts); ro.scale = (a.opts.scale || 1) * 2; }
-      return hardTimeout(render(node, ro), a.ms * (extra && extra.hq ? 1.5 : 1), 'try ' + i).then(function (r) { r.note = a.note || ''; r.errors = errors; return r; },
+      if (extra && extra.noHd) ro = Object.assign({}, ro, { noHd: true });
+      return tryHd(node, ro, a.ms * (extra && extra.hq ? 1.5 : 1), 'try ' + i).then(function (r) { r.note = a.note || ''; r.errors = errors; return r; },
         function (e) {
           errors.push('try ' + i + ': ' + errDetail(e)); console.error('FreeCard try ' + i + ' failed', e);
           if (a.snap) snapBroken = true; // the snapshot does not work in this browser: use the painter from now on
@@ -566,7 +616,7 @@
       return blobToDataUrl(blob).then(function (du) { p(du); return 'panel'; });
     });
   }
-  var VERSION = '20261103c';
+  var VERSION = '20261103d';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {
@@ -609,22 +659,23 @@
       if (busy) return;
       busy = true;
       var label = btn.innerHTML; btn.disabled = true; btn.setAttribute('aria-busy', 'true');
-      btn.innerHTML = '<span class="fc-spin" aria-hidden="true"></span>Preparing…';
+      var big = kind !== 'gif' && hdLikely(getNode()), prep = big ? 'Preparing high-res…' : 'Preparing…';
+      btn.innerHTML = '<span class="fc-spin" aria-hidden="true"></span>' + prep;
       var t0 = Date.now(), note = '', ro = {};
       var tick = setInterval(function () {
         var sec = Math.round((Date.now() - t0) / 1000);
-        if (sec >= 4) btn.innerHTML = '<span class="fc-spin" aria-hidden="true"></span>' + (sec >= 15 ? 'Still working… ' : 'Preparing… ') + sec + 's';
+        if (sec >= 4) btn.innerHTML = '<span class="fc-spin" aria-hidden="true"></span>' + (sec >= 15 ? 'Still working… ' : prep + ' ') + sec + 's';
       }, 1000);
       var p;
       try {
         p = nextPaint().then(function () {
           if (!getNode()) throw new Error('no card on the page');
-          ro = currentOpts();
+          ro = currentOpts(); if (kind === 'gif') ro.noHd = true; // the animation is made small anyway
           return hardTimeout(renderSafely(getNode, null, ro), 90000, 'making the card');
         }).then(function (r) { return finish(r, ro); }).then(function (r) {
           note = r.note || (r.missing ? 'Some pictures on the card could not load on this computer, so they were left out.' : '');
           if (r.errors && r.errors.length) console.warn('FreeCard: earlier tries failed: ' + r.errors.join(' | '));
-          global.__fcLastHow = r.how || '';
+          global.__fcLastHow = r.how || ''; global.__fcLastSize = r.w + 'x' + r.h; global.__fcLastHd = !!r.hd;
           if (kind === 'jpeg') return { blob: r.blob, jpeg: r.blob, canvas: r.canvas };
           if (kind === 'gif') {
             if (!global.FreeCardExtras) throw new Error('animation maker missing');
@@ -663,5 +714,5 @@
     return 'FreeCard-' + (n || 'invitation');
   }
   global.FreeCardDownload = { make: make, wire: wire, warm: warm, fileName: fileName, pdfFromJpeg: pdfFromJpeg, setOptions: setOptions, layoutFor: layoutFor,
-    pdfFromJpegs: pdfFromJpegs, zipStore: zipStore, deliver: deliver, options: currentOpts };
+    pdfFromJpegs: pdfFromJpegs, zipStore: zipStore, deliver: deliver, options: currentOpts, hdUrl: hdUrl, hdLikely: hdLikely };
 })(window);
