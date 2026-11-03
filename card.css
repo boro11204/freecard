@@ -997,3 +997,30 @@
 .fc-card.f-shmulik { --fb: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fz: 1; --fnz: 1; }
 .fc-card.nf-shmulik { --fn: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnh: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fa: 'Shmulik CLM', 'Frank Ruhl Libre', serif; --fnz: 1; }
 /* end v20261103f fonts */
+
+/* ===== v20261103g: text layout per part — Paragraph / Copyfit / Tab & dot leader / Curve / Columns (core.js loBuild, loMeasure) ===== */
+.fc-card fc-e { display: block; }
+.fc-card.has-lo .fc-in, .fc-card.has-lo .fc-body, .fc-card.has-lo .fc-when, .fc-card.has-lo .fc-where { min-width: 0 !important; }
+.fc-card .fc-in .lo-fit, .fc-card .fc-in .lo-arc, .fc-card .fc-in .lo-tab, .fc-card .fc-in .lo-cols { min-width: 0 !important; width: auto; box-sizing: border-box; }
+.fc-card .fc-in .lo-fit { white-space: nowrap !important; max-width: none !important; align-self: stretch !important; overflow-wrap: normal !important; }
+.fc-card .fc-in .lo-fit *, .fc-card .fc-in .lo-arc * { white-space: nowrap !important; overflow-wrap: normal !important; }
+.fc-card .fc-in .lo-fit.two { flex-wrap: nowrap !important; }
+.fc-card .fc-in .lo-fit.two > span { max-width: none !important; flex: 0 1 auto !important; }
+.fc-card .fc-in .lo-arc { display: block !important; position: relative; white-space: nowrap !important; max-width: none !important; align-self: stretch !important; overflow-wrap: normal !important; }
+.fc-card .fc-in .lo-arc > span { display: inline !important; }
+.fc-card .fc-in .lo-arc > span + span { margin-inline-start: .35em; }
+.fc-card fc-h { visibility: hidden; }
+.fc-card fc-g { position: absolute; left: 0; top: 0; display: block; white-space: pre !important; visibility: visible; margin: 0; padding: 0; transform-origin: 50% 50%; pointer-events: none; }
+.fc-card fc-sp { display: block; }
+.fc-card .fc-in .lo-tab, .fc-card .fc-in .lo-cols { align-self: stretch !important; max-width: none !important; }
+.fc-card .fc-in .lo-tab:not(.lo-cols) { display: flex !important; flex-direction: column !important; gap: .15em !important; }
+.fc-card .fc-in .fc-row { display: flex !important; align-items: baseline; gap: .3em; max-width: none !important; flex: none !important; width: 100%; }
+.fc-card fc-tl { flex: 0 1 auto; min-width: 0; text-align: start; }
+.fc-card fc-ld { flex: 1 1 0; min-width: .8em; overflow: hidden; white-space: nowrap; letter-spacing: .16em; opacity: .8; font-weight: 400; }
+.fc-card fc-tv { flex: none; white-space: nowrap; }
+.fc-card .fc-in .lo-cols { display: flex !important; flex-direction: row !important; align-items: flex-start !important; justify-content: center !important; gap: 0 !important; }
+.fc-card fc-col { display: flex; flex-direction: column; flex: 1 1 0; min-width: 0; gap: .15em; }
+.fc-card fc-col + fc-col { padding-inline-start: calc(var(--lg, 4) * .5cqw); }
+.fc-card fc-col:not(:last-child) { padding-inline-end: calc(var(--lg, 4) * .5cqw); }
+.fc-card .lo-div > fc-col + fc-col { border-inline-start: max(1px, .22cqw) solid currentColor; }
+.fc-card .fc-in .lo-cols.two > fc-col > span { max-width: none !important; flex: none !important; }

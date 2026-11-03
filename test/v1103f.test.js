@@ -33,7 +33,7 @@ test('v20261103f: letters a font lacks are drawn as plain letters on the card on
 test('v20261103f: one compact font list with every font, grouped, the new ones first', ()=>{
   const html=rd('make.html'), mk=rd('make.js'), fp=rd('fontpick.js');
   assert.ok(html.includes('<select id="f-f" class="font-main" aria-label="Lettering"></select>') && !html.includes('id="fontGrid"'));
-  assert.ok(html.indexOf('fontpick.js?v=20261103f') > html.indexOf('partedit.js?v=20261103f'), 'fontpick after partedit');
+  assert.ok(html.indexOf('fontpick.js?v=20261103g') > html.indexOf('partedit.js?v=20261103g'), 'fontpick after partedit');
   const F=load(); const m=mk.match(/var FONT_GROUPS = (\[[\s\S]*?\n  \]);/); assert.ok(m); const G=eval(m[1]);
   assert.strictEqual(G[0][0],'Yiddish & sofer classics'); assert.deepStrictEqual(G[0][1].slice(0,5),['shlomostam','stamashk','taameyashk','keteryg','mekorot']);
   const all=[].concat(...G.map(g=>g[1])); assert.strictEqual(new Set(all).size, all.length, 'no font twice');
@@ -53,9 +53,9 @@ test('v20261103f: + Add line, Clear all text, Start from scratch, plain backgrou
   assert.match(mk, /fcx-ov fc-blank-hint/, 'the "Tap to write" marks sit beside the card, not in it');
   assert.strictEqual(F.PLAIN.length, 5); for(const p of F.PLAIN){ const d=F.DESIGNS[p[0]]; assert.ok(d && d.plain && d.kind==='plain' && d.types.length===0, p[0]); }
   for(const t of ['chasuna','bris','kiddush']){ const g=F.designsFor(t); assert.ok(!g.first.concat(g.rest).some(k=>F.DESIGNS[k].plain), t+': plain colours only in their own row'); }
-  assert.strictEqual(Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).length, 486);
+  assert.strictEqual(Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).length, 501);
 });
 test('v20261103f: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103e'), f); assert.ok(h.includes('?v=20261103f'), f); }
-  assert.match(rd('download.js'),/var VERSION = '20261103f';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103f'/);
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103e'), f); assert.ok(!h.includes('?v=20261103f') && h.includes('?v=20261103g'), f); }  // v20261103g: bumped again
+  assert.match(rd('download.js'),/var VERSION = '20261103g';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103g'/);
 });

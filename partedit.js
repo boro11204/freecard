@@ -27,7 +27,19 @@
     'Smaller photo': ['תמונה קטנה יותר', 'קלענער בילד'], 'Bigger photo': ['תמונה גדולה יותר', 'גרעסער בילד'],
     'Remove photo': ['הסרת התמונה', 'אראפנעמען דאס בילד'], 'Pick any color': ['בחירת כל צבע', 'קלייבט סיי וועלכן קאליר'],
     'Delete this line': ['מחיקת השורה', 'אויסמעקן די שורה'],
-    'This line is empty now. Type to bring it back.': ['השורה ריקה עכשיו. כתבו כדי להחזיר אותה.', 'די שורה איז יעצט ליידיג. שרייבט צו ברענגען זי צוריק.']
+    'This line is empty now. Type to bring it back.': ['השורה ריקה עכשיו. כתבו כדי להחזיר אותה.', 'די שורה איז יעצט ליידיג. שרייבט צו ברענגען זי צוריק.'],
+    // v20261103g: text layout
+    'Layout': ['פריסה', 'אויסשטעל'], 'Paragraph': ['פסקה', 'פאראגראף'], 'Copyfit': ['התאמה', 'אריינפאסן'], 'Tab': ['טאב', 'טאב'], 'Curve': ['קשת', 'בויגן'],
+    'Text layout': ['פריסת הטקסט', 'אויסשטעל פונעם טעקסט'],
+    'Curve down': ['קשת למטה', 'בויגן אראפ'], 'Curve up': ['קשת למעלה', 'בויגן ארויף'],
+    'Dots': ['נקודות', 'פינטלעך'], 'Blank': ['ריק', 'ליידיג'], 'Columns': ['עמודות', 'שפאלטן'], 'Gap': ['רווח', 'אפשטאנד'],
+    'Fewer columns': ['פחות עמודות', 'ווינציגער שפאלטן'], 'More columns': ['יותר עמודות', 'מער שפאלטן'], 'Smaller gap': ['רווח קטן יותר', 'קלענערער אפשטאנד'], 'Bigger gap': ['רווח גדול יותר', 'גרעסערער אפשטאנד'],
+    'Line between': ['קו באמצע', 'ליניע אין מיטן'],
+    'Lines wrap as usual.': ['השורות נשברות כרגיל.', 'די שורות ברעכן זיך ווי געווענליך.'],
+    'One line that gets smaller so it always fits.': ['שורה אחת שמתכווצת כדי שתמיד תיכנס.', 'איין שורה וואס ווערט קלענער כדי זי זאל שטענדיג אריינפאסן.'],
+    'Words, then the time: Kabolas Ponim 6:30. Press Enter for the next line.': ['מילים ואז השעה: קבלת פנים 6:30. Enter לשורה הבאה.', 'ווערטער, דערנאך די צייט: קבלת פנים 6:30. Enter פאר דער קומענדיגער שורה.'],
+    'Press Enter for the next line; the lines are shared out over the columns.': ['Enter לשורה הבאה; השורות מתחלקות בין העמודות.', 'Enter פאר דער קומענדיגער שורה; די שורות ווערן צעטיילט צווישן די שפאלטן.'],
+    'The line bends along an arc. Slide to bend it up or down.': ['השורה מתעקלת בקשת. הזיזו כדי לעקל למעלה או למטה.', 'די שורה בויגט זיך אויף א בויגן. רירט צו בויגן ארויף אדער אראפ.']
   });
 
   var COLOURS = [['', 'Design'], ['#a8802c', 'Gold'], ['#1f2f57', 'Navy'], ['#7a1f2b', 'Burgundy'], ['#1f5b3f', 'Green'], ['#1d4fa0', 'Blue'],
@@ -58,7 +70,20 @@
       '<button type="button" data-a="l" aria-label="Left">' + al('M4 6h16M4 12h10M4 18h14') + '</button>' +
       '<button type="button" data-a="c" aria-label="Center">' + al('M4 6h16M7 12h10M5 18h14') + '</button>' +
       '<button type="button" data-a="r" aria-label="Right">' + al('M4 6h16M10 12h10M6 18h14') + '</button></div>' +
-      '<div class="stepper pe-st pe-ls" role="group" aria-label="Line spacing"><button type="button" id="peLm" aria-label="Less space">' + al('M8 9h12M8 15h12M4 8l0 8') + '</button><output id="peL" aria-hidden="true">↕</output><button type="button" id="peLp" aria-label="More space">' + al('M8 6h12M8 18h12M4 5v14') + '</button></div></div>' +
+      '<div class="stepper pe-st pe-ls" role="group" aria-label="Line spacing"><button type="button" id="peLm" aria-label="Less space">' + al('M8 9h12M8 15h12M4 8l0 8') + '</button><output id="peL" aria-hidden="true">↕</output><button type="button" id="peLp" aria-label="More space">' + al('M8 6h12M8 18h12M4 5v14') + '</button></div><button type="button" class="pe-lobtn" id="peLoBtn" aria-expanded="false" aria-controls="peLo">' + al('M4 6h16M4 12h7M15 12h5M4 18h16') + '<span>Layout</span></button></div>' +
+     '<div class="pe-lo" id="peLo" hidden role="group" aria-label="Text layout">' +
+      '<div class="pe-lomodes">' +
+       '<button type="button" data-lo="" aria-pressed="false">' + al('M4 6h16M4 10h16M4 14h16M4 18h10') + '<span>Paragraph</span></button>' +
+       '<button type="button" data-lo="fit" aria-pressed="false">' + al('M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4') + '<span>Copyfit</span></button>' +
+       '<button type="button" data-lo="tab" aria-pressed="false">' + al('M4 12h3M17 12h3M9 12h.01M12 12h.01M15 12h.01') + '<span>Tab</span></button>' +
+       '<button type="button" data-lo="arc" aria-pressed="false">' + al('M4 17Q12 3 20 17') + '<span>Curve</span></button></div>' +
+      '<div class="pe-row pe-loarc" id="peLoArc"><span class="pe-lab" aria-hidden="true">⌣</span><input type="range" id="peArc" min="-100" max="100" step="5" value="40" aria-label="Curve" dir="ltr"><span class="pe-lab" aria-hidden="true">⌒</span></div>' +
+      '<div class="pe-row" id="peLoTab"><div class="pe-seg pe-ldseg" role="group" aria-label="Tab"><button type="button" data-ld="1" aria-pressed="true" aria-label="Dots">···</button><button type="button" data-ld="0" aria-pressed="false" aria-label="Blank">␣</button></div></div>' +
+      '<div class="pe-row" id="peLoCols"><span class="pe-lab">Columns</span><div class="stepper pe-st" dir="ltr"><button type="button" id="peCm" aria-label="Fewer columns">−</button><output id="peC">1</output><button type="button" id="peCp" aria-label="More columns">+</button></div>' +
+       '<span class="pe-lab pe-gapl">Gap</span><div class="stepper pe-st" dir="ltr"><button type="button" id="peGm" aria-label="Smaller gap">−</button><output id="peG">4</output><button type="button" id="peGp" aria-label="Bigger gap">+</button></div>' +
+       '<button type="button" class="pe-tg pe-divtg" id="peDiv" aria-pressed="false" aria-label="Line between">' + al('M12 4v16') + '</button></div>' +
+      '<div class="pe-hint" id="peLoHint"></div>' +
+     '</div>' +
      '<div class="pe-row pe-moverow"><span class="pe-lab">Move</span><div class="pe-move" role="group" aria-label="Move">' +
       '<button type="button" data-mx="0" data-my="-1" aria-label="Up">' + ARW + '</button>' +
       '<button type="button" data-mx="0" data-my="1" aria-label="Down" class="r180">' + ARW + '</button>' +
@@ -129,19 +154,20 @@
   }
   function srcValue() {
     if (!src) return '';
-    if (src.type === 'field') return state[src.field] || '';
-    if (src.type === 'line') { var raw = curTemplate().split(/\r?\n/)[src.idx]; return raw == null || /^(#\s+)?\s*\[LINE\]\s*$/i.test(raw) ? '' : raw.replace(/^#\s+/, ''); }
+    if (src.type === 'field') return (state[src.field] || '').replace(/\u2028/g, '\n');
+    if (src.type === 'line') { var raw = curTemplate().split(/\r?\n/)[src.idx]; return raw == null || /^(#\s+)?\s*\[LINE\]\s*$/i.test(raw) ? '' : raw.replace(/^#\s+/, '').replace(/\u2028/g, '\n'); }
     return '';
   }
   function writeWords(v) {
     if (!src) return;
     if (src.type === 'field') {
       var fe = form.elements[src.field]; if (!fe) return;
+      if (fe.tagName !== 'TEXTAREA') v = v.replace(/\r?\n/g, loEntries() ? '\u2028' : ' ');
       fe.value = v; fe.dispatchEvent(new Event('input', { bubbles: true }));
       return;
     }
     if (src.type !== 'line') return;
-    v = v.replace(/\r?\n/g, ' ');
+    v = v.replace(/\r?\n/g, loEntries() ? '\u2028' : ' ').replace(/\u2028{2,}/g, '\u2028');
     var raws = curTemplate().split(/\r?\n/), wasBlank = /^(#\s+)?\s*\[LINE\]\s*$/i.test(raws[src.idx] || ''), nraw = (src.title ? '# ' : '') + (v === '' && wasBlank && !delBlank ? '[LINE]' : v);
     raws[src.idx] = nraw;
     var ed = edits(), k = scope() + sel; if (ed[k]) { ed[k].r = nraw; saveEdits(ed); }
@@ -184,8 +210,29 @@
   function nameOf(e) {
     if (!e) return '';
     if (e.getAttribute('data-pe') === 'ph') return tr('Photo');
-    var t = (e.textContent || '').replace(/\s+/g, ' ').trim();
+    var t = (F.plainText ? F.plainText(e) : (e.textContent || '')).replace(/\s+/g, ' ').trim();
     return t.length > 34 ? t.slice(0, 32) + '…' : t;
+  }
+  // v20261103g: Tab and columns take several lines in one part (Enter in the words box), kept as U+2028
+  function loEntries() {
+    var o = cur(); if (o.lo === 'tab' || parseInt(o.co, 10) > 1) return true;
+    if (typeof o.t === 'string' && o.t.indexOf('\u2028') >= 0) return true;
+    if (src && src.type === 'line') { var raw = curTemplate().split(/\r?\n/)[src.idx]; return !!raw && raw.indexOf('\u2028') >= 0; }
+    return false;
+  }
+  var LO_HINT = { '': 'Lines wrap as usual.', fit: 'One line that gets smaller so it always fits.', tab: 'Words, then the time: Kabolas Ponim 6:30. Press Enter for the next line.', arc: 'The line bends along an arc. Slide to bend it up or down.' };
+  function syncLayout() {
+    var o = cur(), lo = o.lo || '', co = parseInt(o.co, 10) || 1, open = !$('peLo').hidden;
+    $('peLoBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+    $('peLoBtn').classList.toggle('on', !!(lo || co > 1));
+    [].forEach.call(sheet.querySelectorAll('.pe-lomodes button'), function (b) { b.setAttribute('aria-pressed', (b.dataset.lo || '') === lo ? 'true' : 'false'); });
+    $('peLoArc').hidden = lo !== 'arc'; $('peLoTab').hidden = lo !== 'tab'; $('peLoCols').hidden = lo === 'fit' || lo === 'arc';
+    if (lo === 'arc' && document.activeElement !== $('peArc')) $('peArc').value = String(o.k || 40);
+    [].forEach.call(sheet.querySelectorAll('.pe-ldseg button'), function (b) { b.setAttribute('aria-pressed', (o.ld === '0' ? '0' : '1') === b.dataset.ld ? 'true' : 'false'); });
+    $('peC').textContent = String(co); $('peG').textContent = String(o.cg != null ? o.cg : 4); $('peDiv').setAttribute('aria-pressed', o.cd === '1' ? 'true' : 'false');
+    $('peGm').disabled = $('peGp').disabled = $('peDiv').disabled = co < 2;
+    var h = tr(LO_HINT[lo] || ''); if (co > 1 && lo !== 'tab') h = tr('Press Enter for the next line; the lines are shared out over the columns.');
+    $('peLoHint').textContent = h;
   }
   function syncControls() {
     var e = partEl(), o = cur();
@@ -200,6 +247,7 @@
     [].forEach.call(sheet.querySelectorAll('.pe-seg button'), function (b) { b.setAttribute('aria-pressed', b.dataset.a === o.a ? 'true' : 'false'); });
     $('peReset').disabled = F.peIsEmpty(F.peClean(o));
     $('peUndoAll').hidden = !state.pe;
+    syncLayout();
   }
   function syncPhoto() {
     $('peName').textContent = tr('Photo');
@@ -212,9 +260,9 @@
     if (src && src.type === 'none') {
       // v20261102h: nothing on the card is permanent — fixed words (מזל טוב, בס״ד, the simcha's title, names from the form)
       // can be retyped right here or deleted
-      ta.hidden = false; ta.rows = 1;
+      ta.hidden = false; ta.rows = loEntries() ? 3 : 1;
       var ov = cur().t;
-      if (document.activeElement !== ta) ta.value = typeof ov === 'string' ? ov : (e ? (e.textContent || '').replace(/\s+/g, ' ').trim() : '');
+      if (document.activeElement !== ta) ta.value = typeof ov === 'string' ? ov.replace(/\u2028/g, '\n') : (e ? (F.plainText ? F.plainText(e) : (e.textContent || '').replace(/\s+/g, ' ').trim()) : '');
       h.innerHTML = '';
       if (ov === '') { var em = document.createElement('div'); em.textContent = tr('This line is empty now. Type to bring it back.'); h.appendChild(em); }
       var fid0 = FORM_OF[sel], target0 = fid0 && $(fid0);
@@ -242,7 +290,7 @@
     }
     ta.hidden = false;
     if (document.activeElement !== ta) ta.value = srcValue();
-    ta.rows = src.multi ? 3 : 1;
+    ta.rows = src.multi || loEntries() ? 3 : 1;
     var msg = '';
     if (!e) msg = tr('This line is empty now. Type to bring it back.');
     else if (src.type === 'line' && src.tokens) msg = tr('Words in [BRACKETS] fill in from your details.');
@@ -292,7 +340,7 @@
   $('peNext').addEventListener('click', function () { step(1); });
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !sheet.hidden) close(); });
   $('peWords').addEventListener('input', function (ev) {
-    if (src && src.type === 'none') { var v = ev.target.value.replace(/\r?\n/g, ' '); change(function (o) { o.t = v; }); syncWords(); placeBox(); return; }
+    if (src && src.type === 'none') { var v = ev.target.value.replace(/\r?\n/g, loEntries() ? '\u2028' : ' '); change(function (o) { o.t = v; }); syncWords(); placeBox(); return; }
     writeWords(ev.target.value); syncWords(); placeBox();
   });
   // v20261102h: one tap deletes the line, whatever it is
@@ -327,6 +375,30 @@
   }
   $('peLm').addEventListener('click', function () { lineBy(-0.1); });
   $('peLp').addEventListener('click', function () { lineBy(0.1); });
+  // v20261103g: Layout (Paragraph / Copyfit / Tab / Curve + columns)
+  $('peLoBtn').addEventListener('click', function () { $('peLo').hidden = !$('peLo').hidden; syncLayout(); if (!$('peLo').hidden) setTimeout(function () { $('peLo').scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, 30); });
+  [].forEach.call(sheet.querySelectorAll('.pe-lomodes button'), function (b) {
+    b.addEventListener('click', function () {
+      var v = b.dataset.lo;
+      change(function (o) { if (v) o.lo = v; else delete o.lo; if (v !== 'arc') delete o.k; else if (!o.k) o.k = 40; if (v !== 'tab') delete o.ld; });
+      syncWords(); placeBox();
+    });
+  });
+  var arcRaf = 0;
+  $('peArc').addEventListener('input', function () {
+    var v = parseInt($('peArc').value, 10) || 0; if (!v) v = 5;
+    cancelAnimationFrame(arcRaf); arcRaf = requestAnimationFrame(function () { change(function (o) { o.lo = 'arc'; o.k = v; }); placeBox(); });
+  });
+  [].forEach.call(sheet.querySelectorAll('.pe-ldseg button'), function (b) {
+    b.addEventListener('click', function () { var v = b.dataset.ld; change(function (o) { if (v === '0') o.ld = '0'; else delete o.ld; }); });
+  });
+  function colsBy(d) { change(function (o) { var n = Math.max(1, Math.min(4, (parseInt(o.co, 10) || 1) + d)); if (n > 1) o.co = n; else { delete o.co; delete o.cg; delete o.cd; } }); syncWords(); placeBox(); }
+  function gapBy(d) { change(function (o) { var g = Math.max(0, Math.min(12, (o.cg != null ? parseInt(o.cg, 10) : 4) + d)); if (g === 4) delete o.cg; else o.cg = g; }); placeBox(); }
+  $('peCm').addEventListener('click', function () { colsBy(-1); });
+  $('peCp').addEventListener('click', function () { colsBy(1); });
+  $('peGm').addEventListener('click', function () { gapBy(-1); });
+  $('peGp').addEventListener('click', function () { gapBy(1); });
+  $('peDiv').addEventListener('click', function () { var on = $('peDiv').getAttribute('aria-pressed') === 'true'; change(function (o) { if (on) delete o.cd; else o.cd = '1'; }); });
   // move buttons: a tap moves one step, holding keeps moving
   [].forEach.call(sheet.querySelectorAll('.pe-move button'), function (b) {
     var dx = parseInt(b.dataset.mx, 10), dy = parseInt(b.dataset.my, 10), t1 = null, t2 = null, used = false;
