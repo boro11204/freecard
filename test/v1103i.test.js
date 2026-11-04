@@ -51,6 +51,6 @@ test('v20261103i: the Words list has + above, + below, move up / down and delete
   assert.match(mk,/lineList\.id = 'lineList'/); assert.match(mk,/'Add a line above': \['הוספת שורה מעל'/); assert.match(mk,/'Move down': \['הזזה למטה'/);
   assert.match(mk,/if \(!force && \(llTyping \|\| \(a && lineList\.contains\(a\) && a\.tagName === 'INPUT'\)\)\) \{ markList\(\); return; \}/, 'typing in a row keeps its box');
   assert.match(css,/\.ll-row\.on \{ border-color: #c8962e;/); assert.match(css,/@media \(max-width: 520px\) \{ \.ll-row \.ll-t \{ flex-basis: 100%; \}/);
-  for(const f of ['index.html','make.html','card.html','host.html','designs.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103h') && h.includes('?v=20261103j'), f); }
+  for(const f of ['index.html','make.html','card.html','host.html','designs.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103h') && h.includes('?v=20261103k'), f); }
   assert.match(rd('download.js'),/var VERSION = '20261103[i-z]';/);
 });

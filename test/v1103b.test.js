@@ -15,9 +15,9 @@ test('v20261103b: 22 more Adobe Firefly designs with pictures, tiles, credential
     assert.strictEqual(t.readUInt32LE(4)+8, t.length, 'tile is a whole RIFF file'); }
   // dropped on the re-check: crescent-like curls / smudged corners, and a text area too small on blotchy green
   for(const f of ['ax2-chasuna-black-gold-baroque-on-marble','ax2-tenoyim-sage-watercolor-wine-grapes']) assert.ok(!core.includes(f) && !fs.existsSync(S+'/img/ai/'+f+'.webp'), f);
-  const F=load(); const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); assert.strictEqual(all.length,551); // v20261103c adds 28
+  const F=load(); const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); assert.strictEqual(all.length,576); // v20261103c adds 28
   for(const k of ks) assert.ok(F.DESIGNS[k], k);
-  for(const t of ['kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','tenoyim','vort']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[34]adobe|^ai15(adobe|can)|^ai16adobe|^ai17adobe/.test(f), t+' leads with '+f); }
+  for(const t of ['kiddush','barmitzvah','shevabrachos','vachnacht','shalomzachor','bris','pidyonhaben','tenoyim','vort']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[34]adobe|^ai15(adobe|can)|^ai16adobe|^ai17adobe|^ai18/.test(f), t+' leads with '+f); }
   assert.ok(all.filter(k=>/^ai12adobe/.test(k)).every(k=>F.DESIGNS[k].nb), 'the first Adobe set keeps New');
 });
 test('v20261103b: version everywhere, 4-value pad and centred בס״ד over off-centre text, shade class', ()=>{

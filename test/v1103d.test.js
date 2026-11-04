@@ -9,7 +9,7 @@ function webpSize(b){ // VP8 / VP8L / VP8X header -> [w,h]
   return null; }
 test('v20261103d: every high-res copy exists, is 1600x2400, small enough, and belongs to a live picture design', ()=>{
   const dl=rd('download.js'); const m=dl.match(/HD_SET = \{\};\n  '([^']+)'\.split/); assert.ok(m,'HD list'); const names=m[1].split(' ');
-  assert.strictEqual(names.length, 161); assert.strictEqual(new Set(names).size, names.length);
+  assert.strictEqual(names.length, 175); assert.strictEqual(new Set(names).size, names.length);
   const core=rd('core.js');
   for(const n of names){
     const p=S+'/img/ai/hd/'+n+'.webp'; assert.ok(fs.existsSync(p), p); const b=fs.readFileSync(p);

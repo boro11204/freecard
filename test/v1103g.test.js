@@ -59,9 +59,9 @@ test('v20261103g: the 15 Adobe project designs (#13 the broken blue plate)', ()=
     assert.ok(!/magen|moon|cross|crescent/i.test(d.name), d.name);
   }
   const plate=ks.find(k=>/brokenblueplate/.test(k)); assert.ok(plate && F.DESIGNS[plate].types.includes('tenoyim'));
-  assert.strictEqual(Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).length, 551);
+  assert.strictEqual(Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain).length, 576);
 });
 test('v20261103g: version everywhere', ()=>{
-  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103f'), f); assert.ok(h.includes('?v=20261103j'), f); }
+  for(const f of ['index.html','make.html','card.html','host.html']){ const h=rd(f); assert.ok(!h.includes('?v=20261103f'), f); assert.ok(h.includes('?v=20261103k'), f); }
   assert.match(rd('download.js'),/var VERSION = '20261103[i-z]';/); assert.match(rd('core.js'),/var TILE_V = 'v20261103[g-z]'/);
 });
