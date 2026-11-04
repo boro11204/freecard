@@ -60,16 +60,19 @@
     return false;
   }
   function doText(node) {
-    var cur = node.nodeValue;
-    if (set.get(node) === cur) return;            // our own write
-    if (!/[A-Za-z]/.test(cur)) { orig.delete(node); return; }
-    var base = cur;
-    orig.set(node, base);
+    var cur = node.nodeValue, base;
+    if (set.get(node) === cur && orig.has(node)) base = orig.get(node);   // our own earlier write: re-translate from the English original (fixes he<->yi switching)
+    else {
+      if (!/[A-Za-z]/.test(cur)) { orig.delete(node); set.delete(node); return; }
+      base = cur; orig.set(node, base);
+    }
     var trimmed = base.replace(/\s+/g, ' ').trim(); if (!trimmed) return;
     var r = lang === 'en' ? trimmed : tr(trimmed);
-    if (r === trimmed) return;
-    var lead = /^\s/.test(base) ? ' ' : '', tail = /\s$/.test(base) ? ' ' : '';
-    var v = lead + r + tail; set.set(node, v); node.nodeValue = v;
+    var v;
+    if (r === trimmed) v = base;
+    else { var lead = /^\s/.test(base) ? ' ' : '', tail = /\s$/.test(base) ? ' ' : ''; v = lead + r + tail; }
+    set.set(node, v);
+    if (node.nodeValue !== v) node.nodeValue = v;
   }
   function restoreText(node) { var o = orig.get(node); if (o != null && set.get(node) === node.nodeValue) { set.delete(node); node.nodeValue = o; } }
   var ATTRS = ['placeholder', 'aria-label', 'title'];
