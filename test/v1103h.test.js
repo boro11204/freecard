@@ -54,7 +54,7 @@ test('v20261103h: in a real browser the default card, a chosen lettering and a c
 
 test('v20261103h: redesign A is the live look; the home page has simchas and a short row of new designs, the whole collection is on designs.html', ()=>{
   for(const f of ['index.html','make.html','card.html','host.html','designs.html']){ const h=rd(f);
-    assert.match(h,/<html lang="en" data-theme="a">/, f); assert.ok(h.includes('theme.css?v=20261103k'), f); }
+    assert.match(h,/<html lang="en" data-theme="a">/, f); assert.ok(h.includes('theme.css?v=20261103l'), f); }
   const i=rd('index.html'), d=rd('designs.html'), tj=rd('theme.js');
   assert.match(i,/id="gallery" data-mode="featured"/); assert.ok(!/g-chips|g-more"/.test(i), 'no full gallery on home');
   assert.match(i,/href="designs\.html">All designs/); assert.match(i,/href="make\.html\?blank=1">Start from scratch/);

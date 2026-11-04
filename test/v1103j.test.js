@@ -19,10 +19,10 @@ test('v20261103j: 50 new Adobe Firefly designs with web pictures, tiles, high-re
     assert.strictEqual(h.readUInt32LE(4)+8, h.length, 'hd is a whole RIFF file'); assert.ok(dl.includes(' '+slug), 'HD_SET has '+slug); }
   const F=load(); for(const k of ks) assert.ok(F.DESIGNS[k], k);
   const all=Object.keys(F.DESIGNS).filter(k=>!F.DESIGNS[k].plain); assert.ok(all.length>=501+50, 'at least the 551 of v20261103j');
-  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','basmitzvah','shevabrachos','bris','upsherin','chanukashabayis']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[78]/.test(f), t+' leads with '+f); }
+  for(const t of ['chasuna','tenoyim','vort','kiddush','barmitzvah','basmitzvah','shevabrachos','bris','upsherin','chanukashabayis']){ const f=F.designsFor(t).first[0]; assert.ok(/^ai1[789]/.test(f), t+' leads with '+f); }
   // the home row (8 newest, one per simcha) is made of this batch, and the home page still does not list the whole collection
   const nb=all.filter(k=>F.DESIGNS[k].nb && F.DESIGNS[k].kind==='img'); const seen={}, row=[]; nb.forEach(k=>{ const t=F.DESIGNS[k].types[0]; if(row.length<8 && !seen[t]){ seen[t]=1; row.push(k); } });
-  assert.strictEqual(row.length,8); assert.ok(row.every(k=>/^ai1[78]/.test(k)), row.join());
+  assert.strictEqual(row.length,8); assert.ok(row.every(k=>/^ai1[789]/.test(k)), row.join());
   assert.ok(/var FEAT = 8/.test(rd('theme.js'))); assert.ok(rd('index.html').includes('data-mode="featured"'));
 });
 test('v20261103j: the tile label can never show as "Â·" (written as \\u00b7 in core.js), version everywhere', ()=>{

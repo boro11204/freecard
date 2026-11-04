@@ -106,9 +106,9 @@
   // The lists are real <select>s underneath, so the choice also works without the drawn list.
   var FONT_GROUPS = [
     ['Yiddish & sofer classics', ['shlomostam', 'stamashk', 'taameyashk', 'keteryg', 'mekorot', 'rommvilna', 'shlomosemi', 'keteraram', 'ezra', 'taameyfrank', 'drugulin', 'nesher', 'yehoash']],
-    ['Elegant & headline', ['notocondblack', 'notoblack', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
+    ['Elegant & headline', ['notocondblack', 'notoblack', 'cardo', 'libertinus', 'bellefair', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
     ['Classic', ['script', 'serif', 'bold', 'frank', 'david', 'notoserif', 'rashi', 'bona', 'tinos', 'miriam']],
-    ['Modern & fun', ['modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
+    ['Modern & fun', ['bubbles', 'modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
     ['English letters only', ['playfair', 'cinzel', 'parisienne', 'allura', 'pinyon', 'italianno', 'baskerville', 'marcellus', 'cormorant', 'alexbrush', 'tangerine']]
   ];
   (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !seen[k] && (seen[k] = 1); }); });

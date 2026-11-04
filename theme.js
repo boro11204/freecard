@@ -72,6 +72,7 @@
     function listFor(key) {
       if (key === 'featured') { // v20261103h: home shows only a short row of the newest, one per simcha, not the whole collection
         var seen = {}, out = [];
+        (F.FEATURED || []).forEach(function (k) { if (out.length < FEAT && D[k] && D[k].kind === 'img' && !out.some(function (x) { return x[0] === k; })) { out.push([k, D[k].types[0]]); seen[D[k].types[0]] = 1; } }); // v20261103l: a chosen row first
         newOnes.forEach(function (k) { var t = D[k].types[0]; if (out.length < FEAT && !seen[t]) { seen[t] = 1; out.push([k, t]); } });
         newOnes.forEach(function (k) { if (out.length < FEAT && !out.some(function (x) { return x[0] === k; })) out.push([k, D[k].types[0]]); });
         return out;
