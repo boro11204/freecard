@@ -1,4 +1,5 @@
 /* FreeCard core: simcha types, wording, designs, link encoding, card renderer */
+  /* v20261103o: six new Yom Tov sections (Pesach, Sukkos, Shavuos, Simchas Torah, Lag Ba'omer, Tu B'Shvat) with their own wording and Adobe Firefly designs */
   /* v20261103n: 19 new Adobe Firefly holiday designs (Purim, Chanukah, Rosh Hashana) with high-res download copies */
   /* v20261102g: editor — only the editing tools beside the card (words, details and photo open in a drawer); the design strip shows each design's real picture */
   /* v20261103j: 50 new Adobe Firefly backgrounds (batch 4, catalog look), New badge, high-res download copies; tile label written as \u00b7 so it can never show garbled (mojibake) */
@@ -1345,6 +1346,247 @@
  }
 };
   Object.keys(GREET_TYPES).forEach(function (k) { TYPES[k] = GREET_TYPES[k]; TEMPLATES[k] = GREET_TEMPLATES[k]; });
+  // v20261103o: six Yom Tov sections (Benz, Nov 4 12:19 AM: "add sections for all of them"): Pesach, Sukkos / Simchas Beis Hashoeva, Shavuos,
+  // Simchas Torah, Lag Ba'omer and Tu B'Shvat, each with its own wording in English, Hebrew and Yiddish (every line editable and deletable as on every card)
+  var YT_TYPES = {
+ "pesach": {
+  "en": "Pesach Seudah",
+  "he": "סעודת יום טוב פסח",
+  "sub": "Seder & Yom Tov meal",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "חג כשר ושמח",
+  "intro": {
+   "en": "Please join us for a Pesach Yom Tov Seudah",
+   "he": "הננו מתכבדים להזמינכם לסעודת יום טוב פסח"
+  },
+  "timeLabel": "Time",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "The Friedman home",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "20:30",
+   "sc": "The Seder begins after Maariv"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "בית משפחת פרידמן",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "20:30",
+   "sc": "הסדר יתחיל אחר תפילת ערבית"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ },
+ "sukkos": {
+  "en": "Simchas Beis Hashoeva",
+  "he": "שמחת בית השואבה",
+  "sub": "Sukkos in the sukkah",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "חג סוכות שמח",
+  "intro": {
+   "en": "Please join us for a Simchas Beis Hashoeva",
+   "he": "הננו מתכבדים להזמינכם לשמחת בית השואבה"
+  },
+  "timeLabel": "Time",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "The Friedman sukkah",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "21:00",
+   "sc": "Live music & refreshments"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "סוכת משפחת פרידמן",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "21:00",
+   "sc": "מוזיקה חיה וכיבוד קל"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ },
+ "shavuos": {
+  "en": "Shavuos Seudah",
+  "he": "סעודת חג השבועות",
+  "sub": "Yom Tov meal",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "חג שבועות שמח",
+  "intro": {
+   "en": "Please join us for a Shavuos Yom Tov Seudah",
+   "he": "הננו מתכבדים להזמינכם לסעודת חג השבועות"
+  },
+  "timeLabel": "Time",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "The Friedman home",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "13:00",
+   "sc": "A milchig seudah"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "בית משפחת פרידמן",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "13:00",
+   "sc": "סעודה חלבית"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ },
+ "simchastorah": {
+  "en": "Simchas Torah Hakafos",
+  "he": "הקפות שמחת תורה",
+  "sub": "Hakafos & Kiddush",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "שישו ושמחו בשמחת תורה",
+  "intro": {
+   "en": "Please join us for Hakafos & Kiddush",
+   "he": "הננו מתכבדים להזמינכם להקפות שמחת תורה"
+  },
+  "timeLabel": "Hakafos",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "Beis Medrash Ohel Yaakov",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "19:30",
+   "sc": "Kiddush after Hakafos"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "בית המדרש אהל יעקב",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "19:30",
+   "sc": "קידוש אחר ההקפות"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ },
+ "lagbaomer": {
+  "en": "Lag Ba'omer Hadlakah",
+  "he": "הדלקה לכבוד ל״ג בעומר",
+  "sub": "Bonfire celebration",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "ל״ג בעומר שמח",
+  "intro": {
+   "en": "Please join us for a Lag Ba'omer Hadlakah",
+   "he": "הננו מתכבדים להזמינכם להדלקה לכבוד ל״ג בעומר"
+  },
+  "timeLabel": "Hadlakah",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "The Friedman backyard",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "21:00",
+   "sc": "Music & dancing for the whole family"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "חצר משפחת פרידמן",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "21:00",
+   "sc": "ריקודים ומוזיקה לכל המשפחה"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ },
+ "tubshvat": {
+  "en": "Tu B'Shvat Seudah",
+  "he": "סעודת ט״ו בשבט",
+  "sub": "Fruits & a festive table",
+  "label1": "Family",
+  "label2": "",
+  "join": "",
+  "parents1": "",
+  "parents2": "",
+  "head": "ט״ו בשבט שמח",
+  "intro": {
+   "en": "Please join us for a Tu B'Shvat Seudah",
+   "he": "הננו מתכבדים להזמינכם לסעודת ט״ו בשבט"
+  },
+  "timeLabel": "Time",
+  "foot": "",
+  "sample": {
+   "n1": "The Friedman Family",
+   "hl": "The Friedman home",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "19:00",
+   "sc": "Fruits of Eretz Yisroel"
+  },
+  "sampleHe": {
+   "n1": "משפחת פרידמן",
+   "hl": "בית משפחת פרידמן",
+   "ad": "1400 Ave M, Brooklyn, NY",
+   "tm": "19:00",
+   "sc": "פירות ארץ ישראל"
+  },
+  "tokens": {
+   "FAMILY": "n1"
+  }
+ }
+};
+  var YT_TEMPLATES = {
+ "pesach": {
+  "he": "חג המצות זמן חרותנו\nהננו מתכבדים להזמינכם\nלהשתתף בשמחתנו\nבסעודת יום טוב פסח\nשתתקיים אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nבשעה [TIME]\n[MORE TIMES]\nבברכת חג כשר ושמח\n[FAMILY]",
+  "yi": "חג המצות זמן חרותנו\nמיר לאדן אייך איין\nצו פארברענגען מיט אונז\nביי דער יום טוב סעודה\nוועלכע וועט פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nאום [TIME]\n[MORE TIMES]\nא כשר׳ן און פרייליכן פסח!\n[FAMILY]",
+  "en": "Chag Kasher V'Sameach!\nPlease join us\nfor a Pesach Yom Tov Seudah\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nat [TIME]\n[MORE TIMES]\nWishing you a Good Yom Tov\n[FAMILY]"
+ },
+ "sukkos": {
+  "he": "ושאבתם מים בששון ממעיני הישועה\nהננו מתכבדים להזמינכם\nלשמחת בית השואבה\nשתתקיים אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nבשעה [TIME]\n[MORE TIMES]\nבברכת חג שמח\n[FAMILY]",
+  "yi": "ושאבתם מים בששון ממעיני הישועה\nמיר לאדן אייך איין\nצו פארברענגען מיט אונז\nביי דער שמחת בית השואבה\nוועלכע וועט פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nאום [TIME]\n[MORE TIMES]\nא גוטן יום טוב!\n[FAMILY]",
+  "en": "A Freilichen Sukkos!\nPlease join us\nfor a Simchas Beis Hashoeva\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nat [TIME]\n[MORE TIMES]\nWishing you a Good Yom Tov\n[FAMILY]"
+ },
+ "shavuos": {
+  "he": "חג השבועות זמן מתן תורתנו\nהננו מתכבדים להזמינכם\nלהשתתף בשמחתנו\nבסעודת חג השבועות\nשתתקיים אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nבשעה [TIME]\n[MORE TIMES]\nבברכת חג שמח\n[FAMILY]",
+  "yi": "חג השבועות זמן מתן תורתנו\nמיר לאדן אייך איין\nצו פארברענגען מיט אונז\nביי דער שבועות סעודה\nוועלכע וועט פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nאום [TIME]\n[MORE TIMES]\nא גוטן יום טוב!\n[FAMILY]",
+  "en": "A Freilichen Shavuos!\nPlease join us\nfor a Shavuos Yom Tov Seudah\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nat [TIME]\n[MORE TIMES]\nWishing you a Good Yom Tov\n[FAMILY]"
+ },
+ "simchastorah": {
+  "he": "שישו ושמחו בשמחת תורה\nהננו מתכבדים להזמינכם\nלהשתתף בשמחתנו\nבהקפות שמחת תורה\nשיתקיימו אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nבשעה [TIME]\n[MORE TIMES]\nבברכת חג שמח\n[FAMILY]",
+  "yi": "שישו ושמחו בשמחת תורה\nמיר לאדן אייך איין\nצו פארברענגען מיט אונז\nביי די הקפות און קידוש\nוועלכע וועלן פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nאום [TIME]\n[MORE TIMES]\nא פרייליכן שמחת תורה!\n[FAMILY]",
+  "en": "Sisu V'simchu B'simchas Torah!\nPlease join us\nfor Hakafos & Kiddush\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nat [TIME]\n[MORE TIMES]\nWishing you a Freilichen Simchas Torah\n[FAMILY]"
+ },
+ "lagbaomer": {
+  "he": "לכבוד התנא האלקי\nרבי שמעון בר יוחאי זי״ע\nהננו מתכבדים להזמינכם\nלהדלקה לכבוד ל״ג בעומר\nשתתקיים אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nההדלקה בשעה [TIME]\n[MORE TIMES]\nובבואכם תשמחונו\n[FAMILY]",
+  "yi": "לכבוד דעם תנא האלקי\nרבי שמעון בר יוחאי זי״ע\nמיר לאדן אייך איין\nצו דער ל״ג בעומר הדלקה\nוועלכע וועט פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nהדלקה אום [TIME]\n[MORE TIMES]\nאייער קומען וועט אונז משמח זיין\n[FAMILY]",
+  "en": "In honor of Rabbi Shimon Bar Yochai\nPlease join us\nfor a Lag Ba'omer Hadlakah\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nHadlakah at [TIME]\n[MORE TIMES]\nWe look forward to celebrating with you\n[FAMILY]"
+ },
+ "tubshvat": {
+  "he": "ראש השנה לאילנות\nהננו מתכבדים להזמינכם\nלהשתתף בשמחתנו\nבסעודת ט״ו בשבט\nשתתקיים אי״ה\n[HEBREW DATE]\nב[HALL]\n[ADDRESS]\nמשעה [TIME]\n[MORE TIMES]\nובבואכם תשמחונו\n[FAMILY]",
+  "yi": "ראש השנה לאילנות\nמיר לאדן אייך איין\nצו פארברענגען מיט אונז\nביי א ט״ו בשבט סעודה\nוועלכע וועט פארקומען אי״ה\n[HEBREW DATE]\nאין [HALL]\n[ADDRESS]\nפון [TIME]\n[MORE TIMES]\nא גוטן ט״ו בשבט!\n[FAMILY]",
+  "en": "Rosh Hashana La'ilanos\nPlease join us\nfor a Tu B'Shvat Seudah\non [DATE]\n[HEBREW DATE]\nat [HALL]\n[ADDRESS]\nfrom [TIME]\n[MORE TIMES]\nWe look forward to celebrating with you\n[FAMILY]"
+ }
+};
+  Object.keys(YT_TYPES).forEach(function (k) { TYPES[k] = YT_TYPES[k]; TEMPLATES[k] = YT_TEMPLATES[k]; });
   // more wording styles (v20261027e): 'h' heimish (Lashon Kodesh / Yiddish), 's' short & simple (English)
   var STYLE_TEMPLATES = {
  "chasuna": {
@@ -1936,6 +2178,16 @@
   (function () { var prev = DESIGNS; DESIGNS = {}; Object.keys(AI20_DESIGNS).forEach(function (k) { DESIGNS[k] = AI20_DESIGNS[k]; });
     Object.keys(prev).forEach(function (k) { if (!DESIGNS[k] && prev[k].ai) DESIGNS[k] = prev[k]; });
     Object.keys(prev).forEach(function (k) { if (!DESIGNS[k]) DESIGNS[k] = prev[k]; }); })();
+  // v20261103o: 28 Adobe Firefly (Image 3) Yom Tov designs for the new sections (pesach 7, sukkos 4, shavuos 5, simchastorah 1, lagbaomer 5, tubshvat 7). Zoom-checked: no six-point stars, crosses or + marks,
+  // crescents, pointed arches, letters or labels, people. Fitted to 2:3 by extending plain background (never stretched); web picture, tile and high-res copy each carry Content Credentials.
+  var AI21_DESIGNS = {"ai21adobelagbaomerarrowsquiverbonfiregree": {"name": "Arrows Quiver & Bonfire on Green", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-lagbaomer-arrows-quiver-and-bonfire-on-green", "thumb": "ai/p/hx1-lagbaomer-arrows-quiver-and-bonfire-on-green", "ai": 1, "src": "adobe", "dark": 1, "types": ["lagbaomer"], "vars": {"bg": "#1f492b", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 45.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobelagbaomercharcoalframerisingembe": {"name": "Charcoal Frame & Rising Embers", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-lagbaomer-charcoal-frame-and-rising-embers", "thumb": "ai/p/hx1-lagbaomer-charcoal-frame-and-rising-embers", "ai": 1, "src": "adobe", "dark": 1, "types": ["lagbaomer"], "vars": {"bg": "#1d1814", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [24.0, 25.0, 50.0, 25.0], "bsd": 19.2, "nb": true, "isNew": true}, "ai21adobelagbaomerglowingbonfiregoldborde": {"name": "Glowing Bonfire & Gold Border", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-lagbaomer-glowing-bonfire-and-gold-border", "thumb": "ai/p/hx1-lagbaomer-glowing-bonfire-and-gold-border", "ai": 1, "src": "adobe", "dark": 1, "types": ["lagbaomer"], "vars": {"bg": "#080302", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 72.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobelagbaomertallbonfirewarmbrown": {"name": "Tall Bonfire on Warm Brown", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-lagbaomer-tall-bonfire-on-warm-brown", "thumb": "ai/p/hx1-lagbaomer-tall-bonfire-on-warm-brown", "ai": 1, "src": "adobe", "dark": 1, "types": ["lagbaomer"], "vars": {"bg": "#320d01", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 82.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobelagbaomerwatercolorcampfirepines": {"name": "Watercolor Campfire in the Pines", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-lagbaomer-watercolor-campfire-in-the-pines", "thumb": "ai/p/hx1-lagbaomer-watercolor-campfire-in-the-pines", "ai": 1, "src": "adobe", "dark": 0, "types": ["lagbaomer"], "vars": {"bg": "#fae9b9", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [10.0, 22.0, 82.0, 22.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobepesachburgundyovalmatzahwine": {"name": "Burgundy Oval Matzah & Wine", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-burgundy-oval-matzah-and-wine", "thumb": "ai/p/hx1-pesach-burgundy-oval-matzah-and-wine", "ai": 1, "src": "adobe", "dark": 1, "types": ["pesach"], "vars": {"bg": "#65091a", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [26.0, 32.0, 45.0, 24.0], "bsd": 21.2, "nb": true, "isNew": true}, "ai21adobepesachcrystalwinematzahstack": {"name": "Crystal Wine & Matzah Stack", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-crystal-wine-and-matzah-stack", "thumb": "ai/p/hx1-pesach-crystal-wine-and-matzah-stack", "ai": 1, "src": "adobe", "dark": 1, "types": ["pesach"], "vars": {"bg": "#52392d", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [12.0, 52.0, 72.0, 6.0], "bsd": 7.2, "nb": true, "isNew": true}, "ai21adobepesachemeraldwallmatzahwineglass": {"name": "Emerald Wall Matzah & Wine Glass", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-emerald-wall-matzah-and-wine-glass", "thumb": "ai/p/hx1-pesach-emerald-wall-matzah-and-wine-glass", "ai": 1, "src": "adobe", "dark": 1, "types": ["pesach"], "vars": {"bg": "#075748", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 45.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobepesachplumwallmatzahwine": {"name": "Plum Wall Matzah & Wine", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-plum-wall-matzah-and-wine", "thumb": "ai/p/hx1-pesach-plum-wall-matzah-and-wine", "ai": 1, "src": "adobe", "dark": 1, "types": ["pesach"], "vars": {"bg": "#341523", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [14.0, 6.0, 42.0, 58.0], "bsd": 9.2, "nb": true, "isNew": true}, "ai21adobepesachsedertablefromabove": {"name": "Seder Table From Above", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-seder-table-from-above", "thumb": "ai/p/hx1-pesach-seder-table-from-above", "ai": 1, "src": "adobe", "dark": 0, "types": ["pesach"], "vars": {"bg": "#c6c1c0", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [46.0, 22.0, 46.0, 22.0], "bsd": 41.2, "nb": true, "isNew": true}, "ai21adobepesachwatercolorgoldovalmatzah": {"name": "Watercolor Gold Oval & Matzah", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-watercolor-gold-oval-and-matzah", "thumb": "ai/p/hx1-pesach-watercolor-gold-oval-and-matzah", "ai": 1, "src": "adobe", "dark": 0, "types": ["pesach"], "vars": {"bg": "#f5f2e8", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [14.0, 40.0, 70.0, 8.0], "bsd": 9.2, "nb": true, "isNew": true}, "ai21adobepesachwatercolorgrapevinesmatzah": {"name": "Watercolor Grapevines & Matzah", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-pesach-watercolor-grapevines-and-matzah", "thumb": "ai/p/hx1-pesach-watercolor-grapevines-and-matzah", "ai": 1, "src": "adobe", "dark": 0, "types": ["pesach"], "vars": {"bg": "#f8f1e4", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [24.0, 10.0, 62.0, 10.0], "bsd": 19.2, "nb": true, "isNew": true}, "ai21adobeshavuosbasketfirstfruits": {"name": "Basket of First Fruits", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-shavuos-basket-of-first-fruits", "thumb": "ai/p/hx1-shavuos-basket-of-first-fruits", "ai": 1, "src": "adobe", "dark": 1, "types": ["shavuos"], "vars": {"bg": "#6d1d25", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 48.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobeshavuoscheesecakemilkpitcher": {"name": "Cheesecake & Milk Pitcher", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-shavuos-cheesecake-and-milk-pitcher", "thumb": "ai/p/hx1-shavuos-cheesecake-and-milk-pitcher", "ai": 1, "src": "adobe", "dark": 1, "types": ["shavuos"], "vars": {"bg": "#044f7c", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 60.0, 26.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobeshavuosivoryrosesgoldborder": {"name": "Ivory Roses & Gold Border", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-shavuos-ivory-roses-and-gold-border", "thumb": "ai/p/hx1-shavuos-ivory-roses-and-gold-border", "ai": 1, "src": "adobe", "dark": 0, "types": ["shavuos"], "vars": {"bg": "#ece4bb", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [24.0, 14.0, 44.0, 14.0], "bsd": 19.2, "nb": true, "isNew": true}, "ai21adobeshavuosnavywheatsheaves": {"name": "Navy Wheat Sheaves", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-shavuos-navy-wheat-sheaves", "thumb": "ai/p/hx1-shavuos-navy-wheat-sheaves", "ai": 1, "src": "adobe", "dark": 1, "types": ["shavuos"], "vars": {"bg": "#102045", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [24.0, 12.0, 48.0, 12.0], "bsd": 19.2, "nb": true, "isNew": true}, "ai21adobeshavuosvelvetscrollwhiteroses": {"name": "Velvet Scroll & White Roses", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-shavuos-velvet-scroll-and-white-roses", "thumb": "ai/p/hx1-shavuos-velvet-scroll-and-white-roses", "ai": 1, "src": "adobe", "dark": 1, "types": ["shavuos", "simchastorah"], "vars": {"bg": "#0c4e46", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 56.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobesukkosburgundyharvestframe": {"name": "Burgundy Harvest Frame", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-sukkos-burgundy-harvest-frame", "thumb": "ai/p/hx1-sukkos-burgundy-harvest-frame", "ai": 1, "src": "adobe", "dark": 1, "types": ["sukkos"], "vars": {"bg": "#69102c", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [22.0, 26.0, 48.0, 26.0], "bsd": 17.2, "nb": true, "isNew": true}, "ai21adobesukkosemeraldpalmesrog": {"name": "Emerald Palm & Esrog", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-sukkos-emerald-palm-and-esrog", "thumb": "ai/p/hx1-sukkos-emerald-palm-and-esrog", "ai": 1, "src": "adobe", "dark": 1, "types": ["sukkos"], "vars": {"bg": "#135f43", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 66.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobesukkossukkahfruitgarlands": {"name": "Sukkah Fruit Garlands", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-sukkos-sukkah-fruit-garlands", "thumb": "ai/p/hx1-sukkos-sukkah-fruit-garlands", "ai": 1, "src": "adobe", "dark": 0, "types": ["sukkos"], "vars": {"bg": "#d7a779", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [56.0, 14.0, 8.0, 14.0], "bsd": 51.2, "nb": true, "isNew": true}, "ai21adobesukkoswatercoloresrogim": {"name": "Watercolor Esrogim", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-sukkos-watercolor-esrogim", "thumb": "ai/p/hx1-sukkos-watercolor-esrogim", "ai": 1, "src": "adobe", "dark": 0, "types": ["sukkos"], "vars": {"bg": "#f7f3e3", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [30.0, 16.0, 38.0, 16.0], "bsd": 25.2, "nb": true, "isNew": true}, "ai21adobetubshvatalmondblossomsgoldleaf": {"name": "Almond Blossoms & Gold Leaf", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-almond-blossoms-and-gold-leaf", "thumb": "ai/p/hx1-tubshvat-almond-blossoms-and-gold-leaf", "ai": 1, "src": "adobe", "dark": 0, "types": ["tubshvat"], "vars": {"bg": "#ede5d9", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [28.0, 28.0, 50.0, 10.0], "bsd": 23.2, "nb": true, "isNew": true}, "ai21adobetubshvatburgundysevenspeciesharv": {"name": "Burgundy Seven Species Harvest", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-burgundy-seven-species-harvest", "thumb": "ai/p/hx1-tubshvat-burgundy-seven-species-harvest", "ai": 1, "src": "adobe", "dark": 1, "types": ["tubshvat"], "vars": {"bg": "#701418", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 50.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobetubshvatdriedfruitsalmondblossom": {"name": "Dried Fruits & Almond Blossoms", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-dried-fruits-and-almond-blossoms", "thumb": "ai/p/hx1-tubshvat-dried-fruits-and-almond-blossoms", "ai": 1, "src": "adobe", "dark": 1, "types": ["tubshvat"], "vars": {"bg": "#52644f", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 46.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobetubshvatemeraldsilkfigspomegrana": {"name": "Emerald Silk Figs & Pomegranates", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-emerald-silk-figs-and-pomegranates", "thumb": "ai/p/hx1-tubshvat-emerald-silk-figs-and-pomegranates", "ai": 1, "src": "adobe", "dark": 1, "types": ["tubshvat"], "vars": {"bg": "#09523a", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [28.0, 10.0, 56.0, 16.0], "bsd": 23.2, "nb": true, "isNew": true}, "ai21adobetubshvatnavypottedfruittrees": {"name": "Navy Potted Fruit Trees", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-navy-potted-fruit-trees", "thumb": "ai/p/hx1-tubshvat-navy-potted-fruit-trees", "ai": 1, "src": "adobe", "dark": 1, "types": ["tubshvat"], "vars": {"bg": "#0a2843", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [12.0, 8.0, 78.0, 20.0], "bsd": 7.2, "nb": true, "isNew": true}, "ai21adobetubshvattealwallfruitgildedconso": {"name": "Teal Wall & Fruit on Gilded Console", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-teal-wall-and-fruit-on-gilded-console", "thumb": "ai/p/hx1-tubshvat-teal-wall-and-fruit-on-gilded-console", "ai": 1, "src": "adobe", "dark": 1, "types": ["tubshvat"], "vars": {"bg": "#1c6773", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 8.0, 62.0, 8.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai21adobetubshvatwatercolorfigsolivebranc": {"name": "Watercolor Figs & Olive Branches", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/hx1-tubshvat-watercolor-figs-and-olive-branches", "thumb": "ai/p/hx1-tubshvat-watercolor-figs-and-olive-branches", "ai": 1, "src": "adobe", "dark": 0, "types": ["tubshvat"], "vars": {"bg": "#f9f5ea", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [28.0, 22.0, 32.0, 14.0], "bsd": 23.2, "nb": true, "isNew": true}};
+  var AI21_ORDER = {"pesach": ["ai21adobepesachburgundyovalmatzahwine", "ai21adobepesachcrystalwinematzahstack", "ai21adobepesachemeraldwallmatzahwineglass", "ai21adobepesachplumwallmatzahwine", "ai21adobepesachsedertablefromabove", "ai21adobepesachwatercolorgoldovalmatzah", "ai21adobepesachwatercolorgrapevinesmatzah"], "sukkos": ["ai21adobesukkosburgundyharvestframe", "ai21adobesukkosemeraldpalmesrog", "ai21adobesukkossukkahfruitgarlands", "ai21adobesukkoswatercoloresrogim"], "shavuos": ["ai21adobeshavuosbasketfirstfruits", "ai21adobeshavuoscheesecakemilkpitcher", "ai21adobeshavuosivoryrosesgoldborder", "ai21adobeshavuosnavywheatsheaves", "ai21adobeshavuosvelvetscrollwhiteroses"], "simchastorah": ["ai21adobeshavuosvelvetscrollwhiteroses"], "lagbaomer": ["ai21adobelagbaomerarrowsquiverbonfiregree", "ai21adobelagbaomercharcoalframerisingembe", "ai21adobelagbaomerglowingbonfiregoldborde", "ai21adobelagbaomertallbonfirewarmbrown", "ai21adobelagbaomerwatercolorcampfirepines"], "tubshvat": ["ai21adobetubshvatalmondblossomsgoldleaf", "ai21adobetubshvatburgundysevenspeciesharv", "ai21adobetubshvatdriedfruitsalmondblossom", "ai21adobetubshvatemeraldsilkfigspomegrana", "ai21adobetubshvatnavypottedfruittrees", "ai21adobetubshvattealwallfruitgildedconso", "ai21adobetubshvatwatercolorfigsolivebranc"]};
+  Object.keys(AI21_ORDER).forEach(function (t) { var head = AI21_ORDER[t]; var cur = (NEW_FIRST[t] || []).filter(function (k) { return head.indexOf(k) < 0; }); NEW_FIRST[t] = head.concat(cur); });
+  (function () { var prev = DESIGNS; DESIGNS = {}; Object.keys(AI21_DESIGNS).forEach(function (k) { DESIGNS[k] = AI21_DESIGNS[k]; });
+    Object.keys(prev).forEach(function (k) { if (!DESIGNS[k] && prev[k].ai) DESIGNS[k] = prev[k]; });
+    Object.keys(prev).forEach(function (k) { if (!DESIGNS[k]) DESIGNS[k] = prev[k]; }); })();
+  // the classic drawn designs that suit any Yom Tov also open under the new sections, after their own pictures
+  ['pesach', 'sukkos', 'shavuos', 'simchastorah', 'lagbaomer', 'tubshvat'].forEach(function (t) { ['gold', 'midnight', 'damask', 'classic'].forEach(function (k) { if (DESIGNS[k] && DESIGNS[k].types.indexOf(t) < 0) DESIGNS[k].types.push(t); }); });
   // v20261103l: the home page's featured row, in order (the two new shalom zachor tiles take the places of the old shalom zachor and the removed tefillin tile). A later batch may replace or clear this list; missing keys are skipped and the row fills itself as before.
   var FEATURED = ["ai18adobebriscornflowerbluecribtoyrow", "ai18adobekiddushcandystripesteddybear", "ai19adobeshalomzachorwoodtableringofbottl", "ai19adobeshalomzachorwatercolorbottlesarb", "ai17adobechasunagardenrosesonburgundyve", "ai17adobebasmitzvahpearlstrandsonplumve", "ai17adobevortchocolategoldleafoval", "ai17adobeshevabrachostealgoldlaurelwith"];
   // v20261031b: the two older designs with small stars in the art (Navy Starry Night, Starry Balloons) never open a simcha; they move to the back of its preferred list
@@ -3361,7 +3613,7 @@
     card.setAttribute('data-bg', src); bgObserver.observe(card);
     return true;
   }
-  var TILE_V = 'v20261103n';
+  var TILE_V = 'v20261103o';
   function tileLog(ev, u) {
     try {
       if (!/tab\.bot$/.test(location.hostname) || !navigator.sendBeacon) return;
