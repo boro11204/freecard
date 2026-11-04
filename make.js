@@ -510,10 +510,10 @@
   $('bgClear').addEventListener('click', function () { bgBitmap = null; bgRaw = null; bg = null; $('f-bg').value = ''; syncMore(); render(); });
 
   /* ---------- the card is kept on this device as you go (a refresh does not lose it) ---------- */
-  var DKEY = 'fc_draft_v2', saveTimer = null, restoring = true;
+  var DKEY = 'fc_draft_v2', saveTimer = null, restoring = true, cloud = null; // cloud: the account card this draft is ({id, name}), v20261103m
   function saveSoon() { if (restoring) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 400); }
   function saveNow() {
-    var d = { v: 2, at: Date.now(), state: state, touched: touched, popts: popts, photo: photo, bg: bgRaw };
+    var d = { v: 2, at: Date.now(), state: state, touched: touched, popts: popts, photo: photo, bg: bgRaw, cloud: cloud };
     try { localStorage.setItem(DKEY, JSON.stringify(d)); }
     catch (e) { try { d.photo = null; d.bg = null; localStorage.setItem(DKEY, JSON.stringify(d)); } catch (e2) {} }
   }
@@ -524,6 +524,7 @@
     Object.keys(d.state).forEach(function (k) { if (typeof d.state[k] === 'string') state[k] = d.state[k]; });
     if (!F.DESIGNS[state.d]) state.d = F.designsFor(state.t).first[0];
     touched = d.touched || {};
+    if (d.cloud && typeof d.cloud.id === 'string') cloud = { id: d.cloud.id, name: String(d.cloud.name || '') };
     if (d.popts) Object.keys(popts).forEach(function (k) { if (d.popts[k] != null) popts[k] = d.popts[k]; });
     if (typeof d.photo === 'string' && /^data:image\//.test(d.photo)) { photo = d.photo; $('photoClear').hidden = false; }
     if (typeof d.bg === 'string' && /^data:image\//.test(d.bg)) { bgRaw = d.bg; useBgBlob(dataUrlToBlob(d.bg), false); }
@@ -541,7 +542,7 @@
   function savedList() { try { var l = JSON.parse(localStorage.getItem(SKEY) || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } }
   function putList(l) { localStorage.setItem(SKEY, JSON.stringify(l)); }
   function tr(s) { return window.FCi18n ? window.FCi18n.t(s) : s; }
-  function cardsCount() { var n = savedList().length; $('myCards').textContent = tr('My cards') + (n ? ' (' + n + ')' : ''); }
+  function cardsCount() { var n = savedList().length; $('myCards').textContent = tr('Copies on this device') + (n ? ' (' + n + ')' : ''); }
   function renderCards() {
     var box = $('cardsList'), l = savedList(); box.innerHTML = '';
     if (!l.length) { var p = document.createElement('p'); p.className = 'hint'; p.textContent = tr('No saved cards yet. Tap “Save a copy” to keep this card here.'); box.appendChild(p); }
@@ -583,6 +584,19 @@
   $('myCards').addEventListener('click', function () { var b = $('cardsBox'); b.hidden = !b.hidden; if (!b.hidden) renderCards(); });
   $('cardsClose').addEventListener('click', function () { $('cardsBox').hidden = true; });
   cardsCount();
+
+  /* ---------- v20261103m: hooks for "Save to my account" (account.js) — the same draft, minus your own photo ---------- */
+  window.FCEditor = {
+    snapshot: function () { return { v: 2, at: Date.now(), state: JSON.parse(JSON.stringify(state)), touched: JSON.parse(JSON.stringify(touched)), popts: JSON.parse(JSON.stringify(popts)), photo: null, bg: null }; },
+    cloud: function () { return cloud; },
+    setCloud: function (c) { cloud = c; clearTimeout(saveTimer); saveNow(); },
+    hasOwnPicture: function () { return !!(photo || bgRaw); },
+    autoName: function () {
+      // the names line with the simcha ("Moshe & Sara · Chasuna"); the card's top line is usually the same opening words on every card
+      var names = String(F.namesLine(state) || '').replace(/\s+/g, ' ').trim(), head = String(state.h || '').replace(/\s+/g, ' ').trim();
+      return (names ? F.titleOf(state) : (head || (F.TYPES[state.t] || {}).en || 'My card')).slice(0, 80);
+    }
+  };
 
 
   /* ---------- v20261102b: tap a design → an enlarged preview with every tool laid out beside it ----------

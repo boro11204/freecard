@@ -3352,7 +3352,7 @@
     card.setAttribute('data-bg', src); bgObserver.observe(card);
     return true;
   }
-  var TILE_V = 'v20261103l';
+  var TILE_V = 'v20261103m';
   function tileLog(ev, u) {
     try {
       if (!/tab\.bot$/.test(location.hostname) || !navigator.sendBeacon) return;
