@@ -3,25 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Make your card · FreeCard</title>
+<title>Make your card · Simcha Card</title>
 <meta name="description" content="Make a simcha invitation: choose the simcha and design, fill in the details, then download it as a JPEG to send on WhatsApp or a PDF to print.">
-<meta property="og:title" content="Make your card · FreeCard">
+<meta property="og:title" content="Make your card · Simcha Card">
 <meta property="og:description" content="Make a simcha invitation: choose the simcha and design, fill in the details, then download it as a JPEG to send on WhatsApp or a PDF to print.">
 <meta property="og:image" content="og.jpg">
-<meta name="theme-color" content="#0f1322">
+<meta name="theme-color" content="#22130f">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/GreatVibes-7-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=20261103q">
-<link rel="stylesheet" href="card.css?v=20261103q">
-<link rel="stylesheet" href="styles.css?v=20261103q">
-<link rel="stylesheet" href="theme.css?v=20261103q">
-<link rel="stylesheet" href="account.css?v=20261103q">
-<script src="i18n.js?v=20261103k2"></script>
-<script src="account.js?v=20261103q"></script>
+<link rel="stylesheet" href="fonts.css?v=20261106c">
+<link rel="stylesheet" href="card.css?v=20261106c">
+<link rel="stylesheet" href="styles.css?v=20261106c">
+<link rel="stylesheet" href="theme.css?v=20261106c">
+<link rel="stylesheet" href="account.css?v=20261106c">
+<script src="i18n.js?v=20261106c"></script>
+<script src="account.js?v=20261106c"></script>
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#14182a" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Free<b>Card</b></span><small>Simcha Invitations</small></span></a>
+<a class="logo" href="index.html" aria-label="Simcha Card home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#2a1814" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Simcha<b>Card</b></span><small>Simcha Invitations</small></span></a>
 <nav class="nav" aria-label="Main"><a class="plain" href="index.html#simchas">Simchas</a><a class="plain" href="index.html#faq">FAQ</a><a class="btn sm" href="make.html">Make a card</a></nav>
 </div></header>
 <main id="main" class="maker"><div class="wrap">
@@ -40,7 +40,7 @@
 <div class="chipset"><div class="chipgrp">Shul & community</div><div class="chiprow"><button type="button" class="chip" data-type="siyum" aria-pressed="false"><span>Siyum</span><span class="he" dir="rtl">סיום</span></button><button type="button" class="chip" data-type="sefertorah" aria-pressed="false"><span>Hachnasas Sefer Torah</span><span class="he" dir="rtl">הכנסת ספר תורה</span></button><button type="button" class="chip" data-type="chanukashabayis" aria-pressed="false"><span>Chanukas Habayis</span><span class="he" dir="rtl">חנוכת הבית</span></button><button type="button" class="chip" data-type="shiur" aria-pressed="false"><span>Shiur / Drasha</span><span class="he" dir="rtl">שיעור / דרשה</span></button><button type="button" class="chip" data-type="parlor" aria-pressed="false"><span>Parlor Meeting</span><span class="he" dir="rtl">אסיפה</span></button></div></div>
 <div class="chipset"><div class="chipgrp">Cards & more</div><div class="chiprow"><button type="button" class="chip" data-type="seudah" aria-pressed="false"><span>Seudah / Other</span><span class="he" dir="rtl">סעודה</span></button><button type="button" class="chip" data-type="thankyou" aria-pressed="false"><span>Thank-you card</span><span class="he" dir="rtl">כרטיס תודה</span></button><button type="button" class="chip" data-type="mazeltov" aria-pressed="false"><span>Mazel Tov wishes</span><span class="he" dir="rtl">ברכת מזל טוב</span></button></div></div></div></div>
     <div class="panel p-design"><h2><span class="n">2</span>The design</h2>
-     <div class="sw-label" id="swLabel">Designs for this simcha</div><div class="swatches" id="swFirst" role="group" aria-label="Designs for this simcha"></div>
+     <label class="keep-words" title="Your lines, lettering, sizes and colors stay when you pick another design or simcha"><input type="checkbox" id="keepWords" checked> <span>Keep my words when I change the design</span></label><div class="sw-label" id="swLabel">Designs for this simcha</div><div class="swatches" id="swFirst" role="group" aria-label="Designs for this simcha"></div>
      <div class="plain-row" id="plainRow"><span class="plain-l">Plain background</span><span class="plain-dots" id="plainDots" role="group" aria-label="Plain background"></span></div> <details class="more-designs"><summary>More designs</summary><div class="swatches" id="swRest" role="group" aria-label="More designs"></div></details>
      <p class="ai-credit">Designs marked “AI art” have background art AI-generated with Canva, Leonardo.ai or Adobe Firefly.</p>
     </div>
@@ -163,21 +163,21 @@
  </div>
 </div></main>
 <footer class="site mk-foot"><div class="wrap">
-  <div class="f-brand"><a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#14182a" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Free<b>Card</b></span><small>Simcha Invitations</small></span></a><p>Invitations for every simcha</p><p class="f-he" dir="rtl">הזמנות לכל שמחה</p></div>
-  <div class="f-col"><b>FreeCard</b><a class="plain" href="make.html">Make a card</a><a class="plain" href="make.html?blank=1">Start from scratch</a><a class="plain" href="index.html#simchas">Simchas</a><a class="plain" href="index.html#faq">FAQ</a></div>
+  <div class="f-brand"><a class="logo" href="index.html" aria-label="Simcha Card home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#2a1814" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Simcha<b>Card</b></span><small>Simcha Invitations</small></span></a><p>Invitations for every simcha</p><p class="f-he" dir="rtl">הזמנות לכל שמחה</p></div>
+  <div class="f-col"><b>Simcha Card</b><a class="plain" href="make.html">Make a card</a><a class="plain" href="make.html?blank=1">Start from scratch</a><a class="plain" href="index.html#simchas">Simchas</a><a class="plain" href="index.html#faq">FAQ</a></div>
   <div class="f-col"><b>Credits</b><span class="ai-credit">Some background art AI-generated with Canva, Leonardo.ai and Adobe Firefly</span><a class="plain" href="fonts/licenses/">Fonts &amp; licenses</a><span>Free · no account needed</span></div>
-  <div class="f-base"><span>© FreeCard · Invitations for every simcha</span><span>Free, always</span></div>
+  <div class="f-base"><span>© Simcha Card · Invitations for every simcha</span><span>Free, always</span></div>
 </div></footer>
 <div class="mobile-bar"><a class="btn ghost see" href="#preview">See card</a><button type="button" class="btn gold" id="dlJpg2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>JPEG</button><button type="button" class="btn" id="dlPdf2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>PDF</button></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="vendor/html-to-image.js?v=20261103q"></script>
-<script src="core.js?v=20261103q"></script>
-<script src="paint.js?v=20261103q"></script>
-<script src="extras.js?v=20261103q"></script>
-<script src="download.js?v=20261103q"></script>
-<script src="make.js?v=20261103q"></script>
-<script src="partedit.js?v=20261103q"></script>
-<script src="fontpick.js?v=20261103q"></script>
-<script src="vkb.js?v=20261103q"></script>
-<script src="theme.js?v=20261103q"></script>
+<script src="vendor/html-to-image.js?v=20261106c"></script>
+<script src="core.js?v=20261106c"></script>
+<script src="paint.js?v=20261106c"></script>
+<script src="extras.js?v=20261106c"></script>
+<script src="download.js?v=20261106c"></script>
+<script src="make.js?v=20261106c"></script>
+<script src="partedit.js?v=20261106c"></script>
+<script src="fontpick.js?v=20261106c"></script>
+<script src="vkb.js?v=20261106c"></script>
+<script src="theme.js?v=20261106c"></script>
 </body></html>

@@ -5,9 +5,13 @@
 (function () {
   'use strict';
   var F = window.FreeCard; if (!F) return;
+  // v20261106c: each new fancy font's license kind: 'open' (OFL / GPL / CC BY-SA, any use) or 'personal' (free for personal / non-commercial use only).
+  // To take the personal-use fonts off the site later, set window.FC_NO_PERSONAL_FONTS = true before make.js runs, or remove their keys from FONT_GROUPS in make.js.
+  var FONT_LICENSE = F.FONT_LICENSE = { noashalev: 'personal', solitreo: 'open', shuneet: 'open', ellinia: 'open', farissol: 'open', ktavyad: 'open', antiochus: 'personal', cafe: 'personal', journal: 'open', hillel: 'open', nesherkaton: 'open', anka: 'open', ozrad: 'open', horev: 'open', maaravon: 'personal', archai: 'personal', migdal: 'open', kurkevan: 'personal', dybbuk: 'personal', wetpaint: 'open', vinyl: 'open', gemstones: 'open' };
+  Object.keys(FONT_LICENSE).forEach(function (k) { if (F.FONTS[k]) F.FONTS[k].license = FONT_LICENSE[k]; });
   function tr(s) { return window.FCi18n ? window.FCi18n.t(s) : s; }
   if (window.FCi18n && window.FCi18n.add) window.FCi18n.add({
-    'Yiddish & sofer classics': ['אידיש וסת״ם קלאסי', 'אידיש און סת״ם קלאסיש'], 'Elegant & headline': ['מהודר וכותרות', 'שיין און קעפלעך'],
+    'Yiddish & sofer classics': ['אידיש וסת״ם קלאסי', 'אידיש און סת״ם קלאסיש'], 'Fancy & artistic': ['מהודר ואומנותי', 'שיין און קינסטלעריש'], 'Elegant & headline': ['מהודר וכותרות', 'שיין און קעפלעך'],
     'Classic': ['קלאסי', 'קלאסיש'], 'Modern & fun': ['מודרני ושמח', 'מאדערן און פריילעך'], 'English letters only': ['אותיות אנגליות בלבד', 'נאר ענגלישע אותיות'],
     'Choose the lettering': ['בחירת גופן', 'קלייבט א שריפט'], 'Close': ['סגירה', 'פארמאכן'], 'Done': ['סיום', 'פארטיג'],
     'Same as the card': ['כמו בהזמנה', 'ווי אויפן קארטל'], 'Default: Noto Serif Black': ['ברירת מחדל: נוטו סריף שחור', 'סטאנדארט: נאטא סעריף שווארץ'], 'Same as card': ['כמו בהזמנה', 'ווי אויפן קארטל'], 'fonts': ['גופנים', 'שריפטן'],
@@ -72,7 +76,7 @@
     if (!k) { r.classList.add('fp-same'); r.innerHTML = '<span class="fp-s"></span><span class="fp-nm"><b></b></span>'; r.querySelector('b').textContent = text; }
     else {
       var f = F.FONTS[k];
-      r.innerHTML = '<span class="fp-s" aria-hidden="true"></span><span class="fp-nm"><b data-noi18n></b><small dir="rtl" data-noi18n></small></span>' + (f.yi ? '<i class="nb">New</i>' : '');
+      r.innerHTML = '<span class="fp-s" aria-hidden="true"></span><span class="fp-nm"><b data-noi18n></b><small dir="rtl" data-noi18n></small></span>' + (f.yi || f.art ? '<i class="nb">New</i>' : '');
       r.querySelector('b').textContent = f.name; r.querySelector('small').textContent = f.enOnly ? tr('English letters only') : (f.he || '');
       var s = r.querySelector('.fp-s'); s.textContent = fixed(k, sampleText(k)); s.dir = f.enOnly ? 'ltr' : 'rtl';
       s._k = k; // its font is set when the row comes into view (so only the fonts looked at are fetched)

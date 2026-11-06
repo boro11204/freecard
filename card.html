@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>You're invited · FreeCard</title>
+<title>You're invited · Simcha Card</title>
 <meta name="description" content="You're invited! Open to see the invitation, RSVP, add it to your calendar and get directions.">
-<meta property="og:title" content="You're invited · FreeCard">
+<meta property="og:title" content="You're invited · Simcha Card">
 <meta property="og:description" content="You're invited! Open to see the invitation, RSVP, add it to your calendar and get directions.">
 <meta property="og:image" content="og.jpg">
-<meta name="theme-color" content="#0f1322">
+<meta name="theme-color" content="#22130f">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/GreatVibes-7-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=20261103q">
-<link rel="stylesheet" href="card.css?v=20261103q">
-<link rel="stylesheet" href="styles.css?v=20261103q">
-<link rel="stylesheet" href="theme.css?v=20261103q">
-<script src="i18n.js?v=20261103k2"></script>
+<link rel="stylesheet" href="fonts.css?v=20261106c">
+<link rel="stylesheet" href="card.css?v=20261106c">
+<link rel="stylesheet" href="styles.css?v=20261106c">
+<link rel="stylesheet" href="theme.css?v=20261106c">
+<script src="i18n.js?v=20261106c"></script>
 </head>
 <body class="viewer">
 <div class="host-bar" id="hostBar" hidden>You made this card · <a id="hostBarLink" href="#">Guest list &amp; RSVPs →</a></div>
-<div class="v-top"><a class="logo" href="index.html" aria-label="FreeCard home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#14182a" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Free<b>Card</b></span><small>Simcha Invitations</small></span></a></div>
+<div class="v-top"><a class="logo" href="index.html" aria-label="Simcha Card home"><svg class="logo-mark" viewBox="0 0 32 40" aria-hidden="true"><path d="M4 38V16a12 12 0 0 1 24 0v22z" fill="#2a1814" stroke="#c9a45a" stroke-width="1.6"/><path d="M8 35V16.5a8 8 0 0 1 16 0V35z" fill="none" stroke="#c9a45a" stroke-width=".8"/><path d="M16 15.5l2.4 2.4-2.4 2.4-2.4-2.4z" fill="#e4c983"/><path d="M11.5 26h9M12.8 29h6.4" stroke="#c9a45a" stroke-width=".9" stroke-linecap="round"/></svg><span class="lw"><span class="lw-1">Simcha<b>Card</b></span><small>Simcha Invitations</small></span></a></div>
 <main class="v-main" id="main">
  <div id="loading" class="v-error"><p>Opening your invitation…</p></div>
  <div id="err" class="v-error" hidden><h1 id="errH">This link looks incomplete</h1><p id="errP">Ask the sender to send the full link again, or make your own card.</p><a class="btn gold" href="make.html">Make a card</a></div>
@@ -67,14 +67,14 @@
     <div class="btn-row"><a class="btn wa" id="shareWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3z"/></svg>Share</a><button type="button" class="btn ghost" id="copyLink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Copy link</button>
     <a class="btn ghost" id="mazel" target="_blank" rel="noopener" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.4C1.6 7.2 4 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4 20 4 22.4 7.2 21.2 10.6 19.5 15.4 12 20 12 20z"/></svg>Send a Mazel Tov</a></div></div>
   </div>
-  <p class="v-foot">Made with FreeCard · <a href="make.html">Make your own card</a></p>
+  <p class="v-foot">Made with Simcha Card · <a href="make.html">Make your own card</a></p>
  </div>
 </main>
 <div class="toast" id="toast" role="status"></div>
-<script src="vendor/html-to-image.js?v=20261103q"></script>
-<script src="core.js?v=20261103q"></script>
-<script src="paint.js?v=20261103q"></script>
-<script src="download.js?v=20261103q"></script>
-<script src="api.js?v=20261103q"></script>
-<script src="card.js?v=20261103q"></script>
+<script src="vendor/html-to-image.js?v=20261106c"></script>
+<script src="core.js?v=20261106c"></script>
+<script src="paint.js?v=20261106c"></script>
+<script src="download.js?v=20261106c"></script>
+<script src="api.js?v=20261106c"></script>
+<script src="card.js?v=20261106c"></script>
 </body></html>

@@ -966,3 +966,195 @@
   src: url(fonts/RubikBubbles-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* v20261106c: 22 fancy / artistic Hebrew fonts, self-hosted woff2. Open licenses (subset to Hebrew + basic Latin + numbers): Culmus GPL-2 (Ellinia, Farissol, Ktav Yad, Anka, Horev, Hillel, Ozrad, Journal), SIL OFL 1.1 (Solitreo, Nesher Katon, Migdal Haemeq, Rubik Wet Paint, Rubik Vinyl, Rubik Gemstones), CC BY-SA 3.0 (Shuneet). Free for personal use, files unchanged (not subset): AlefAlefAlef free license (Noa Shalev, Archai, Maaravon), CC BY-NC-ND 1.0 Oketz Fonts / Meir Sadan (Antiochus, Kurkevan, Cafe, Dybbuk). See fonts/licenses/. */
+@font-face {
+  font-family: 'Noa Shalev AAA';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/NoaShalev-AlefAlefAlef.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Solitreo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Solitreo-hebrew.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Solitreo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Solitreo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Shuneet Oblique';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Shuneet-ObliqueBold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ellinia CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/ElliniaCLM-BoldItalic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Farissol CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/FarissolCLM-BoldItalic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ktav Yad CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/KtavYadCLM-BoldItalic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Antiochus Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Antiochus-Bold-Oketz.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Cafe Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Cafe-Oketz.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Journal CLM';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/JournalCLM-Light.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Hillel CLM';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/HillelCLM-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Nesher Katon';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/NesherKaton.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Anka CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/AnkaCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ozrad CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/OzradCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Horev CLM';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(fonts/HorevCLM-Heavy.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Maaravon AAA';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Maaravon-AlefAlefAlef.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Archai AAA';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Archai-AlefAlefAlef.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Migdal Haemeq';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/MigdalHaemeq.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Kurkevan Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Kurkevan-Oketz.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Dybbuk Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Dybbuk-Oketz.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Rubik Wet Paint';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikWetPaint-hebrew.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Rubik Wet Paint';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikWetPaint-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Rubik Vinyl';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikVinyl-hebrew.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Rubik Vinyl';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikVinyl-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Rubik Gemstones';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikGemstones-hebrew.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+@font-face {
+  font-family: 'Rubik Gemstones';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/RubikGemstones-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

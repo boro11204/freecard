@@ -1,5 +1,5 @@
 /* FreeCard core: simcha types, wording, designs, link encoding, card renderer */
-  /* v20261103q: top-up designs for Shavuos, Sukkos and Lag Ba'omer */
+  /* v20261104a: top-up designs for Shavuos, Sukkos and Lag Ba'omer */
   /* v20261103p: Simchas Torah designs */
   /* v20261103o: six new Yom Tov sections (Pesach, Sukkos, Shavuos, Simchas Torah, Lag Ba'omer, Tu B'Shvat) with their own wording and Adobe Firefly designs */
   /* v20261103n: 19 new Adobe Firefly holiday designs (Purim, Chanukah, Rosh Hashana) with high-res download copies */
@@ -2188,6 +2188,16 @@
   (function () { var prev = DESIGNS; DESIGNS = {}; Object.keys(AI21_DESIGNS).forEach(function (k) { DESIGNS[k] = AI21_DESIGNS[k]; });
     Object.keys(prev).forEach(function (k) { if (!DESIGNS[k] && prev[k].ai) DESIGNS[k] = prev[k]; });
     Object.keys(prev).forEach(function (k) { if (!DESIGNS[k]) DESIGNS[k] = prev[k]; }); })();
+  // v20261106b-n6 start
+  // v20261106b: 54 new designs (Benz Nov 6: more from Canva and Adobe) — 24 Adobe Firefly Image 3, 30 Canva; rich grounds, gold and round-arched frames, silk, scrolls. Zoom-checked: no six-point stars, crescents, crosses or + marks,
+  // pointed arches, letters, people or hands. Fitted to 2:3 by stretching a plain background band (never stretched objects); web picture, tile and high-res copy each carry Content Credentials.
+  var AI22_DESIGNS = {"ai22adobechasunawinevelvetchampagnesilkfr": {"name": "Wine Velvet & Champagne Silk Frame", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-chasuna-wine-velvet-and-champagne-silk-frame", "thumb": "ai/p/n6-chasuna-wine-velvet-and-champagne-silk-frame", "ai": 1, "src": "adobe", "dark": 1, "types": ["chasuna", "vort", "engaged", "tenoyim", "shevabrachos", "aufruf"], "vars": {"bg": "#500311", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [18.0, 14.0, 18.0, 14.0], "bsd": 13.2, "nb": true, "isNew": true}, "ai22adobechasunanavyvelvetgoldfiligreeban": {"name": "Navy Velvet & Gold Filigree Bands", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-chasuna-navy-velvet-and-gold-filigree-bands", "thumb": "ai/p/n6-chasuna-navy-velvet-and-gold-filigree-bands", "ai": 1, "src": "adobe", "dark": 1, "types": ["chasuna", "vort", "engaged", "tenoyim", "shevabrachos", "aufruf"], "vars": {"bg": "#060a25", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [20.0, 10.0, 24.0, 10.0], "bsd": 15.2, "nb": true, "isNew": true}, "ai22adobechasunaivorysilkovalwhiteroses": {"name": "Ivory Silk Oval & White Roses", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-chasuna-ivory-silk-oval-and-white-roses", "thumb": "ai/p/n6-chasuna-ivory-silk-oval-and-white-roses", "ai": 1, "src": "adobe", "dark": 0, "types": ["chasuna", "vort", "engaged", "tenoyim", "shevabrachos", "aufruf"], "vars": {"bg": "#ddcec5", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [18.0, 38.0, 16.0, 20.0], "bsd": 13.2, "nb": true, "isNew": true}, "ai22adobekiddushchocolatevelvetpastrytray": {"name": "Chocolate Velvet & Pastry Tray", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-kiddush-chocolate-velvet-and-pastry-tray", "thumb": "ai/p/n6-kiddush-chocolate-velvet-and-pastry-tray", "ai": 1, "src": "adobe", "dark": 1, "types": ["kiddush", "birth", "basmitzvah"], "vars": {"bg": "#350c08", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [12.0, 12.0, 38.0, 12.0], "bsd": 7.2, "nb": true, "isNew": true}, "ai22adobeshevabrachostealwallgoldbrocadet": {"name": "Teal Wall & Gold Brocade Table", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-shevabrachos-teal-wall-and-gold-brocade-table", "thumb": "ai/p/n6-shevabrachos-teal-wall-and-gold-brocade-table", "ai": 1, "src": "adobe", "dark": 1, "types": ["shevabrachos", "chasuna", "vort", "seudah"], "vars": {"bg": "#015861", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 10.0, 34.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobeshalomzachorslateolivesbluedishe": {"name": "Slate, Olives & Blue Dishes", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-shalomzachor-slate-olives-and-blue-dishes", "thumb": "ai/p/n6-shalomzachor-slate-olives-and-blue-dishes", "ai": 1, "src": "adobe", "dark": 1, "types": ["shalomzachor", "vachnacht", "bris", "birth"], "vars": {"bg": "#2d374d", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 10.0, 40.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobeupsherinsageshelfhoneytoywagon": {"name": "Sage Shelf, Honey & Toy Wagon", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-upsherin-sage-shelf-honey-and-toy-wagon", "thumb": "ai/p/n6-upsherin-sage-shelf-honey-and-toy-wagon", "ai": 1, "src": "adobe", "dark": 0, "types": ["upsherin", "birth"], "vars": {"bg": "#879e55", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [10.0, 10.0, 36.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobeupsherinmustardwallcandywagon": {"name": "Mustard Wall & Candy Wagon", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-upsherin-mustard-wall-and-candy-wagon", "thumb": "ai/p/n6-upsherin-mustard-wall-and-candy-wagon", "ai": 1, "src": "adobe", "dark": 0, "types": ["upsherin", "birth"], "vars": {"bg": "#e9ad05", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [10.0, 10.0, 32.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobechasunagarnetsilklaurelovalpearl": {"name": "Garnet Silk, Laurel Oval & Pearls", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-chasuna-garnet-silk-laurel-oval-and-pearls", "thumb": "ai/p/n6-chasuna-garnet-silk-laurel-oval-and-pearls", "ai": 1, "src": "adobe", "dark": 1, "types": ["chasuna", "vort", "engaged", "tenoyim", "shevabrachos", "aufruf"], "vars": {"bg": "#640113", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [26.0, 30.0, 22.0, 30.0], "bsd": 21.2, "nb": true, "isNew": true}, "ai22adobechasunagoldsatinbeadedoval": {"name": "Gold Satin & Beaded Oval", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-chasuna-gold-satin-and-beaded-oval", "thumb": "ai/p/n6-chasuna-gold-satin-and-beaded-oval", "ai": 1, "src": "adobe", "dark": 0, "types": ["chasuna", "vort", "engaged", "tenoyim", "shevabrachos", "aufruf"], "vars": {"bg": "#dbd1ca", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [20.0, 28.0, 16.0, 28.0], "bsd": 15.2, "nb": true, "isNew": true}, "ai22adobekiddushtealwallgiltframecakestan": {"name": "Teal Wall, Gilt Frame & Cake Stand", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-kiddush-teal-wall-gilt-frame-and-cake-stand", "thumb": "ai/p/n6-kiddush-teal-wall-gilt-frame-and-cake-stand", "ai": 1, "src": "adobe", "dark": 1, "types": ["kiddush", "birth", "basmitzvah"], "vars": {"bg": "#015660", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [8.0, 10.0, 46.0, 10.0], "bsd": 3.2, "nb": true, "isNew": true}, "ai22adobebarmitzvahemeraldleathergoldcorn": {"name": "Emerald Leather & Gold Corners", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-barmitzvah-emerald-leather-and-gold-corners", "thumb": "ai/p/n6-barmitzvah-emerald-leather-and-gold-corners", "ai": 1, "src": "adobe", "dark": 1, "types": ["barmitzvah", "aufruf", "siyum"], "vars": {"bg": "#064a34", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [12.0, 12.0, 12.0, 12.0], "bsd": 7.2, "nb": true, "isNew": true}, "ai22adobeshevabrachoschampagnesatinroundf": {"name": "Champagne Satin, Round Frame & Orchid", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-shevabrachos-champagne-satin-round-frame-and-orchid", "thumb": "ai/p/n6-shevabrachos-champagne-satin-round-frame-and-orchid", "ai": 1, "src": "adobe", "dark": 0, "types": ["shevabrachos", "chasuna", "vort", "seudah"], "vars": {"bg": "#b6afb2", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [26.0, 30.0, 20.0, 22.0], "bsd": 21.2, "nb": true, "isNew": true}, "ai22adobeshalomzachornavywallarbesbowlbee": {"name": "Navy Wall, Arbes Bowl & Beer Mug", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-shalomzachor-navy-wall-arbes-bowl-and-beer-mug", "thumb": "ai/p/n6-shalomzachor-navy-wall-arbes-bowl-and-beer-mug", "ai": 1, "src": "adobe", "dark": 1, "types": ["shalomzachor", "vachnacht", "bris", "birth"], "vars": {"bg": "#0f2c58", "ink": "#f6f0e2", "accent": "#d6b66c", "soft": "#e8dec6"}, "pad": [10.0, 10.0, 32.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobebrisbluewallwhitecradle": {"name": "Blue Wall & White Cradle", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-bris-blue-wall-and-white-cradle", "thumb": "ai/p/n6-bris-blue-wall-and-white-cradle", "ai": 1, "src": "adobe", "dark": 0, "types": ["bris", "shalomzachor", "vachnacht", "pidyonhaben", "birth"], "vars": {"bg": "#96b4b9", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [10.0, 10.0, 46.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}, "ai22adobeupsherinpeachwallhoneyjarstoycar": {"name": "Peach Wall, Honey Jars & Toy Car", "note": "AI art \u00b7 Adobe Firefly", "kind": "img", "file": "ai/n6-upsherin-peach-wall-honey-jars-and-toy-car", "thumb": "ai/p/n6-upsherin-peach-wall-honey-jars-and-toy-car", "ai": 1, "src": "adobe", "dark": 0, "types": ["upsherin", "birth"], "vars": {"bg": "#ecc2a1", "ink": "#2b2526", "accent": "#8a5a1e", "soft": "#55494a"}, "pad": [10.0, 10.0, 30.0, 10.0], "bsd": 5.2, "nb": true, "isNew": true}};
+  var AI22_ORDER = {"chasuna": ["ai22adobechasunawinevelvetchampagnesilkfr", "ai22adobechasunanavyvelvetgoldfiligreeban", "ai22adobechasunaivorysilkovalwhiteroses", "ai22adobechasunagarnetsilklaurelovalpearl", "ai22adobechasunagoldsatinbeadedoval"], "kiddush": ["ai22adobekiddushchocolatevelvetpastrytray", "ai22adobekiddushtealwallgiltframecakestan"], "barmitzvah": ["ai22adobebarmitzvahemeraldleathergoldcorn"], "shevabrachos": ["ai22adobeshevabrachostealwallgoldbrocadet", "ai22adobeshevabrachoschampagnesatinroundf"], "shalomzachor": ["ai22adobeshalomzachorslateolivesbluedishe", "ai22adobeshalomzachornavywallarbesbowlbee"], "upsherin": ["ai22adobeupsherinsageshelfhoneytoywagon", "ai22adobeupsherinmustardwallcandywagon", "ai22adobeupsherinpeachwallhoneyjarstoycar"], "bris": ["ai22adobebrisbluewallwhitecradle"]};
+  Object.keys(AI22_ORDER).forEach(function (t) { var head = AI22_ORDER[t]; var cur = (NEW_FIRST[t] || []).filter(function (k) { return head.indexOf(k) < 0; }); NEW_FIRST[t] = head.concat(cur); });
+  (function () { var prev = DESIGNS; DESIGNS = {}; Object.keys(AI22_DESIGNS).forEach(function (k) { DESIGNS[k] = AI22_DESIGNS[k]; });
+    Object.keys(prev).forEach(function (k) { if (!DESIGNS[k] && prev[k].ai) DESIGNS[k] = prev[k]; });
+    Object.keys(prev).forEach(function (k) { if (!DESIGNS[k]) DESIGNS[k] = prev[k]; }); })();
+  // v20261106b-n6 end
   // the classic drawn designs that suit any Yom Tov also open under the new sections, after their own pictures
   ['pesach', 'sukkos', 'shavuos', 'simchastorah', 'lagbaomer', 'tubshvat'].forEach(function (t) { ['gold', 'midnight', 'damask', 'classic'].forEach(function (k) { if (DESIGNS[k] && DESIGNS[k].types.indexOf(t) < 0) DESIGNS[k].types.push(t); }); });
   // v20261103l: the home page's featured row, in order (the two new shalom zachor tiles take the places of the old shalom zachor and the removed tefillin tile). A later batch may replace or clear this list; missing keys are skipped and the row fills itself as before.
@@ -2272,6 +2282,31 @@
     lulav: { name: 'Lulav', he: 'לולב', family: 'Lulav CLM', weight: 400, isNew: true, yi: true, grp: 'fancy', fix: 'dlns' },
     shmulik: { name: 'Shmulik', he: 'שמוליק', family: 'Shmulik CLM', weight: 400, isNew: true, yi: true, grp: 'fancy' }
   });
+  // v20261106c: 22 fancy / artistic Hebrew fonts (Benz Nov 5–6: more free fancy Hebrew fonts). license: 'open' = OFL / GPL / CC BY-SA (free for any use); 'personal' = free for personal / non-commercial use (Benz's call, Nov 6 2026: each person makes their own card). Details: fonts/licenses/README.txt.
+  Object.assign(FONTS, {
+    noashalev: { name: 'Noa Shalev', he: 'נעה שלו', family: 'Noa Shalev AAA', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dl' },
+    solitreo: { name: 'Solitreo', he: 'סוליטריאו', family: 'Solitreo', weight: 400, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dln' },
+    shuneet: { name: 'Shuneet', he: 'שונית', family: 'Shuneet Oblique', weight: 700, isNew: true, art: true, grp: 'art', license: 'open' },
+    ellinia: { name: 'Ellinia', he: 'אלינייה', family: 'Ellinia CLM', weight: 700, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlns' },
+    farissol: { name: 'Farissol', he: 'פריסול', family: 'Farissol CLM', weight: 700, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    ktavyad: { name: 'Ktav Yad', he: 'כתב יד קלאסי', family: 'Ktav Yad CLM', weight: 700, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlns' },
+    antiochus: { name: 'Antiochus', he: 'אנטיוכוס', family: 'Antiochus Oketz', weight: 700, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dlns' },
+    cafe: { name: 'Cafe', he: 'קפה', family: 'Cafe Oketz', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dlns' },
+    journal: { name: 'Journal', he: 'ז׳ורנל', family: 'Journal CLM', weight: 300, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    hillel: { name: 'Hillel', he: 'הלל', family: 'Hillel CLM', weight: 500, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    nesherkaton: { name: 'Nesher Katon', he: 'נשר קטן', family: 'Nesher Katon', weight: 400, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlns' },
+    anka: { name: 'Anka', he: 'אנקה', family: 'Anka CLM', weight: 700, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    ozrad: { name: 'Ozrad', he: 'עוזרד', family: 'Ozrad CLM', weight: 700, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    horev: { name: 'Horev', he: 'חורב', family: 'Horev CLM', weight: 900, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    maaravon: { name: 'Maaravon', he: 'מערבון', family: 'Maaravon AAA', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dl' },
+    archai: { name: 'Archai', he: 'ארכאי', family: 'Archai AAA', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dl' },
+    migdal: { name: 'Migdal Haemek', he: 'מגדל העמק', family: 'Migdal Haemeq', weight: 500, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dlnsp' },
+    kurkevan: { name: 'Kurkevan', he: 'קורקבן', family: 'Kurkevan Oketz', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dlns' },
+    dybbuk: { name: 'Dybbuk', he: 'דיבוק', family: 'Dybbuk Oketz', weight: 400, isNew: true, art: true, grp: 'art', license: 'personal', fix: 'dlns' },
+    wetpaint: { name: 'Rubik Wet Paint', he: 'רוביק צבע רטוב', family: 'Rubik Wet Paint', weight: 400, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dl' },
+    vinyl: { name: 'Rubik Vinyl', he: 'רוביק ויניל', family: 'Rubik Vinyl', weight: 400, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dl' },
+    gemstones: { name: 'Rubik Gemstones', he: 'רוביק אבני חן', family: 'Rubik Gemstones', weight: 400, isNew: true, art: true, grp: 'art', license: 'open', fix: 'dl' }
+  });
   // v20261103h: the standard lettering's defaults for the main words (a card that chose a lettering, a names font, a part's font or a line's font keeps it)
   var DEF_TITLE = 'notocondblack', DEF_NAMES = 'notoblack';
   var BASE_TOKENS = { 'DATE': 'dt', 'HEBREW DATE': 'hd', 'TIME': 'tm', 'MORE TIMES': 'sc', 'HALL': 'hl', 'ADDRESS': 'ad',
@@ -2320,7 +2355,20 @@
     function tiers(l) { return l.filter(function (k) { return DESIGNS[k].nb; }).concat(l.filter(function (k) { return !DESIGNS[k].nb; })); }
     function aiFirst(list) { var own = list.filter(function (k) { return DESIGNS[k].ai && bor.indexOf(k) < 0; }), lent = list.filter(function (k) { return DESIGNS[k].ai && bor.indexOf(k) >= 0; }).sort(function (a, b) { return bor.indexOf(a) - bor.indexOf(b); });
       return tiers(own).concat(tiers(lent), list.filter(function (k) { return !DESIGNS[k].ai; })); }
-    return { first: aiFirst(first), rest: aiFirst(rest) };
+    var out = aiFirst(first);
+    // v20261104a (Benz, Nov 4 2026): the 8 look-alike bottle & arbes shalom zachor designs move from the front to the middle, spread apart
+    var SPREAD = { shalomzachor: /^ai19adobeshalomzachor/ };
+    if (SPREAD[type]) {
+      var mv = out.filter(function (k) { return SPREAD[type].test(k); }), keep = out.filter(function (k) { return !SPREAD[type].test(k); });
+      var at = Math.max(6, Math.floor(keep.length / 3));
+      mv.forEach(function (k, i) { keep.splice(Math.min(keep.length, at + i * 4), 0, k); });
+      out = keep;
+      // the 6 bottle & arbes designs that then lead are spread out too, so the first row mixes styles
+      var b18 = out.filter(function (k) { return /^ai18(adobe|can)shalomzachor/.test(k); }), rest18 = out.filter(function (k) { return b18.indexOf(k) < 0; });
+      b18.forEach(function (k, i) { rest18.splice(Math.min(rest18.length, 1 + i * 3), 0, k); });
+      out = rest18;
+    }
+    return { first: out, rest: aiFirst(rest) };
   }
 
   function sampleCard(type, design, lang) {
@@ -3180,7 +3228,7 @@
   var SEC_FZ = { karantina: 1.15, amatic: 1.15, gveret: 1.1, david: 1.04, cinzel: 0.9, parisienne: 1.02, allura: 1.1, pinyon: 0.98, italianno: 1.18, baskerville: 0.95, cormorant: 1.06, alexbrush: 1.05, tangerine: 1.2 };
   function secStack(k) {
     if (SEC_STACK[k]) return SEC_STACK[k];
-    var F = FONTS[k]; return "'" + F.family + "', " + (/Rubik|Heebo|Assistant|Alef|Varela|Secular|Karantina|Amatic|Playpen|Fredoka|Plex|Gveret|Miriam/.test(F.family) ? "'Heebo', sans-serif" : "'Frank Ruhl Libre', serif");
+    var F = FONTS[k]; return "'" + F.family + "', " + (/Rubik|Heebo|Assistant|Alef|Varela|Secular|Karantina|Amatic|Playpen|Fredoka|Plex|Gveret|Miriam|Migdal|Archai|Maaravon|Kurkevan|Dybbuk/.test(F.family) ? "'Heebo', sans-serif" : "'Frank Ruhl Libre', serif");
   }
   function sectionOf(e) {
     var c = e.className || '';
@@ -3615,7 +3663,7 @@
     card.setAttribute('data-bg', src); bgObserver.observe(card);
     return true;
   }
-  var TILE_V = 'v20261103q';
+  var TILE_V = 'v20261106b';
   function tileLog(ev, u) {
     try {
       if (!/tab\.bot$/.test(location.hostname) || !navigator.sendBeacon) return;

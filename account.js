@@ -1,5 +1,5 @@
 /* FreeCard accounts (optional, v20261103m): sign up / sign in, a "My Cards" page with cards saved to the account,
-   and "Save to my account" in the editor. Talks to the FreeCard accounts server (Cloudflare Worker + D1).
+   and "Save to my account" in the editor. Talks to the Simcha Card accounts server (Cloudflare Worker + D1).
    Only the email and each card's words & settings are stored — no photos, nothing else. Making and downloading
    cards keeps working without an account. */
 (function (global) {
@@ -10,7 +10,7 @@
     'Sign in': ['כניסה', 'אריינגיין'],
     'My Cards': ['הכרטיסים שלי', 'מיינע קארטלעך'],
     'Create account': ['יצירת חשבון', 'מאכן א חשבון'],
-    'Your FreeCard account': ['החשבון שלך ב-FreeCard', 'אייער FreeCard חשבון'],
+    'Your Simcha Card account': ['החשבון שלך ב-Simcha Card', 'אייער Simcha Card חשבון'],
     'Email': ['אימייל', 'אימעיל'],
     'Password': ['סיסמה', 'פאסווארט'],
     'New password': ['סיסמה חדשה', 'נייער פאסווארט'],
@@ -22,7 +22,7 @@
     'Set new password': ['קביעת סיסמה חדשה', 'שטעלן א נייעם פאסווארט'],
     'Enter your email, the recovery code you got when you signed up, and a new password.': ['הזינו את האימייל, את קוד השחזור שקיבלתם בהרשמה, וסיסמה חדשה.', 'שרייבט אריין אייער אימעיל, דעם צוריקקריג קאד וואס איר האט באקומען ביים איינשרייבן, און א נייעם פאסווארט.'],
     'Your recovery code': ['קוד השחזור שלך', 'אייער צוריקקריג קאד'],
-    'FreeCard does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.': ['FreeCard לא שולח אימיילים. אם תשכחו את הסיסמה, הקוד הזה הוא הדרך היחידה לחזור לחשבון. רשמו אותו או צלמו מסך עכשיו. הוא מוצג פעם אחת בלבד.', 'FreeCard שיקט נישט קיין אימעילס. אויב איר פארגעסט דעם פאסווארט, איז דער קאד דער איינציגער וועג צוריק אין חשבון. שרייבט אים אויף אדער מאכט א סקרינשאט יעצט. ער ווערט געוויזן נאר איין מאל.'],
+    'Simcha Card does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.': ['Simcha Card לא שולח אימיילים. אם תשכחו את הסיסמה, הקוד הזה הוא הדרך היחידה לחזור לחשבון. רשמו אותו או צלמו מסך עכשיו. הוא מוצג פעם אחת בלבד.', 'Simcha Card שיקט נישט קיין אימעילס. אויב איר פארגעסט דעם פאסווארט, איז דער קאד דער איינציגער וועג צוריק אין חשבון. שרייבט אים אויף אדער מאכט א סקרינשאט יעצט. ער ווערט געוויזן נאר איין מאל.'],
     'Copy code': ['העתקת הקוד', 'קאפירן דעם קאד'],
     'Copied': ['הועתק', 'קאפירט'],
     'I saved it': ['שמרתי אותו', 'איך האב עס אפגעהיטן'],
@@ -133,7 +133,7 @@
   function draw(box, mode, why) {
     box.innerHTML = '';
     var x = btn('acct-x', '✕', closeModal); x.setAttribute('aria-label', 'Close'); box.appendChild(x);
-    var title = h('h2', 'acct-h', mode === 'code' ? 'Your recovery code' : mode === 'reset' ? 'Set new password' : 'Your FreeCard account'); title.id = 'acctTitle'; box.appendChild(title);
+    var title = h('h2', 'acct-h', mode === 'code' ? 'Your recovery code' : mode === 'reset' ? 'Set new password' : 'Your Simcha Card account'); title.id = 'acctTitle'; box.appendChild(title);
     if (mode === 'code') return drawCode(box, why);
     if (why && mode !== 'reset') box.appendChild(h('p', 'acct-why', why));
     if (mode !== 'reset') {
@@ -175,7 +175,7 @@
     setTimeout(function () { try { f.email.focus(); } catch (e) {} }, 30);
   }
   function drawCode(box, code) {
-    box.appendChild(h('p', 'acct-why', 'FreeCard does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.'));
+    box.appendChild(h('p', 'acct-why', 'Simcha Card does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.'));
     var c = h('div', 'acct-code', code); c.setAttribute('data-noi18n', ''); c.dir = 'ltr'; box.appendChild(c);
     var row = h('div', 'acct-row');
     var cp = btn('btn ghost', 'Copy code', function () {
@@ -339,7 +339,7 @@
       var r = h('div', 'acct-row');
       r.appendChild(btn('btn ghost sm', 'Get a new recovery code', function () {
         m.textContent = ''; api('POST', '/me/recovery', { password: pw.value }).then(function (j) {
-          pw.value = ''; out.innerHTML = ''; out.appendChild(h('p', 'acct-why', 'FreeCard does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.'));
+          pw.value = ''; out.innerHTML = ''; out.appendChild(h('p', 'acct-why', 'Simcha Card does not send emails. If you forget your password, this code is the only way back into your account. Write it down or take a screenshot now. It is shown only once.'));
           var c = h('div', 'acct-code', j.recovery_code); c.setAttribute('data-noi18n', ''); c.dir = 'ltr'; out.appendChild(c);
         }, function (er) { m.textContent = errText(er); });
       }));

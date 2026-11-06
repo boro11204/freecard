@@ -319,7 +319,7 @@
   function textShadow(ctx, v, z) {
     var s = shadows(v)[0];
     if (!s) return;
-    ctx.shadowColor = s.color; ctx.shadowOffsetX = s.x * z; ctx.shadowOffsetY = s.y * z; ctx.shadowBlur = s.blur * z;
+    ctx.shadowColor = s.color; ctx.shadowOffsetX = s.x * z * SK; ctx.shadowOffsetY = s.y * z * SK; ctx.shadowBlur = s.blur * z * SK;
   }
   var HAS_LS = (function () { try { var c = document.createElement('canvas').getContext('2d'); return 'letterSpacing' in c; } catch (e) { return false; } })();
   function drawWord(ctx, str, r, base, cs, rtlHint) {
@@ -396,7 +396,7 @@
       if (!isRoot) shadows(cs.boxShadow).filter(function (s) { return !s.inset; }).reverse().forEach(function (s) {
         ctx.save();
         var off = 20000, p = new Path2D(); rrect(p, x - off, y, w, h, R);
-        ctx.shadowColor = s.color; ctx.shadowBlur = s.blur * zz; ctx.shadowOffsetX = off + s.x * zz; ctx.shadowOffsetY = s.y * zz;
+        ctx.shadowColor = s.color; ctx.shadowBlur = s.blur * zz * SK; ctx.shadowOffsetX = (off + s.x * zz) * SK; ctx.shadowOffsetY = s.y * zz * SK;
         ctx.fillStyle = '#000'; ctx.fill(p); ctx.restore();
       });
       // background
@@ -477,6 +477,8 @@
 
   // does getComputedStyle already include CSS zoom (Firefox) or not (Chrome, Safari)?
   var ZOOMED_CS = null;
+  // canvas shadows are measured in canvas pixels and ignore ctx.scale, so they are multiplied by the scale (SK)
+  var SK = 1;
   function zoomedCs() {
     if (ZOOMED_CS !== null) return ZOOMED_CS;
     try {
@@ -490,7 +492,11 @@
   function paint(node, opts) {
     opts = opts || {};
     zoomedCs();
-    var W = Math.round(opts.width || 1080), tmp = copyOf(node, W), card = tmp.node, info;
+    // v20261106b: the copy is laid out at the card's own width on the page, so every line breaks exactly where the
+    // preview's does; the canvas is then scaled up to the download size (text stays sharp: it is drawn, not stretched)
+    var W = Math.round(opts.width || 1080), bw = node.getBoundingClientRect().width, ow = node.offsetWidth;
+    var LW = ow > 0 ? (Math.abs(bw - ow) < 1 ? bw : ow) : W;
+    var tmp = copyOf(node, LW), card = tmp.node, info;
     return Promise.resolve().then(function () {
       var c = collect(card, opts.noPictures);
       info = c.info; info.bitmaps = {}; info.missing = {};
@@ -514,8 +520,8 @@
       var bg = getComputedStyle(card).backgroundColor;
       ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
       if (bg && rgba(bg) && rgba(bg)[3] > 0) { ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H); }
-      ctx.save(); ctx.scale(s, s);
-      paintEl(ctx, card, base, 1, info, true, opts);
+      ctx.save(); ctx.scale(s, s); SK = s;
+      try { paintEl(ctx, card, base, 1, info, true, opts); } finally { SK = 1; }
       ctx.restore();
       tmp.remove();
       var missing = Object.keys(info.missing).length;

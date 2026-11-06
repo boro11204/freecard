@@ -105,13 +105,14 @@
   // v20261103f: every lettering in one compact list (fontpick.js draws it), grouped, the new Yiddish/sofer fonts first.
   // The lists are real <select>s underneath, so the choice also works without the drawn list.
   var FONT_GROUPS = [
+    ['Fancy & artistic', ['noashalev', 'solitreo', 'shuneet', 'ellinia', 'farissol', 'ktavyad', 'antiochus', 'cafe', 'journal', 'hillel', 'nesherkaton', 'anka', 'ozrad', 'horev', 'maaravon', 'archai', 'migdal', 'kurkevan', 'dybbuk', 'wetpaint', 'vinyl', 'gemstones']],
     ['Yiddish & sofer classics', ['shlomostam', 'stamashk', 'taameyashk', 'keteryg', 'mekorot', 'rommvilna', 'shlomosemi', 'keteraram', 'ezra', 'taameyfrank', 'drugulin', 'nesher', 'yehoash']],
     ['Elegant & headline', ['notocondblack', 'notoblack', 'cardo', 'libertinus', 'bellefair', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
     ['Classic', ['script', 'serif', 'bold', 'frank', 'david', 'notoserif', 'rashi', 'bona', 'tinos', 'miriam']],
     ['Modern & fun', ['bubbles', 'modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
     ['English letters only', ['playfair', 'cinzel', 'parisienne', 'allura', 'pinyon', 'italianno', 'baskerville', 'marcellus', 'cormorant', 'alexbrush', 'tangerine']]
   ];
-  (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !seen[k] && (seen[k] = 1); }); });
+  (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !(window.FC_NO_PERSONAL_FONTS && F.FONTS[k].license === 'personal') && !seen[k] && (seen[k] = 1); }); });
     var rest = FONT_KEYS.filter(function (k) { return !seen[k]; }); if (rest.length) FONT_GROUPS[2][1] = FONT_GROUPS[2][1].concat(rest);
     FONT_KEYS = [].concat.apply([], FONT_GROUPS.map(function (g) { return g[1]; })); })();
   window.FCFontGroups = FONT_GROUPS;
@@ -168,7 +169,7 @@
     });
   }
   // fetch every lettering quietly once the page has settled, so switching is instant
-  function preloadAll() { FONT_KEYS.filter(function (k) { return !F.FONTS[k].yi; }).reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
+  function preloadAll() { FONT_KEYS.filter(function (k) { return !F.FONTS[k].yi; }).filter(function (k) { return !F.FONTS[k].art; }).reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
   if ('requestIdleCallback' in window) setTimeout(function () { requestIdleCallback(preloadAll, { timeout: 4000 }); }, 2500);
   else setTimeout(preloadAll, 3000);
   function buildTokens() {
@@ -264,8 +265,9 @@
     var T = F.TYPES[t];
     if (!touched.h) state.h = T.head;
     if (!touched.tl) state.tl = T.timeLabel;
-    state.i = T.intro[state.w === 'en' || state.w === 'short' ? 'en' : 'he'];
-    state.x = state.w === 'short' ? '' : tplFor(t, state.w); touched.x = false;
+    var keepW = keepOn(); // v20261106c: with "Keep my words" on, lines they typed stay when the simcha changes
+    if (!(keepW && touched.i)) state.i = T.intro[state.w === 'en' || state.w === 'short' ? 'en' : 'he'];
+    if (!(keepW && touched.x)) { state.x = state.w === 'short' ? '' : tplFor(t, state.w); touched.x = false; }
     if (!F.DESIGNS[state.d].plain && F.DESIGNS[state.d].types.indexOf(t) < 0) state.d = F.designsFor(t).first[0];
     swapSamples();
     buildSwatches(); buildTokens(); fillForm(); applyUI(); render();
@@ -510,6 +512,9 @@
   $('bgClear').addEventListener('click', function () { bgBitmap = null; bgRaw = null; bg = null; $('f-bg').value = ''; syncMore(); render(); });
 
   /* ---------- the card is kept on this device as you go (a refresh does not lose it) ---------- */
+  var KEEPK = 'fc_keep_words'; // v20261106c: '0' = the user turned "Keep my words" off
+  function keepOn() { try { return localStorage.getItem(KEEPK) !== '0'; } catch (e) { return true; } }
+  function tr0(s) { return window.FCi18n && window.FCi18n.t ? window.FCi18n.t(s) : s; }
   var DKEY = 'fc_draft_v2', saveTimer = null, restoring = true, cloud = null; // cloud: the account card this draft is ({id, name}), v20261103m
   function saveSoon() { if (restoring) return; clearTimeout(saveTimer); saveTimer = setTimeout(saveNow, 400); }
   function saveNow() {
@@ -518,9 +523,34 @@
     catch (e) { try { d.photo = null; d.bg = null; localStorage.setItem(DKEY, JSON.stringify(d)); } catch (e2) {} }
   }
   function restore() {
-    if (params.get('type') || params.get('design') || params.get('blank')) return false;
+    // v20261106c "keep my words": opening another design or simcha (a link with ?design= or ?type=) keeps the lines you typed,
+    // and your lettering, sizes and colors, when "Keep my words" is on (the default). Only "Start from scratch" (?blank) starts empty.
+    var carry = false;
+    if (params.get('blank')) return false;
+    if (params.get('design')) { if (!keepOn()) return false; carry = true; } // a picked design (from the designs page or a home tile)
+    else if (params.get('type')) return false; // a simcha link from the home page starts that simcha's ready-made card
     var d = null; try { d = JSON.parse(localStorage.getItem(DKEY) || 'null'); } catch (e) { d = null; }
     if (!d || !d.state || !F.TYPES[d.state.t]) return false;
+    if (carry) {
+      var dt0 = d.touched || {};
+      if (!Object.keys(dt0).some(function (k) { return dt0[k]; }) && !d.state.pe) return false; // nothing of theirs to keep
+      var newD = state.d, newT = params.get('type') && F.TYPES[params.get('type')] ? state.t : d.state.t;
+      Object.keys(d.state).forEach(function (k) {
+        if (typeof d.state[k] !== 'string' || k === 'd' || k === 't') return;
+        if (FIELDS.indexOf(k) >= 0 && !dt0[k]) return; // a ready-made line they never changed follows the new simcha
+        state[k] = d.state[k];
+      });
+      state.t = newT; state.d = newD;
+      if (!F.DESIGNS[state.d]) state.d = F.designsFor(state.t).first[0];
+      touched = dt0;
+      if (!touched.x) state.x = state.w === 'short' ? '' : tplFor(state.t, state.w);
+      if (!touched.i) state.i = F.TYPES[state.t].intro[state.w === 'en' || state.w === 'short' ? 'en' : 'he'];
+      if (d.cloud && typeof d.cloud.id === 'string') cloud = { id: d.cloud.id, name: String(d.cloud.name || '') };
+      if (d.popts) Object.keys(popts).forEach(function (k) { if (d.popts[k] != null) popts[k] = d.popts[k]; });
+      if (typeof d.photo === 'string' && /^data:image\//.test(d.photo)) { photo = d.photo; $('photoClear').hidden = false; }
+      $('draftMsg').textContent = tr0('Your words were kept on the new design.');
+      return true;
+    }
     Object.keys(d.state).forEach(function (k) { if (typeof d.state[k] === 'string') state[k] = d.state[k]; });
     if (!F.DESIGNS[state.d]) state.d = F.designsFor(state.t).first[0];
     touched = d.touched || {};
@@ -802,6 +832,12 @@
   }
 
   /* the Words list: one row per line with its own controls */
+  if (window.FCi18n && window.FCi18n.add) window.FCi18n.add({ // v20261106c keep my words
+    'Keep my words when I change the design': ['לשמור את המילים שלי כשמחליפים עיצוב', 'האלטן מיינע ווערטער ווען איך טויש דעם דיזיין'],
+    'Your words were kept on the new design.': ['המילים שלכם נשמרו בעיצוב החדש.', 'אייערע ווערטער זענען געבליבן אויפן נייעם דיזיין.'],
+    'Your words will stay when you change the design': ['המילים יישארו כשתחליפו עיצוב', 'די ווערטער בלייבן ווען איר טוישט דעם דיזיין'],
+    'A new design will bring its own ready-made words': ['עיצוב חדש יביא את הנוסח המוכן שלו', 'א נייער דיזיין ברענגט זיין אייגענעם גרייטן נוסח']
+  });
   if (window.FCi18n && window.FCi18n.add) window.FCi18n.add({
     'Lines': ['שורות', 'שורות'], 'Add a line above': ['הוספת שורה מעל', 'צולייגן א שורה אויבן'], 'Add a line below': ['הוספת שורה מתחת', 'צולייגן א שורה אונטן'],
     'Move up': ['הזזה למעלה', 'רירן ארויף'], 'Move down': ['הזזה למטה', 'רירן אראפ'], 'Delete this line': ['מחיקת השורה', 'אויסמעקן די שורה'],
@@ -946,6 +982,11 @@
     });
   })();
 
+  (function () { // v20261106c: the "Keep my words" checkbox (on by default; remembered on this device)
+    var kb = $('keepWords'); if (!kb) return;
+    kb.checked = keepOn();
+    kb.addEventListener('change', function () { try { localStorage.setItem(KEEPK, kb.checked ? '1' : '0'); } catch (e) {} toast(tr0(kb.checked ? 'Your words will stay when you change the design' : 'A new design will bring its own ready-made words')); });
+  })();
   var restored = restore();
   if (restored) { setTypeQuiet(); }
   if (params.get('blank') === '1') blankWords();
