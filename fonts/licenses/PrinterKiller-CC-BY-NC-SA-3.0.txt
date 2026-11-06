@@ -1,0 +1,3 @@
+Dragon, Paskol, Nehama, Asakim (Printer Killer fonts)
+The font files state: Creative Commons Attribution-NonCommercial-ShareAlike 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode) in the copyright field, and SIL Open Font License 1.1 in the license field.
+Source: https://github.com/aharonium/fonts (Open Siddur font pack). Used on SimchaCard as free for personal / non-commercial use; files unchanged.

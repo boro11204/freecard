@@ -63,7 +63,7 @@
           return '@font-face{font-family:"' + fam + '";font-style:' + (s.getPropertyValue('font-style') || 'normal') +
             ';font-weight:' + (s.getPropertyValue('font-weight') || '400') +
             (s.getPropertyValue('unicode-range') ? ';unicode-range:' + s.getPropertyValue('unicode-range') : '') +
-            ';src:url(' + d + ') format("woff2");}';
+            ';src:url(' + d + ') format("' + (/\.woff(\?|$)/i.test(abs) ? 'woff' : 'woff2') + '");}'; // v20261106d: Dana Yad ships as .woff
         }));
       });
     });
@@ -624,7 +624,7 @@
       return blobToDataUrl(blob).then(function (du) { p(du); return 'panel'; });
     });
   }
-  var VERSION = '20261106c';
+  var VERSION = '20261106d';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {

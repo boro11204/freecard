@@ -1,0 +1,6 @@
+Fonts on SimchaCard with no license stated (free downloads; tagged 'unclear' in fontpick.js; window.FC_NO_PERSONAL_FONTS hides them):
+- Nachlaot: file says "Copyright 1991, Atech Software, Carlsbad CA"; the Open Siddur folder (github.com/aharonium/fonts) labels it GPL + font exception.
+- Refoyl: "Created by Raphael Finkel with FontForge"; Open Siddur folder labels it GPL + font exception.
+- Ptil Wide: from hebrewfont.net; reserved font name, license not stated in the file.
+- OS Aran: from hebrewfont.net; freeware marked "All Rights Reserved".
+Added on Benz's instruction (Nov 6, 2026): "add every font u can dont worry about licenses".

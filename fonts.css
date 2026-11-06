@@ -1158,3 +1158,342 @@
   src: url(fonts/RubikGemstones-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* v20261106d: 48 more Hebrew fonts, self-hosted. Open (OFL / GPL; subset to Hebrew + Latin + numbers, WOFF2): Culmus CLM (Comix No2, Aharoni, Yehuda, Simple, Trashim), Noot, Stop Motion, Miri, Carmelit. Personal use (designers' files unchanged, only converted to WOFF2): Oketz / Meir Sadan CC BY-NC-ND 1.0, Printer Killer CC BY-NC-SA, AlefAlefAlef free license (Yarden, Dana Yad). Unclear (free download, no license stated): Nachlaot, Refoyl, Ptil Wide, OS Aran. See fonts/licenses/README.txt. */
+@font-face {
+  font-family: 'Eldad Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Eldad-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Kunstlicheberg Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Kunstlicheberg-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shimshon Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Shimshon-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Camping Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Camping_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Busta Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Busta-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Latet Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Latet_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Gagua Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Gagua_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Mevorach Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Mevorach-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Petel Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Petel_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Choco Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Choco-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ariana Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Ariana-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ashem Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Ashem-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Hofesh Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Hofesh-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Touring Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Touring-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Yoav Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Yoav_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Keshet Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Keshet_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Sinaa Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Sinaa_Black-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Comix No2 CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Comix_No2_CLM_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Aharoni CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Aharoni_CLM_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Yehuda CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Yehuda_CLM_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shaliah Sans Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Shaliah_Sans_Black-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Simple CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Simple_CLM_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ptil Wide FC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Ptil_Wide_Bold-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'OS Aran FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/OS_Aran_R_600_FFC-HF.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Akitza Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Akitza.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Anarchy Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Anarchy.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Betzefer Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Betzefer.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Motek Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Motek.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Haim Reloaded Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Haim_Reloaded.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Hatachana Habaa Oketz';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Hatachana_Habaa.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Lakahat Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Lakahat_Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Shimshon Agol Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Shimshon_Agol_Bold_Italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Yoav Cursive Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Yoav_Cursive_Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Dlilah Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Dlilah_Bold_Italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Ilanit Oketz';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Ilanit_Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Dragon PK';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Dragon.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Paskol PK';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Paskol_Bold.woff2) format('woff2');
+  unicode-range: U+0020-0040, U+005B-0060, U+007B-007E, U+00A0-00FF, U+0590-05FF, U+FB1D-FB4F, U+2010-2027, U+20AA; /* its A-Z are blank, so English uses the fallback */
+}
+@font-face {
+  font-family: 'Nehama PK';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Nehama.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Asakim PK';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Asakim_Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Carmelit FC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Carmelit_Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noot FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Noot.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Stop Motion FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Stopmotion.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Miri FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Miri.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Trashim CLM';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/TrashimCLM-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Nachlaot FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Nachlaot.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Refoyl FC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/Refoyl.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Yarden AAA';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/Yarden-bold-AlefAlefAlef.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Dana Yad AAA';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/DanaYad-AlefAlefAlef-Normal.woff) format('woff');
+}

@@ -105,14 +105,14 @@
   // v20261103f: every lettering in one compact list (fontpick.js draws it), grouped, the new Yiddish/sofer fonts first.
   // The lists are real <select>s underneath, so the choice also works without the drawn list.
   var FONT_GROUPS = [
-    ['Fancy & artistic', ['noashalev', 'solitreo', 'shuneet', 'ellinia', 'farissol', 'ktavyad', 'antiochus', 'cafe', 'journal', 'hillel', 'nesherkaton', 'anka', 'ozrad', 'horev', 'maaravon', 'archai', 'migdal', 'kurkevan', 'dybbuk', 'wetpaint', 'vinyl', 'gemstones']],
+    ['Fancy & artistic', ['noashalev', 'solitreo', 'shuneet', 'ellinia', 'farissol', 'ktavyad', 'antiochus', 'cafe', 'journal', 'hillel', 'nesherkaton', 'anka', 'ozrad', 'horev', 'maaravon', 'archai', 'migdal', 'kurkevan', 'dybbuk', 'wetpaint', 'vinyl', 'gemstones', 'eldad', 'kunstlicheberg', 'shimshon', 'camping', 'busta', 'latet', 'gagua', 'mevorach', 'petel', 'choco', 'ariana', 'ashem', 'hofesh', 'touring', 'yoav', 'keshet', 'sinaa', 'comix', 'akitza', 'anarchy', 'betzefer', 'motek', 'haim', 'hatachana', 'lakahat', 'shimshonagol', 'yoavcursive', 'dlilah', 'ilanit', 'dragon', 'paskol', 'nehama', 'noot', 'stopmotion', 'miri', 'trashim', 'nachlaot', 'refoyl', 'danayad']],
     ['Yiddish & sofer classics', ['shlomostam', 'stamashk', 'taameyashk', 'keteryg', 'mekorot', 'rommvilna', 'shlomosemi', 'keteraram', 'ezra', 'taameyfrank', 'drugulin', 'nesher', 'yehoash']],
-    ['Elegant & headline', ['notocondblack', 'notoblack', 'cardo', 'libertinus', 'bellefair', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav']],
+    ['Elegant & headline', ['notocondblack', 'notoblack', 'cardo', 'libertinus', 'bellefair', 'hadasim', 'shofar', 'dorian', 'gan', 'gladia', 'lulav', 'aharoni', 'yehuda', 'shaliah', 'asakim', 'carmelit', 'yarden']],
     ['Classic', ['script', 'serif', 'bold', 'frank', 'david', 'notoserif', 'rashi', 'bona', 'tinos', 'miriam']],
-    ['Modern & fun', ['bubbles', 'modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex']],
+    ['Modern & fun', ['bubbles', 'modern', 'shmulik', 'rubik', 'assistant', 'alef', 'varela', 'secular', 'karantina', 'amatic', 'playpen', 'gveret', 'fredoka', 'plex', 'simpleclm', 'ptil', 'osaran']],
     ['English letters only', ['playfair', 'cinzel', 'parisienne', 'allura', 'pinyon', 'italianno', 'baskerville', 'marcellus', 'cormorant', 'alexbrush', 'tangerine']]
   ];
-  (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !(window.FC_NO_PERSONAL_FONTS && F.FONTS[k].license === 'personal') && !seen[k] && (seen[k] = 1); }); });
+  (function () { var seen = {}; FONT_GROUPS.forEach(function (g) { g[1] = g[1].filter(function (k) { return F.FONTS[k] && !(window.FC_NO_PERSONAL_FONTS && (F.FONTS[k].license === 'personal' || F.FONTS[k].license === 'unclear')) && !seen[k] && (seen[k] = 1); }); });
     var rest = FONT_KEYS.filter(function (k) { return !seen[k]; }); if (rest.length) FONT_GROUPS[2][1] = FONT_GROUPS[2][1].concat(rest);
     FONT_KEYS = [].concat.apply([], FONT_GROUPS.map(function (g) { return g[1]; })); })();
   window.FCFontGroups = FONT_GROUPS;
@@ -169,7 +169,7 @@
     });
   }
   // fetch every lettering quietly once the page has settled, so switching is instant
-  function preloadAll() { FONT_KEYS.filter(function (k) { return !F.FONTS[k].yi; }).filter(function (k) { return !F.FONTS[k].art; }).reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
+  function preloadAll() { FONT_KEYS.filter(function (k) { return !F.FONTS[k].yi; }).filter(function (k) { return !F.FONTS[k].art; }).filter(function (k) { return !F.FONTS[k].art2; }).reduce(function (p, k) { return p.then(function () { return preloadFont(k); }); }, Promise.resolve()); }
   if ('requestIdleCallback' in window) setTimeout(function () { requestIdleCallback(preloadAll, { timeout: 4000 }); }, 2500);
   else setTimeout(preloadAll, 3000);
   function buildTokens() {

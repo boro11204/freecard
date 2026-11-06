@@ -7,7 +7,9 @@
   var F = window.FreeCard; if (!F) return;
   // v20261106c: each new fancy font's license kind: 'open' (OFL / GPL / CC BY-SA, any use) or 'personal' (free for personal / non-commercial use only).
   // To take the personal-use fonts off the site later, set window.FC_NO_PERSONAL_FONTS = true before make.js runs, or remove their keys from FONT_GROUPS in make.js.
-  var FONT_LICENSE = F.FONT_LICENSE = { noashalev: 'personal', solitreo: 'open', shuneet: 'open', ellinia: 'open', farissol: 'open', ktavyad: 'open', antiochus: 'personal', cafe: 'personal', journal: 'open', hillel: 'open', nesherkaton: 'open', anka: 'open', ozrad: 'open', horev: 'open', maaravon: 'personal', archai: 'personal', migdal: 'open', kurkevan: 'personal', dybbuk: 'personal', wetpaint: 'open', vinyl: 'open', gemstones: 'open' };
+  var FONT_LICENSE = F.FONT_LICENSE = { noashalev: 'personal', solitreo: 'open', shuneet: 'open', ellinia: 'open', farissol: 'open', ktavyad: 'open', antiochus: 'personal', cafe: 'personal', journal: 'open', hillel: 'open', nesherkaton: 'open', anka: 'open', ozrad: 'open', horev: 'open', maaravon: 'personal', archai: 'personal', migdal: 'open', kurkevan: 'personal', dybbuk: 'personal', wetpaint: 'open', vinyl: 'open', gemstones: 'open',
+    // v20261106d ('unclear' = free download, no license stated; FC_NO_PERSONAL_FONTS hides these too)
+    eldad: 'personal', kunstlicheberg: 'personal', shimshon: 'personal', camping: 'personal', busta: 'personal', latet: 'personal', gagua: 'personal', mevorach: 'personal', petel: 'personal', choco: 'personal', ariana: 'personal', ashem: 'personal', hofesh: 'personal', touring: 'personal', yoav: 'personal', keshet: 'personal', sinaa: 'personal', comix: 'open', aharoni: 'open', yehuda: 'open', shaliah: 'personal', simpleclm: 'open', ptil: 'unclear', osaran: 'unclear', akitza: 'personal', anarchy: 'personal', betzefer: 'personal', motek: 'personal', haim: 'personal', hatachana: 'personal', lakahat: 'personal', shimshonagol: 'personal', yoavcursive: 'personal', dlilah: 'personal', ilanit: 'personal', dragon: 'personal', paskol: 'personal', nehama: 'personal', asakim: 'personal', carmelit: 'open', noot: 'open', stopmotion: 'open', miri: 'open', trashim: 'open', nachlaot: 'unclear', refoyl: 'unclear', yarden: 'personal', danayad: 'personal' };
   Object.keys(FONT_LICENSE).forEach(function (k) { if (F.FONTS[k]) F.FONTS[k].license = FONT_LICENSE[k]; });
   function tr(s) { return window.FCi18n ? window.FCi18n.t(s) : s; }
   if (window.FCi18n && window.FCi18n.add) window.FCi18n.add({
@@ -76,7 +78,7 @@
     if (!k) { r.classList.add('fp-same'); r.innerHTML = '<span class="fp-s"></span><span class="fp-nm"><b></b></span>'; r.querySelector('b').textContent = text; }
     else {
       var f = F.FONTS[k];
-      r.innerHTML = '<span class="fp-s" aria-hidden="true"></span><span class="fp-nm"><b data-noi18n></b><small dir="rtl" data-noi18n></small></span>' + (f.yi || f.art ? '<i class="nb">New</i>' : '');
+      r.innerHTML = '<span class="fp-s" aria-hidden="true"></span><span class="fp-nm"><b data-noi18n></b><small dir="rtl" data-noi18n></small></span>' + (f.yi || f.art || f.art2 ? '<i class="nb">New</i>' : '');
       r.querySelector('b').textContent = f.name; r.querySelector('small').textContent = f.enOnly ? tr('English letters only') : (f.he || '');
       var s = r.querySelector('.fp-s'); s.textContent = fixed(k, sampleText(k)); s.dir = f.enOnly ? 'ltr' : 'rtl';
       s._k = k; // its font is set when the row comes into view (so only the fonts looked at are fetched)

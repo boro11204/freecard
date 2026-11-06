@@ -13,3 +13,53 @@ Sources: Culmus 0.140 (sourceforge.net/projects/culmus), Open Siddur font pack (
   PERSONAL USE (free for personal / non-commercial use; the site is free and each person makes their own card; files not subset):
   - AlefAlefAlef free license (alefalefalef.co.il free fonts page): Noa Shalev (Noa Shalev & family / AlefAlefAlef), Archai (Ze'ev Harari), Maaravon (Eran Ben-Barak) -> NoaShalev-AlefAlefAlef-license.pdf, AlefAlefAlef-free-font-license.pdf, Archai-AlefAlefAlef-license.pdf. The designers' own WOFF2 files, unchanged.
   - CC BY-NC-ND 1.0 (Meir Sadan, Oketz Fonts): Antiochus, Kurkevan, Cafe, Dybbuk -> Oketz-CC-BY-NC-ND-1.0.txt.
+
+- v20261106d: 48 more Hebrew fonts (Benz, Nov 6 2026: "add every font u can dont worry about licenses"). Tags in fontpick.js: 'open', 'personal', 'unclear'.
+  - Eldad (Eldad Oketz, file fonts/Eldad-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737377
+  - Kunstlicheberg (Kunstlicheberg Oketz, file fonts/Kunstlicheberg-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737438
+  - Shimshon (Shimshon Oketz, file fonts/Shimshon-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737482
+  - Camping (Camping Oketz, file fonts/Camping_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737354
+  - Busta (Busta Oketz, file fonts/Busta-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737352
+  - Latet (Latet Oketz, file fonts/Latet_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737442
+  - Gagua (Gagua Oketz, file fonts/Gagua_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737380
+  - Mevorach (Mevorach Oketz, file fonts/Mevorach-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737449
+  - Petel (Petel Oketz, file fonts/Petel_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737456
+  - Choco (Choco Oketz, file fonts/Choco-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737359
+  - Ariana (Ariana Oketz, file fonts/Ariana-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737347
+  - Ashem (Ashem Oketz, file fonts/Ashem-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737348
+  - Hofesh (Hofesh Oketz, file fonts/Hofesh-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737428
+  - Touring (Touring Oketz, file fonts/Touring-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737526
+  - Yoav (Yoav Oketz, file fonts/Yoav_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737532
+  - Keshet (Keshet Oketz, file fonts/Keshet_Bold-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737436
+  - Sinaa (Sinaa Oketz, file fonts/Sinaa_Black-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737509
+  - Comix (Comix No2 CLM, file fonts/Comix_No2_CLM_Bold-HF.woff2): open -> GPL-2.0.txt + Culmus-LICENSE.txt. Source: https://www.hebrewfont.net/download.php?id=737239
+  - Aharoni (Aharoni CLM, file fonts/Aharoni_CLM_Bold-HF.woff2): open -> GPL-2.0.txt + Culmus-LICENSE.txt. Source: https://www.hebrewfont.net/download.php?id=737219
+  - Yehuda (Yehuda CLM, file fonts/Yehuda_CLM_Bold-HF.woff2): open -> GPL-2.0.txt + Culmus-LICENSE.txt. Source: https://www.hebrewfont.net/download.php?id=737337
+  - Shaliah Sans (Shaliah Sans Oketz, file fonts/Shaliah_Sans_Black-HF.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737464
+  - Simple (Simple CLM, file fonts/Simple_CLM_Bold-HF.woff2): open -> GPL-2.0.txt + Culmus-LICENSE.txt. Source: https://www.hebrewfont.net/download.php?id=737329
+  - Ptil Wide (Ptil Wide FC, file fonts/Ptil_Wide_Bold-HF.woff2): unclear -> Unclear-license-fonts.txt. Source: https://www.hebrewfont.net/download.php?id=737310
+  - Aran (OS Aran FC, file fonts/OS_Aran_R_600_FFC-HF.woff2): unclear -> Unclear-license-fonts.txt. Source: https://www.hebrewfont.net/download.php?id=737301
+  - Akitza (Akitza Oketz, file fonts/Akitza.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737341
+  - Anarchy (Anarchy Oketz, file fonts/Anarchy.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737344
+  - Betzefer (Betzefer Oketz, file fonts/Betzefer.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737349
+  - Motek (Motek Oketz, file fonts/Motek.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737454
+  - Haim Reloaded (Haim Reloaded Oketz, file fonts/Haim_Reloaded.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737419
+  - Hatachana Habaa (Hatachana Habaa Oketz, file fonts/Hatachana_Habaa.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737422
+  - Lakahat (Lakahat Oketz, file fonts/Lakahat_Bold.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737440
+  - Shimshon Agol (Shimshon Agol Oketz, file fonts/Shimshon_Agol_Bold_Italic.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737471
+  - Yoav Cursive (Yoav Cursive Oketz, file fonts/Yoav_Cursive_Bold.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737533
+  - Dlilah (Dlilah Oketz, file fonts/Dlilah_Bold_Italic.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737368
+  - Ilanit (Ilanit Oketz, file fonts/Ilanit_Bold.woff2): personal -> Oketz-CC-BY-NC-ND-1.0.txt. Source: https://www.hebrewfont.net/download.php?id=737429
+  - Dragon (Dragon PK, file fonts/Dragon.woff2): personal -> PrinterKiller-CC-BY-NC-SA-3.0.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Printer%20Killer%20(OFL)
+  - Paskol (Paskol PK, file fonts/Paskol_Bold.woff2): personal -> PrinterKiller-CC-BY-NC-SA-3.0.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Printer%20Killer%20(OFL)
+  - Nehama (Nehama PK, file fonts/Nehama.woff2): personal -> PrinterKiller-CC-BY-NC-SA-3.0.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Printer%20Killer%20(OFL)
+  - Asakim (Asakim PK, file fonts/Asakim_Bold.woff2): personal -> PrinterKiller-CC-BY-NC-SA-3.0.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Printer%20Killer%20(OFL)
+  - Carmelit (Carmelit FC, file fonts/Carmelit_Bold.woff2): open -> OFL-1.1.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Amos%20Jerbi%20(OFL)/Carmelit
+  - Noot (Noot FC, file fonts/Noot.woff2): open -> OFL-1.1.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Amos%20Jerbi%20(OFL)/Noot
+  - Stop Motion (Stop Motion FC, file fonts/Stopmotion.woff2): open -> OFL-1.1.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Elad%20Mordechai%20Mizrahi%20(GPL%20and%20OFL)/stop-motion%20(OFL)
+  - Miri (Miri FC, file fonts/Miri.woff2): open -> OFL-1.1.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Elad%20Mordechai%20Mizrahi%20(GPL%20and%20OFL)/miri%20(OFL)
+  - Trashim (Trashim CLM, file fonts/TrashimCLM-Bold.woff2): open -> GPL-2.0.txt + Culmus-LICENSE.txt. Source: https://culmus.sourceforge.io/
+  - Nachlaot (Nachlaot FC, file fonts/Nachlaot.woff2): unclear -> Unclear-license-fonts.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Refoyl%20Finkl%20(GPL%2BFE)/nachlaot
+  - Refoyl (Refoyl FC, file fonts/Refoyl.woff2): unclear -> Unclear-license-fonts.txt. Source: https://github.com/aharonium/fonts/tree/master/Fonts/Hebrew%20Letters%20only/Refoyl%20Finkl%20(GPL%2BFE)/refoyl
+  - Yarden (Yarden AAA, file fonts/Yarden-bold-AlefAlefAlef.woff2): personal -> AlefAlefAlef-free-font-license.pdf. Source: https://alefalefalef.co.il/en/resources/%D7%A4%D7%95%D7%A0%D7%98%D7%99%D7%9D-%D7%91%D7%97%D7%99%D7%A0%D7%9D/
+  - Dana Yad (Dana Yad AAA, file fonts/DanaYad-AlefAlefAlef-Normal.woff): personal -> AlefAlefAlef-free-font-license.pdf. Source: https://alefalefalef.co.il/en/resources/%D7%A4%D7%95%D7%A0%D7%98%D7%99%D7%9D-%D7%91%D7%97%D7%99%D7%A0%D7%9D/
