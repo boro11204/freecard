@@ -1,0 +1,8 @@
+Antiochus, Kurkevan, Cafe, Dybbuk - Copyright Meir Sadan <meir@sadan.com>, Oketz Fonts (http://www.oketz.com/).
+License carried in each font file: Creative Commons Attribution-NoDerivs-NonCommercial 1.0 (http://creativecommons.org/licenses/by-nd-nc/1.0/)
+You are free: to copy, distribute, display, and perform the work. Under the following conditions:
+ Attribution. You must give the original author credit.
+ Noncommercial. You may not use this work for commercial purposes.
+ No Derivative Works. You may not alter, transform, or build upon this work.
+For any reuse or distribution, you must make clear to others the license terms of this work.
+On this site the font files are served with their outlines unchanged (only re-packed as WOFF2, no glyphs removed or edited) for a free, non-commercial card maker.

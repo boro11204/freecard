@@ -1,0 +1,4 @@
+Shuneet (oblique bold) - Copyright 2006 Michael Cunliffe Thompson (formerly MikeHebrew).
+Licensed under the Creative Commons Attribution-Share Alike 3.0 Unported License: http://creativecommons.org/licenses/by-sa/3.0/
+The file here is subset to Hebrew + basic Latin and re-packed as WOFF2; that subset is shared under the same license.
+Source: Open Siddur font pack, https://github.com/aharonium/fonts
