@@ -117,7 +117,7 @@
     var io2 = typeof IntersectionObserver !== 'undefined' ? new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { io2.unobserve(e.target); drawType(e.target); } });
     }, { rootMargin: '400px 0px' }) : null;
-    var PICK = { chasuna: 'ai22adobechasunaivorysilkovalwhiteroses' }; // v20261107a // the home page's own cover for the chasuna
+    var PICK = { chasuna: 'ai22adobechasunaivorysilkovalwhiteroses' }; // v20261107b // the home page's own cover for the chasuna
     function drawType(w) {
       var t = w.getAttribute('data-t'), k = w.getAttribute('data-k');
       try { F.renderCard(F.sampleCard(t, k, lang2), w, { thumb: true }); w.classList.add('drawn'); } catch (e) { console.warn(e); }

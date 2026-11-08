@@ -624,7 +624,7 @@
       return blobToDataUrl(blob).then(function (du) { p(du); return 'panel'; });
     });
   }
-  var VERSION = '20261107a';
+  var VERSION = '20261107b';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {
@@ -718,7 +718,8 @@
     setTimeout(function () { idle(function () { try { warm(getNode()); } catch (e) {} }); }, 800);
   }
   function fileName(c) {
-    var n = (global.FreeCard.namesLine(c) || 'invitation').replace(/[^\w\u0590-\u05FF]+/g, '-').replace(/^-|-$/g, '');
+    var D = (global.FreeCard.DESIGNS || {})[c && c.d] || null;
+    var n = ((D && D.name) || 'invitation').replace(/&/g, 'and').replace(/[^\w\u0590-\u05FF]+/g, '-').replace(/^-|-$/g, '');
     return 'FreeCard-' + (n || 'invitation');
   }
   global.FreeCardDownload = { make: make, wire: wire, warm: warm, fileName: fileName, pdfFromJpeg: pdfFromJpeg, setOptions: setOptions, layoutFor: layoutFor,
