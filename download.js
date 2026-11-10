@@ -600,6 +600,7 @@
     box.addEventListener('click', function (e) { if (e.target === box) close(); });
     var sh = box.querySelector('.fc-share');
     if (sh) sh.onclick = function () {
+      count('share', global.__fcLastHd);
       try { navigator.share({ files: [o.file] }).catch(function (e) { if (!e || e.name !== 'AbortError') console.warn('share', e); }); } catch (e) { console.warn('share', e); }
     };
     var rt = box.querySelector('.fc-retry');
@@ -624,7 +625,22 @@
       return blobToDataUrl(blob).then(function (du) { p(du); return 'panel'; });
     });
   }
-  var VERSION = '20261110d';
+  // anonymous "a card was made" counter (v20261110e): sends only the design id, the simcha, what was made, the site language and HD yes/no.
+  // Fire-and-forget: never waits, never throws, never slows the download. Only the make page sets FreeCardCountMeta, so guests saving a shared card are not counted.
+  var COUNT_URL = 'https://freecard-api.drinfo-site.workers.dev/count';
+  function count(action, hd) {
+    try {
+      var m = global.FreeCardCountMeta && global.FreeCardCountMeta();
+      if (!m || !m.d) return;
+      var l = (global.FCi18n && global.FCi18n.lang && global.FCi18n.lang()) || 'en';
+      var body = JSON.stringify({ d: String(m.d), t: String(m.t || ''), a: action, l: l, hd: hd ? 1 : 0 });
+      global.__fcLastCount = body;
+      var sent = false;
+      try { if (navigator.sendBeacon) sent = navigator.sendBeacon(COUNT_URL, new Blob([body], { type: 'text/plain' })); } catch (e) { sent = false; }
+      if (!sent && global.fetch) fetch(COUNT_URL, { method: 'POST', body: body, mode: 'no-cors', keepalive: true, credentials: 'omit', headers: { 'Content-Type': 'text/plain' } }).catch(function () {});
+    } catch (e) {}
+  }
+  var VERSION = '20261110e';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {
@@ -701,6 +717,7 @@
         });
       } catch (e) { p = Promise.reject(e); }
       p.then(function (how) {
+        count({ jpeg: 'jpg', pdf: 'pdf', gif: 'gif', story: 'status' }[kind] || kind, global.__fcLastHd);
         if (toast && how === 'saved') toast({ jpeg: 'Image saved', pdf: 'PDF saved', gif: 'Animated GIF saved', story: 'Status picture saved' }[kind]);
       }).catch(function (e) {
         var detail = errDetail(e) + ' [' + kind + ', ' + ((Date.now() - t0) / 1000).toFixed(1) + 's, v' + VERSION + ']';
@@ -723,5 +740,5 @@
     return 'FreeCard-' + (n || 'invitation');
   }
   global.FreeCardDownload = { make: make, wire: wire, warm: warm, fileName: fileName, pdfFromJpeg: pdfFromJpeg, setOptions: setOptions, layoutFor: layoutFor,
-    pdfFromJpegs: pdfFromJpegs, zipStore: zipStore, deliver: deliver, options: currentOpts, hdUrl: hdUrl, hdLikely: hdLikely };
+    pdfFromJpegs: pdfFromJpegs, zipStore: zipStore, deliver: deliver, count: count, options: currentOpts, hdUrl: hdUrl, hdLikely: hdLikely };
 })(window);

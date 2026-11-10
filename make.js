@@ -331,6 +331,7 @@
 
   var getNode = function () { return cardMount.querySelector('.fc-card'); };
   var getName = function () { var pk = pieceOn(); return window.FreeCardDownload.fileName(state) + (pk ? '-' + pk + (pk === 'table' ? '-' + (parseInt(state.tn, 10) || 1) : '') : ''); };
+  window.FreeCardCountMeta = function () { return { d: state.d, t: state.t }; }; // anonymous card counter: design + simcha only
   window.FreeCardDownload.wire($('dlJpg'), $('dlPdf'), getNode, getName, toast, { gif: $('dlGif'), story: $('dlStory') });
   window.FreeCardDownload.wire($('dlJpg2'), $('dlPdf2'), getNode, getName, toast);
 
@@ -396,6 +397,7 @@
         return D.deliver(zip, base + '.zip', 'zip', out[0].blob, '', null);
       });
     }).then(function (how) {
+      try { if (D.count) D.count('tables', false); } catch (e) {}
       $('tnMsg').textContent = (kind === 'pdf' ? 'Your PDF with ' : 'Your .zip with ') + nums.length + ' table numbers is ready.';
       if (how === 'saved') toast(kind === 'pdf' ? 'PDF saved' : 'Zip saved');
     }, function (e) {
