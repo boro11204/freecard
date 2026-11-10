@@ -332,6 +332,13 @@
   var getNode = function () { return cardMount.querySelector('.fc-card'); };
   var getName = function () { var pk = pieceOn(); return window.FreeCardDownload.fileName(state) + (pk ? '-' + pk + (pk === 'table' ? '-' + (parseInt(state.tn, 10) || 1) : '') : ''); };
   window.FreeCardCountMeta = function () { return { d: state.d, t: state.t }; }; // anonymous card counter: design + simcha only
+  // card details (v20261110f): the editor's words and settings for the admin's "Card details" list. Photos and uploaded pictures are never sent, only a yes/no.
+  window.FreeCardDetailMeta = function () {
+    var s = {}; Object.keys(state).forEach(function (k) { var v = state[k]; if (typeof v === 'string' && !/^\s*(data|blob):/i.test(v)) s[k] = v; else if (typeof v === 'number' || typeof v === 'boolean') s[k] = v; });
+    var u = {}; Object.keys(touched || {}).forEach(function (k) { if (touched[k]) u[k] = true; });
+    var D = F.DESIGNS[state.d] || {};
+    return { s: s, u: u, po: { gray: !!popts.gray, paper: String(popts.paper || ''), hq: !!popts.hq, marks: !!popts.marks }, ph: !!(photo || bgRaw), dn: String(D.name || '') };
+  };
   window.FreeCardDownload.wire($('dlJpg'), $('dlPdf'), getNode, getName, toast, { gif: $('dlGif'), story: $('dlStory') });
   window.FreeCardDownload.wire($('dlJpg2'), $('dlPdf2'), getNode, getName, toast);
 

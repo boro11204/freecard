@@ -632,15 +632,38 @@
     try {
       var m = global.FreeCardCountMeta && global.FreeCardCountMeta();
       if (!m || !m.d) return;
+      try { if (sessionStorage.getItem('fc_admin_view') === '1') return; } catch (e) {} // a copy the site owner opened from the admin page (v20261110f)
       var l = (global.FCi18n && global.FCi18n.lang && global.FCi18n.lang()) || 'en';
       var body = JSON.stringify({ d: String(m.d), t: String(m.t || ''), a: action, l: l, hd: hd ? 1 : 0 });
       global.__fcLastCount = body;
       var sent = false;
       try { if (navigator.sendBeacon) sent = navigator.sendBeacon(COUNT_URL, new Blob([body], { type: 'text/plain' })); } catch (e) { sent = false; }
       if (!sent && global.fetch) fetch(COUNT_URL, { method: 'POST', body: body, mode: 'no-cors', keepalive: true, credentials: 'omit', headers: { 'Content-Type': 'text/plain' } }).catch(function () {});
+      if (action !== 'share') detail(m, action, hd, l);
     } catch (e) {}
   }
-  var VERSION = '20261110e';
+  // card details (v20261110f): one row per card made, for the site owner's admin page: the editor's words and settings (no photos, IP, email or device id).
+  // Same rules as the counter: fire-and-forget, never waits, never throws. Kept under 16 KB (the long "pe" line edits go first, then long text is shortened).
+  var CARD_URL = 'https://freecard-api.drinfo-site.workers.dev/card', CARD_MAX = 16000;
+  function detail(m, action, hd, l) {
+    try {
+      var x = global.FreeCardDetailMeta && global.FreeCardDetailMeta();
+      if (!x || !x.s) return;
+      var o = { d: String(m.d), t: String(m.t || ''), dn: x.dn || '', a: action, l: l, hd: hd ? 1 : 0, ph: x.ph ? 1 : 0, s: x.s, u: x.u || {}, po: x.po || {} };
+      var size = function () { return new Blob([JSON.stringify(o)]).size; };
+      if (size() > CARD_MAX && o.s.pe) { delete o.s.pe; o.pe_dropped = 1; }
+      for (var guard = 0; size() > CARD_MAX && guard < 40; guard++) {
+        var big = null; Object.keys(o.s).forEach(function (k) { if (typeof o.s[k] === 'string' && (!big || o.s[k].length > o.s[big].length)) big = k; });
+        if (!big || o.s[big].length < 50) break; o.s[big] = o.s[big].slice(0, Math.floor(o.s[big].length / 2));
+      }
+      if (size() > CARD_MAX) return;
+      var body = JSON.stringify(o); global.__fcLastCard = body;
+      var sent = false;
+      try { if (navigator.sendBeacon) sent = navigator.sendBeacon(CARD_URL, new Blob([body], { type: 'text/plain' })); } catch (e) { sent = false; }
+      if (!sent && global.fetch) fetch(CARD_URL, { method: 'POST', body: body, mode: 'no-cors', keepalive: true, credentials: 'omit', headers: { 'Content-Type': 'text/plain' } }).catch(function () {});
+    } catch (e) {}
+  }
+  var VERSION = '20261110f';
   // a readable reason for any failure: Error objects, image load Events, strings
   function errDetail(e) {
     try {
