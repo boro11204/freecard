@@ -91,7 +91,7 @@
     }
     root.appendChild(table(['Day', '', 'Shares', 'Cards'], rows, 'adm-days'));
   }
-  // --- Card details (v20261110f): every card made on the Make page, newest first, with all its words and settings ---
+  // --- Card details (v20261112a): every card made on the Make page, newest first, with all its words and settings ---
   var WORD_LABELS = { h: 'Top line', i: 'Opening line', n1: 'Name 1', n2: 'Name 2', p1: 'Parents / family 1', p2: 'Parents / family 2', dt: 'Date', hd: 'Hebrew date', pa: 'Parsha', tl: 'Time label', tm: 'Time', sc: 'Second time', hl: 'Hall / place', ad: 'Address', ex: 'Extra lines', nt: 'Note', x: 'Wording (the card text with its {fields})' };
   var WORD_ORDER = ['h', 'i', 'n1', 'n2', 'p1', 'p2', 'dt', 'hd', 'pa', 'tl', 'tm', 'sc', 'hl', 'ad', 'ex', 'nt', 'x'];
   var SET_LABELS = { t: 'Simcha', d: 'Design', w: 'Card language', ws: 'Wording style', f: 'Lettering', nf: 'Names lettering', tf: 'Top line lettering', bf: 'Body lettering', tz: 'Top line size', bz: 'Body size', ns: 'Names size', ev: 'Evening (Hebrew date of the next day)', pk: 'Matching piece', tn: 'Table number', th: 'Table number style' };

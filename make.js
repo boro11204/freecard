@@ -332,7 +332,7 @@
   var getNode = function () { return cardMount.querySelector('.fc-card'); };
   var getName = function () { var pk = pieceOn(); return window.FreeCardDownload.fileName(state) + (pk ? '-' + pk + (pk === 'table' ? '-' + (parseInt(state.tn, 10) || 1) : '') : ''); };
   window.FreeCardCountMeta = function () { return { d: state.d, t: state.t }; }; // anonymous card counter: design + simcha only
-  // card details (v20261110f): the editor's words and settings for the admin's "Card details" list. Photos and uploaded pictures are never sent, only a yes/no.
+  // card details (v20261112a): the editor's words and settings for the admin's "Card details" list. Photos and uploaded pictures are never sent, only a yes/no.
   window.FreeCardDetailMeta = function () {
     var s = {}; Object.keys(state).forEach(function (k) { var v = state[k]; if (typeof v === 'string' && !/^\s*(data|blob):/i.test(v)) s[k] = v; else if (typeof v === 'number' || typeof v === 'boolean') s[k] = v; });
     var u = {}; Object.keys(touched || {}).forEach(function (k) { if (touched[k]) u[k] = true; });
